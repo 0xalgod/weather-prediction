@@ -4,7 +4,7 @@
 **Dataset version:** Local Gamma run `20260829T215025Z`
 **Code/config version:** Pre-fix `scripts/discover_polymarket_markets.py` and discovery contract
 **Covered markets:** Complete keyset traversal for `tag_slug=highest-temperature&closed=true`
-**Status:** `PARTIALLY_INVALIDATED`
+**Status:** `SUPERSEDED_WITH_PARTIAL_INVALIDATION`
 
 ## 1. Objective
 
@@ -81,4 +81,4 @@ A new regression test requires an expired but identifier-complete market to reta
 
 ## 7. Next action
 
-Commit the contract correction and invalidation record, then rerun `closed=true` to a new immutable run directory and new summary artifact.
+Completed. The corrected rerun is documented in `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`. This file remains the append-only invalidation record for the first attempt.

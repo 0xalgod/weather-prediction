@@ -485,7 +485,7 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 
 - [x] Build read-only Gamma discovery client with raw-envelope persistence.
 - [x] Determine reliable weather/temperature discovery filters. (`highest-temperature`, tag ID `104596`, selected provisionally.)
-- [ ] Query active, closed and resolved records where supported. (Active/not-closed full traversal complete; closed/resolved pending.)
+- [x] Query active, closed and resolved records where supported. (Full active/not-closed and closed keyset traversals complete; exceptional status cohorts pending reconciliation.)
 - [x] Normalize event/market/outcome/token/condition mappings. (Contract implementation complete; full live inventory pending.)
 - [x] Preserve rule text and metadata hashes. (Raw envelope preserves payload and SHA-256; normalized event preserves resolution source.)
 - [x] Identify multi-outcome/negative-risk structure. (Event contains binary bucket markets; flags preserved at both levels.)
@@ -558,13 +558,22 @@ The first full closed traversal completed with run ID `20260829T215025Z`:
 - Contract correction now separates `identifier_complete` from `eligible_for_book_collection` and retains valid historical outcome-token rows.
 - Evidence/invalidation record: `reports/data_quality/EXP-20260830-phase1-closed-inventory-attempt.md`.
 
+The corrected closed traversal completed with run ID `20260829T215446Z`:
+
+- Reproduced 83 pages, 8,222 events, 54 cities, 89,536 markets and 0 duplicates.
+- 89,514 markets are identifier-complete (99.9754%) and produced 179,028 historical outcome-token rows.
+- Resolution-source coverage is 92.2282%; automatic-resolution coverage 98.5892%; event close-time coverage 99.3067%; UMA-resolved market coverage 99.9107%.
+- Missing cohorts: 639 no event resolution source, 116 not automatically resolved, 57 no close time, 22 identity-incomplete markets and 80 not UMA-resolved markets; categories may overlap.
+- One full closed raw traversal consumes approximately 370 MB.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`.
+
 #### Decision
 
 Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Rerun `closed=true` with the corrected identifier/book-eligibility contract, then measure settlement and identifier coverage.
+Classify missing resolution/settlement/identifier cohorts and select the stratified 20-event manual reconciliation sample.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -1021,6 +1030,17 @@ These inferences must be verified in Phases 3 and 4.
 - Correction: Separated historical `identifier_complete` from current `eligible_for_book_collection`; added expired-market outcome retention regression test.
 - Blockers: Corrected closed summary and full settlement-field coverage remain pending.
 - Next action: Commit correction and rerun closed history to a new immutable run ID.
+
+### 2026-08-30 — Corrected closed inventory and settlement coverage measured
+
+- Previous status: `IN_PROGRESS`
+- New status: `IN_PROGRESS`
+- Work completed: Reran the complete closed history under the corrected contract and measured identifier plus settlement-field coverage.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`; local raw run `20260829T215446Z`.
+- Verification: 83 pages, 8,222 events, 89,536 markets and 0 duplicates reproduced; 89,514 identifier-complete markets generated 179,028 outcomes.
+- Deviations: None. The earlier outcome metric remains invalidated and linked.
+- Blockers: Missing source/status cohorts and ≥20 manual reconciliations remain pending.
+- Next action: Generate anomaly cohorts and a stratified manual reconciliation sample.
 
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 

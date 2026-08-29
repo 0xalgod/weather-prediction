@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.8.0
+**Plan versiyonu:** 0.9.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -706,6 +706,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-inventory-attempt.md`
 - **Sonuç:** Contract ayrıştırıldı ve regression test eklendi. Closed history yeni immutable run ile yeniden ölçülecek.
 
+### D-0010 — 2026-08-30 — Closed history identifier ve settlement kapsamı
+
+- **Durum:** `ACTIVE`
+- **Karar:** Gamma closed history, event/market identity registry için kullanılabilir aday olarak tutulacak; ancak eksik resolution/status cohortları sınıflandırılmadan Phase 1 geçmeyecek. Full-snapshot storage için scheduled collector öncesi dedup/compression retention kararı zorunlu.
+- **Ölçülen kanıt:** Corrected run `20260829T215446Z` önceki 83 sayfa/8.222 event/89.536 market/0 duplicate ölçümünü yeniden üretti. 89.514 market identifier-complete (%99,9754) ve 179.028 historical outcome satırı oluştu. Event resolution source %92,2282; automatic resolution %98,5892; closedTime %99,3067; UMA-resolved market %99,9107. Tek raw run yaklaşık 370 MB.
+- **Eksik cohortlar:** 639 no-source event, 116 non-automatic event, 57 no-close-time event, 22 identity-incomplete market, 80 non-UMA-resolved market; overlap henüz çözülmedi.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`
+- **Sonuç:** Closed inventory substep geçti; Phase 1 `IN_PROGRESS`. Sıradaki adım anomaly cohort extraction ve stratified 20-event manual reconciliation sample'dır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -718,7 +727,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Düzeltilmiş `identifier_complete` / `eligible_for_book_collection` contract ile `closed=true` history'yi yeni immutable run ID altında yeniden çekmek ve valid historical outcome/identifier coverage ölçmek.
+**Tek sonraki adım:** Closed raw inventory'den eksik resolution/status/identifier cohortlarını deterministik artifact olarak çıkarmak ve clean+anomalous kayıtları kapsayan stratified 20-event manual reconciliation örneğini seçmek.
 
 Beklenen artifact'lar:
 
