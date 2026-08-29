@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "reviewed_at": "2026-08-30",
+  "records": {
+    "CYYZ": {"status": "MATCH", "basis": "ICAO code and Pearson airport name agree"},
+    "EDDM": {"status": "MATCH", "basis": "ICAO code and Munich airport name agree"},
+    "KORD": {"status": "MATCH", "basis": "ICAO code and Chicago O'Hare name agree"},
+    "LIMC": {"status": "MATCH", "basis": "ICAO code and Milan Malpensa name agree"},
+    "MMMX": {"status": "MATCH", "basis": "ICAO code and Mexico City airport identity agree"},
+    "MPMG": {"status": "MATCH", "basis": "ICAO code and Marcos A. Gelabert name agree"},
+    "OPKC": {"status": "MISMATCH", "basis": "Rule says Masroor Airbase while source ICAO OPKC is Karachi/Jinnah Intl"},
+    "SAEZ": {"status": "MATCH", "basis": "ICAO code and Pistarini airport name agree"},
+    "WIHH": {"status": "MATCH", "basis": "ICAO code and Halim Perdanakusuma name agree"},
+    "WMKK": {"status": "MATCH", "basis": "ICAO code and Kuala Lumpur Intl name agree"},
+    "ZGGG": {"status": "MATCH", "basis": "ICAO code and Guangzhou Baiyun name agree"},
+    "ZGSZ": {"status": "MATCH", "basis": "ICAO code and Shenzhen Bao'an name agree"}
+  }
+}

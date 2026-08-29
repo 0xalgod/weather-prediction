@@ -599,12 +599,12 @@ Convert market rule text into versioned, manually verified station, source, time
 
 - [x] Define resolution registry schema. (`schemas/resolution_registry.schema.json` plus fail-closed Python semantic validator.)
 - [x] Parse source URL/provider and station identity. (20 candidate records emitted; independent station verification pending.)
-- [ ] Parse local date, timezone and observation window. (Local dates/windows parsed; timezones remain explicit unverified candidates.)
+- [x] Parse local date, timezone and observation window. (11 retained records independently timezone-verified against IANA-aligned 2026c boundaries.)
 - [x] Parse temperature unit, bucket inclusivity and rounding. (161 buckets parsed; 128 belong to structurally valid candidates.)
 - [x] Hash and version rule text. (20 exact SHA-256 rule versions.)
 - [ ] Detect rule/station changes within a city family.
-- [ ] Cross-check source station metadata.
-- [ ] Manually reconcile minimum 20 market-events.
+- [x] Cross-check source station metadata. (AviationWeather returned 12/12 candidates; 11 identity matches and one Karachi rule/source conflict.)
+- [x] Manually reconcile minimum 20 market-events. (All 20 received disposition; 11 now pass full registry verification.)
 - [ ] Add DST, Celsius/Fahrenheit and boundary tests.
 
 #### Outputs
@@ -626,15 +626,15 @@ Convert market rule text into versioned, manually verified station, source, time
 
 #### Actual result
 
-Registry schema version `0.1.0` binds event identity, disposition, source/station/timezone, unit/precision/rounding, explicit local-day window, exact rule hash/version, numeric bucket boundaries and source provenance. Candidate population produced 20 deterministic records and 161 buckets: 12 structurally complete station-unverified candidates and 8 preserved hard exclusions. Twenty exact rule hashes were retained; 26 tests pass.
+Registry schema versions `0.1.0`/`0.2.0` bind event identity, disposition, source/station/timezone, unit/precision/rounding, explicit local-day window, exact rule hash/version, numeric bucket boundaries and source provenance. Candidate population produced 20 deterministic records and 161 buckets. Independent AviationWeather plus IANA-aligned boundary verification promoted 11 records; Karachi was rejected for a rule station-name/source-code contradiction. The verified registry contains 11 final records, 9 hard exclusions and 117 retained buckets; 28 tests pass.
 
 #### Decision
 
-Contract and candidate-population substeps passed; Phase 2 remains `IN_PROGRESS` until station/timezone metadata is independently verified and eligible records are promoted.
+Contract, population and station/timezone verification substeps passed. Phase 2 remains `IN_PROGRESS` pending city-family revision analysis and DST/local-date boundary tests.
 
 #### Next action
 
-Verify station identity and timezone for the 12 structurally complete candidates against authoritative metadata, then promote only verified records.
+Measure rule/station revisions within repeated city families and add DST/local-date boundary tests, then evaluate the Phase 2 exit gate.
 
 ### Phase 3 — Executable order-book capture feasibility
 
@@ -1094,6 +1094,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: Authoritative station/timezone verification and city-family revision analysis remain pending.
 - Next action: Verify the 12 candidate station/timezone mappings and promote only supported records.
 
+### 2026-08-30 — Phase 2 station identity and timezone verification completed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Work completed: Retrieved current AviationWeather metadata for 12 ICAO codes, resolved coordinates against Timezone Boundary Builder/IANA 2026c geometry and merged-name metadata, and applied a station-name/source-code semantic review.
+- Evidence: `reports/data_quality/EXP-20260830-phase2-station-timezone-verification.md`, `reports/data_quality/EXP-20260830-phase2-station-timezone-evidence.json`.
+- Verification: 12/12 ICAO records returned; 12/12 proposed timezones matched directly or through release-declared equivalence; 11/12 station identities passed; 11 records promoted and 9 total records remain hard excluded; 28 tests pass.
+- Unexpected finding: Karachi rule text names Masroor Airbase while its source code OPKC identifies Karachi/Jinnah Intl; it was rejected despite valid code/timezone.
+- Blockers: City-family rule/station revision analysis and DST/local-date tests remain pending.
+- Next action: Complete revision and DST checks, then evaluate Phase 2 exit.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1133,6 +1144,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Promote immediately because all IANA names exist in `zoneinfo`; rejected because syntactic validity does not prove the station-to-timezone mapping.
 - Consequence: Candidate records pass full structural validation but carry `STATION_TIMEZONE_UNVERIFIED` and remain excluded from backtests/trading.
 - Revisit condition: Promotion occurs record-by-record after primary-source evidence is persisted.
+
+### ED-0011 — 2026-08-30 — Require semantic station identity, not only a valid ICAO code
+
+- Decision: Promotion requires rule station name and source ICAO identity to be semantically consistent in addition to metadata/timezone validity.
+- Evidence available at decision time: Karachi rule text says Masroor Airbase, while source code OPKC resolves in current AviationWeather metadata to Karachi/Jinnah Intl.
+- Alternatives considered: Trust the source URL code over prose; rejected because the resolution rule itself defines the intended station and ambiguity can change the realized maximum.
+- Consequence: Karachi becomes `NO_TRADE_AMBIGUOUS_RULE`; 11 of 12 candidates are promoted.
+- Revisit condition: A versioned Polymarket correction or authoritative resolution record explicitly disambiguates which station controlled that event.
 
 ## 20. Decision Log — append only
 

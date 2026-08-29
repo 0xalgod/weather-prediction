@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "registry_record_id": "event-100-rule-v1",
   "event_id": "100",
   "event_slug": "highest-temperature-in-test-city-on-january-1",
@@ -31,6 +31,11 @@
     "resolution_observed_at_utc": "2026-01-02T01:00:00Z",
     "gamma_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "resolution_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-    "parser_version": "0.1.0"
+    "parser_version": "0.2.0",
+    "station_metadata_source_url": "https://aviationweather.gov/api/data/stationinfo?ids=KAAA&format=json",
+    "station_metadata_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "timezone_boundary_version": "2026c",
+    "timezone_boundary_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "timezone_names_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
   }
 }

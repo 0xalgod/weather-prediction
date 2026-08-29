@@ -136,4 +136,9 @@ def validate_resolution_record(record: Mapping[str, Any]) -> List[str]:
         parsed = datetime.fromisoformat(str(provenance[field]).replace("Z", "+00:00"))
         if parsed.tzinfo is None:
             raise ResolutionRegistryError(f"{field} must include timezone")
+    if disposition == RECONCILED:
+        evidence_fields = ("station_metadata_source_url", "station_metadata_sha256", "timezone_boundary_version", "timezone_boundary_sha256", "timezone_names_sha256")
+        absent_evidence = [field for field in evidence_fields if provenance.get(field) in (None, "")]
+        if absent_evidence:
+            raise ResolutionRegistryError(f"reconciled record missing station evidence: {absent_evidence}")
     return exclusions

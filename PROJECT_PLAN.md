@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.13.0
+**Plan versiyonu:** 0.14.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -750,6 +750,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase2-resolution-registry-candidate.jsonl`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-population.md`
 - **Sonuç:** Parser/population substep geçti; Phase 2 `IN_PROGRESS`. Sıradaki adım 12 candidate station/timezone eşleşmesini authoritative metadata ile doğrulamaktır.
 
+### D-0015 — 2026-08-30 — Station identity ve timezone promotion sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Candidate yalnız current AviationWeather ICAO metadata, coordinate-to-IANA 2026c boundary eşleşmesi ve rule-name/source-code semantik kontrolünün tamamını geçerse final `RECONCILED` olur.
+- **Ölçülen kanıt:** AviationWeather 12/12 ICAO kodunu döndürdü; timezone boundary ve release equivalence mapping ile 12/12 timezone doğrulandı. 11/12 station identity geçti. Karachi kuralındaki `Masroor Airbase` adı, source ICAO `OPKC` için resmî `Karachi/Jinnah Intl` metadata'sıyla çelişti.
+- **Sonuç:** 11 kayıt final `RECONCILED`, toplam 9 kayıt hard `NO_TRADE`; 117 bucket retained. Phase 2 minimum ≥3 şehir mapping eşiğini aşıyor ancak city-family revision ve DST testleri tamamlanmadan Phase 2 kapanmıyor.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase2-station-timezone-verification.md`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-verified.jsonl`
+- **Sıradaki adım:** Tekrarlanan şehirlerde rule/station değişimini ölçmek ve DST/local-date boundary testlerini eklemek.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -762,13 +771,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 12 candidate kaydın station identity ve IANA timezone eşleşmesini authoritative metadata ile bağımsız doğrulamak; kanıt URL/hash'lerini kaydedip yalnız doğrulananları final `RECONCILED` statüsüne yükseltmek.
+**Tek sonraki adım:** Tekrarlanan city family'lerde station/rule değişimini ölçmek ve DST/local-date boundary contract testlerini eklemek; ardından Phase 2 exit gate'ini değerlendirmek.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- verified resolution registry JSONL
-- station/timezone evidence manifest ve coverage raporu
+- city-family rule/station revision artifact'ı
+- DST ve local-date boundary testleri
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.

@@ -10,7 +10,7 @@
     "rule", "buckets", "provenance"
   ],
   "properties": {
-    "schema_version": {"const": "0.1.0"},
+    "schema_version": {"enum": ["0.1.0", "0.2.0"]},
     "registry_record_id": {"type": "string", "minLength": 1},
     "event_id": {"type": "string", "minLength": 1},
     "event_slug": {"type": "string", "minLength": 1},
@@ -77,7 +77,12 @@
         "resolution_observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
         "gamma_content_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
         "resolution_content_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
-        "parser_version": {"type": "string", "minLength": 1}
+        "parser_version": {"type": "string", "minLength": 1},
+        "station_metadata_source_url": {"type": ["string", "null"], "format": "uri"},
+        "station_metadata_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "timezone_boundary_version": {"type": ["string", "null"]},
+        "timezone_boundary_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "timezone_names_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
       }
     }
   }
