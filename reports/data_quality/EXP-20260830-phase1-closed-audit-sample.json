@@ -1,0 +1,4793 @@
+{
+  "audit": {
+    "anomalous_event_count": 752,
+    "clean_event_count": 7470,
+    "cohort_event_counts": {
+      "EVENT_MISSING_CLOSED_TIME": 57,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED": 116,
+      "MARKET_IDENTIFIER_INCOMPLETE": 2,
+      "MARKET_NOT_UMA_RESOLVED": 19,
+      "NO_EVENT_RESOLUTION_SOURCE": 639
+    },
+    "cohort_intersection_counts": {
+      "CLEAN": 7470,
+      "EVENT_MISSING_CLOSED_TIME+EVENT_NOT_AUTOMATICALLY_RESOLVED": 54,
+      "EVENT_MISSING_CLOSED_TIME+EVENT_NOT_AUTOMATICALLY_RESOLVED+NO_EVENT_RESOLUTION_SOURCE": 3,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED": 40,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED+MARKET_IDENTIFIER_INCOMPLETE+MARKET_NOT_UMA_RESOLVED": 2,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED+MARKET_NOT_UMA_RESOLVED": 16,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED+NO_EVENT_RESOLUTION_SOURCE": 1,
+      "MARKET_NOT_UMA_RESOLVED": 1,
+      "NO_EVENT_RESOLUTION_SOURCE": 635
+    },
+    "cohort_market_counts": {
+      "MARKET_IDENTIFIER_INCOMPLETE": 22,
+      "MARKET_NOT_UMA_RESOLVED": 80
+    },
+    "event_count": 8222
+  },
+  "manual_reconciliation_sample": [
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-06-26T02:57:04Z",
+      "cohorts": [
+        "NO_EVENT_RESOLUTION_SOURCE"
+      ],
+      "end_date": "2026-06-25T12:00:00Z",
+      "event_id": "624485",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "27\u00b0C or below",
+          "condition_id": "0x25acea4c9a0f91351536de34b14a15e83eb1514b4af7786ab24d379d0681179a",
+          "market_id": "2647484",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "100552746863063095862015929940178619722001037405323115492134114344246234459933",
+            "3256542846489936840851510545835097340720426105084225015930349949737684548658"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0x844ed63a02e4ef980e7a8599035098e8dbd17324045f53c4ba154bcfb91704dc",
+          "market_id": "2647485",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "78085718594962953667437174036585028819383776945630884549671437326354752499719",
+            "32087905492932444980228958942406083895425169657605436650082121246746645317373"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0x04d3c7a218e7d0ebac90f6dcc61484fd99932ec8950ffc889f921c61bbb94c17",
+          "market_id": "2647486",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "45212030947858714378283545635428500184310890240740163483677887873505559683236",
+            "69518457545535815466379742594062193937963692089499756118401036033290647453507"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x32a8e2ff2096b51202bbbc2cf7f4096104b652b311b159aa2fc15543da485673",
+          "market_id": "2647487",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "67519344447469596260958962009303872096735674795388405220051379952614282956129",
+            "6981238179893879132629169845229283074881023576301028113402302084037496126734"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xeb82fda0a3511e604f25fbd31b74508f14e382522124ef3f8add095516bd2360",
+          "market_id": "2647488",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "86013524443074833907061956138362389184628075888633104252967629479652949907916",
+            "85831460705322593234769542391127857371660599889435440886963472705860331493759"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x7ed0cafe030b9b4036f41aecaf3b57e8feb221de56d66325142e1a26592895a1",
+          "market_id": "2647489",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "108038659330144098454340441883366833360550501508725816962969453125821824799342",
+            "29316972864776051386152301301356717076574157714312269865280624324422332101067"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0xbdf3ba62ea282f7f58af46099153c81590d95e5535f57f8424a3cec7c0b89e8c",
+          "market_id": "2647490",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "94235088269908433595847537103080241678008853895292862350383778778360682993997",
+            "35946228926990528007725225936705701243826326005208404481056005197114414458627"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0xdc2b968fa4fdce8c68a21a68101a266cf5ec1f9feff13f0f9492cdb2c9afc633",
+          "market_id": "2647491",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "76214219658468508064406807264107366072293704479783653684858035094228480596431",
+            "43779019635060393887392571838182669278622813706745764871228006953285717989723"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C",
+          "condition_id": "0xb55c728c67421549b1301453e5f298eb863e225b0ad50f633d417bc2021de008",
+          "market_id": "2647492",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "72935136085113087257485184093042629849204866625902463056345369631290484391577",
+            "75281768733434758477205720532243009440016372060747714494903393569753009766339"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "36\u00b0C",
+          "condition_id": "0xa769c608c864a0e5371bceef8910cf9b7994dc1a248c61c99a30e7473fd6235d",
+          "market_id": "2647493",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71468101443679994283492328841455036591665306562816433530580240331577395995243",
+            "55830785662875431024237341240522509730861489366350737451784886306789067557921"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "37\u00b0C or higher",
+          "condition_id": "0x824b005b786429346cebe8e896e682632e14a11ac629755d7d540079b70ebffd",
+          "market_id": "2647494",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "99566484654520736756514196408853766580566193608199241240635368925597484476041",
+            "13321115131716865672023431082159771856469201851075773201606129452270519844504"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "35ff7083095ee23d93acc666a9168fa7dfb92644cf635255d9ece116a7a0918b",
+      "resolution_source": null,
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "slug": "highest-temperature-in-hong-kong-on-june-25-2026",
+      "title": "Highest temperature in Hong Kong on June 25?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-07-07T21:29:41Z",
+      "cohorts": [
+        "NO_EVENT_RESOLUTION_SOURCE"
+      ],
+      "end_date": "2026-07-07T12:00:00Z",
+      "event_id": "668435",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "14\u00b0C or below",
+          "condition_id": "0x1438df072a4edf469013a3cd8968787fd49466a3e74b23d7a44f0b410336acc1",
+          "market_id": "2802176",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "33316555247258367393911578073533953030336960163593504041461280593139721308309",
+            "8649823668899646044750657087146637757593048993298210230950843521223568902768"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "15\u00b0C",
+          "condition_id": "0x7edeee29504f5db4e204f8315df215f5ff198792832d36a5640aa808fe2c0cea",
+          "market_id": "2802177",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "27658000591134058875727061147586649674316466179625502275937301445715338139324",
+            "12292274317020199875868759802755482286179801946725258548046789866492848531415"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "16\u00b0C",
+          "condition_id": "0x5c785c1f4eba02893a9e7ba25a13d9b9184dfb1c145b9b450fd2d8212434d23f",
+          "market_id": "2802178",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "38393159962291901583370035969596533472588822070072466962733162226752963852154",
+            "97521046237187967629346705036442947215140562289712615541192204988319546937638"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "17\u00b0C",
+          "condition_id": "0x7ab3f21e24fa95dae10c48f4fbe4693ec10f0a1dadf0938be357cd98efcd9c6e",
+          "market_id": "2802179",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "58111059437242729027700111099642373911893908909055597248487336568775610524308",
+            "101687009804530163484066356694532697730134875320862159378637470759676783264788"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "18\u00b0C",
+          "condition_id": "0xa2e0664ae62f9591dfa4d40c0e3d598861d69db4a2786768f070705397f332d4",
+          "market_id": "2802180",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "6148124635084886587038949326429150821108127072898165635824964362389893224827",
+            "71350062930617408731249587292808389204113787516107881758976471884627483631717"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x7ebab6bd129b62f35006086ac1a02e8bedca19a0e77a745ef13b6af29fa182b0",
+          "market_id": "2802181",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "104637803824937433994310968220164046986104139137022608843177910172416493681260",
+            "113674028690683617371271931887829873043841783805943084854186703303604227901837"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0xd92e192d73cea9e3e62ac981a3f6586c3b54c262a1554f51ac1b69443e791dea",
+          "market_id": "2802182",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "19268174304359474775273755903878938197618953970852780647080136614790505751493",
+            "66203553977106530956569312288667400696265093945862825261067369885234655885019"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0x3de16f83269db85bd5e4f4bcef16d8ff7c0b541949d98070949402badd695d16",
+          "market_id": "2802183",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "55946703464348721008136241904786621205593326427411252818628780288099899114603",
+            "85690577996294763061653404046083366382085043847067391266400044071200890376575"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xb4a928be99b1bd039744beeb8eb786746c3cef4f1e3f0fc4414e6e7b987ce883",
+          "market_id": "2802184",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "88175423354974668749710801861087940352291323435203081836337025554641937887756",
+            "59197240131287977827694987908752861225211221353711074866836173182146396616108"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x2ca23a1e4a638d5d3f0d59066bdda47ac6fb2c3f986effa4ff639e9fda4c7052",
+          "market_id": "2802185",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "70940749488801467219106532172564019801835593384302047134908521859443777212271",
+            "110381095090262807343335999358830707800080075276209696859445639755687202578233"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "24\u00b0C or higher",
+          "condition_id": "0xaecf550b5e25e53116e8a541bd87b61ad051257cd840354628cf7578e6807f37",
+          "market_id": "2802186",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "26866050970219777430785035097133811752780705722694765529544512934864359810625",
+            "41908331404385856430617828676209323377032805083060052724492506817123763285778"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "369b9644588a4ad244709900f1626c3dbd1416d771213df72a5d19d4ebd65e35",
+      "resolution_source": null,
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "slug": "highest-temperature-in-moscow-on-july-7-2026",
+      "title": "Highest temperature in Moscow on July 7?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-08-26T21:46:16Z",
+      "cohorts": [
+        "NO_EVENT_RESOLUTION_SOURCE"
+      ],
+      "end_date": "2026-08-26T12:00:00Z",
+      "event_id": "899793",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "29\u00b0C or below",
+          "condition_id": "0x9ab802e2de68017c408738a20519b4783efc0ab9c6ca07ed117bd9d8e87a39e0",
+          "market_id": "3831583",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "81188127364598887626756212972237681712806503633142350457277111038808206818675",
+            "41637102765101758178949528143962205408083390611762059810344546836962228645598"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x0f4a2192c3b0115ed80af54d3fa08cc02ca990fd2c08f4fd46a64c54ca517ebf",
+          "market_id": "3831584",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "99912263094180673110736164175143151674153587378515948467653941006708314994703",
+            "11091199349069616936142565017978880673768795855513501660781374634185195288592"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0x32949ba63476ad33480896ea18e494cb940644f4a3a8859a7081d7e3c27ad6ec",
+          "market_id": "3831585",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "42010052657975434751026821219545237128918050445342969138129325896476170462529",
+            "20006746525582469353520957310978813290396975243361612617037047970941481122532"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x5f51b60d81f727947a6908b860f2865e2c9928123edc7740ad1d8d79e56c826e",
+          "market_id": "3831586",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "81741126431216028456507987153723998143731604969683863564403654550074221683431",
+            "32702123830648789806487506336587654461462862326634328088495651513192397207988"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0xf842b11c777082b2c365ff84741180d3d69dad79707f91cdd05b3586200cd13a",
+          "market_id": "3831587",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "31895271654227105310260439656043031358681530963731033666863271581056571747727",
+            "9011067898152200683604512854684028658031146795496466465546637593073573308032"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0xb9b950b04bb3d91bb35b03fe832a03e544e2b469957497740d9ffd39aa7a3402",
+          "market_id": "3831588",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "63331094352351863409561161825145823493377068793540238102507971694092422274604",
+            "40969404956981784600930797493204231510720553083769736010177819150397547964208"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C",
+          "condition_id": "0x6de853ec5fe79f18dbd7c98c6d5fede7d8804eed1c4db875a019fbeb082b380c",
+          "market_id": "3831589",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "109951737503418034263619526709515852226245851477231385784481985357509899477866",
+            "101927865956808959904487303487838468891723361477521017703372612944864058488143"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "36\u00b0C",
+          "condition_id": "0xf2f1fb0bb9f9f8a2691fd3079841a2bd5064da6da8763ab9baf10af539813dda",
+          "market_id": "3831590",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "83479820247372917037738184126213251534317441273369783514402064262250430418339",
+            "67299511920372152332678377287463036366959752348651544750548814939339314232660"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "37\u00b0C",
+          "condition_id": "0xff7eba9f83d1e201f43aaf2f8580ff7b44bc6deed4a8327f8b51206694a0bbc6",
+          "market_id": "3831591",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "96003653903886206819520875043899113078380659275618156295032477541915552649122",
+            "13140578470902417766637197356066418998268229398376610260776098528375701344301"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "38\u00b0C",
+          "condition_id": "0xfca3a133853756882ccc88095a789cf373c4ed6620e8863b44bde522e4a3e307",
+          "market_id": "3831592",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "32699990428670997261800850824480131345833659589604434558000525654991174307117",
+            "85768514112886475954574382722317475499352225300930734178455686397685133517188"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "39\u00b0C or higher",
+          "condition_id": "0x97c658799f094e044cace20581f7e7dc7ed4b548fe7c5a789e0b09666c515480",
+          "market_id": "3831593",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71889236092210746403559429895309294418872994221174864269237409121813085923845",
+            "40777395987992973676656463843495086481521191406085110525218037153503447143149"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "48bbc675c43dde06090baa206c4ab26fa129300f6ddead4bd7630c1d0c182ddf",
+      "resolution_source": null,
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "slug": "highest-temperature-in-tel-aviv-on-august-26-2026",
+      "title": "Highest temperature in Tel Aviv on August 26?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-18T02:39:00.221263Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-05-19T12:00:00Z",
+      "event_id": "493722",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "27\u00b0C or below",
+          "condition_id": "0x297e5d5bfa3148f6408670367fcf3a80e833ec3a4e4ebf06bb60e2f55c743fc5",
+          "market_id": "2282243",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "72091283430209213716550967761708599169793476136131061629890387814108619287643",
+            "25208769223730351501710429084872472013246905486343170816576552141810501061492"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0xd48bfd0b2b9b7b15c47dee692432a67c1d5c0217bb19fb4df39c7fc79096b367",
+          "market_id": "2282244",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "56731681813814034141870239787929675119646277796769943266749767629975356593291",
+            "88372715518006706727504227147281934106120977096902472610386576601973958871466"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0x3a56c10d3080636686ee393d2adb8a5eebcdf10002f455aa16e5d687c3a22ca5",
+          "market_id": "2282245",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "34037073667069624598742242894751407408580775087833837014964159998578250246912",
+            "500375894811255559026482445333847124512642044574131265509465006428043816206"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x9aa7347c84cd086ed1f250ffd329bc9c87786817d35664cc8e97930b52abf728",
+          "market_id": "2282246",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "12740449549255813464196727472834894000998748092162008280435867735646666576751",
+            "13343008607737857479761815788210389535873993226517091723897523603697911179906"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0x62d07fb74fa6e39541a14768b587d00b184d5b203368cb6d4bd9fbc3c7c12001",
+          "market_id": "2282247",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "23171558629633757208149990953986482079401304782348820396028291668072428993035",
+            "21427809694305708136190065510365592042467838752301762240699838950939519720313"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x95aa5379c304337df81eb6fe94f604c0bf0bb32292e91a573c1f1032bb637738",
+          "market_id": "2282248",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "30249066116396373422025330510535226703009260365399126243481574167719439488571",
+            "110653754760809761437896675336866064900402962004526781150541456224469134823338"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x16838794f2729d9a8f2a8f438597cd08f6ad809f8df1b4e0826024ab3532815d",
+          "market_id": "2282249",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "42016520645207717943671730063647960636277003914338008873936992499654481342672",
+            "86693591507666668044349060718706573719233148317943377681944032142792453321912"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0x11cd0c98f3c963149f4ca462048a37e17a1a3937c5cb5a2d82d08716a18a6161",
+          "market_id": "2282250",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "89126636304372147185122265107303752078062245358629406635729230899865316915547",
+            "78438677483519474564338250752051186469522916099186246001642607219127008886102"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C",
+          "condition_id": "0xe266bfd657635970c4eb80c38a22a97939e75ab354087211b91b0702fcecb59b",
+          "market_id": "2282251",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "69589047529988101076738128615531124034276155894820703637019883084569475656143",
+            "77157036281359921923897790635540906312200738977387935877450543673219227144111"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "36\u00b0C",
+          "condition_id": "0x8407ffe5522ed805c0c1f59727c729d5ee5a9232a232e1617e46d17b094afcac",
+          "market_id": "2282252",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "30753598320530724847817365170873592966895005963273430168946062661413435402518",
+            "4989251137285283675916580603918494261495010099716959228559028260518820679707"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "37\u00b0C or higher",
+          "condition_id": "0xf73d32bb8d7eec0d9e8325000776f69b53a845935833a7f9f5dfcce02e05158d",
+          "market_id": "2282253",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "69187411456439364253902759119701806521482993900269571956936672257100630756727",
+            "48486274813894563233234274824768026035130363060472843953677355528524739685298"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "4e666e1831d63027e4ca0214d501b68ab33c95598d8a0467ac7f214ec445e733",
+      "resolution_source": "https://www.wunderground.com/history/daily/pk/karachi/OPKC",
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "slug": "arch-highest-temperature-in-karachi-on-may-19-2026",
+      "title": "Highest temperature in Karachi on May 19?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": "2026-06-16T22:53:50.282427Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-06-16T12:00:00Z",
+      "event_id": "593023",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "18\u00b0C or below",
+          "condition_id": "0xcd58f8b52677ea525a66be361661e0c2af4754fe1bbd2d0a27d8745346857c35",
+          "market_id": "2539099",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "113225546550532933096553988423329632226532811356031652902677763840658495903441",
+            "39291716159658443514286182304941634867712424322668418138538860329512843671865"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x987fcc47b478f7e6078bdf2abde6cdbf99c5dfd483c04beefcf26ffda5eaa030",
+          "market_id": "2539100",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "46697786467385590250000827328381111169407596119444716778831769179445480387998",
+            "113915508453595082689417163606131081508634094258107475603094676986450278322994"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0x4ad1ff9c9421afb25af557207e64cd7610b507f13477887dd464e4348e5df8e9",
+          "market_id": "2539101",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "48488064664616126888560978307918048335162883877152533760479405872803019151126",
+            "109263023667363517200484787882287286666191393878897897242504920116913988246087"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0x3ba7c28d03d3252ff1cb03196cec7262128f3cba115a4bd4e867cbe63818b96d",
+          "market_id": "2539102",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "68285166426694918559945297998727542750165815488077661101149949121072048901011",
+            "69246999800766022947444627227983338585287344913431086971466129436297575433659"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xdca116bdd53acc4cb9fcea630f3446546127a39d67a261ba08af7d65213468c9",
+          "market_id": "2539103",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "10392957530535911709704850550422056783544942770660995881518386052236354652092",
+            "20551822472962938868588449021172267734413230712189308163484626699554337594748"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0xc030c62fdf62dd7f24971583385b285c25b943986d264cc97d50149d0cc30cab",
+          "market_id": "2539104",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "70672681182757812423678015138883493207387132121615850903258060633640185356507",
+            "90972610972382430566060757642915305548654888020292752892803580039974200958629"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x38396f737eff6e10caa5053fee8c19000c640cd62bdc7b2163b1ae1be3b6047d",
+          "market_id": "2539105",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "31124286006834279905077917942016739725336973109135587779487718710372187017487",
+            "19931788605639444963741554948484410956543687056813856756959460385915318337758"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "0xa6ce97d699615b8e5e88a739ec33c079936018b59cbb4b2de965ab1f6519b260",
+          "market_id": "2539106",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71582863754441744257748775001754339788575209893005649550088271841639819110444",
+            "58424567805500672260960291553496794297288358562453257043807967160208360525716"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0x3066a66d7fa66c301bd16d02cc8a0b243b8367c8a6829dc8e0b2859fff157640",
+          "market_id": "2539107",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "51146283715046014816672619783413024477492779917628720696964380417565197031432",
+            "35087247932530768553249932680549994535345048977891618871259409348915535481803"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0xe316bfa0dda3cb541a962d1149bc6bb2d06730b0ea1c99aeec782037c9817e1c",
+          "market_id": "2539108",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "43563491695132367345409782275094195983353152750165568236554828116976584745537",
+            "12726802668223860798959234317719785895612933667309072497557853815556860909890"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C or higher",
+          "condition_id": "0x73cb8fe270ad08a91aafabd46c5e9401de98b6f424083b3001d7987e7e08d2c5",
+          "market_id": "2539109",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "48198772190968979035661877508553794743008257925299348884924290281578882239256",
+            "66356174145465711606094433623847650626450057753643999827558513179608258669591"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "2d6b3dbd9ebcb90808c54a43bbf970ee52b19071ca1316b60f65bd0d50ebe6af",
+      "resolution_source": "https://www.wunderground.com/history/daily/de/munich/EDDM",
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "slug": "highest-temperature-in-munich-on-june-16-2026",
+      "title": "Highest temperature in Munich on June 16?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-25T20:56:49.299822Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-05-25T12:00:00Z",
+      "event_id": "515716",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "28\u00b0C or below",
+          "condition_id": "0xb9c08b4e6d65933a9e83c8cdea3b49a264bb989a56e4c2f433a67b5500b1e6e1",
+          "market_id": "2337266",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "90871370148054567643324801514409455452226602251613498732652128440114497189737",
+            "5098306245056728792808002310554947162562722115710902065727776883031644195163"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0xb255528ca8c141df651e19883fcd708b0f96d63ade72f0a183c48d7f4dc552da",
+          "market_id": "2337267",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "41164097974503158390534075376830399771247658485655909358302132449151270156742",
+            "44903556542389492247761582162161693610466853188872861332662821783115012167492"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x084c810b750d0b44e7b51b8f982e262d4bd989630da87480ea70bd6834a54e86",
+          "market_id": "2337268",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "96845666050348479305853913747359209561477564526905553107114997624526204426285",
+            "78873523019671538516979691600121368185978391013884320582438615354252979455504"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xb3042206faf25bba632a45e009212338cfa8f04c4e74fd2ee0426f212257c778",
+          "market_id": "2337269",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "92595306488468365816106343541677317635118018701451888523669616226332034172732",
+            "87975237235637395662436099463754546541340538399111897511781524180508905136105"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x2ed2738eb39e5f8cc242aec8899bcaa6f768ae3c7745804c605d7f0e73c52128",
+          "market_id": "2337270",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "45836719217489391322210135877707846174909910434541359076475350671690466785174",
+            "74649467818885679342574920669537179723403127985425203612839322652125404547661"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x50a34113431345276cb5b858ae8074e98c9fa852ec7c216bceb7b94f92b60483",
+          "market_id": "2337271",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "112950470910905813881899014309197988125721759060254542916949050894009887560274",
+            "59935693439178240079717772659831349352948993939174748895312201088103487861245"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0x3c29ae63121875e5d26ffab547a6346bf10cf93b4c1f290872ae7ab07a96c651",
+          "market_id": "2337272",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "35012895140333675427024991240876366664649645026764265485689158484885589049051",
+            "96788484207742047117945423858330071742168052646243340015835853319005697968853"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C",
+          "condition_id": "0x919c6c64c89e01f1cfef7bfb5b09abe789bc4d56026350cef9d10ade463aa80d",
+          "market_id": "2337273",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "61107701200332490404394572509867362152618681782564592186948303209421293271961",
+            "46712142654797318914875515494692788813758900822111614281845164563673440134485"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "36\u00b0C",
+          "condition_id": "0x11c913c510b224b1c920e0a2ba89296f39ad42ad27140f0adc1909c2887bd8be",
+          "market_id": "2337274",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "24768215838381919340468553332516244604837175647686787817411772122772411578229",
+            "56410877123275048131310491034755726079279558179200545620031389304293313011185"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "37\u00b0C",
+          "condition_id": "0x788e58621b9980b75546e28fddf9fe70bd5385ad149f0e440e1dc69bb7548fb8",
+          "market_id": "2337275",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "90231637801538018846653392034933400659071635514332773085518349254171646047707",
+            "26782394716731583435842531612767327371409948194499435652829475627888556328775"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "38\u00b0C or higher",
+          "condition_id": "0x2125c5aa0b54d3725984f26873df3f6ed3bdf2cd0cfc398811ee472b55675d9f",
+          "market_id": "2337276",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "64733442608693874055653534246675264490570986550704534975350149280603056273977",
+            "59570646721693248965981286293537209168289916336491750555892315523043684671184"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "2c2b4c8e3ad752555aea70e8780d2b4e299ded43a9ac99209aa12478e5474f79",
+      "resolution_source": "https://www.wunderground.com/history/daily/cn/guangzhou/ZGGG",
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "slug": "highest-temperature-in-guangzhou-on-may-25-2026",
+      "title": "Highest temperature in Guangzhou on May 25?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": null,
+      "cohorts": [
+        "EVENT_MISSING_CLOSED_TIME",
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-05-19T12:00:00Z",
+      "event_id": "493659",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "73\u00b0F or below",
+          "condition_id": "0xd74f33f968a6b7049080f82aef7cf42fde100e9ce84571532799eb2da57384f7",
+          "market_id": "2281756",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "104940005877190890978706415910903648786273015623849668331263458016562951817822",
+            "26577085274704188514580756309237783322603644675263097713434439694333808025122"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "74-75\u00b0F",
+          "condition_id": "0x7cbc64f03b4e6a6227af5b4f0986daa76eea322193f2fbf218e4d75a0de8f2a7",
+          "market_id": "2281757",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "75201818059099282442634347529371338073082682089874482524591138055387998832324",
+            "102198263069397371629928009600268719742411419898265379663634324479427967712562"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "76-77\u00b0F",
+          "condition_id": "0x884cf9b8fc22b66933ef3722d1eaaee6cd569a81ba21be86e8e5af4c076f27b6",
+          "market_id": "2281758",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "33407247516831577972653593511607198684330867202539189949992475691010413791612",
+            "11520191153607853609400000806371638428339874607341731012920907764519583831712"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "78-79\u00b0F",
+          "condition_id": "0xf6dcbadf1457399762e79ac441f11be992af9a017291412fcb864f6ae2a6886d",
+          "market_id": "2281759",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "89114184022924799042114605397826729530848899767645370739810433857990509420552",
+            "105272904547227718300259064356649788462364233630467287304118129965108190098326"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "80-81\u00b0F",
+          "condition_id": "0x1f5692a87773d401172a9125fb3ce992e0d86e1657cbdf1c797be11a4c9fb513",
+          "market_id": "2281760",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "52915783848068753915335624624011551140064052771786948830646230178453111423342",
+            "41112887507465293781666278324974220191180360833830243974821489120622429662337"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "82-83\u00b0F",
+          "condition_id": "0xb8a12b1fbecc9f7e3f69f7be76f690b166393d188e210e778e1c5fc203121226",
+          "market_id": "2281761",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "70001517937938487325100329150597223418759675195551087104545928738160621789693",
+            "104408875754568631169801961668027965125938621956990927542025408278234634363219"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "84-85\u00b0F",
+          "condition_id": "0x028a2ec601c08a78112fb034e7b0643a0c687ba74f31249e76002619b01e338b",
+          "market_id": "2281762",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "39312534722235355986592210685357965087799301486894458361199042037334674782257",
+            "14286365608645634159646574690582052052273201907967333865403731459392217887606"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "86-87\u00b0F",
+          "condition_id": "0xe3bc1c10c7203d8a9a2c11e1c82f1e4c13e4ec5e076e42674bf363eb4951010d",
+          "market_id": "2281763",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "41529889664167460282777648120171718823996011100408333723351592123429595343440",
+            "71255730698955133405052031130267177657117655526908518231452910924993563772303"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "88-89\u00b0F",
+          "condition_id": "0xa812739ae4644bd1ab81205969602ca7bc640580de93be21b388eacf7f86d87b",
+          "market_id": "2281764",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "48142036988808803216167630688220491489854511533550040956655708321488300273551",
+            "7013059517741919650134379493635414731809666330815362094173679860508082410000"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "90-91\u00b0F",
+          "condition_id": "0x60a39382e8b2dbe0753532a39a998dbea410536a133be33c907968ec718466bb",
+          "market_id": "2281765",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "15687849827591829304734095222939932992139747923737059875535570097186905427149",
+            "114605668530265710099921227650784764416395739088962847853763756873058497899216"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "92\u00b0F or higher",
+          "condition_id": "0x318a12e6ae1cecebfe3accd81abac33d631e0704f8237eb5568d0ec364ae4acc",
+          "market_id": "2281766",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "1089351339336143246916949224300730994333269967168390561345775850382689243034",
+            "109633132834288909698704342461398374966803679161906569886576426976804506607297"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "4e666e1831d63027e4ca0214d501b68ab33c95598d8a0467ac7f214ec445e733",
+      "resolution_source": "https://www.wunderground.com/history/daily/us/tx/dallas/KDAL",
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "slug": "arch-highest-temperature-in-dallas-on-may-19-2026",
+      "title": "Highest temperature in Dallas on May 19?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": null,
+      "cohorts": [
+        "EVENT_MISSING_CLOSED_TIME",
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-05-18T12:00:00Z",
+      "event_id": "490270",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "27\u00b0C or below",
+          "condition_id": "0xd98f6f9259448c94ae7d373dc5363043f06acb41cbca006ae18cc524f2203efd",
+          "market_id": "2274597",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "22548399101034749643369040426558854468801784973970867455722254713671474314033",
+            "60053346593297602089312644966106541608248651635063245754288467171317959093134"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0xef8913bf64cd5a4bd309ba63b1cb0751cae4490f8ae5a8f944a09288a551d866",
+          "market_id": "2274598",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "37773361000196933363366526558577124467052205331146898653054382574734211744429",
+            "83819227087461399020551975895964146445739587720153928925204696129538286393258"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0xd735a579fd6a1db44ade1870b6853170f131836f051051ab7719619a5f1cc539",
+          "market_id": "2274599",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "72064003048160249660932410269013489767097958942317683389092141688894044055138",
+            "62603009245072732952203198375930781830625553600840078207484034413413495519387"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x009bb0346644b388ac62d2824d193d54dad2212b254040440847dc658aa49319",
+          "market_id": "2274600",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "61097532182567145886687995215346989336583897081108542047793149494861307515797",
+            "14634447386333402293984031582971295028952155751657167593286744264991991367196"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xc694dc8a2823d90aeebee206147506103005ad386ea7c1bc92d7b0f2f78d89e0",
+          "market_id": "2274601",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "5577394825836256068679915616676018723724177949370467070388555902605660076669",
+            "73129223751097144437892290503648357621459339777959875074786200722570093334732"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x34ca6ca32cdfe469c18ba00f67031ff5d0b56ee8f750f4eaa8329f274a06719b",
+          "market_id": "2274602",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "80442823789820472874757887750383567339687196982372669116843431649748595670561",
+            "94806083165605567561609034915052212520660458955311968294046989009148867004555"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0xbcfd953a77c4400251477f86a4898edc1a25a780dd234d6c5937b32fbde64854",
+          "market_id": "2274603",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "9369067480084689465673650129514050007845239041563700483800437712452236318406",
+            "65039234077781003804779872377125967987278045894436154463008138599586260729705"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0x6e8428819a6bc70b31a718db5cbe7c2b567f845257075a5c90d0886320bb33eb",
+          "market_id": "2274604",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "41068847464395676514325146505208342676698582698969950523854252142374590540493",
+            "115662741427211888772433177944224607737979433806502719650486426093733061952408"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C",
+          "condition_id": "0x6226fd46df83695fb1b162e2b7a1ba74793e91fcba3ff45b8eb7bfe67508225c",
+          "market_id": "2274605",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "7528911279597649260475936709204356316764099249574472000749720937030975051329",
+            "7168022402276879551370962160713229791668043661959323116252428358442511873569"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "36\u00b0C",
+          "condition_id": "0x2602c52d3f46ce11276d1f53a7f16e09508bed4374f6981861e9b06ccb1e2c34",
+          "market_id": "2274606",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "81256857275474827248213357553104110224962341157504401955048184654059366928705",
+            "11495516073648094365722848244729519047813452299643292054514807320976485012396"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "37\u00b0C or higher",
+          "condition_id": "0x117beed8f9e75e5b2e69dc1e902738127fb9fb085b38527c78f9f232b5f5ccc5",
+          "market_id": "2274607",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "105564149879089295998363212131727435827555737135415698408971562250206394824208",
+            "113752915128286220584429741132953099450472396975630015746030247431609974701662"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "4e666e1831d63027e4ca0214d501b68ab33c95598d8a0467ac7f214ec445e733",
+      "resolution_source": "https://www.wunderground.com/history/daily/id/jakarta/WIHH",
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "slug": "arch-highest-temperature-in-jakarta-on-may-18-2026",
+      "title": "Highest temperature in Jakarta on May 18?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": null,
+      "closed_time": null,
+      "cohorts": [
+        "EVENT_MISSING_CLOSED_TIME",
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED"
+      ],
+      "end_date": "2026-05-19T12:00:00Z",
+      "event_id": "493666",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "11\u00b0C or below",
+          "condition_id": "0xfa507f36883a4b075c82fb1ce1dbcc6e3ad4e7b1c963891c68f15ee91b99fa7f",
+          "market_id": "2281833",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "16834311537503083923943671588722357462681662545740951877557166439497221560602",
+            "5801127098042479263236550400690822977477874195289084674924365979709405870678"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "12\u00b0C",
+          "condition_id": "0x1d877010746947dd9c22c2d2f01ea8830f47a8916bed23897d9f64ac7ac480ce",
+          "market_id": "2281834",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "115123526604121793665195193225825832756913244791308844112673682914154067068814",
+            "12115106181679501848969333508596215119614792922006478897429476143445959003121"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "13\u00b0C",
+          "condition_id": "0x4bc5a14ee0fe1c2d34fda3f81568ad4818521b26cba49ffd78a2c01de1c7e2a5",
+          "market_id": "2281835",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "10173073619077063221736074145946936025529291256330183458313098423452816911676",
+            "103149091356491680324376086295829922587871144137211915703492919622979474094268"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "14\u00b0C",
+          "condition_id": "0x7f904f4d76e816b6b38606072a889deabd217a4b33545a537ef41b7258270664",
+          "market_id": "2281836",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "3362050953010980615360628221615895182177206898486523641597084377207191374936",
+            "76721318394945537601190732300908152992572521535061185708052975174049735263015"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "15\u00b0C",
+          "condition_id": "0xc9def9e813a5396a342d125ef0397615d2488b5c9e1a5a5916aceabe1d263c31",
+          "market_id": "2281837",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "70957753817901647347342818043528257411210602814707002184635777032166115523035",
+            "58921654677725922935444250784985486770886535177213734920534616069588380894057"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "16\u00b0C",
+          "condition_id": "0x3e3502893fa3968e6666b8907cda5579fe471102fc3db86178ff3caec1fd79a2",
+          "market_id": "2281838",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "19355674472230730611101812291306710079860286663682321960306115219222692525094",
+            "27299059923104368220142373998658514338221306131317698391931732618852364249746"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "17\u00b0C",
+          "condition_id": "0x8d7e90e111854ffd84688389c888d055eaf55f95f7776b70f84e8ba460efb288",
+          "market_id": "2281839",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "92106044589956793377301168875878297226075291777677238984718320554746253764404",
+            "93683089225219109643253311843952506211579784757501597593653211322632964781721"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "18\u00b0C",
+          "condition_id": "0x32058ca981f3a83fbff81750fa320fcd60bf04729bc9232bd7fd0bb42c2f8c26",
+          "market_id": "2281840",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "14572400496817060916817308313086978145762569797927942821229312503590624376340",
+            "9361500059612152236205672899484059190625492383970115193327820466881594158009"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x45e9207d6683127f6ab596cca4c65f86f1760f3968e025ba05c6e69a33647339",
+          "market_id": "2281841",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "61725511310800356862278778271654209952462026519816348765714221865763713679436",
+            "86092074282577345658840261624285958336799363218182284501075421695248578943262"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0x964235510e872a18f9c8c0f388dfcdc4fbace3905c599e4c9bb71f4762e1ab6a",
+          "market_id": "2281842",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "113364963448742601791046264235613082308114470920081717604018962336981752397618",
+            "106254678353763802913760314715498521438114199044561613789356365041959223102603"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C or higher",
+          "condition_id": "0x05bd4e39d14a75dd9ce0ab91954c873059f2e0ff59e812e40b5740bae89715fb",
+          "market_id": "2281843",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "55670041852711435878221882829243235097817916221174200656207877897640083649904",
+            "65237920277070706981481942316240042470198407609250287644957464448074954161036"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "4e666e1831d63027e4ca0214d501b68ab33c95598d8a0467ac7f214ec445e733",
+      "resolution_source": "https://www.wunderground.com/history/daily/de/munich/EDDM",
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "slug": "arch-highest-temperature-in-munich-on-may-19-2026",
+      "title": "Highest temperature in Munich on May 19?"
+    },
+    {
+      "anomalous_markets": [
+        {
+          "bucket_label": "20\u00b0C or below",
+          "condition_id": "",
+          "market_id": "2309630",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "",
+          "market_id": "2309631",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "",
+          "market_id": "2309632",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "",
+          "market_id": "2309633",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "",
+          "market_id": "2309634",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "",
+          "market_id": "2309635",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "",
+          "market_id": "2309636",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "",
+          "market_id": "2309637",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "",
+          "market_id": "2309638",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "",
+          "market_id": "2309639",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "30\u00b0C or higher",
+          "condition_id": "",
+          "market_id": "2309640",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        }
+      ],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-20T17:32:33.060549Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+        "MARKET_IDENTIFIER_INCOMPLETE",
+        "MARKET_NOT_UMA_RESOLVED"
+      ],
+      "end_date": "2026-05-22T12:00:00Z",
+      "event_id": "504566",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "20\u00b0C or below",
+          "condition_id": "",
+          "market_id": "2309630",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "",
+          "market_id": "2309631",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "",
+          "market_id": "2309632",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "",
+          "market_id": "2309633",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "",
+          "market_id": "2309634",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "",
+          "market_id": "2309635",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "",
+          "market_id": "2309636",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "",
+          "market_id": "2309637",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "",
+          "market_id": "2309638",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "",
+          "market_id": "2309639",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "30\u00b0C or higher",
+          "condition_id": "",
+          "market_id": "2309640",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        }
+      ],
+      "page_content_sha256": "16fa1fe8f2dff0666908bd522abb18620b9519ed79fa2bdc34b0706ac3a38e33",
+      "resolution_source": "https://www.wunderground.com/history/daily/cn/jinan/ZSJN",
+      "selection_stratum": "MARKET_IDENTIFIER_INCOMPLETE",
+      "slug": "highest-temperature-in-jinan-on-may-22-2026",
+      "title": "Highest temperature in Jinan on May 22?"
+    },
+    {
+      "anomalous_markets": [
+        {
+          "bucket_label": "21\u00b0C or below",
+          "condition_id": "",
+          "market_id": "2309652",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "",
+          "market_id": "2309653",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "",
+          "market_id": "2309654",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "",
+          "market_id": "2309655",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "",
+          "market_id": "2309656",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "",
+          "market_id": "2309657",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "",
+          "market_id": "2309658",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "",
+          "market_id": "2309659",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "",
+          "market_id": "2309660",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "",
+          "market_id": "2309661",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "31\u00b0C or higher",
+          "condition_id": "",
+          "market_id": "2309662",
+          "outcome_prices": [],
+          "outcomes": [],
+          "reason_codes": [
+            "MARKET_IDENTIFIER_INCOMPLETE",
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [],
+          "uma_resolution_status": null
+        }
+      ],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-20T17:32:33.153929Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+        "MARKET_IDENTIFIER_INCOMPLETE",
+        "MARKET_NOT_UMA_RESOLVED"
+      ],
+      "end_date": "2026-05-22T12:00:00Z",
+      "event_id": "504568",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "21\u00b0C or below",
+          "condition_id": "",
+          "market_id": "2309652",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "",
+          "market_id": "2309653",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "",
+          "market_id": "2309654",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "",
+          "market_id": "2309655",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "",
+          "market_id": "2309656",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "",
+          "market_id": "2309657",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "",
+          "market_id": "2309658",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "",
+          "market_id": "2309659",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "",
+          "market_id": "2309660",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "",
+          "market_id": "2309661",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "31\u00b0C or higher",
+          "condition_id": "",
+          "market_id": "2309662",
+          "outcome_prices": [],
+          "outcomes": [],
+          "token_ids": [],
+          "uma_resolution_status": null
+        }
+      ],
+      "page_content_sha256": "16fa1fe8f2dff0666908bd522abb18620b9519ed79fa2bdc34b0706ac3a38e33",
+      "resolution_source": "https://www.wunderground.com/history/daily/cn/zhengzhou/ZHCC",
+      "selection_stratum": "MARKET_IDENTIFIER_INCOMPLETE",
+      "slug": "highest-temperature-in-zhengzhou-on-may-22-2026",
+      "title": "Highest temperature in Zhengzhou on May 22?"
+    },
+    {
+      "anomalous_markets": [
+        {
+          "bucket_label": "15\u00b0C or below",
+          "condition_id": "0x1388430541ca0433a9587150c936273b033eb66e6455f8c7c081b752d0fac7bb",
+          "market_id": "2282167",
+          "outcome_prices": [
+            "0.0025",
+            "0.9975"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "54727809895953350499360798232172764824548692726116402044158744379039287066667",
+            "98171788384022398924325130082562293229299991134846556360073648252480899974436"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "16\u00b0C",
+          "condition_id": "0xd2e2d2b7be1f4d95a9d2fc9f78918addf9ffbd38a3ba47639ccd911c39de91f4",
+          "market_id": "2282168",
+          "outcome_prices": [
+            "0.0025",
+            "0.9975"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "28660504597152988360689314211421933951011923168110054799117306519961890106108",
+            "10516143355440246518983463720214767152220246044409324041534677481963660564986"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "17\u00b0C",
+          "condition_id": "0x7a6036f478131b29e6fec384ce4f15a0aa698054f66539270a4680a93c884886",
+          "market_id": "2282169",
+          "outcome_prices": [
+            "0.0035",
+            "0.9965"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "9753222075215063988120293458853721140339653155201484860589593965341836118385",
+            "105390285093615320855306567327277348641748624933325800873635708448793294145212"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "18\u00b0C",
+          "condition_id": "0x1c49a14afd9f06b606bad7f77a40192c27bc308acd964d0f74cb8f824ce47b74",
+          "market_id": "2282170",
+          "outcome_prices": [
+            "0.004",
+            "0.996"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "60471454577727935458398088482197783223992854686173893582993481627946796576183",
+            "25164021932402048727376247063446567976815202909966444652868945455513088937261"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x88dd818a538dc51ad3749bb6efd995054ec6b27e617722406fb17ac17442e051",
+          "market_id": "2282171",
+          "outcome_prices": [
+            "0.0175",
+            "0.9825"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "74901893755149232052313290771512967335659500427986472725749100571391366505890",
+            "54931276220664049710453546073544206504310181602600708401033746782663867069778"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0x8c9ac14b1b1afc190d562f4edd08218d1a3b0550fb744850784ca99a682032b3",
+          "market_id": "2282172",
+          "outcome_prices": [
+            "0.065",
+            "0.935"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "32182651733374206572092770487356091216231550589080032225965293053095806610075",
+            "52830374051407451693537946232670530293667373898638125991263333367845515935181"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0xa443f764569e3c1630f9f8bd15669718b1c9c6e72754b1bdaaa0fcb5be3f2aa8",
+          "market_id": "2282173",
+          "outcome_prices": [
+            "0.125",
+            "0.875"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "76638170654988680142807897654977988633592041980756071661082290584956695658267",
+            "91174426201566960976199334955337422976736488789839772701984033038649848631008"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xb3c9195077658f591a01f7074b9771753c7e3318bc0551f186607351e5f5ae5a",
+          "market_id": "2282174",
+          "outcome_prices": [
+            "0.33",
+            "0.67"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "27686521243214638930252047516884257683092563419048959040842000245239055717283",
+            "69681714215135508947301191711644299118915118187739287603542215363146265599270"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x85e6234e77269bde8fea5f380c09cfb7a516d479eabf41d036981f7268f71e3a",
+          "market_id": "2282175",
+          "outcome_prices": [
+            "0.285",
+            "0.715"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "72662381656547165719267966250252918878137380607800920155296844028396547810795",
+            "85554445071905203756949422009845730326665356125776223116234769006348189410354"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x481aa6a8f8adfc581427cc30d5e1be0a40872ba592a7a44cc346ebd1c6e17fc7",
+          "market_id": "2282176",
+          "outcome_prices": [
+            "0.0905",
+            "0.9095"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "61112951092843056144960318957730262854758550952805282168314958108702676313781",
+            "102922184752989500796666671119367416142542341504455775506899498346190645331575"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C or higher",
+          "condition_id": "0x45dfd1bb0502cb414d6d313830d62b2b92600df9cfc877c843d156f8c2df29a6",
+          "market_id": "2282177",
+          "outcome_prices": [
+            "0.015",
+            "0.985"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "60698368476330415480943376879263431196176142282506587757166709877644321408133",
+            "114864264879961448023102598936519907579755052835396786970715689018498755727492"
+          ],
+          "uma_resolution_status": null
+        }
+      ],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-18T02:38:58.199444Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+        "MARKET_NOT_UMA_RESOLVED"
+      ],
+      "end_date": "2026-05-19T12:00:00Z",
+      "event_id": "493696",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "15\u00b0C or below",
+          "condition_id": "0x1388430541ca0433a9587150c936273b033eb66e6455f8c7c081b752d0fac7bb",
+          "market_id": "2282167",
+          "outcome_prices": [
+            "0.0025",
+            "0.9975"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "54727809895953350499360798232172764824548692726116402044158744379039287066667",
+            "98171788384022398924325130082562293229299991134846556360073648252480899974436"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "16\u00b0C",
+          "condition_id": "0xd2e2d2b7be1f4d95a9d2fc9f78918addf9ffbd38a3ba47639ccd911c39de91f4",
+          "market_id": "2282168",
+          "outcome_prices": [
+            "0.0025",
+            "0.9975"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "28660504597152988360689314211421933951011923168110054799117306519961890106108",
+            "10516143355440246518983463720214767152220246044409324041534677481963660564986"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "17\u00b0C",
+          "condition_id": "0x7a6036f478131b29e6fec384ce4f15a0aa698054f66539270a4680a93c884886",
+          "market_id": "2282169",
+          "outcome_prices": [
+            "0.0035",
+            "0.9965"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "9753222075215063988120293458853721140339653155201484860589593965341836118385",
+            "105390285093615320855306567327277348641748624933325800873635708448793294145212"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "18\u00b0C",
+          "condition_id": "0x1c49a14afd9f06b606bad7f77a40192c27bc308acd964d0f74cb8f824ce47b74",
+          "market_id": "2282170",
+          "outcome_prices": [
+            "0.004",
+            "0.996"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "60471454577727935458398088482197783223992854686173893582993481627946796576183",
+            "25164021932402048727376247063446567976815202909966444652868945455513088937261"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x88dd818a538dc51ad3749bb6efd995054ec6b27e617722406fb17ac17442e051",
+          "market_id": "2282171",
+          "outcome_prices": [
+            "0.0175",
+            "0.9825"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "74901893755149232052313290771512967335659500427986472725749100571391366505890",
+            "54931276220664049710453546073544206504310181602600708401033746782663867069778"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0x8c9ac14b1b1afc190d562f4edd08218d1a3b0550fb744850784ca99a682032b3",
+          "market_id": "2282172",
+          "outcome_prices": [
+            "0.065",
+            "0.935"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "32182651733374206572092770487356091216231550589080032225965293053095806610075",
+            "52830374051407451693537946232670530293667373898638125991263333367845515935181"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0xa443f764569e3c1630f9f8bd15669718b1c9c6e72754b1bdaaa0fcb5be3f2aa8",
+          "market_id": "2282173",
+          "outcome_prices": [
+            "0.125",
+            "0.875"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "76638170654988680142807897654977988633592041980756071661082290584956695658267",
+            "91174426201566960976199334955337422976736488789839772701984033038649848631008"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xb3c9195077658f591a01f7074b9771753c7e3318bc0551f186607351e5f5ae5a",
+          "market_id": "2282174",
+          "outcome_prices": [
+            "0.33",
+            "0.67"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "27686521243214638930252047516884257683092563419048959040842000245239055717283",
+            "69681714215135508947301191711644299118915118187739287603542215363146265599270"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x85e6234e77269bde8fea5f380c09cfb7a516d479eabf41d036981f7268f71e3a",
+          "market_id": "2282175",
+          "outcome_prices": [
+            "0.285",
+            "0.715"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "72662381656547165719267966250252918878137380607800920155296844028396547810795",
+            "85554445071905203756949422009845730326665356125776223116234769006348189410354"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x481aa6a8f8adfc581427cc30d5e1be0a40872ba592a7a44cc346ebd1c6e17fc7",
+          "market_id": "2282176",
+          "outcome_prices": [
+            "0.0905",
+            "0.9095"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "61112951092843056144960318957730262854758550952805282168314958108702676313781",
+            "102922184752989500796666671119367416142542341504455775506899498346190645331575"
+          ],
+          "uma_resolution_status": null
+        },
+        {
+          "bucket_label": "25\u00b0C or higher",
+          "condition_id": "0x45dfd1bb0502cb414d6d313830d62b2b92600df9cfc877c843d156f8c2df29a6",
+          "market_id": "2282177",
+          "outcome_prices": [
+            "0.015",
+            "0.985"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "60698368476330415480943376879263431196176142282506587757166709877644321408133",
+            "114864264879961448023102598936519907579755052835396786970715689018498755727492"
+          ],
+          "uma_resolution_status": null
+        }
+      ],
+      "page_content_sha256": "4e666e1831d63027e4ca0214d501b68ab33c95598d8a0467ac7f214ec445e733",
+      "resolution_source": "https://www.wunderground.com/history/daily/za/matroosfontein/FACT",
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "slug": "arch-highest-temperature-in-cape-town-on-may-19-2026",
+      "title": "Highest temperature in Cape Town on May 19?"
+    },
+    {
+      "anomalous_markets": [
+        {
+          "bucket_label": "21\u00b0C or below",
+          "condition_id": "0xc9926fb0672e249a5209322b7944621455713a847504cd8bab9748a89c4a9f5c",
+          "market_id": "2290012",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "66023454757822496807093270222633048310320692316661723061395636694640823929975",
+            "102176651506745557618815938212662119304577390647835629002657151149526393113014"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xe074eae43924da0ebf61cb349b5856458aa3bca614853057b9e474aad8ab0990",
+          "market_id": "2290013",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "35460179969583234960946626118640980530422172940817178047638172056571019807759",
+            "99575761101686729928635584890658931986510063456713173602704025521607732721930"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x24fbfcc21f373f740be2329a3368f64d1b6bfab6c1f502cee0c79ea4482ea027",
+          "market_id": "2290014",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "65472127431238431815228042184243259793622542789320537197629500996065342137538",
+            "103290675143321924320867683913256719455589629584261917886741176271088286055002"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x7fe7468baed2e6196f2bc27ee0bf71a344a86b737a650988cdf206e79a1421c8",
+          "market_id": "2290015",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "41815931368916071950006353448078477963500805335489456495636019056968016877908",
+            "60487480930576166182413835882062834308603832212529649902999730346433980970079"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "0x1d4d345f0c1890e5f815417463a401e0bdf794584fa640c158948200dd1bec5c",
+          "market_id": "2290016",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "71239321898018338883611988440005116172136130793298773682555344288640019972077",
+            "102330276055710825643123627935964494726753801306299586047014438011892276273537"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0xc9f9417a69d540ee4e43902453d6ad9c583bf79c0949c3661d0365f7e3fc2b3e",
+          "market_id": "2290017",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "70769517751158932141434461787527064540483067436112899301808348549898231377225",
+            "108813909688005631182237296273590369161790243421034764676754744626807380065275"
+          ],
+          "uma_resolution_status": "proposed"
+        }
+      ],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-21T18:32:56.780389Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+        "MARKET_NOT_UMA_RESOLVED"
+      ],
+      "end_date": "2026-05-20T12:00:00Z",
+      "event_id": "497028",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "21\u00b0C or below",
+          "condition_id": "0xc9926fb0672e249a5209322b7944621455713a847504cd8bab9748a89c4a9f5c",
+          "market_id": "2290012",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "66023454757822496807093270222633048310320692316661723061395636694640823929975",
+            "102176651506745557618815938212662119304577390647835629002657151149526393113014"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0xe074eae43924da0ebf61cb349b5856458aa3bca614853057b9e474aad8ab0990",
+          "market_id": "2290013",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "35460179969583234960946626118640980530422172940817178047638172056571019807759",
+            "99575761101686729928635584890658931986510063456713173602704025521607732721930"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x24fbfcc21f373f740be2329a3368f64d1b6bfab6c1f502cee0c79ea4482ea027",
+          "market_id": "2290014",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "65472127431238431815228042184243259793622542789320537197629500996065342137538",
+            "103290675143321924320867683913256719455589629584261917886741176271088286055002"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x7fe7468baed2e6196f2bc27ee0bf71a344a86b737a650988cdf206e79a1421c8",
+          "market_id": "2290015",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "41815931368916071950006353448078477963500805335489456495636019056968016877908",
+            "60487480930576166182413835882062834308603832212529649902999730346433980970079"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "0x1d4d345f0c1890e5f815417463a401e0bdf794584fa640c158948200dd1bec5c",
+          "market_id": "2290016",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71239321898018338883611988440005116172136130793298773682555344288640019972077",
+            "102330276055710825643123627935964494726753801306299586047014438011892276273537"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0xc9f9417a69d540ee4e43902453d6ad9c583bf79c0949c3661d0365f7e3fc2b3e",
+          "market_id": "2290017",
+          "outcome_prices": [
+            "0.0005",
+            "0.9995"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "70769517751158932141434461787527064540483067436112899301808348549898231377225",
+            "108813909688005631182237296273590369161790243421034764676754744626807380065275"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0xfefd12a44ad28f958f1157a393a3a3000a80ed015daf482d7f5fb4b9f90d5fa5",
+          "market_id": "2290018",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "86427804990976587208563443131747383455630091818884577005170433345807910291334",
+            "107794152078530972119573688828724847879145319130694662904845149027348943686927"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0xdfbf785d60f5d56b7c15a084c43ddd85ab96d80184b8cab950931d5ac89bd118",
+          "market_id": "2290019",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "97014494514457404425322648557895812574939435598520473516870918055259959202896",
+            "71978773362901079723063006190836764777226550397884369975028949356725121069422"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0xc188927bfc40517d8a81442ff7e2e31114f5080c0afee4b6550521f2e7604c13",
+          "market_id": "2290020",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "68245643280367745108751187389581450722140947542893388225747867097892649797688",
+            "47888224961032902652692226008326379352557011855005103795861364845648730380340"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x5a521579e9cc78cc0d4801714da92bf00e77afdfb9763693098e9d0d1135df8a",
+          "market_id": "2290021",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "6166526217802295079345151090007645707152931201224743741354166127202441667829",
+            "114541675099044420989391619029398296830501944787701934578683577515346967860650"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C or higher",
+          "condition_id": "0xbde9d3d142341a0d0b375ab3c8bdf5758111dfcecfd5933939d5e6e2e54c89df",
+          "market_id": "2290022",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "76759320493553742490033064499393611566912456858566765053305989321094577842633",
+            "59123601955968602419238979289738326105130096031358564168099956443955594659518"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "d6334a35cfbff94701e3259e76538073ed2f058c99402cd25121c826ea8b1121",
+      "resolution_source": "https://www.wunderground.com/history/daily/pa/panama-city/MPMG",
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "slug": "highest-temperature-in-panama-city-on-may-20-2026",
+      "title": "Highest temperature in Panama City on May 20?"
+    },
+    {
+      "anomalous_markets": [
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x9133dcc7d359a890a2e5fbdeeb17639680cb0336214554729f33ee32613ea28b",
+          "market_id": "2337097",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "103180674303408772154404696986363280680567510100389266870653803253595968156702",
+            "86648628158366056989716915975346232865461864649965312472236017060725954919874"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0xf8a93264d01e51c7187ba1cb830f758454685c533b2eba0551e34bc14bad5572",
+          "market_id": "2337098",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "reason_codes": [
+            "MARKET_NOT_UMA_RESOLVED"
+          ],
+          "token_ids": [
+            "22629582968184523750114639672856526666347135824581659514510713144955344476268",
+            "96273373095267130624496025297038843835696197128563966992515595246876368717904"
+          ],
+          "uma_resolution_status": "proposed"
+        }
+      ],
+      "automatically_resolved": null,
+      "closed_time": "2026-05-25T22:27:05.746923Z",
+      "cohorts": [
+        "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+        "MARKET_NOT_UMA_RESOLVED"
+      ],
+      "end_date": "2026-05-25T12:00:00Z",
+      "event_id": "515700",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "25\u00b0C or below",
+          "condition_id": "0x95a3aff5d9df2d7a871a3ade6d278185740bfc74f78bfae98ff0522690d9a2b9",
+          "market_id": "2337089",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "57441811891246023820571362797055348082443739599830454335277555382009854640268",
+            "57264578486449019735198636881677553212229594169831842528907925425874571282431"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0x7aced2b73545e751c114bf0a423981b1ac3c8e4506ee3e448b3f2cc5ed184cdd",
+          "market_id": "2337090",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "57757640052704542818876920530322843755856597740141282592249452371498110689356",
+            "29019229218058177693992380147594076656696482249219178144733836438279872810573"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0x04088b86969760479f34e82ace60b76351e2dbf1012c3bfd8ae48b04a2c6ee99",
+          "market_id": "2337091",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71683996130634318460314843281737257358511970533880297118299259521054046858710",
+            "4718642070153865577785423180365558670787510046727318682295318571928207417493"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0x88cd8b440dfd15ebeaf50f2bd9854f6245a1aa98bd5e77574ffa8c1ac7dec5d1",
+          "market_id": "2337092",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "42734056456627684318783777073185054229198091902209882289906600167289252496203",
+            "36204273459062611373826323034777360303004174746480746475386571091152682964857"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0x339a154b542430e472f4f14ab4f56e04e0d37fffb5116de455499237cb4d5180",
+          "market_id": "2337093",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "24527079927558329085191512618326559805950593618919115913536044065001550541713",
+            "7024909731598944896598206963054022259851276601577027469281467014000832115034"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0xd1aad3c37f6aa24dc0d5dd1403b14d7c4619e7ee2f2e36ae666488a123838b59",
+          "market_id": "2337094",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "6301626073901441544335603526707346820136697165026995317274027810899607531001",
+            "15809508303066599143683689368559533309776232682280375517312519266637492775980"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xd3614c9d7f2a1dd8b401be293baa17e6fae56fd04a815a466c6ff88a528030fd",
+          "market_id": "2337095",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "112677446813441526814798547577070961183930317930511702999543615527196175369818",
+            "2179130453935920856997072808686756774820629023364446906545898966607783108500"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0x01565a991ea6e283e6cc45bb006683f39f3f5d7123c44ed2714620d57da31c74",
+          "market_id": "2337096",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "103416887450967255597707326897404526921723433719548544750193165326865470531283",
+            "85990996845389434499665691521724218690574268711751013565774999560323197606754"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x9133dcc7d359a890a2e5fbdeeb17639680cb0336214554729f33ee32613ea28b",
+          "market_id": "2337097",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "103180674303408772154404696986363280680567510100389266870653803253595968156702",
+            "86648628158366056989716915975346232865461864649965312472236017060725954919874"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0xf8a93264d01e51c7187ba1cb830f758454685c533b2eba0551e34bc14bad5572",
+          "market_id": "2337098",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "22629582968184523750114639672856526666347135824581659514510713144955344476268",
+            "96273373095267130624496025297038843835696197128563966992515595246876368717904"
+          ],
+          "uma_resolution_status": "proposed"
+        },
+        {
+          "bucket_label": "35\u00b0C or higher",
+          "condition_id": "0x53d5dd8d66e6ad96b58808ab5512537eef716840bf6d602dd287656bb97b11bc",
+          "market_id": "2337099",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "36068110714556072028032505365055848020253025722368034410081173523883489135845",
+            "28709610374960923966978059503849980831039070203446426613416024273527588362792"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "2c2b4c8e3ad752555aea70e8780d2b4e299ded43a9ac99209aa12478e5474f79",
+      "resolution_source": "https://www.wunderground.com/history/daily/cn/shenzhen/ZGSZ",
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "slug": "highest-temperature-in-shenzhen-on-may-25-2026",
+      "title": "Highest temperature in Shenzhen on May 25?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-06-22T16:33:52Z",
+      "cohorts": [],
+      "end_date": "2026-06-22T12:00:00Z",
+      "event_id": "614117",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "25\u00b0C or below",
+          "condition_id": "0xd8dc8a6a09afc9e5ff4656d94db61dbdcd548faca42bb01d43f7bed58db1e3d7",
+          "market_id": "2615442",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "32702327769545040666877929358555289856305509860766472210409865920435557716520",
+            "111558443565376123151001142973026424026654448523303624271707180245000154495860"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0x15f43f04c2c38ba2624a1d3b237da072f0441ed95c6cad4c872529e8307ec640",
+          "market_id": "2615443",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "24195912838771828273091346405172433671893300109722971687239608823392857149770",
+            "16973694249077096804595319295146692877675988929871016316224495738354589242268"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0x8f38d13f9573e1bb7547fcb1f9e6b670f29a36c2ca1f3cdfaf3fad283e615dc5",
+          "market_id": "2615444",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "110053747660136800406035117080721593017735423643896281878742191942489301135800",
+            "114599777889933503714549346463578240086837888691265617036852719790711333166755"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0x3d3b4b69ffd30cba444e648f6b2d023930ff38457809e128bd32c0496f188c5b",
+          "market_id": "2615445",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "24068258473481469596986136468974660474380908740224468080840330794874361863055",
+            "112460985493857728805953715223145102099677616529252290133709277060584481993767"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C",
+          "condition_id": "0x677ff624db6df513f0f4d97e53e1899475fe7ff8ea3f021e74815c59f819b1d4",
+          "market_id": "2615446",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "79071794738072272241552506838001277268026442036748489731675637423896289195416",
+            "37603821561620639040254084848768720885768402455043813533319421032511788046185"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x5586f2dbde617494fa0c9db25bacbed3ada928c478f8f2569acfb0e8dc2ebd40",
+          "market_id": "2615447",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "11222889050896345047609078519925146195414814419456433561472758368795289406264",
+            "68355029867590787540665933069103768332562970023653516599558745810380900426018"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xa26ccd0b9b92289849b6ec687497da7148affac5576efdeb726d35ac92d5aaff",
+          "market_id": "2615448",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "32024810310492253894690113481707858174499642279120489139553892489087033181914",
+            "78008420151205694062844891812660247171007239612963062462411530069536526176174"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0xd9898e582a9754780a610571e5dc70965008ffb463c298a68e073f36b379fbf5",
+          "market_id": "2615449",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "14664341615981504171300810035627010456987545436230894434652432955193585423992",
+            "11319184608735481492105542290439053718376542232146131443508585714108159530487"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x896c49cb0f085a76166d9ac842dbb990a45d247aa8739a3d42d8d2f8d99a3426",
+          "market_id": "2615450",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "65997705835130904672678458973059230130629680206125666492482041232607076785075",
+            "56100975359196433905077072773457556628720940741384588642382488847287720423571"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0xd6593c785949010cfb1ab02d5caba89f1dff6c3015e8247814c4c014e6ea9fd7",
+          "market_id": "2615451",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "23590974960249249628958321645460627480520346867435217741880238109526081159043",
+            "29467216164951546015009741418805743458481334899100306001384645147244406154905"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C or higher",
+          "condition_id": "0xbf9a780782afa8e6883ed11453fe782fcb24bebe3a196caddfd749d05be22c31",
+          "market_id": "2615452",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "92133075767403749868905547352447240826781910337941078930772779154787069022741",
+            "14829055514331281837954902351567245974385054823081949102546638851183810137263"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "972ab6c968565ed478376de44e21e3bfcc1f3da437083bdb6630616978d07441",
+      "resolution_source": "https://www.wunderground.com/history/daily/my/sepang-district/WMKK",
+      "selection_stratum": "CLEAN",
+      "slug": "highest-temperature-in-kuala-lumpur-on-june-22-2026",
+      "title": "Highest temperature in Kuala Lumpur on June 22?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-01-02T06:15:41Z",
+      "cohorts": [],
+      "end_date": "2026-01-01T12:00:00Z",
+      "event_id": "132826",
+      "market_count": 7,
+      "markets": [
+        {
+          "bucket_label": "29\u00b0C or below",
+          "condition_id": "0xb77c5a64bbdbc181e39ddd1ac332c1a39c06d0e3281ececbe3aabcc06d79e406",
+          "market_id": "1064855",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "68117444729796333861490672479510806491723834583733973847053792992478583592236",
+            "101885821659190853195565074231053074023817566723126387427047902581424793973200"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "30\u00b0C",
+          "condition_id": "0x0629296a9876da16a7d8e9b8daa1fa44e338ff2f104b02cca4c21ecea82896a9",
+          "market_id": "1064856",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "71017462139060940152615859044878688099914245940599485380520445305647430189416",
+            "4034168019716474828849957795517048938386961028498041386504932982070810087838"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "31\u00b0C",
+          "condition_id": "0xeeacb32a62c21eeff988e5923849ccc52525dabaf3f6c77a95b1c852c8a1c7f9",
+          "market_id": "1064857",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "103711586613835573635744827086366884907298487251424041896210267327837664372066",
+            "100012603968654259749673101022244000212846591228704352676326228177715488839910"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "32\u00b0C",
+          "condition_id": "0xcc504c2b9a9ce51e0d5175ac176fe27d89d988a7c2f251f4ce041ea7ab46343e",
+          "market_id": "1064858",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "94257357036806115081216218762914023445020810365505874184085277186137362419556",
+            "46630939881199582785156104309418344810586549665756041491636417394988863267315"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "33\u00b0C",
+          "condition_id": "0x34dcaf2c41f77db726aa1f8b123e4fba1f10706443e6eacc988135ca7e2046a0",
+          "market_id": "1064859",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "110913878368742793708655036892863361143619030021829645108099758876965631817184",
+            "81394254222651722257154795460268797558920046590714633183793266719474364255929"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "34\u00b0C",
+          "condition_id": "0x8392cd696c52b7010bcae87f38596ce28d67271efe428d8c9a22a8ddc0fd3939",
+          "market_id": "1064860",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "49603076833255957380335630362255017233534785173091647816809914992477606938314",
+            "75276443874340118558126715665865304157062934601532583426028403153699985662659"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "35\u00b0C or higher",
+          "condition_id": "0x505d4082be7a097a60794ef8b6173effa4f45c247e7a36095b555a359e944488",
+          "market_id": "1064861",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "98684031520439488480743305113523966864991430623902370980971194722601721705672",
+            "83472237325205309762572524391644002222492353357829810994263681021699395099221"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "1e0d0e1fa9d715206fa1f6dca52fb0501b626c1229647a64c9f868e842a45096",
+      "resolution_source": "https://www.wunderground.com/history/daily/ar/ezeiza/SAEZ",
+      "selection_stratum": "CLEAN",
+      "slug": "highest-temperature-in-buenos-aires-on-january-1",
+      "title": "Highest temperature in Buenos Aires on January 1?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-07-24T04:29:10Z",
+      "cohorts": [],
+      "end_date": "2026-07-23T12:00:00Z",
+      "event_id": "731100",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "18\u00b0C or below",
+          "condition_id": "0xf12d220d6567c8ca7087e462711d8708d540c72195527ad8ada120ddf9979501",
+          "market_id": "3023884",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "61651896997561275568394503427865432165499157925707153963363395145517906951761",
+            "11770391573054488365035609768523402974396445928688141922430120865768746053876"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x06d6c9e6ae2545f93d7664ecf9b233ef7db920694ca54ab0ef4956b2f92ed3f4",
+          "market_id": "3023885",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "21087414485013342637625597503043317326164147188476527112612481473046640477251",
+            "54109128175081418040992463005587034170340164278963679271243591203455369082544"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0xcf20aaab54aee74e6898b97b7dc4fe335874c29a0ced61db50699e67007e4c7f",
+          "market_id": "3023886",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "95134000192253851344387405077846907245834050169351042318201850852005894389917",
+            "54812606769615555894015403691205198218753674354672332372953685734996596279229"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0x40f9b80c19b09d4bb1e713bcf2bc7b5e90173db688c80b09f69b9ca8080d1c96",
+          "market_id": "3023887",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "54456814565368208018964068408570620659271086676838298179928131235432160428340",
+            "19376205863310353442801495658869263766670170756730344765506431494526605250613"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0x573a345f2df42ff6eef2660e460a93c8cdfd7aa043fd84fe7630460765988617",
+          "market_id": "3023888",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "38721801428994997656372238489184073745866056014011233535422410500216855225437",
+            "19727567730117492775905787065405206880674624905294160143480501646740794508068"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x660acc6a6cccd5ec1d4872a2a810146f8927f6dd6ea89ac7747aa542ea121d5b",
+          "market_id": "3023889",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "25829885046475559168348685567366960357411688906777819371737811851922161471070",
+            "114279958287891510257179997817932443353191717762867929265027691067426055217709"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x827876f737b88342a588c7a043105cdf42b78f61abfb51503b5ba629b2da7554",
+          "market_id": "3023890",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "78837602677250740515255730621561128688631881198076854389658352042781623466927",
+            "30986927561599165983449605222474109523001642961516678625853422973824212668874"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "0x3cf8864beaa94a596255a1aab87fedb8e4218d85f68cf017f6fda73f2ebe6022",
+          "market_id": "3023891",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "45560591879770956721565409340127947091868307762815063168717077153352798900128",
+            "30375774120910702592201093151556518074377985159225928064864742814941339450753"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0x45dbcb71672d06d3926d94025fb33c5c7930622b7beaae35cd5abb120319106b",
+          "market_id": "3023892",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "83438013030466274556656976787063240228218930093627557390065708779765733941621",
+            "112422191069191718843909348605717149814077728172856716534752109439538051401697"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0x5e3b954c1342c53b1ccb11922e6d08147a89fa6cf7af3166880c790de11dfd0b",
+          "market_id": "3023894",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "115683785954190143170826824147387465145238174179864346488675569154201886765370",
+            "29608974427448607411892177984560159983523145089119189143798902756937445722508"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C or higher",
+          "condition_id": "0xf2ee4ae7b8e0f3572a5a48f701edc00b8c4c7a90b5f2a85d0e4eb14b1c1654cd",
+          "market_id": "3023899",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "85435801172800619101322596288437289967047248260231371271093825653931070995226",
+            "25721741701957618139729281554230242948566853042325112696560598939555300944420"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "7a041896856cf000af2daf298e607047c1946804be0b74e963ef5e0e23651ced",
+      "resolution_source": "https://www.wunderground.com/history/daily/ca/mississauga/CYYZ",
+      "selection_stratum": "CLEAN",
+      "slug": "highest-temperature-in-toronto-on-july-23-2026",
+      "title": "Highest temperature in Toronto on July 23?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-06-06T06:30:52Z",
+      "cohorts": [],
+      "end_date": "2026-06-05T12:00:00Z",
+      "event_id": "553903",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "49\u00b0F or below",
+          "condition_id": "0xc729bdd19cd759316db07c327a5270e3bfda4552793de2c9826582f4e3f690ec",
+          "market_id": "2424514",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "45939892658452235145680575331446839859914453209648659794475473781522117953111",
+            "92155294255253911304131643667043287655193093236061547648633661868420076523009"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "50-51\u00b0F",
+          "condition_id": "0xb4555aa3589f2a00a297c0044ddfec624ef2cbf84b67f6c0f4215be4b3676740",
+          "market_id": "2424515",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "53496204264522677456951569735723386269724244862750185104977383820945520057715",
+            "106940417303543493159156931163235647484361128225141396445396233217330869623813"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "52-53\u00b0F",
+          "condition_id": "0x11e63fe830a1a8fa73668ae2aea6150ce4e4d61735190532c5771b04268f2a4b",
+          "market_id": "2424516",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "18882211417631417686204512985359170546820391716367619206696709119531075327701",
+            "4914682697985660288924468284279028069130212561585965452440843932853929475964"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "54-55\u00b0F",
+          "condition_id": "0x902ed2a18d005b0b3b29065edcdeec65f425770ebc2bbf2c6043f8d378f83e3d",
+          "market_id": "2424517",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "97959082402419781701217647638011703064573979187389534895530145162007610582956",
+            "61015005051136095961479399536969465158971291960082347732694000285681900827940"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "56-57\u00b0F",
+          "condition_id": "0xf8754024b70ee17a7093a0c1064c9c8ee5aeeba4a63b3d1239262781d046db22",
+          "market_id": "2424518",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "67829525546436420508753936710636821098734100843927655660505623105417183340235",
+            "51286772889805082743875187895224279119345697006337201985989328632757698704074"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "58-59\u00b0F",
+          "condition_id": "0xb34a566d5ac1e0bb065e5f8ec1f4a7a042b6219a8a3afd2b89890c91ece21c15",
+          "market_id": "2424519",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "59153269466300078469394749151341669510213589056624755436286389120323672361162",
+            "110234445732919207199152016587345652709196308437893103904685584352787068733501"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "60-61\u00b0F",
+          "condition_id": "0xa64cd066a145a22908f61bcfbc703035972fce415d6e6c89e261c464ca3bb51e",
+          "market_id": "2424520",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "13582722900572664895581227505518868516012265302268058382980788068290413707828",
+            "109872248476209698201670769635396857901701691546232907402762694222581388666433"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "62-63\u00b0F",
+          "condition_id": "0xd9e81fc68f2a68cb25fd77fc5ac8ad2503439b094621fa83f61200d93984eacb",
+          "market_id": "2424521",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "78925719757402169810442439529307173093734229558945513098942421671282235684212",
+            "75802397311921703795140463612832842918312290119659354603064594675587236851232"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "64-65\u00b0F",
+          "condition_id": "0x8409572a05cff1913b8cc851ae00f83094b76ae587963eedf63ff754f4e37db9",
+          "market_id": "2424522",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "56160632032002531096639822042551878110053855981607098651874681261943416904664",
+            "67867889520334034736554294213049796530150573036114833412625666935969455634447"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "66-67\u00b0F",
+          "condition_id": "0x399c0c6d3bf8c93553c9a95ba4fe782aa2db120b537edb126539fb66fc570052",
+          "market_id": "2424523",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "49928868564005891489603696392975577765098955740109137256295187613498084312057",
+            "70910540927019480728714152336900514296001215095384510801399254765794392590212"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "68\u00b0F or higher",
+          "condition_id": "0x7c59f32ba83f164bd7229cfa923b81820d0103a31334df1e19f3d4bb75f528da",
+          "market_id": "2424524",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "28985602175093529697431370542135080427718443000600362192898131287846733986453",
+            "84765131402146560358467402406449288486177965032137875223110813689924065792929"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "0a7a1372fb1d3ade17704a2e87b8fc8ea5420dd328132a0a70475fbc1e3fa539",
+      "resolution_source": "https://www.wunderground.com/history/daily/us/il/chicago/KORD",
+      "selection_stratum": "CLEAN",
+      "slug": "highest-temperature-in-chicago-on-june-5-2026",
+      "title": "Highest temperature in Chicago on June 5?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-06-15T07:27:27Z",
+      "cohorts": [],
+      "end_date": "2026-06-14T12:00:00Z",
+      "event_id": "589059",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "19\u00b0C or below",
+          "condition_id": "0xc6d1c01f097a3cc6981e7fad721b66d7fe403bee9e539d6e47870e986e4594fb",
+          "market_id": "2527094",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "92797128243194408842827240867224832091869124265097851647992763189738440141373",
+            "89981795841533510546255092213696396431656773188481271479348303826379620151458"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0xbe2532ff4d2e09d2876a1f4970f1c1054672da6a1bf25af983c830d6ad1b129a",
+          "market_id": "2527095",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "5953936154964222218598614953407667126622896382448347034906676432630583150822",
+            "80679345145410810350742425930137533781780386325967654089540770346227996910920"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0x460c04c819fb3e15b0dbc970bd6a0f62e586b043255b877e400cc65414fd69d2",
+          "market_id": "2527096",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "86798100381019168798997095457470439464890756159956945901202425065073280736323",
+            "101928313380955055768549036333541137203420447208058952542393601180554426076906"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "22\u00b0C",
+          "condition_id": "0x74cfc8c0bf49c43cd5f8d9d9200f21b1892c0e46c1c24922b227c9d200759e49",
+          "market_id": "2527097",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "18864794650082384397550715579783275514415059143729049856417148051347603120321",
+            "43258824141084443703479995446331003752938025169909862039211822674641343917839"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "23\u00b0C",
+          "condition_id": "0x27f1762c831400b431043450b0f4bfdeb80be7297dadcc10b3be648111541ecd",
+          "market_id": "2527098",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "25754297215945042264342510221723965968610343223306941698000360704893674838792",
+            "46200866687397648942213844234957144558278375618127568167216855493412195222274"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "24\u00b0C",
+          "condition_id": "0x8d71dc3e56d331a2e072d5e7db63432a41675989404f54df3ef9165d25c3528b",
+          "market_id": "2527099",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "7056859720508477624800823466495669887375132664407141685967987034659210707831",
+            "103773139082755462978133473964000847597260189102030291808165982271596040654573"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "25\u00b0C",
+          "condition_id": "0x0c3955e3061c7d18b73284abebf2942e17f7b1e69e4a0e839c914f39ad0a502c",
+          "market_id": "2527100",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "105274613518750676138206811520732253516586321860815333863352710841343422226209",
+            "10657664124820896826980462740146450586322280423263643964306638154698592638320"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "26\u00b0C",
+          "condition_id": "0x8ce1d9a3e758c0cc027d622d04842595eaa2bffa6f1d1fe45f3fe406f47e7abb",
+          "market_id": "2527101",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "62872963267621745351311047361383377696239354232946623357612416658933621340950",
+            "49845871508418932779118741856490812143520104192752272637830739214243134304961"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "27\u00b0C",
+          "condition_id": "0x2e1e1d6ce54a64cf16b5ffb3a3907612ab1f3d4abfafc228e78bbf88260e005e",
+          "market_id": "2527102",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "17822034411966790249875936113777700838437485242660820013149789296635525471701",
+            "4385231099800130053420045742384779843391664770364913283094551236875970839423"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "28\u00b0C",
+          "condition_id": "0x928ecec0081e4f583e2a7e26344605d34f71a5a3b32b0303121858dd94fe90a6",
+          "market_id": "2527103",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "43241478123829486463820180740542102992394313900390438938072947948588177337605",
+            "112927731147505389510367514814018089752017303126382965866961130283971735870750"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "29\u00b0C or higher",
+          "condition_id": "0x3b6f826317627e4af90decd57d17778c0aa8ee2554d1f2aa3d747fa99b9077b6",
+          "market_id": "2527104",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "90997883070015125283182401986960037057415138617040891918861315796292303277891",
+            "11581117936222495857576484595493308120120672063573202621772661777651516616084"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "2d6b3dbd9ebcb90808c54a43bbf970ee52b19071ca1316b60f65bd0d50ebe6af",
+      "resolution_source": "https://www.wunderground.com/history/daily/mx/mexico-city/MMMX",
+      "selection_stratum": "CLEAN",
+      "slug": "highest-temperature-in-mexico-city-on-june-14-2026",
+      "title": "Highest temperature in Mexico City on June 14?"
+    },
+    {
+      "anomalous_markets": [],
+      "automatically_resolved": true,
+      "closed_time": "2026-04-03T01:00:49Z",
+      "cohorts": [],
+      "end_date": "2026-04-02T12:00:00Z",
+      "event_id": "322484",
+      "market_count": 11,
+      "markets": [
+        {
+          "bucket_label": "12\u00b0C or below",
+          "condition_id": "0xc2cc358a68422fb43200241b15479d5328b3bacbff83822053cc2c2daf30326c",
+          "market_id": "1780379",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "38069494412024172974230834545034984051956650445286402807231944819565445388316",
+            "8712319852033549391880541605168713626591436673514544094570148823487148637338"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "13\u00b0C",
+          "condition_id": "0x392ee05dbb017642db18fb9cfe7f24df15bc7ed0e6274cda65bc88f47e93c283",
+          "market_id": "1780380",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "108620119181920927290952261267596343950445097295860084099477715753160811459694",
+            "28545570161870401553831344440310431980772286694240462708632596100113419802"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "14\u00b0C",
+          "condition_id": "0x113c43f5fe8901afbc9da12e473285f7363cd3daadd979ba816f4b66edda5aeb",
+          "market_id": "1780381",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "96443544533939182488376666581777185799027397244916532530024523074403867383239",
+            "31249346367475114504646235105170347072546287935205494569962721322459497495716"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "15\u00b0C",
+          "condition_id": "0xad7a978cb7f6bb7ac45e05c76a82de0ca02b8f3f455c103d2cfb84f8bc284509",
+          "market_id": "1780382",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "27402850413910491466166853913815223400537485160799559015302314343566475187243",
+            "58395947015652551803213642241491512372562939602028650906105072141142707667944"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "16\u00b0C",
+          "condition_id": "0x7a6b9d9a00bffe5a1bc9e3a1494c392631900df1884bbfb542ad125a96a8a355",
+          "market_id": "1780383",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "72088510963693510508428799438269258387414771263363487257016360473913280428771",
+            "35278190693346109646186311806554646157195648943136451639372093033665921069766"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "17\u00b0C",
+          "condition_id": "0x1b2103cb0f670b6b249a84b0ac472c58d01b9ec1451e7541a9930cd936bf46dd",
+          "market_id": "1780384",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "90838411514635850548654523236830316042096420780684251834218237703644441687695",
+            "65019104134954662372321932961845424536020784513645722910923967510139200070086"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "18\u00b0C",
+          "condition_id": "0x095212acd3c336d3a749fd7ed8a8c37815db1841642e0134518fcfb40ad9ad10",
+          "market_id": "1780385",
+          "outcome_prices": [
+            "1",
+            "0"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "110330202736093225349796862983046452118968369923714551229001247164781864943199",
+            "78698712156301857731543082615625973438694513665541579557165945290315398623797"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "19\u00b0C",
+          "condition_id": "0x5e09d45fdb93f6db8d14ab652e1283be8a8155d6b677f9740cdfa26f38de1e1d",
+          "market_id": "1780386",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "74292370320350818857970388324024271986181541686074341721218197602065578781724",
+            "101218965124647655178611314515371149413717730607899988198670283793787284683538"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "20\u00b0C",
+          "condition_id": "0x9ecf7b7833f5ccb8281268d099bad468b7f111e636c6f84969e293f4766a36bd",
+          "market_id": "1780387",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "7210628585704938070230070599250849929298490157676717235526913047608804134405",
+            "5494090184852783773195815149730025925437605807540894632106325492680498524260"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "21\u00b0C",
+          "condition_id": "0x60b00af6f2a6d1e0dcb9befbfc8385510ccd0a6c3d596c65966fe3083c760825",
+          "market_id": "1780388",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "1223305502618945310542399258092924298780580296385952453000741081667809130420",
+            "20620945325051811202163862731345623289761070321741897852506663980565871525179"
+          ],
+          "uma_resolution_status": "resolved"
+        },
+        {
+          "bucket_label": "22\u00b0C or higher",
+          "condition_id": "0xa4a43d676ab4b29c122bdea4b30baeb967b87a51794bfbb6e95b541009e87480",
+          "market_id": "1780389",
+          "outcome_prices": [
+            "0",
+            "1"
+          ],
+          "outcomes": [
+            "Yes",
+            "No"
+          ],
+          "token_ids": [
+            "45946311160621734466404980313885979581520086359760134024440177901590474338472",
+            "96148249260281950500427485477928835022937312861278249694916268359144358913055"
+          ],
+          "uma_resolution_status": "resolved"
+        }
+      ],
+      "page_content_sha256": "29a5738472cdde5df3863b80c9c9e07a6db8431fb80e8ff58ba3a154cfbfb55d",
+      "resolution_source": "https://www.wunderground.com/history/daily/it/milan/LIMC",
+      "selection_stratum": "HASH_FILL",
+      "slug": "highest-temperature-in-milan-on-april-2-2026",
+      "title": "Highest temperature in Milan on April 2?"
+    }
+  ],
+  "sampling": {
+    "anomaly_per_cohort_target": 3,
+    "clean_target": 5,
+    "sample_cohort_coverage": {
+      "EVENT_MISSING_CLOSED_TIME": 3,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED": 11,
+      "MARKET_IDENTIFIER_INCOMPLETE": 2,
+      "MARKET_NOT_UMA_RESOLVED": 5,
+      "NO_EVENT_RESOLUTION_SOURCE": 3
+    },
+    "sample_size": 20,
+    "seed": "EXP-20260830-phase1-manual-reconciliation-v1",
+    "selection_stratum_counts": {
+      "CLEAN": 5,
+      "EVENT_MISSING_CLOSED_TIME": 3,
+      "EVENT_NOT_AUTOMATICALLY_RESOLVED": 3,
+      "HASH_FILL": 1,
+      "MARKET_IDENTIFIER_INCOMPLETE": 2,
+      "MARKET_NOT_UMA_RESOLVED": 3,
+      "NO_EVENT_RESOLUTION_SOURCE": 3
+    }
+  },
+  "schema_version": "0.1.0",
+  "source_run_directory": "data/raw/polymarket_gamma/closed=true/run=20260829T215446Z"
+}

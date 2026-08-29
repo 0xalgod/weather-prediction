@@ -490,7 +490,7 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 - [x] Preserve rule text and metadata hashes. (Raw envelope preserves payload and SHA-256; normalized event preserves resolution source.)
 - [x] Identify multi-outcome/negative-risk structure. (Event contains binary bucket markets; flags preserved at both levels.)
 - [ ] Validate at least 20 sampled market-events manually.
-- [ ] Measure discovery coverage and critical-field missingness.
+- [x] Measure discovery coverage and critical-field missingness. (Closed anomaly cohorts are overlap-aware at event and market level.)
 - [x] Add unit/contract tests with sanitized fixtures.
 - [ ] Produce Phase 1 evidence report.
 
@@ -567,13 +567,21 @@ The corrected closed traversal completed with run ID `20260829T215446Z`:
 - One full closed raw traversal consumes approximately 370 MB.
 - Evidence: `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`.
 
+Deterministic anomaly extraction and sampling completed:
+
+- 7,470/8,222 events are clean under the registered metadata/status checks; 752 carry at least one flag.
+- Market-level counts of 22 identifier-incomplete and 80 non-UMA-resolved records are concentrated in 2 and 19 events respectively.
+- The fixed-seed 20-event queue covers every anomaly type plus clean controls; only two identifier-incomplete events exist, so both were selected and one slot was hash-filled.
+- Selection is complete, but none of the 20 events is yet credited as manually reconciled.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-closed-anomaly-cohorts.md` and `reports/data_quality/EXP-20260830-phase1-closed-audit-sample.json`.
+
 #### Decision
 
 Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Classify missing resolution/settlement/identifier cohorts and select the stratified 20-event manual reconciliation sample.
+Manually reconcile the selected 20 events against Gamma metadata and resolution-source pages, recording station/source, identifiers, terminal outcome and anomaly disposition.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -1042,6 +1050,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: Missing source/status cohorts and ≥20 manual reconciliations remain pending.
 - Next action: Generate anomaly cohorts and a stratified manual reconciliation sample.
 
+### 2026-08-30 — Closed anomaly cohorts extracted and audit queue selected
+
+- Previous status: `IN_PROGRESS`
+- New status: `IN_PROGRESS`
+- Work completed: Added deterministic closed-event classification, measured overlap-aware event/market cohorts and selected a fixed-seed 20-event manual reconciliation queue.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-closed-anomaly-cohorts.md`, `reports/data_quality/EXP-20260830-phase1-closed-audit-sample.json`.
+- Verification: All 8,222 events classified; 20 unique sample IDs; every registered anomaly type represented; 13 tests pass.
+- Deviations: The identifier-incomplete event cohort contains only two events, below its target of three; both were included and the remaining slot was filled deterministically. This is a population constraint, not a post-hoc threshold change.
+- Blockers: The 20 selected records have not yet been manually reconciled.
+- Next action: Reconcile the selected queue against source metadata and resolution pages.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1049,6 +1068,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Treat closed history only as event metadata; rejected because settlement and future historical-price joins require outcome-token identity.
 - Consequence: Normalized market records expose both `identifier_complete` and `eligible_for_book_collection`; closed history is rerun before further coverage claims.
 - Revisit condition: None; these concepts remain permanently distinct.
+
+### ED-0007 — 2026-08-30 — Separate event-level and market-level anomaly prevalence
+
+- Decision: Report status/identifier anomaly counts at their native grain and preserve cohort intersections; never add overlapping event cohorts or present market counts as event prevalence.
+- Evidence available at decision time: 22 identifier-incomplete markets occur in only 2 events, and 80 non-UMA-resolved markets occur in 19 events; 54 events simultaneously lack close time and automatic resolution.
+- Alternatives considered: Keep only raw market counts; rejected because it overstates independent event prevalence and obscures concentration.
+- Consequence: Manual audit selection operates on unique events while retaining their anomalous market rows.
+- Revisit condition: None; grain-aware reporting is a permanent integrity rule.
 
 ## 20. Decision Log — append only
 

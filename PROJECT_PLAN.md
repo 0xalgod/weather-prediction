@@ -1,9 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.9.0
+**Plan versiyonu:** 0.10.0
 **Son güncelleme:** 2026-08-30
-**Mevcut faz:** Phase 0 — Research charter  
+**Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -114,7 +114,7 @@ Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez y
 
 ## Phase 0 — Research charter ve operasyonel temel
 
-**Durum:** `IN_PROGRESS`  
+**Durum:** `IN_PROGRESS`
 **Amaç:** Araştırmayı sonuç yanlılığından koruyacak scope, kayıt ve yeniden üretilebilirlik temelini kurmak.
 
 ### İşler
@@ -151,7 +151,7 @@ Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez y
 
 ## Phase 1 — Market, resolution ve veri fizibilitesi
 
-**Durum:** `NOT_STARTED`  
+**Durum:** `IN_PROGRESS`
 **Amaç:** Model kurmadan önce gerçekten trade edilebilir veri evrenini ve resolution hedefini belirlemek.
 
 ### 1A. Polymarket market universe
@@ -715,6 +715,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-inventory.md`
 - **Sonuç:** Closed inventory substep geçti; Phase 1 `IN_PROGRESS`. Sıradaki adım anomaly cohort extraction ve stratified 20-event manual reconciliation sample'dır.
 
+### D-0011 — 2026-08-30 — Anomaly cohortları ve deterministik reconciliation örneklemi
+
+- **Durum:** `ACTIVE`
+- **Karar:** Closed-history kalite bayrakları event ve market seviyesinde ayrı raporlanacak; 20-event manuel kontrol kuyruğu sabit seed ve hash sırasıyla seçildi. Örnek seçimi tamamlandı, fakat manuel reconciliation tamamlanmış sayılmayacak.
+- **Ölçülen kanıt:** 8.222 eventin 7.470'i temiz, 752'si en az bir anomaly bayrağı taşıyor. 639 no-source, 116 non-automatic, 57 no-close-time event var. Önceki 22 identity-incomplete ve 80 non-UMA-resolved sayıları market düzeyinde; bunlar sırasıyla yalnız 2 ve 19 eventte yoğunlaşıyor. Cohortlar örtüşüyor.
+- **Örneklem:** Sabit `EXP-20260830-phase1-manual-reconciliation-v1` seed'iyle 20 benzersiz event seçildi; beş anomaly sınıfının tamamı ve temiz kontroller kapsandı. Identifier-incomplete popülasyon yalnız iki event olduğu için ikisi de örneğe girdi.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-anomaly-cohorts.md`, `reports/data_quality/EXP-20260830-phase1-closed-audit-sample.json`
+- **Sonuç:** Cohort extraction/sample-selection substep geçti; Phase 1 `IN_PROGRESS`. Sıradaki adım seçilmiş 20 eventin kaynak, station, identifier ve terminal outcome alanlarını manuel reconcile etmektir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -727,12 +736,12 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Closed raw inventory'den eksik resolution/status/identifier cohortlarını deterministik artifact olarak çıkarmak ve clean+anomalous kayıtları kapsayan stratified 20-event manual reconciliation örneğini seçmek.
+**Tek sonraki adım:** Seçilmiş 20-event kuyruğunu Gamma event/market metadata ve resolution-source sayfalarına karşı manuel reconcile etmek; event başına identifier, station/source, terminal outcome ve anomaly disposition kaydetmek.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- `reports/data_quality/EXP-20260830-phase1-market-discovery.md`
+- `reports/data_quality/EXP-20260830-phase1-manual-reconciliation.md`
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.
