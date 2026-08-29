@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1.0",
+  "registry_record_id": "event-100-rule-v1",
+  "event_id": "100",
+  "event_slug": "highest-temperature-in-test-city-on-january-1",
+  "city_label": "Test City",
+  "market_date_local": "2026-01-01",
+  "disposition": "RECONCILED",
+  "exclusion_reasons": [],
+  "rule": {
+    "provider": "Wunderground",
+    "source_url": "https://www.wunderground.com/history/daily/us/ny/test/KAAA",
+    "station_code": "KAAA",
+    "station_name": "Test Airport Station",
+    "timezone": "America/New_York",
+    "temperature_unit": "F",
+    "temperature_precision": 1,
+    "rounding_mode": "SOURCE_REPORTED_WHOLE_DEGREE",
+    "observation_window": {"basis": "LOCAL_CALENDAR_DAY", "start_local": "00:00:00", "end_local": "23:59:59.999999", "end_inclusive": true},
+    "rule_text": "Sanitized exact resolution rule.",
+    "rule_text_sha256": "f8de0c75e35f2fee5742851d7be93398bba5261d0e1b014f741110b1d69e751a",
+    "rule_version": "v1"
+  },
+  "buckets": [
+    {"market_id": "1", "condition_id": "c1", "yes_token_id": "y1", "no_token_id": "n1", "label": "69°F or below", "lower_bound": null, "upper_bound": 69, "lower_inclusive": true, "upper_inclusive": true},
+    {"market_id": "2", "condition_id": "c2", "yes_token_id": "y2", "no_token_id": "n2", "label": "70-71°F", "lower_bound": 70, "upper_bound": 71, "lower_inclusive": true, "upper_inclusive": true},
+    {"market_id": "3", "condition_id": "c3", "yes_token_id": "y3", "no_token_id": "n3", "label": "72°F or higher", "lower_bound": 72, "upper_bound": null, "lower_inclusive": true, "upper_inclusive": true}
+  ],
+  "provenance": {
+    "gamma_observed_at_utc": "2026-01-02T00:00:00Z",
+    "resolution_observed_at_utc": "2026-01-02T01:00:00Z",
+    "gamma_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "resolution_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "parser_version": "0.1.0"
+  }
+}

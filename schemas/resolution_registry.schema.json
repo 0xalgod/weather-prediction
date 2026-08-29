@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xalgod/weather-prediction/schemas/resolution_registry.schema.json",
+  "title": "Polymarket Maximum-Temperature Resolution Registry Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "registry_record_id", "event_id", "event_slug",
+    "city_label", "market_date_local", "disposition", "exclusion_reasons",
+    "rule", "buckets", "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "registry_record_id": {"type": "string", "minLength": 1},
+    "event_id": {"type": "string", "minLength": 1},
+    "event_slug": {"type": "string", "minLength": 1},
+    "city_label": {"type": "string", "minLength": 1},
+    "market_date_local": {"type": "string", "format": "date"},
+    "disposition": {
+      "enum": [
+        "RECONCILED", "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+        "NO_TRADE_NON_TERMINAL_OR_CANCELLED", "NO_TRADE_OUTCOME_SOURCE_MISMATCH",
+        "NO_TRADE_AMBIGUOUS_RULE", "NO_TRADE_IDENTIFIER_FAILURE"
+      ]
+    },
+    "exclusion_reasons": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "rule": {
+      "type": "object", "additionalProperties": false,
+      "required": ["provider", "source_url", "station_code", "station_name", "timezone", "temperature_unit", "temperature_precision", "rounding_mode", "observation_window", "rule_text", "rule_text_sha256", "rule_version"],
+      "properties": {
+        "provider": {"type": ["string", "null"]},
+        "source_url": {"type": ["string", "null"], "format": "uri"},
+        "station_code": {"type": ["string", "null"]},
+        "station_name": {"type": ["string", "null"]},
+        "timezone": {"type": ["string", "null"]},
+        "temperature_unit": {"enum": ["C", "F", null]},
+        "temperature_precision": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "rounding_mode": {"enum": ["SOURCE_REPORTED_WHOLE_DEGREE", "UNKNOWN", null]},
+        "observation_window": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "required": ["basis", "start_local", "end_local", "end_inclusive"],
+          "properties": {
+            "basis": {"const": "LOCAL_CALENDAR_DAY"},
+            "start_local": {"const": "00:00:00"},
+            "end_local": {"const": "23:59:59.999999"},
+            "end_inclusive": {"const": true}
+          }
+        },
+        "rule_text": {"type": ["string", "null"]},
+        "rule_text_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "rule_version": {"type": ["string", "null"]}
+      }
+    },
+    "buckets": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["market_id", "condition_id", "yes_token_id", "no_token_id", "label", "lower_bound", "upper_bound", "lower_inclusive", "upper_inclusive"],
+        "properties": {
+          "market_id": {"type": "string", "minLength": 1},
+          "condition_id": {"type": "string", "minLength": 1},
+          "yes_token_id": {"type": "string", "minLength": 1},
+          "no_token_id": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "lower_bound": {"type": ["number", "null"]},
+          "upper_bound": {"type": ["number", "null"]},
+          "lower_inclusive": {"const": true},
+          "upper_inclusive": {"const": true}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["gamma_observed_at_utc", "resolution_observed_at_utc", "gamma_content_sha256", "resolution_content_sha256", "parser_version"],
+      "properties": {
+        "gamma_observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+        "resolution_observed_at_utc": {"type": ["string", "null"], "format": "date-time"},
+        "gamma_content_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "resolution_content_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "parser_version": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -597,7 +597,7 @@ Convert market rule text into versioned, manually verified station, source, time
 
 #### Tasks
 
-- [ ] Define resolution registry schema.
+- [x] Define resolution registry schema. (`schemas/resolution_registry.schema.json` plus fail-closed Python semantic validator.)
 - [ ] Parse source URL/provider and station identity.
 - [ ] Parse local date, timezone and observation window.
 - [ ] Parse temperature unit, bucket inclusivity and rounding.
@@ -626,15 +626,15 @@ Convert market rule text into versioned, manually verified station, source, time
 
 #### Actual result
 
-Pending.
+Registry schema version `0.1.0` now binds event identity, disposition, source/station/timezone, unit/precision/rounding, explicit local-day window, exact rule hash/version, numeric bucket boundaries and source provenance. Five focused tests cover a valid record, bucket discontinuity, stale hash, invalid timezone and explicit missing-source exclusion; 23 repository tests pass.
 
 #### Decision
 
-Pending.
+Contract substep passed; Phase 2 remains `IN_PROGRESS` until the fixed sample is populated and station/timezone metadata is independently verified.
 
 #### Next action
 
-Pending Phase 2 result.
+Build the deterministic Gamma rule/bucket parser and emit candidate registry records for all 20 sampled events, preserving the eight exclusions as `NO_TRADE`.
 
 ### Phase 3 — Executable order-book capture feasibility
 
@@ -1072,6 +1072,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: None for Phase 1. Historical forecast-as-issued, prospective L2 and the full experiment gate remain pending in later phases.
 - Next action: Define the Phase 2 versioned resolution-rule/station registry schema.
 
+### 2026-08-30 — Phase 2 resolution registry contract defined
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Work completed: Added JSON Schema `0.1.0`, fail-closed semantic validation, sanitized record fixture and tests for rule hash, timezone, local-day semantics, identifier requirements and exhaustive discrete buckets.
+- Evidence: `reports/data_quality/EXP-20260830-phase2-resolution-registry-contract.md`.
+- Verification: 5 focused registry tests and 23 total repository tests pass; schema and fixture parse as JSON.
+- Deviation/failure memory: First test run failed on an incorrect hand-written fixture hash and an insufficiently invalid timezone example; both test inputs were corrected without changing the contract or acceptance gate.
+- Blockers: Sample population, independent timezone/station cross-check and city-family revision detection remain pending.
+- Next action: Populate candidate registry records for the fixed 20-event sample.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1095,6 +1106,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Treat exact `[1,0]` outcome prices as ground truth; rejected because two sampled counterexamples would create mislabeled training/backtest rows.
 - Consequence: Resolution registry and future datasets require independent source reconciliation and explicit disposition before a realized label is admitted.
 - Revisit condition: Only a documented platform correction/re-resolution workflow that explains and versions these discrepancies.
+
+### ED-0009 — 2026-08-30 — Make resolution eligibility a versioned fail-closed contract
+
+- Decision: `RECONCILED` registry records require complete source/station/timezone/unit/window/rounding/rule-hash/bucket/provenance fields. Incomplete records remain representable only as explicit `NO_TRADE` dispositions.
+- Evidence available at decision time: Phase 1 found missing sources, non-terminal records and source/outcome mismatches that would become silent label errors under a nullable best-effort table.
+- Alternatives considered: Store a sparse registry and filter ad hoc in each analysis; rejected because filters could diverge and admit unsafe labels.
+- Consequence: All downstream forecast joins/backtests must consume validated registry versions, not raw event metadata directly.
+- Revisit condition: Schema version increments may add fields, but may not weaken fail-closed eligibility without a new documented decision.
 
 ## 20. Decision Log — append only
 

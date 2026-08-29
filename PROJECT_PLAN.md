@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.11.0
+**Plan versiyonu:** 0.12.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -733,6 +733,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-manual-reconciliation.md`, `reports/data_quality/EXP-20260830-phase1-manual-reconciliation-v2.json`
 - **Sonuç:** Üst seviye veri fizibilitesi Phase 1 hâlâ `IN_PROGRESS`; market identity alt gate'i geçti. Sıradaki adım versioned resolution-rule/station registry şemasıdır.
 
+### D-0013 — 2026-08-30 — Resolution registry veri sözleşmesi
+
+- **Durum:** `ACTIVE`
+- **Karar:** Research label'a alınacak her event; versioned event/station/rule/bucket/provenance kaydıyla ve `RECONCILED` disposition ile temsil edilecek. Kritik alanı eksik kayıtlar uydurularak doldurulmayacak; reason-code içeren hard `NO_TRADE` kaydı olarak korunacak.
+- **Zorunlu semantik:** IANA timezone, explicit local calendar day, unit/precision/rounding, exact rule SHA-256, inclusive sayısal bucket sınırları, event-market-condition-token zinciri ve source snapshot checksumları.
+- **Kanıt:** Sanitized fixture üzerinde valid record, gap/overlap, rule hash revision, invalid timezone ve missing-source `NO_TRADE` davranışını kapsayan 5 yeni test; repository toplam 23 test geçti.
+- **Artifact:** `schemas/resolution_registry.schema.json`, `src/weather_quant/normalization/resolution_rules.py`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-contract.md`
+- **Sonuç:** Phase 2 contract substep geçti; Phase 2 `IN_PROGRESS`. Sıradaki adım parser ile sabit 20-event örneklem için candidate registry üretmektir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -745,13 +754,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Phase 2 için versioned resolution-rule/station registry şemasını tanımlamak; station, timezone, unit, local-day, rounding, bucket semantics, rule hash ve hard exclusion disposition alanlarını sözleşmeye bağlamak.
+**Tek sonraki adım:** Deterministik Gamma rule/bucket parser'ını geliştirip sabit 20-event örneklem için candidate registry üretmek; Phase 1'de elenen sekiz kaydı explicit `NO_TRADE` olarak korumak.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- `src/weather_quant/normalization/resolution_rules.py`
-- resolution registry schema ve fixture'ları
+- candidate resolution registry JSONL
+- parser ve bucket-boundary contract testleri
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.
