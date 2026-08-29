@@ -1,6 +1,6 @@
 # EXP-20260830-data-source-feasibility — Point-in-time market and weather data feasibility
 
-**Status:** `READY`
+**Status:** `IN_PROGRESS`
 **Owner:** Abdullah Sezdi
 **Created:** 2026-08-30
 **Last updated:** 2026-08-30
@@ -470,7 +470,7 @@ Implement Phase 1 market discovery spike using public Gamma and CLOB metadata en
 
 ### Phase 1 — Polymarket market discovery and identifier reconciliation
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
 #### Objective
 
@@ -484,7 +484,7 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 #### Tasks
 
 - [ ] Build read-only Gamma discovery client with raw-envelope persistence.
-- [ ] Determine reliable weather/temperature discovery filters.
+- [x] Determine reliable weather/temperature discovery filters. (`highest-temperature`, tag ID `104596`, selected provisionally.)
 - [ ] Query active, closed and resolved records where supported.
 - [ ] Normalize event/market/outcome/token/condition mappings.
 - [ ] Preserve rule text and metadata hashes.
@@ -515,15 +515,25 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 
 #### Actual result
 
-Pending.
+Schema reconnaissance completed on 2026-08-30:
+
+- `weather` tag ID `84` is broad and contained multiple weather contract families.
+- `temperature` tag ID `104615` returned only 2 active/not-closed events in the probe and did not cover the daily MaxT universe.
+- `highest-temperature` tag ID `104596` returned a first keyset page of 100 structurally matching events with a non-null cursor.
+- The first broad Weather page contained 36 MaxT events across 33 city labels and 396 nested binary bucket markets.
+- All 396 observed MaxT market rows had order books and fees enabled, but 44 rows lacked both `conditionId` and `clobTokenIds`.
+- `active=true`/`closed=false` included stale May events on 2026-08-30; lifecycle flags alone are not a tradeability filter.
+- An observed NYC event contained 11 binary bucket markets, event/market negative-risk flags, market-specific fee metadata and an event-level `resolutionSource` pointing to station code KLGA.
+
+Evidence: `reports/data_quality/EXP-20260830-phase1-schema-recon.md`.
 
 #### Decision
 
-Pending.
+Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Pending Phase 1 result.
+Implement the versioned keyset discovery client, strict identifier normalization, sanitized fixtures and contract tests.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -938,6 +948,16 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: Endpoint-level coverage remains unknown by design.
 - Next action: Commit registration, then begin Phase 1 public market-discovery spike.
 
+### 2026-08-30 — Phase 1 schema reconnaissance completed
+
+- Previous status: `READY`
+- New status: `IN_PROGRESS`
+- Work completed: Resolved live tag identities, compared broad/narrow tag coverage, measured first-page event/market counts, inspected keyset pagination and one nested market schema.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-schema-recon.md`.
+- Deviations: None. Raw payloads remained temporary because the production immutable-envelope client is not yet implemented.
+- Blockers: Full-page coverage and historical closed/resolved discovery remain unmeasured.
+- Next action: Implement and test the production read-only market discovery client.
+
 ## 20. Decision Log — append only
 
 ### ED-0001 — 2026-08-30 — Register feasibility before model development
@@ -963,3 +983,19 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Infer archive depth from current product availability; rejected as point-in-time evidence risk.
 - Consequence: Phase 4 must produce actual retrieval artifacts and measured retention.
 - Revisit condition: None; this is a permanent provenance rule.
+
+### ED-0004 — 2026-08-30 — Select the highest-temperature tag and keyset pagination
+
+- Decision: Use tag slug `highest-temperature` (ID `104596`) as the primary daily MaxT discovery surface, keyset pagination for complete traversal, and broad Weather tag ID `84` only as a coverage cross-check.
+- Evidence available at decision time: The narrow tag's first keyset page returned 100 titles all matching the intended family and a non-null cursor; the broad tag mixed multiple weather families; the generic temperature tag returned only two unrelated active events in the probe.
+- Alternatives considered: Broad Weather filtering plus title regex; retained as cross-check but rejected as primary due to mixed contract families. Generic temperature tag; rejected for insufficient coverage.
+- Consequence: Production normalization must still validate title structure, nested buckets, lifecycle dates and required identifiers; tag membership alone is insufficient.
+- Revisit condition: Full pagination/manual reconciliation finds material false negatives or false positives.
+
+### ED-0005 — 2026-08-30 — Do not equate active/not-closed with tradeable
+
+- Decision: Preserve lifecycle flags but classify temporal relevance, identifier completeness and order-book eligibility separately.
+- Evidence available at decision time: The 2026-08-30 response included active/not-closed May events and 44 nested market rows without condition/token identifiers.
+- Alternatives considered: Filter only `active=true,closed=false`; rejected because it admits stale/incomplete records.
+- Consequence: Excluded records remain in the inventory with explicit reason codes to avoid survivorship bias.
+- Revisit condition: None; this is a permanent data-quality rule.

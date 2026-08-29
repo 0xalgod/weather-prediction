@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.4.0
+**Plan versiyonu:** 0.5.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -673,6 +673,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Kanıt:** Resmî Polymarket dokümantasyonu public current book, market WebSocket ve price-history yüzeylerini; NOAA NBM dokümantasyonu NOMADS/AWS dağıtımını; ECMWF Open Data dokümantasyonu rolling archive yapısını gösteriyor. Endpoint-level gerçek coverage henüz ölçülmedi.
 - **Artifact:** `docs/experiments/EXP-20260830-data-source-feasibility/PLAN.md`
 - **Sonuç:** Yalnız Phase 1 read-only Polymarket market discovery spike'ı yetkilidir. Profitability claim, model eğitimi sonucu ve canlı emir kapsam dışıdır.
+
+### D-0006 — 2026-08-30 — Polymarket MaxT discovery yüzeyi
+
+- **Durum:** `ACTIVE`
+- **Karar:** Daily maximum-temperature discovery için primary surface `highest-temperature` tag slug/ID `104596` ve cursor-based keyset pagination olacak. Broad Weather tag ID `84` coverage cross-check olarak kalacak; generic temperature tag ID `104615` primary filter olmayacak.
+- **Ölçülen kanıt:** Narrow tag ilk keyset sayfası 100/100 yapısal olarak eşleşen event ve non-null cursor döndürdü. Broad Weather ilk sayfada 36 MaxT event, 33 şehir etiketi ve 396 nested binary market gözlendi. Bunların 44'ünde condition/token identifier eksikti. `active=true,closed=false` Mayıs'ta bitmiş stale eventleri de içerdi.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-schema-recon.md`
+- **Sonuç:** Experiment `IN_PROGRESS`. Tag membership/lifecycle flag tek başına yeterli değil; production client date relevance, identifier completeness, nested JSON array integrity, negative-risk ve fee metadata sınıflandırması yapacak.
 
 ## 13. Open Questions
 
