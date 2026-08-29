@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.1.0  
+**Plan versiyonu:** 0.2.0
 **Son güncelleme:** 2026-08-29  
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -122,6 +122,7 @@ Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez y
 - [x] Proje amacını ve canlı sermaye sınırını tanımla.
 - [x] Agent araştırma kurallarını oluştur.
 - [x] İlk hipotezleri ve gate'leri pre-register et.
+- [x] Experiment planlama ve proje-hafızası protokolünü oluştur.
 - [ ] Repository'yi başlat; `.gitignore`, README ve lisans kararını ekle.
 - [ ] Python environment ve dependency lock yaklaşımını seç.
 - [ ] Klasör yapısını ve config standardını oluştur.
@@ -133,6 +134,7 @@ Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez y
 
 - `AGENTS.md`
 - `PROJECT_PLAN.md`
+- `docs/agents.md`
 - ileride `README.md`, `pyproject.toml`, `configs/`, `experiments/registry.*`
 
 ### Exit kriteri — G0'ın araştırma altyapısı kısmı
@@ -641,6 +643,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** İlk araştırma günlük maksimum sıcaklık bucket marketleri ve veriyle seçilecek 3–5 istasyonla sınırlandırıldı.
 - **Gerekçe:** Dar scope, station-specific bias ve resolution kurallarının doğru modellenmesini; yeterli örnek biriktirmeyi ve veri kalite sorunlarını görünür kılmayı kolaylaştırır.
 - **Yeniden değerlendirme:** Phase 1 şehir skoru ve veri erişimi tamamlandığında.
+
+### D-0003 — 2026-08-29 — Experiment hafızası ve commit protokolü
+
+- **Durum:** `ACTIVE`
+- **Karar:** Her material araştırma deneyi, `docs/experiments/EXP-YYYYMMDD-short-slug/PLAN.md` altında pre-register edilecek; aşamalara bölünecek ve her aşama sonunda status, evidence, decision ve next action güncellenerek ayrı bir Git commit oluşturulacak.
+- **Gerekçe:** Başarılı ve başarısız denemelerin, veri/code lineage'ın ve post-hoc değişikliklerin kalıcı biçimde izlenmesi; proje hafızasının terminal çıktısına veya insan belleğine bağlı kalmaması.
+- **Artifact:** `docs/agents.md`
+- **Sonuç:** İlk gerçek deney oluşturulduğunda `docs/experiments/README.md` index'i de başlatılacak. Experiment-level ayrıntılar kendi planında, project-level kararlar bu dosyanın Decision Log'unda tutulacak.
 
 ## 13. Open Questions
 
