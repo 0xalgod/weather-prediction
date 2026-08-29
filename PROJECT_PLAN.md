@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.3.0
+**Plan versiyonu:** 0.4.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -665,6 +665,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Branch:** `feat/project-bootstrap`
 - **Sonuç:** Phase 0'ın veri/provenance ve test altyapısı hazır. Sonraki araştırma çalışması ayrı experiment planıyla pre-register edilecek.
 
+### D-0005 — 2026-08-30 — İlk veri fizibilite deneyi pre-registration
+
+- **Durum:** `ACTIVE`
+- **Karar:** `EXP-20260830-data-source-feasibility` deneyi `READY` olarak kaydedildi. En az üç şehirde market/outcome metadata, versioned resolution rule ve istasyon, prospective executable L2 order book, historical forecast-as-issued, exact station observation ve settlement bileşenleri birleşmeden forecast/backtest geliştirmesi araştırma kanıtı olarak kabul edilmeyecek.
+- **Pre-registered gate:** `PASS` için en az 3 complete city, kritik identifier/rule bütünlüğünde %100, 24 saatlik collector koşusunda ≥%99 uptime ve ≥%95 beklenen interval coverage, final şehir başına tercihen ≥365 günlük forecast-as-issued ve observation geçmişi gerekir. 180–364 gün veya yalnız prospective L2 durumunda ancak açık koşullu `CONDITIONAL_PASS` verilebilir.
+- **Kanıt:** Resmî Polymarket dokümantasyonu public current book, market WebSocket ve price-history yüzeylerini; NOAA NBM dokümantasyonu NOMADS/AWS dağıtımını; ECMWF Open Data dokümantasyonu rolling archive yapısını gösteriyor. Endpoint-level gerçek coverage henüz ölçülmedi.
+- **Artifact:** `docs/experiments/EXP-20260830-data-source-feasibility/PLAN.md`
+- **Sonuç:** Yalnız Phase 1 read-only Polymarket market discovery spike'ı yetkilidir. Profitability claim, model eğitimi sonucu ve canlı emir kapsam dışıdır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -677,12 +686,12 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `EXP-20260830-data-source-feasibility` deney planını pre-register ederek Polymarket market/order-book kaynakları ile historical forecast-as-issued kaynaklarının fizibilite matrisini oluşturmak.
+**Tek sonraki adım:** `EXP-20260830-data-source-feasibility` Phase 1 kapsamında public Gamma/CLOB yüzeylerinden daily maximum-temperature market discovery ve event/market/outcome/token/condition identifier reconciliation spike'ını uygulamak.
 
 Beklenen artifact'lar:
 
-- `docs/experiments/EXP-20260830-data-source-feasibility/PLAN.md`
-- `docs/experiments/README.md`
-- `reports/research/data_source_feasibility.md`
+- `src/weather_quant/ingestion/polymarket_markets.py`
+- sanitized API fixtures ve identifier contract testleri
+- `reports/data_quality/EXP-20260830-phase1-market-discovery.md`
 
-Bu adım başlamadan önce veri kaynakları, değerlendirme ölçütleri ve G0 kabul/red eşikleri experiment planında commit edilecektir. Phase 0'ın kalan idari işi lisans seçimidir.
+Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.
