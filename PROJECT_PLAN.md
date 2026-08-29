@@ -1,8 +1,8 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.2.0
-**Son güncelleme:** 2026-08-29  
+**Plan versiyonu:** 0.3.0
+**Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
@@ -123,19 +123,23 @@ Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez y
 - [x] Agent araştırma kurallarını oluştur.
 - [x] İlk hipotezleri ve gate'leri pre-register et.
 - [x] Experiment planlama ve proje-hafızası protokolünü oluştur.
-- [ ] Repository'yi başlat; `.gitignore`, README ve lisans kararını ekle.
-- [ ] Python environment ve dependency lock yaklaşımını seç.
-- [ ] Klasör yapısını ve config standardını oluştur.
-- [ ] Experiment registry şemasını oluştur.
-- [ ] Data manifest ve data dictionary şablonlarını oluştur.
-- [ ] Reproducibility smoke test ekle.
+- [ ] Repository'yi başlat; `.gitignore`, README ve lisans kararını ekle. (`README.md` ve `.gitignore` tamamlandı; lisans kararı bekliyor.)
+- [x] Python environment ve dependency lock yaklaşımını seç. (`pyproject.toml`; bootstrap runtime dependency yok, dev dependency aralıkları tanımlı.)
+- [x] Klasör yapısını ve config standardını oluştur.
+- [x] Experiment registry şemasını oluştur.
+- [x] Data manifest ve data dictionary şablonlarını oluştur.
+- [x] Reproducibility smoke test ekle.
 
 ### Çıktılar
 
 - `AGENTS.md`
 - `PROJECT_PLAN.md`
 - `docs/agents.md`
-- ileride `README.md`, `pyproject.toml`, `configs/`, `experiments/registry.*`
+- `README.md`, `pyproject.toml`, `.gitignore`
+- `configs/base.json`
+- `experiments/registry.schema.json`
+- `docs/data/manifest-template.md`, `docs/data/data-dictionary-template.md`
+- `src/weather_quant/`, `tests/`, `data/`, `notebooks/`, `reports/`
 
 ### Exit kriteri — G0'ın araştırma altyapısı kısmı
 
@@ -652,6 +656,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `docs/agents.md`
 - **Sonuç:** İlk gerçek deney oluşturulduğunda `docs/experiments/README.md` index'i de başlatılacak. Experiment-level ayrıntılar kendi planında, project-level kararlar bu dosyanın Decision Log'unda tutulacak.
 
+### D-0004 — 2026-08-30 — Phase 0 repository bootstrap standardı
+
+- **Durum:** `ACTIVE`
+- **Karar:** Proje `src/weather_quant/` package layout, standard-library ile çalışan `configs/base.json`, `pyproject.toml`, immutable veri katmanları, machine-readable experiment registry şeması ve durable report/data-documentation dizinleriyle başlatıldı.
+- **Kanıt:** `PYTHONPATH=src python3 -m unittest discover -s tests -v` ile config → normalize → feature → evaluation smoke akışındaki 2 test geçti. `configs/base.json` ve `experiments/registry.schema.json` JSON parse kontrolünden geçti. İlk koşu Python 3.9'da `tomllib/tomli` bulunmadığını gösterdi; ek bootstrap dependency gerektirmemek için config formatı JSON'a çevrildi ve yeniden test başarılı oldu.
+- **Sınırlama:** Lisans kararı henüz verilmedi. Smoke akışı altyapı doğrulamasıdır; forecast veya trading edge kanıtı değildir.
+- **Branch:** `feat/project-bootstrap`
+- **Sonuç:** Phase 0'ın veri/provenance ve test altyapısı hazır. Sonraki araştırma çalışması ayrı experiment planıyla pre-register edilecek.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -664,14 +677,12 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Phase 0 repository bootstrap'ını oluşturmak ve aynı anda Phase 1 için veri-kaynağı fizibilite matrisi şemasını tanımlamak.
+**Tek sonraki adım:** `EXP-20260830-data-source-feasibility` deney planını pre-register ederek Polymarket market/order-book kaynakları ile historical forecast-as-issued kaynaklarının fizibilite matrisini oluşturmak.
 
 Beklenen artifact'lar:
 
-- `README.md`
-- `pyproject.toml`
-- `.gitignore`
-- temel `src/` ve `tests/` yapısı
+- `docs/experiments/EXP-20260830-data-source-feasibility/PLAN.md`
+- `docs/experiments/README.md`
 - `reports/research/data_source_feasibility.md`
 
-Bu adım tamamlandığında planın son güncelleme tarihi, Phase 0 checkbox'ları ve Decision Log güncellenecektir.
+Bu adım başlamadan önce veri kaynakları, değerlendirme ölçütleri ve G0 kabul/red eşikleri experiment planında commit edilecektir. Phase 0'ın kalan idari işi lisans seçimidir.

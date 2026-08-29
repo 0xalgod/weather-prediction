@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xalgod/weather-prediction/experiments/registry.schema.json",
+  "title": "Weather Quant Experiment Registry Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id",
+    "title",
+    "status",
+    "created_at",
+    "updated_at",
+    "plan_path",
+    "primary_hypothesis",
+    "code_commit"
+  ],
+  "properties": {
+    "experiment_id": {
+      "type": "string",
+      "pattern": "^EXP-[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "READY",
+        "IN_PROGRESS",
+        "BLOCKED",
+        "PASSED",
+        "FAILED",
+        "INCONCLUSIVE",
+        "DEFERRED",
+        "CANCELLED",
+        "SUPERSEDED"
+      ]
+    },
+    "created_at": { "type": "string", "format": "date" },
+    "updated_at": { "type": "string", "format": "date" },
+    "completed_at": { "type": ["string", "null"], "format": "date" },
+    "plan_path": { "type": "string", "pattern": "^docs/experiments/.+/PLAN\\.md$" },
+    "primary_hypothesis": { "type": "string", "minLength": 1 },
+    "dataset_versions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "config_path": { "type": ["string", "null"] },
+    "code_commit": { "type": "string", "minLength": 7 },
+    "decision": { "type": ["string", "null"] },
+    "superseded_by": { "type": ["string", "null"] }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "project": {
+    "name": "weather-quant",
+    "timezone": "UTC",
+    "random_seed": 42,
+    "live_trading_enabled": false
+  },
+  "data": {
+    "raw_dir": "data/raw",
+    "interim_dir": "data/interim",
+    "processed_dir": "data/processed",
+    "external_dir": "data/external"
+  },
+  "research": {
+    "primary_market_type": "daily_max_temperature_bucket",
+    "execution_price": "executable_order_book",
+    "evaluation_protocol": "walk_forward"
+  },
+  "risk": {
+    "allow_live_orders": false
+  }
+}
