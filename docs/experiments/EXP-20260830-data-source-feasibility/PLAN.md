@@ -548,13 +548,23 @@ Full active/not-closed traversal completed with run ID `20260829T214842Z`:
 - Two immutable raw envelopes consumed 6.6 MB and were indexed by checksums.
 - Evidence: `reports/data_quality/EXP-20260830-phase1-active-inventory.md`.
 
+The first full closed traversal completed with run ID `20260829T215025Z`:
+
+- 83 keyset pages, 8,222 events, 54 city labels, 89,536 nested markets and 0 duplicate events.
+- Event end-date coverage spans 2025-12-30 through 2026-08-29.
+- 83 immutable raw envelopes consumed approximately 370 MB.
+- Page/event/market/date/storage counts are valid.
+- The first `outcome_count=0` metric is invalidated: the normalizer incorrectly coupled historical identifier mapping to current book eligibility.
+- Contract correction now separates `identifier_complete` from `eligible_for_book_collection` and retains valid historical outcome-token rows.
+- Evidence/invalidation record: `reports/data_quality/EXP-20260830-phase1-closed-inventory-attempt.md`.
+
 #### Decision
 
 Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Run the same versioned collector for `closed=true`, measure historical depth/storage, and inspect resolution/settlement field availability.
+Rerun `closed=true` with the corrected identifier/book-eligibility contract, then measure settlement and identifier coverage.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -1000,6 +1010,25 @@ These inferences must be verified in Phases 3 and 4.
 - Deviations: None. Raw and interim payloads remain Git-ignored as required.
 - Blockers: Closed/resolved inventory and manual reconciliation remain pending.
 - Next action: Execute and characterize the closed=true keyset inventory.
+
+### 2026-08-30 — Closed inventory run exposed normalization coupling
+
+- Previous status: `IN_PROGRESS`
+- New status: `IN_PROGRESS`
+- Work completed: Traversed 83 closed-history pages and measured 8,222 events, 54 cities, 89,536 markets, date coverage and 370 MB raw scale.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-closed-inventory-attempt.md`; local raw run `20260829T215025Z`.
+- Invalidated result: Historical `outcome_count=0` from the first run must not be used; event/market/page/date/storage counts remain valid.
+- Correction: Separated historical `identifier_complete` from current `eligible_for_book_collection`; added expired-market outcome retention regression test.
+- Blockers: Corrected closed summary and full settlement-field coverage remain pending.
+- Next action: Commit correction and rerun closed history to a new immutable run ID.
+
+### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
+
+- Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
+- Evidence available at decision time: The first closed run correctly found all events expired but incorrectly emitted zero historical outcome rows despite inspected records containing valid condition IDs and CLOB token mappings.
+- Alternatives considered: Treat closed history only as event metadata; rejected because settlement and future historical-price joins require outcome-token identity.
+- Consequence: Normalized market records expose both `identifier_complete` and `eligible_for_book_collection`; closed history is rerun before further coverage claims.
+- Revisit condition: None; these concepts remain permanently distinct.
 
 ## 20. Decision Log — append only
 

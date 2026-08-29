@@ -104,12 +104,27 @@ class MarketNormalizationTest(unittest.TestCase):
         self.assertEqual(summary["unique_city_count"], 2)
         self.assertEqual(summary["market_count"], 2)
         self.assertEqual(summary["eligible_market_count"], 1)
+        self.assertEqual(summary["identifier_complete_market_count"], 1)
         self.assertEqual(summary["excluded_market_count"], 1)
         self.assertEqual(summary["outcome_count"], 2)
 
     def test_invalid_json_array_is_rejected(self) -> None:
         with self.assertRaisesRegex(DiscoveryError, "not valid JSON"):
             parse_json_array("not-json", "outcomes")
+
+    def test_expired_market_keeps_valid_historical_outcome_mapping(self) -> None:
+        normalized = normalize_highest_temperature_event(
+            self.fixture["events"][0],
+            as_of=datetime(2026, 8, 30, tzinfo=timezone.utc),
+        )
+
+        self.assertTrue(normalized.markets[0]["identifier_complete"])
+        self.assertFalse(normalized.markets[0]["eligible_for_book_collection"])
+        self.assertEqual(len(normalized.outcomes), 2)
+        self.assertEqual(
+            normalized.exclusions[0]["reason_codes"],
+            ["EVENT_END_DATE_PASSED"],
+        )
 
     def test_raw_envelope_is_immutable(self) -> None:
         envelope = {"content_sha256": "abc", "payload": {"events": []}}

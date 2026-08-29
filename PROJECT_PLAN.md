@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.7.0
+**Plan versiyonu:** 0.8.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -697,6 +697,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-active-inventory.md`
 - **Sonuç:** Active inventory substep geçti; Phase 1 henüz geçmedi. Closed/resolved coverage ve ≥20 manual reconciliation sıradaki zorunlu kanıtlardır.
 
+### D-0009 — 2026-08-30 — Historical identity ve current eligibility ayrımı
+
+- **Durum:** `ACTIVE`
+- **Karar:** Closed/historical marketlerde outcome-token mapping `identifier_complete` ile korunacak; `eligible_for_book_collection` yalnız current prospective collection uygunluğunu gösterecek. Bu iki durum tek filtrede birleştirilmeyecek.
+- **Ölçülen kanıt:** İlk closed run 83 sayfa, 8.222 event, 54 şehir, 89.536 market, 0 duplicate ve 370 MB raw veri üretti. İncelenen resolved kayıtta valid condition/token/outcome price olmasına rağmen eski normalizer current eligibility false olduğu için `outcome_count=0` üretti.
+- **Invalidation:** İlk closed run'ın page/event/market/city/date/storage ölçümleri geçerli; historical outcome ve identifier-complete sayıları geçersizdir.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-inventory-attempt.md`
+- **Sonuç:** Contract ayrıştırıldı ve regression test eklendi. Closed history yeni immutable run ile yeniden ölçülecek.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -709,7 +718,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Aynı versioned keyset collector ile `closed=true` highest-temperature geçmişini çekmek; tarih derinliği, sayfa/storage ölçeği ve resolution/settlement alan kapsamını ölçmek.
+**Tek sonraki adım:** Düzeltilmiş `identifier_complete` / `eligible_for_book_collection` contract ile `closed=true` history'yi yeni immutable run ID altında yeniden çekmek ve valid historical outcome/identifier coverage ölçmek.
 
 Beklenen artifact'lar:
 

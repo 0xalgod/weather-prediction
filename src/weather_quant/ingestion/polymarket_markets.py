@@ -243,13 +243,14 @@ def normalize_highest_temperature_event(event: Mapping[str, Any], as_of: datetim
         if not isinstance(market, dict):
             raise DiscoveryError("nested market must be an object")
         market_id = str(market.get("id") or "")
-        reason_codes: List[str] = []
+        integrity_reason_codes: List[str] = []
+        eligibility_reason_codes: List[str] = []
         condition_id = str(market.get("conditionId") or "")
         try:
             outcome_labels = parse_json_array(market.get("outcomes"), "outcomes")
             token_ids = parse_json_array(market.get("clobTokenIds"), "clobTokenIds")
         except DiscoveryError as error:
-            reason_codes.append("INVALID_OUTCOME_TOKEN_JSON")
+            integrity_reason_codes.append("INVALID_OUTCOME_TOKEN_JSON")
             outcome_labels = []
             token_ids = []
             parse_error = str(error)
@@ -257,20 +258,22 @@ def normalize_highest_temperature_event(event: Mapping[str, Any], as_of: datetim
             parse_error = None
 
         if not market_id:
-            reason_codes.append("MISSING_MARKET_ID")
+            integrity_reason_codes.append("MISSING_MARKET_ID")
         if not condition_id:
-            reason_codes.append("MISSING_CONDITION_ID")
+            integrity_reason_codes.append("MISSING_CONDITION_ID")
         if not token_ids:
-            reason_codes.append("MISSING_CLOB_TOKEN_IDS")
+            integrity_reason_codes.append("MISSING_CLOB_TOKEN_IDS")
         if len(outcome_labels) != len(token_ids):
-            reason_codes.append("OUTCOME_TOKEN_LENGTH_MISMATCH")
+            integrity_reason_codes.append("OUTCOME_TOKEN_LENGTH_MISMATCH")
         if len(outcome_labels) != 2:
-            reason_codes.append("NON_BINARY_BUCKET_MARKET")
+            integrity_reason_codes.append("NON_BINARY_BUCKET_MARKET")
         if market.get("enableOrderBook") is not True:
-            reason_codes.append("ORDER_BOOK_DISABLED")
+            eligibility_reason_codes.append("ORDER_BOOK_DISABLED")
         if not temporally_relevant:
-            reason_codes.append("EVENT_END_DATE_PASSED")
+            eligibility_reason_codes.append("EVENT_END_DATE_PASSED")
 
+        identifier_complete = not integrity_reason_codes
+        reason_codes = integrity_reason_codes + eligibility_reason_codes
         eligible = not reason_codes
         market_record: JsonObject = {
             "event_id": event_id,
@@ -285,11 +288,12 @@ def normalize_highest_temperature_event(event: Mapping[str, Any], as_of: datetim
             "minimum_order_size": market.get("orderMinSize"),
             "fees_enabled": bool(market.get("feesEnabled")),
             "fee_schedule": market.get("feeSchedule"),
+            "identifier_complete": identifier_complete,
             "eligible_for_book_collection": eligible,
         }
         normalized_markets.append(market_record)
 
-        if eligible:
+        if identifier_complete:
             for outcome_index, (label, token_id) in enumerate(zip(outcome_labels, token_ids)):
                 normalized_outcomes.append(
                     {
@@ -301,7 +305,7 @@ def normalize_highest_temperature_event(event: Mapping[str, Any], as_of: datetim
                         "token_id": str(token_id),
                     }
                 )
-        else:
+        if reason_codes:
             exclusions.append(
                 {
                     "event_id": event_id,
@@ -328,6 +332,9 @@ def summarize_discovery(events: Sequence[NormalizedEvent]) -> JsonObject:
         "market_count": sum(len(item.markets) for item in events),
         "eligible_market_count": sum(
             1 for item in events for market in item.markets if market["eligible_for_book_collection"]
+        ),
+        "identifier_complete_market_count": sum(
+            1 for item in events for market in item.markets if market["identifier_complete"]
         ),
         "outcome_count": sum(len(item.outcomes) for item in events),
         "excluded_market_count": sum(len(item.exclusions) for item in events),
