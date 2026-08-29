@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.6.0
+**Plan versiyonu:** 0.7.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -689,6 +689,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Kanıt:** `src/weather_quant/ingestion/polymarket_markets.py` ve sanitized fixture üzerinde pagination/cursor-loop, checksum/timestamps, overwrite protection, JSON-array parsing, identifier mapping ve exclusion davranışını kapsayan 7 contract testi; bootstrap ile toplam 9 test başarılı.
 - **Sonuç:** Implementation contract hazır, fakat full live inventory ölçülmeden Phase 1 gate değerlendirilemez. Sıradaki adım tüm active/not-closed keyset sayfalarını raw envelope ile çekip coverage raporu üretmektir.
 
+### D-0008 — 2026-08-30 — Active MaxT inventory kapsamı
+
+- **Durum:** `ACTIVE`
+- **Karar:** Full active/not-closed Gamma inventory keyset ile iki sayfada tamamlandı; lifecycle/date/identifier reason-code sınıflandırması downstream collector evreninin zorunlu parçası olacak.
+- **Ölçülen kanıt:** Run `20260829T214842Z`: 136 event, 51 şehir etiketi, 1.496 nested market, 0 duplicate event. 100 temporally relevant event içindeki 1.100 market eligibility contract'ını geçti; 396 geçmiş market elendi ve 44'ünde condition/token eksikliği de vardı. İki raw envelope 6.6 MB.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-active-inventory.md`
+- **Sonuç:** Active inventory substep geçti; Phase 1 henüz geçmedi. Closed/resolved coverage ve ≥20 manual reconciliation sıradaki zorunlu kanıtlardır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -701,7 +709,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `EXP-20260830-data-source-feasibility` Phase 1 kapsamında public Gamma/CLOB yüzeylerinden daily maximum-temperature market discovery ve event/market/outcome/token/condition identifier reconciliation spike'ını uygulamak.
+**Tek sonraki adım:** Aynı versioned keyset collector ile `closed=true` highest-temperature geçmişini çekmek; tarih derinliği, sayfa/storage ölçeği ve resolution/settlement alan kapsamını ölçmek.
 
 Beklenen artifact'lar:
 

@@ -485,7 +485,7 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 
 - [x] Build read-only Gamma discovery client with raw-envelope persistence.
 - [x] Determine reliable weather/temperature discovery filters. (`highest-temperature`, tag ID `104596`, selected provisionally.)
-- [ ] Query active, closed and resolved records where supported.
+- [ ] Query active, closed and resolved records where supported. (Active/not-closed full traversal complete; closed/resolved pending.)
 - [x] Normalize event/market/outcome/token/condition mappings. (Contract implementation complete; full live inventory pending.)
 - [x] Preserve rule text and metadata hashes. (Raw envelope preserves payload and SHA-256; normalized event preserves resolution source.)
 - [x] Identify multi-outcome/negative-risk structure. (Event contains binary bucket markets; flags preserved at both levels.)
@@ -539,13 +539,22 @@ Production client implementation completed after reconnaissance:
 - Sanitized fixtures contain one eligible NYC bucket and one stale/incomplete Jinan bucket.
 - 9 repository tests pass: 7 Gamma discovery/normalization tests and 2 bootstrap smoke tests.
 
+Full active/not-closed traversal completed with run ID `20260829T214842Z`:
+
+- 2 keyset pages, 136 source events and 0 duplicate event IDs.
+- 51 unique city labels and 1,496 nested bucket markets.
+- 100 events were temporally relevant at run time; their 1,100 nested markets passed the current identifier/book metadata contract and produced 2,200 normalized outcome-token rows.
+- 396 markets were excluded because event end time had passed; 44 also lacked usable condition/token data.
+- Two immutable raw envelopes consumed 6.6 MB and were indexed by checksums.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-active-inventory.md`.
+
 #### Decision
 
 Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Run the client through all active/not-closed keyset pages, persist local raw envelopes, measure full coverage, and then query closed/resolved coverage.
+Run the same versioned collector for `closed=true`, measure historical depth/storage, and inspect resolution/settlement field availability.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -980,6 +989,17 @@ These inferences must be verified in Phases 3 and 4.
 - Deviations: None. The implementation intentionally uses the Python standard library to avoid introducing a runtime dependency before dependency locking is finalized.
 - Blockers: Full active and closed/resolved pagination has not yet been executed.
 - Next action: Execute complete active keyset discovery and generate measured coverage artifacts.
+
+### 2026-08-30 — Full active/not-closed inventory measured
+
+- Previous status: `IN_PROGRESS`
+- New status: `IN_PROGRESS`
+- Work completed: Added the versioned discovery runner, traversed all active/not-closed keyset pages, persisted immutable raw envelopes, normalized events/markets/outcomes and summarized exclusions.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-active-inventory.md`; local run `20260829T214842Z`.
+- Verification: 2 pages, 136 events, 0 duplicate IDs, 51 cities, 1,496 markets; 1,100 eligible and 396 excluded under the registered contract.
+- Deviations: None. Raw and interim payloads remain Git-ignored as required.
+- Blockers: Closed/resolved inventory and manual reconciliation remain pending.
+- Next action: Execute and characterize the closed=true keyset inventory.
 
 ## 20. Decision Log — append only
 
