@@ -598,10 +598,10 @@ Convert market rule text into versioned, manually verified station, source, time
 #### Tasks
 
 - [x] Define resolution registry schema. (`schemas/resolution_registry.schema.json` plus fail-closed Python semantic validator.)
-- [ ] Parse source URL/provider and station identity.
-- [ ] Parse local date, timezone and observation window.
-- [ ] Parse temperature unit, bucket inclusivity and rounding.
-- [ ] Hash and version rule text.
+- [x] Parse source URL/provider and station identity. (20 candidate records emitted; independent station verification pending.)
+- [ ] Parse local date, timezone and observation window. (Local dates/windows parsed; timezones remain explicit unverified candidates.)
+- [x] Parse temperature unit, bucket inclusivity and rounding. (161 buckets parsed; 128 belong to structurally valid candidates.)
+- [x] Hash and version rule text. (20 exact SHA-256 rule versions.)
 - [ ] Detect rule/station changes within a city family.
 - [ ] Cross-check source station metadata.
 - [ ] Manually reconcile minimum 20 market-events.
@@ -626,15 +626,15 @@ Convert market rule text into versioned, manually verified station, source, time
 
 #### Actual result
 
-Registry schema version `0.1.0` now binds event identity, disposition, source/station/timezone, unit/precision/rounding, explicit local-day window, exact rule hash/version, numeric bucket boundaries and source provenance. Five focused tests cover a valid record, bucket discontinuity, stale hash, invalid timezone and explicit missing-source exclusion; 23 repository tests pass.
+Registry schema version `0.1.0` binds event identity, disposition, source/station/timezone, unit/precision/rounding, explicit local-day window, exact rule hash/version, numeric bucket boundaries and source provenance. Candidate population produced 20 deterministic records and 161 buckets: 12 structurally complete station-unverified candidates and 8 preserved hard exclusions. Twenty exact rule hashes were retained; 26 tests pass.
 
 #### Decision
 
-Contract substep passed; Phase 2 remains `IN_PROGRESS` until the fixed sample is populated and station/timezone metadata is independently verified.
+Contract and candidate-population substeps passed; Phase 2 remains `IN_PROGRESS` until station/timezone metadata is independently verified and eligible records are promoted.
 
 #### Next action
 
-Build the deterministic Gamma rule/bucket parser and emit candidate registry records for all 20 sampled events, preserving the eight exclusions as `NO_TRADE`.
+Verify station identity and timezone for the 12 structurally complete candidates against authoritative metadata, then promote only verified records.
 
 ### Phase 3 — Executable order-book capture feasibility
 
@@ -1083,6 +1083,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: Sample population, independent timezone/station cross-check and city-family revision detection remain pending.
 - Next action: Populate candidate registry records for the fixed 20-event sample.
 
+### 2026-08-30 — Phase 2 candidate registry populated
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Work completed: Implemented deterministic rule/bucket parsing, isolated station-timezone candidates in config and emitted all 20 fixed-sample records under schema `0.1.0`.
+- Evidence: `reports/data_quality/EXP-20260830-phase2-resolution-registry-population.md`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-candidate.jsonl`.
+- Verification: 20 records, 161 buckets, 20 exact rule hashes, 12 structurally complete station-unverified candidates and 8 preserved hard exclusions; repeat output was byte-identical; 26 tests pass.
+- Deviations: Initial implementation would have carried the 12 Phase 1 matches directly as `RECONCILED`; before commit this was tightened to `CANDIDATE_STATION_UNVERIFIED` because timezone values have not yet been independently sourced.
+- Blockers: Authoritative station/timezone verification and city-family revision analysis remain pending.
+- Next action: Verify the 12 candidate station/timezone mappings and promote only supported records.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1114,6 +1125,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Store a sparse registry and filter ad hoc in each analysis; rejected because filters could diverge and admit unsafe labels.
 - Consequence: All downstream forecast joins/backtests must consume validated registry versions, not raw event metadata directly.
 - Revisit condition: Schema version increments may add fields, but may not weaken fail-closed eligibility without a new documented decision.
+
+### ED-0010 — 2026-08-30 — Separate structurally complete candidates from verified registry labels
+
+- Decision: A record with a parsed IANA timezone proposal is `CANDIDATE_STATION_UNVERIFIED`, not final `RECONCILED`, until station identity/timezone evidence is independently recorded.
+- Evidence available at decision time: The 12 Phase 1 matches parse cleanly, but their timezone mapping originated from a hand-maintained candidate config rather than an authoritative station metadata artifact.
+- Alternatives considered: Promote immediately because all IANA names exist in `zoneinfo`; rejected because syntactic validity does not prove the station-to-timezone mapping.
+- Consequence: Candidate records pass full structural validation but carry `STATION_TIMEZONE_UNVERIFIED` and remain excluded from backtests/trading.
+- Revisit condition: Promotion occurs record-by-record after primary-source evidence is persisted.
 
 ## 20. Decision Log — append only
 

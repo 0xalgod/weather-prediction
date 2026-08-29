@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import re
 from datetime import date, datetime
-from typing import Any, List, Mapping, Sequence
+from typing import Any, Dict, List, Mapping, Optional, Sequence
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 RECONCILED = "RECONCILED"
+CANDIDATE_STATION_UNVERIFIED = "CANDIDATE_STATION_UNVERIFIED"
+_BUCKET_LABEL = re.compile(
+    r"^(?P<lower>-?\d+)(?:-(?P<upper>-?\d+))?°(?P<unit>[CF])(?: or (?P<tail>below|higher))?$"
+)
 
 
 class ResolutionRegistryError(ValueError):
@@ -19,6 +25,47 @@ def rule_sha256(rule_text: str) -> str:
     """Hash exact rule text so revisions create new registry versions."""
 
     return hashlib.sha256(rule_text.encode("utf-8")).hexdigest()
+
+
+def parse_bucket_bounds(label: str, expected_unit: str) -> Dict[str, Any]:
+    """Convert a Polymarket discrete temperature label to numeric bounds."""
+
+    match = _BUCKET_LABEL.fullmatch(label.strip())
+    if match is None:
+        raise ResolutionRegistryError(f"unparseable bucket label: {label}")
+    if match.group("unit") != expected_unit:
+        raise ResolutionRegistryError("bucket unit disagrees with resolution rule")
+    lower = int(match.group("lower"))
+    upper = int(match.group("upper") or match.group("lower"))
+    tail = match.group("tail")
+    return {
+        "lower_bound": None if tail == "below" else lower,
+        "upper_bound": None if tail == "higher" else upper,
+        "lower_inclusive": True,
+        "upper_inclusive": True,
+    }
+
+
+def build_bucket_records(markets: Sequence[Mapping[str, Any]], unit: str) -> List[Dict[str, Any]]:
+    """Build registry buckets, rejecting incomplete market/token identity."""
+
+    records = []
+    for market in markets:
+        tokens = market.get("clobTokenIds")
+        if isinstance(tokens, str):
+            tokens = json.loads(tokens)
+        if not market.get("id") or not market.get("conditionId") or not isinstance(tokens, list) or len(tokens) != 2:
+            raise ResolutionRegistryError("cannot build bucket with incomplete identifiers")
+        label = str(market.get("groupItemTitle") or "")
+        records.append({
+            "market_id": str(market["id"]),
+            "condition_id": str(market["conditionId"]),
+            "yes_token_id": str(tokens[0]),
+            "no_token_id": str(tokens[1]),
+            "label": label,
+            **parse_bucket_bounds(label, unit),
+        })
+    return records
 
 
 def validate_bucket_partition(buckets: Sequence[Mapping[str, Any]], precision: float) -> None:
@@ -54,12 +101,14 @@ def validate_resolution_record(record: Mapping[str, Any]) -> List[str]:
     date.fromisoformat(str(record["market_date_local"]))
     disposition = record["disposition"]
     exclusions = list(record["exclusion_reasons"])
-    if disposition != RECONCILED:
+    if disposition not in (RECONCILED, CANDIDATE_STATION_UNVERIFIED):
         if not exclusions:
             raise ResolutionRegistryError("NO_TRADE record requires an exclusion reason")
         return exclusions
-    if exclusions:
+    if disposition == RECONCILED and exclusions:
         raise ResolutionRegistryError("reconciled record cannot contain exclusion reasons")
+    if disposition == CANDIDATE_STATION_UNVERIFIED and exclusions != ["STATION_TIMEZONE_UNVERIFIED"]:
+        raise ResolutionRegistryError("station candidate requires its exact unverified reason")
 
     rule = record["rule"]
     critical = ("provider", "source_url", "station_code", "station_name", "timezone", "temperature_unit", "temperature_precision", "rounding_mode", "observation_window", "rule_text", "rule_text_sha256", "rule_version")
@@ -87,4 +136,4 @@ def validate_resolution_record(record: Mapping[str, Any]) -> List[str]:
         parsed = datetime.fromisoformat(str(provenance[field]).replace("Z", "+00:00"))
         if parsed.tzinfo is None:
             raise ResolutionRegistryError(f"{field} must include timezone")
-    return []
+    return exclusions

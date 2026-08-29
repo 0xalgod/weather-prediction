@@ -5,6 +5,8 @@ from pathlib import Path
 
 from weather_quant.normalization.resolution_rules import (
     ResolutionRegistryError,
+    build_bucket_records,
+    parse_bucket_bounds,
     rule_sha256,
     validate_resolution_record,
 )
@@ -45,6 +47,24 @@ class ResolutionRegistryTests(unittest.TestCase):
         excluded["exclusion_reasons"] = ["MISSING_RESOLUTION_SOURCE"]
         excluded["rule"]["source_url"] = None
         self.assertEqual(validate_resolution_record(excluded), ["MISSING_RESOLUTION_SOURCE"])
+
+    def test_parses_celsius_and_fahrenheit_bucket_boundaries(self):
+        self.assertEqual(parse_bucket_bounds("27°C or below", "C")["lower_bound"], None)
+        self.assertEqual(parse_bucket_bounds("74-75°F", "F")["upper_bound"], 75)
+        self.assertEqual(parse_bucket_bounds("37°C or higher", "C")["upper_bound"], None)
+
+    def test_incomplete_token_identity_cannot_build_bucket(self):
+        with self.assertRaisesRegex(ResolutionRegistryError, "incomplete identifiers"):
+            build_bucket_records([{"id": "1", "conditionId": None, "clobTokenIds": "[]", "groupItemTitle": "20°C"}], "C")
+
+    def test_station_candidate_runs_full_contract_but_remains_excluded(self):
+        candidate = copy.deepcopy(self.record)
+        candidate["disposition"] = "CANDIDATE_STATION_UNVERIFIED"
+        candidate["exclusion_reasons"] = ["STATION_TIMEZONE_UNVERIFIED"]
+        self.assertEqual(validate_resolution_record(candidate), ["STATION_TIMEZONE_UNVERIFIED"])
+        candidate["buckets"][1]["lower_bound"] = 71
+        with self.assertRaisesRegex(ResolutionRegistryError, "gap or overlap"):
+            validate_resolution_record(candidate)
 
 
 if __name__ == "__main__":

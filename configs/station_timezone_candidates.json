@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "status": "UNVERIFIED_CANDIDATE",
+  "stations": {
+    "CYYZ": "America/Toronto",
+    "EDDM": "Europe/Berlin",
+    "FACT": "Africa/Johannesburg",
+    "KDAL": "America/Chicago",
+    "KORD": "America/Chicago",
+    "LIMC": "Europe/Rome",
+    "MMMX": "America/Mexico_City",
+    "MPMG": "America/Panama",
+    "OPKC": "Asia/Karachi",
+    "SAEZ": "America/Argentina/Buenos_Aires",
+    "WIHH": "Asia/Jakarta",
+    "WMKK": "Asia/Kuala_Lumpur",
+    "ZGGG": "Asia/Shanghai",
+    "ZHCC": "Asia/Shanghai",
+    "ZGSZ": "Asia/Shanghai",
+    "ZSJN": "Asia/Shanghai"
+  }
+}

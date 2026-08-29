@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.12.0
+**Plan versiyonu:** 0.13.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -742,6 +742,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `schemas/resolution_registry.schema.json`, `src/weather_quant/normalization/resolution_rules.py`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-contract.md`
 - **Sonuç:** Phase 2 contract substep geçti; Phase 2 `IN_PROGRESS`. Sıradaki adım parser ile sabit 20-event örneklem için candidate registry üretmektir.
 
+### D-0014 — 2026-08-30 — Candidate resolution registry population
+
+- **Durum:** `ACTIVE`
+- **Karar:** Phase 1'de eşleşen 12 kayıt station/timezone metadata bağımsız doğrulanana kadar final `RECONCILED` değil, `CANDIDATE_STATION_UNVERIFIED` olarak tutulacak. Candidate statüsü structural validation'dan geçse bile backtest/trading label'ı olamaz.
+- **Ölçülen kanıt:** Sabit örneklemden deterministik olarak 20 registry kaydı, 161 bucket ve 20 ayrı rule hash üretildi. 12 candidate kayıtta 128 bucket tam contract'ı geçti; 8 hard `NO_TRADE` disposition değişmeden korundu. İkinci koşu byte-for-byte aynı sonucu verdi; 26 test geçti.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase2-resolution-registry-candidate.jsonl`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-population.md`
+- **Sonuç:** Parser/population substep geçti; Phase 2 `IN_PROGRESS`. Sıradaki adım 12 candidate station/timezone eşleşmesini authoritative metadata ile doğrulamaktır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -754,13 +762,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Deterministik Gamma rule/bucket parser'ını geliştirip sabit 20-event örneklem için candidate registry üretmek; Phase 1'de elenen sekiz kaydı explicit `NO_TRADE` olarak korumak.
+**Tek sonraki adım:** 12 candidate kaydın station identity ve IANA timezone eşleşmesini authoritative metadata ile bağımsız doğrulamak; kanıt URL/hash'lerini kaydedip yalnız doğrulananları final `RECONCILED` statüsüne yükseltmek.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- candidate resolution registry JSONL
-- parser ve bucket-boundary contract testleri
+- verified resolution registry JSONL
+- station/timezone evidence manifest ve coverage raporu
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.

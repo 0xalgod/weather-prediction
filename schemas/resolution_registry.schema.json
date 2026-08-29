@@ -18,7 +18,7 @@
     "market_date_local": {"type": "string", "format": "date"},
     "disposition": {
       "enum": [
-        "RECONCILED", "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+        "RECONCILED", "CANDIDATE_STATION_UNVERIFIED", "NO_TRADE_MISSING_RESOLUTION_SOURCE",
         "NO_TRADE_NON_TERMINAL_OR_CANCELLED", "NO_TRADE_OUTCOME_SOURCE_MISMATCH",
         "NO_TRADE_AMBIGUOUS_RULE", "NO_TRADE_IDENTIFIER_FAILURE"
       ]
