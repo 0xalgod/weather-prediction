@@ -7,7 +7,7 @@
 **Project phase:** Phase 0/G0 feasibility, enabling Phase 1
 **Related hypotheses:** H1, H2, H3, H5, H6
 **Related experiments:** None
-**Data cut-off:** 2026-08-30 for source documentation; runtime data cut-off not yet available
+**Data cut-off:** 2026-08-30 documentation and reconciliation retrieval; closed inventory through 2026-08-29
 **Decision commit:** This registration commit; resolve with `git log -- PLAN.md`
 
 ## 1. Executive summary
@@ -470,7 +470,7 @@ Implement Phase 1 market discovery spike using public Gamma and CLOB metadata en
 
 ### Phase 1 — Polymarket market discovery and identifier reconciliation
 
-**Status:** `IN_PROGRESS`
+**Status:** `PASSED`
 
 #### Objective
 
@@ -489,10 +489,10 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 - [x] Normalize event/market/outcome/token/condition mappings. (Contract implementation complete; full live inventory pending.)
 - [x] Preserve rule text and metadata hashes. (Raw envelope preserves payload and SHA-256; normalized event preserves resolution source.)
 - [x] Identify multi-outcome/negative-risk structure. (Event contains binary bucket markets; flags preserved at both levels.)
-- [ ] Validate at least 20 sampled market-events manually.
+- [x] Validate at least 20 sampled market-events manually. (12 retained/reconciled; all 20 received explicit disposition.)
 - [x] Measure discovery coverage and critical-field missingness. (Closed anomaly cohorts are overlap-aware at event and market level.)
 - [x] Add unit/contract tests with sanitized fixtures.
-- [ ] Produce Phase 1 evidence report.
+- [x] Produce Phase 1 evidence report.
 
 #### Outputs
 
@@ -577,15 +577,15 @@ Deterministic anomaly extraction and sampling completed:
 
 #### Decision
 
-Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
+Phase 1 passes. Twelve retained events across twelve cities reconcile identifier, rule/station, terminal bucket and displayed source high with zero retained identifier mismatches. Eight anomalous events remain preserved but excluded.
 
 #### Next action
 
-Manually reconcile the selected 20 events against Gamma metadata and resolution-source pages, recording station/source, identifiers, terminal outcome and anomaly disposition.
+Begin Phase 2 with the versioned resolution-rule and station registry schema.
 
 ### Phase 2 — Resolution-rule and station registry
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
 #### Objective
 
@@ -1061,6 +1061,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: The 20 selected records have not yet been manually reconciled.
 - Next action: Reconcile the selected queue against source metadata and resolution pages.
 
+### 2026-08-30 — Phase 1 manual reconciliation gate passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `PASSED`; Phase 2 is now `IN_PROGRESS`.
+- Work completed: Retrieved fresh public Gamma and dated Wunderground snapshots for the fixed queue; checked identifier lineage, parsed rule/station/unit/date, identified exact terminal winners and compared them with displayed daily highs.
+- Evidence: `reports/data_quality/EXP-20260830-phase1-manual-reconciliation.md`, `reports/data_quality/EXP-20260830-phase1-manual-reconciliation-v2.json`; local raw run `run=20260830T-reconciliation-v2`.
+- Verification: 12/20 records reconciled across 12 cities, exceeding the ≥10/≥3 gate; 0 fetch failures; 0 critical identity mismatches among retained records; 18 tests pass.
+- Exclusions: 3 missing source, 3 non-terminal/cancelled and 2 source/outcome mismatch records receive hard exclusion dispositions.
+- Blockers: None for Phase 1. Historical forecast-as-issued, prospective L2 and the full experiment gate remain pending in later phases.
+- Next action: Define the Phase 2 versioned resolution-rule/station registry schema.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1076,6 +1087,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Keep only raw market counts; rejected because it overstates independent event prevalence and obscures concentration.
 - Consequence: Manual audit selection operates on unique events while retaining their anomalous market rows.
 - Revisit condition: None; grain-aware reporting is a permanent integrity rule.
+
+### ED-0008 — 2026-08-30 — Do not infer observed labels from terminal prices alone
+
+- Decision: A terminal-looking Gamma outcome is not a valid weather label unless it reconciles with a declared resolution source and rule. Missing source, non-terminal/cancelled state and source/outcome mismatch are hard exclusion states.
+- Evidence available at decision time: 12/20 sampled events reconciled; Dallas May 19 and Munich May 19 had exact terminal winners that materially contradicted the linked source daily high. Three events lacked a source and three lacked a sole exact terminal winner.
+- Alternatives considered: Treat exact `[1,0]` outcome prices as ground truth; rejected because two sampled counterexamples would create mislabeled training/backtest rows.
+- Consequence: Resolution registry and future datasets require independent source reconciliation and explicit disposition before a realized label is admitted.
+- Revisit condition: Only a documented platform correction/re-resolution workflow that explains and versions these discrepancies.
 
 ## 20. Decision Log — append only
 

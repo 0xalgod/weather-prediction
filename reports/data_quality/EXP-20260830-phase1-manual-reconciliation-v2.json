@@ -1,0 +1,438 @@
+{
+  "raw_manifest": "data/raw/polymarket_reconciliation/run=20260830T-reconciliation-v2/manifest.json",
+  "records": [
+    {
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "event_id": "624485",
+      "identity_match": true,
+      "observed_high_display": null,
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": null,
+        "rule_parse_complete": false,
+        "station_code": null,
+        "station_name": null,
+        "unit": null
+      },
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "32\u00b0C",
+      "title": "Highest temperature in Hong Kong on June 25?"
+    },
+    {
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "event_id": "668435",
+      "identity_match": true,
+      "observed_high_display": null,
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": null,
+        "rule_parse_complete": false,
+        "station_code": null,
+        "station_name": null,
+        "unit": null
+      },
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "20\u00b0C",
+      "title": "Highest temperature in Moscow on July 7?"
+    },
+    {
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "event_id": "899793",
+      "identity_match": true,
+      "observed_high_display": null,
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": null,
+        "rule_parse_complete": false,
+        "station_code": null,
+        "station_name": null,
+        "unit": null
+      },
+      "selection_stratum": "NO_EVENT_RESOLUTION_SOURCE",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Tel Aviv on August 26?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "493722",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 36
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "19 May '26",
+        "rule_parse_complete": true,
+        "station_code": "OPKC",
+        "station_name": "Masroor Airbase Station",
+        "unit": "C"
+      },
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "36\u00b0C",
+      "title": "Highest temperature in Karachi on May 19?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "593023",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 22
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "16 Jun '26",
+        "rule_parse_complete": true,
+        "station_code": "EDDM",
+        "station_name": "Munich Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "22\u00b0C",
+      "title": "Highest temperature in Munich on June 16?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "515716",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 36
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "25 May '26",
+        "rule_parse_complete": true,
+        "station_code": "ZGGG",
+        "station_name": "Guangzhou Baiyun International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "EVENT_NOT_AUTOMATICALLY_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "36\u00b0C",
+      "title": "Highest temperature in Guangzhou on May 25?"
+    },
+    {
+      "disposition": "OUTCOME_SOURCE_MISMATCH_NO_TRADE",
+      "event_id": "493659",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 30
+      },
+      "outcome_rule_check": "MISMATCH",
+      "rule": {
+        "rule_date": "19 May '26",
+        "rule_parse_complete": true,
+        "station_code": "KDAL",
+        "station_name": "Dallas Love Field Station",
+        "unit": "F"
+      },
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "73\u00b0F or below",
+      "title": "Highest temperature in Dallas on May 19?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "490270",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 34
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "18 May '26",
+        "rule_parse_complete": true,
+        "station_code": "WIHH",
+        "station_name": "Halim Perdanakusuma Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "34\u00b0C",
+      "title": "Highest temperature in Jakarta on May 18?"
+    },
+    {
+      "disposition": "OUTCOME_SOURCE_MISMATCH_NO_TRADE",
+      "event_id": "493666",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 19
+      },
+      "outcome_rule_check": "MISMATCH",
+      "rule": {
+        "rule_date": "19 May '26",
+        "rule_parse_complete": true,
+        "station_code": "EDDM",
+        "station_name": "Munich Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "EVENT_MISSING_CLOSED_TIME",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "11\u00b0C or below",
+      "title": "Highest temperature in Munich on May 19?"
+    },
+    {
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "event_id": "504566",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 25
+      },
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": "22 May '26",
+        "rule_parse_complete": true,
+        "station_code": "ZSJN",
+        "station_name": "Jinan Yaoqiang International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "MARKET_IDENTIFIER_INCOMPLETE",
+      "source_fetch_error": null,
+      "terminal_status": "NO_EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Jinan on May 22?"
+    },
+    {
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "event_id": "504568",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": "22 May '26",
+        "rule_parse_complete": true,
+        "station_code": "ZHCC",
+        "station_name": "Zhengzhou Xinzheng International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "MARKET_IDENTIFIER_INCOMPLETE",
+      "source_fetch_error": null,
+      "terminal_status": "NO_EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Zhengzhou on May 22?"
+    },
+    {
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "event_id": "493696",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 24
+      },
+      "outcome_rule_check": "INCONCLUSIVE",
+      "rule": {
+        "rule_date": "19 May '26",
+        "rule_parse_complete": true,
+        "station_code": "FACT",
+        "station_name": "Cape Town International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "NO_EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Cape Town on May 19?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "497028",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "20 May '26",
+        "rule_parse_complete": true,
+        "station_code": "MPMG",
+        "station_name": "Marcos A. Gelabert Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "31\u00b0C or higher",
+      "title": "Highest temperature in Panama City on May 20?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "515700",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "25 May '26",
+        "rule_parse_complete": true,
+        "station_code": "ZGSZ",
+        "station_name": "Shenzhen Bao'an International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "MARKET_NOT_UMA_RESOLVED",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Shenzhen on May 25?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "614117",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "22 Jun '26",
+        "rule_parse_complete": true,
+        "station_code": "WMKK",
+        "station_name": "Kuala Lumpur Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "CLEAN",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Kuala Lumpur on June 22?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "132826",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 31
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "1 Jan '26",
+        "rule_parse_complete": true,
+        "station_code": "SAEZ",
+        "station_name": "Minister Pistarini Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "CLEAN",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "31\u00b0C",
+      "title": "Highest temperature in Buenos Aires on January 1?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "731100",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "23 Jul '26",
+        "rule_parse_complete": true,
+        "station_code": "CYYZ",
+        "station_name": "Toronto Pearson Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "CLEAN",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "26\u00b0C",
+      "title": "Highest temperature in Toronto on July 23?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "553903",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 27
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "5 Jun '26",
+        "rule_parse_complete": true,
+        "station_code": "KORD",
+        "station_name": "Chicago O'Hare Intl Airport Station",
+        "unit": "F"
+      },
+      "selection_stratum": "CLEAN",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "68\u00b0F or higher",
+      "title": "Highest temperature in Chicago on June 5?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "589059",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "14 Jun '26",
+        "rule_parse_complete": true,
+        "station_code": "MMMX",
+        "station_name": "Benito Ju\u00e1rez International Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "CLEAN",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "26\u00b0C",
+      "title": "Highest temperature in Mexico City on June 14?"
+    },
+    {
+      "disposition": "RECONCILED",
+      "event_id": "322484",
+      "identity_match": true,
+      "observed_high_display": {
+        "unit": "C",
+        "value": 18
+      },
+      "outcome_rule_check": "MATCH",
+      "rule": {
+        "rule_date": "2 Apr '26",
+        "rule_parse_complete": true,
+        "station_code": "LIMC",
+        "station_name": "Malpensa Intl Airport Station",
+        "unit": "C"
+      },
+      "selection_stratum": "HASH_FILL",
+      "source_fetch_error": null,
+      "terminal_status": "EXACT_TERMINAL_WINNER",
+      "terminal_winner_bucket": "18\u00b0C",
+      "title": "Highest temperature in Milan on April 2?"
+    }
+  ],
+  "retrieved_at_utc": "2026-08-29T22:17:13.812235Z",
+  "schema_version": "0.1.0"
+}

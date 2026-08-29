@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.10.0
+**Plan versiyonu:** 0.11.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -724,6 +724,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-closed-anomaly-cohorts.md`, `reports/data_quality/EXP-20260830-phase1-closed-audit-sample.json`
 - **Sonuç:** Cohort extraction/sample-selection substep geçti; Phase 1 `IN_PROGRESS`. Sıradaki adım seçilmiş 20 eventin kaynak, station, identifier ve terminal outcome alanlarını manuel reconcile etmektir.
 
+### D-0012 — 2026-08-30 — Market discovery/identifier reconciliation gate sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Experiment Phase 1 market-discovery gate'i geçti; yalnız `RECONCILED` disposition alan eventler future label registry'ye girebilir. Missing-source, non-terminal/cancelled ve source/outcome mismatch kayıtları hard `NO_TRADE`/exclude durumudur.
+- **Ölçülen kanıt:** Sabit 20-event örneklemde 12 event identifier + station/rule + terminal bucket + Wunderground displayed high zincirini geçti; 3 missing-source, 3 non-terminal/cancelled ve 2 source/outcome mismatch bulundu. Fetch error 0; retained 12 kayıt 12 şehir kapsıyor ve ön kayıtlı ≥10 event/≥3 şehir eşiğini geçiyor.
+- **Kritik bulgu:** Exact terminal Gamma outcome her zaman gerçekleşen hava etiketi değildir. Dallas 19 Mayıs terminal `73°F or below` iken linked source 30°C; Munich 19 Mayıs terminal `11°C or below` iken source 19°C gösterdi.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase1-manual-reconciliation.md`, `reports/data_quality/EXP-20260830-phase1-manual-reconciliation-v2.json`
+- **Sonuç:** Üst seviye veri fizibilitesi Phase 1 hâlâ `IN_PROGRESS`; market identity alt gate'i geçti. Sıradaki adım versioned resolution-rule/station registry şemasıdır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -736,12 +745,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Seçilmiş 20-event kuyruğunu Gamma event/market metadata ve resolution-source sayfalarına karşı manuel reconcile etmek; event başına identifier, station/source, terminal outcome ve anomaly disposition kaydetmek.
+**Tek sonraki adım:** Phase 2 için versioned resolution-rule/station registry şemasını tanımlamak; station, timezone, unit, local-day, rounding, bucket semantics, rule hash ve hard exclusion disposition alanlarını sözleşmeye bağlamak.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- `reports/data_quality/EXP-20260830-phase1-manual-reconciliation.md`
+- `src/weather_quant/normalization/resolution_rules.py`
+- resolution registry schema ve fixture'ları
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.
