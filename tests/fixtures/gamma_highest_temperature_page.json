@@ -1,0 +1,71 @@
+{
+  "events": [
+    {
+      "id": "923528",
+      "title": "Highest temperature in NYC on August 29?",
+      "slug": "highest-temperature-in-nyc-on-august-29-2026",
+      "active": true,
+      "closed": false,
+      "archived": false,
+      "endDate": "2026-08-29T12:00:00Z",
+      "resolutionSource": "https://www.weather.gov/wrh/timeseries?site=klga",
+      "enableNegRisk": true,
+      "negRisk": true,
+      "markets": [
+        {
+          "id": "3942211",
+          "question": "Will the highest temperature in New York City be 69°F or below on August 29?",
+          "conditionId": "0xf5e3cb0a9adc873d7bb025ec753b74e3a232fb0869daf28fca09e2a079b495de",
+          "slug": "highest-temperature-in-nyc-on-august-29-2026-69forbelow",
+          "outcomes": "[\"Yes\", \"No\"]",
+          "clobTokenIds": "[\"token-yes-1\", \"token-no-1\"]",
+          "groupItemTitle": "69°F or below",
+          "enableOrderBook": true,
+          "negRisk": true,
+          "orderPriceMinTickSize": 0.001,
+          "orderMinSize": 5,
+          "feesEnabled": true,
+          "feeSchedule": {
+            "exponent": 1,
+            "rate": 0.05,
+            "takerOnly": true,
+            "rebateRate": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "497034",
+      "title": "Highest temperature in Jinan on May 20?",
+      "slug": "highest-temperature-in-jinan-on-may-20-2026",
+      "active": true,
+      "closed": false,
+      "archived": false,
+      "endDate": "2026-05-20T12:00:00Z",
+      "resolutionSource": "https://example.invalid/sanitized-station-source",
+      "enableNegRisk": true,
+      "negRisk": true,
+      "markets": [
+        {
+          "id": "stale-market-1",
+          "question": "Sanitized stale market fixture",
+          "conditionId": "",
+          "slug": "sanitized-stale-market",
+          "outcomes": "[\"Yes\", \"No\"]",
+          "clobTokenIds": "[]",
+          "groupItemTitle": "30°C",
+          "enableOrderBook": true,
+          "negRisk": true,
+          "feesEnabled": true,
+          "feeSchedule": {
+            "exponent": 1,
+            "rate": 0.05,
+            "takerOnly": true,
+            "rebateRate": 0.25
+          }
+        }
+      ]
+    }
+  ],
+  "next_cursor": null
+}

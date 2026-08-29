@@ -483,15 +483,15 @@ Produce a reproducible inventory of qualifying active and recent settled daily m
 
 #### Tasks
 
-- [ ] Build read-only Gamma discovery client with raw-envelope persistence.
+- [x] Build read-only Gamma discovery client with raw-envelope persistence.
 - [x] Determine reliable weather/temperature discovery filters. (`highest-temperature`, tag ID `104596`, selected provisionally.)
 - [ ] Query active, closed and resolved records where supported.
-- [ ] Normalize event/market/outcome/token/condition mappings.
-- [ ] Preserve rule text and metadata hashes.
-- [ ] Identify multi-outcome/negative-risk structure.
+- [x] Normalize event/market/outcome/token/condition mappings. (Contract implementation complete; full live inventory pending.)
+- [x] Preserve rule text and metadata hashes. (Raw envelope preserves payload and SHA-256; normalized event preserves resolution source.)
+- [x] Identify multi-outcome/negative-risk structure. (Event contains binary bucket markets; flags preserved at both levels.)
 - [ ] Validate at least 20 sampled market-events manually.
 - [ ] Measure discovery coverage and critical-field missingness.
-- [ ] Add unit/contract tests with sanitized fixtures.
+- [x] Add unit/contract tests with sanitized fixtures.
 - [ ] Produce Phase 1 evidence report.
 
 #### Outputs
@@ -527,13 +527,25 @@ Schema reconnaissance completed on 2026-08-30:
 
 Evidence: `reports/data_quality/EXP-20260830-phase1-schema-recon.md`.
 
+Production client implementation completed after reconnaissance:
+
+- `GammaDiscoveryClient` uses public HTTPS GET requests and opaque keyset cursors.
+- Request URL construction is deterministic; cursor loops and page-safety overruns fail closed.
+- Raw envelopes record endpoint, request parameters, request/receipt UTC timestamps, SHA-256 and original payload.
+- Raw writes are atomic and reject overwrite.
+- Nested `outcomes` and `clobTokenIds` accept native arrays or strict JSON-array strings.
+- Event normalization separates temporal relevance, lifecycle state, identifier integrity and book eligibility.
+- Explicit reason codes cover stale events, missing IDs/tokens, length mismatch, non-binary markets and disabled books.
+- Sanitized fixtures contain one eligible NYC bucket and one stale/incomplete Jinan bucket.
+- 9 repository tests pass: 7 Gamma discovery/normalization tests and 2 bootstrap smoke tests.
+
 #### Decision
 
 Continue Phase 1. The narrow reconnaissance objective passed, but the Phase 1 exit gate is not yet evaluated.
 
 #### Next action
 
-Implement the versioned keyset discovery client, strict identifier normalization, sanitized fixtures and contract tests.
+Run the client through all active/not-closed keyset pages, persist local raw envelopes, measure full coverage, and then query closed/resolved coverage.
 
 ### Phase 2 — Resolution-rule and station registry
 
@@ -957,6 +969,17 @@ These inferences must be verified in Phases 3 and 4.
 - Deviations: None. Raw payloads remained temporary because the production immutable-envelope client is not yet implemented.
 - Blockers: Full-page coverage and historical closed/resolved discovery remain unmeasured.
 - Next action: Implement and test the production read-only market discovery client.
+
+### 2026-08-30 — Phase 1 discovery client contract implemented
+
+- Previous status: `IN_PROGRESS`
+- New status: `IN_PROGRESS`
+- Work completed: Implemented public keyset pagination, point-in-time raw envelope, atomic immutable persistence, strict event/market/outcome normalization, reason-code exclusions, sanitized fixtures and contract tests.
+- Evidence: `src/weather_quant/ingestion/polymarket_markets.py`, `tests/test_polymarket_markets.py`, `tests/fixtures/gamma_highest_temperature_page.json`, `configs/polymarket_discovery.json`.
+- Verification: 9/9 unit and smoke tests passed; JSON configs/fixtures parsed; Python compile and diff checks passed.
+- Deviations: None. The implementation intentionally uses the Python standard library to avoid introducing a runtime dependency before dependency locking is finalized.
+- Blockers: Full active and closed/resolved pagination has not yet been executed.
+- Next action: Execute complete active keyset discovery and generate measured coverage artifacts.
 
 ## 20. Decision Log — append only
 

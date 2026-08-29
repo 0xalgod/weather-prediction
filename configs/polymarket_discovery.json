@@ -1,0 +1,11 @@
+{
+  "gamma_base_url": "https://gamma-api.polymarket.com",
+  "primary_tag_slug": "highest-temperature",
+  "coverage_crosscheck_tag_slug": "weather",
+  "page_size": 500,
+  "order": "endDate",
+  "ascending": true,
+  "user_agent": "weather-quant-research/0.1 (+https://github.com/0xalgod/weather-prediction)",
+  "request_timeout_seconds": 30,
+  "max_pages_safety_limit": 1000
+}

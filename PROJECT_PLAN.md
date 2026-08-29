@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.5.0
+**Plan versiyonu:** 0.6.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 — Research charter  
 **Genel durum:** `IN_PROGRESS`  
@@ -681,6 +681,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Ölçülen kanıt:** Narrow tag ilk keyset sayfası 100/100 yapısal olarak eşleşen event ve non-null cursor döndürdü. Broad Weather ilk sayfada 36 MaxT event, 33 şehir etiketi ve 396 nested binary market gözlendi. Bunların 44'ünde condition/token identifier eksikti. `active=true,closed=false` Mayıs'ta bitmiş stale eventleri de içerdi.
 - **Artifact:** `reports/data_quality/EXP-20260830-phase1-schema-recon.md`
 - **Sonuç:** Experiment `IN_PROGRESS`. Tag membership/lifecycle flag tek başına yeterli değil; production client date relevance, identifier completeness, nested JSON array integrity, negative-risk ve fee metadata sınıflandırması yapacak.
+
+### D-0007 — 2026-08-30 — Point-in-time Gamma discovery contract
+
+- **Durum:** `ACTIVE`
+- **Karar:** Phase 1 discovery client public HTTPS/keyset, opaque cursor, immutable checksummed raw envelope ve strict normalization contract kullanacak. Stale lifecycle, eksik condition/token, outcome-token mismatch, non-binary market ve disabled book durumları sessizce drop edilmeyecek; reason code ile ayrılacak.
+- **Kanıt:** `src/weather_quant/ingestion/polymarket_markets.py` ve sanitized fixture üzerinde pagination/cursor-loop, checksum/timestamps, overwrite protection, JSON-array parsing, identifier mapping ve exclusion davranışını kapsayan 7 contract testi; bootstrap ile toplam 9 test başarılı.
+- **Sonuç:** Implementation contract hazır, fakat full live inventory ölçülmeden Phase 1 gate değerlendirilemez. Sıradaki adım tüm active/not-closed keyset sayfalarını raw envelope ile çekip coverage raporu üretmektir.
 
 ## 13. Open Questions
 
