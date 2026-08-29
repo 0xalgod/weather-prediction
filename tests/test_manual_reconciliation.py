@@ -18,6 +18,13 @@ class ManualReconciliationTests(unittest.TestCase):
         self.assertEqual((rule["station_code"], rule["unit"]), ("KDAL", "F"))
         self.assertTrue(rule["rule_parse_complete"])
 
+    def test_parses_nws_timeseries_station_query(self):
+        rule = parse_resolution_rule(
+            "This resolves to the highest temperature recorded at the Chicago O'Hare Station in degrees Fahrenheit on 28 Aug '26.",
+            "https://www.weather.gov/wrh/timeseries?site=kord",
+        )
+        self.assertEqual(rule["station_code"], "KORD")
+
     def test_parses_visible_daily_high(self):
         self.assertEqual(parse_wunderground_high("<b>Day High &amp; Low</b> High 30°C Low 19°C"), {"value": 30, "unit": "C"})
 

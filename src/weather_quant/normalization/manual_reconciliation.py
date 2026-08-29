@@ -6,7 +6,7 @@ import html
 import json
 import re
 from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 
 JsonObject = Dict[str, Any]
@@ -24,7 +24,18 @@ def parse_resolution_rule(description: str, source_url: Optional[str]) -> JsonOb
     match = _RULE_RE.search(description or "")
     station_code = None
     if source_url:
-        station_code = urlparse(source_url).path.rstrip("/").split("/")[-1] or None
+        parsed_url = urlparse(source_url)
+        site = parse_qs(parsed_url.query).get("site", [None])[0]
+        if site:
+            station_code = site.upper()
+        else:
+            parts = parsed_url.path.rstrip("/").split("/")
+            if "daily" in parts and len(parts) > parts.index("daily") + 1:
+                tail = parts[parts.index("daily") + 1 :]
+                station_code = next((part.upper() for part in reversed(tail) if re.fullmatch(r"[A-Za-z0-9]{4}", part)), None)
+            elif parts:
+                candidate = parts[-1]
+                station_code = candidate.upper() if re.fullmatch(r"[A-Za-z0-9]{4}", candidate) else None
     return {
         "station_name": match.group("station_name") if match else None,
         "station_code": station_code,

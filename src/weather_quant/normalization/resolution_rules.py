@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import date, datetime
+from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Dict, List, Mapping, Optional, Sequence
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
@@ -15,6 +15,7 @@ CANDIDATE_STATION_UNVERIFIED = "CANDIDATE_STATION_UNVERIFIED"
 _BUCKET_LABEL = re.compile(
     r"^(?P<lower>-?\d+)(?:-(?P<upper>-?\d+))?°(?P<unit>[CF])(?: or (?P<tail>below|higher))?$"
 )
+_RULE_DATE_TEXT = re.compile(r"\bon \d{1,2} [A-Z][a-z]+ '\d{2}\b")
 
 
 class ResolutionRegistryError(ValueError):
@@ -25,6 +26,27 @@ def rule_sha256(rule_text: str) -> str:
     """Hash exact rule text so revisions create new registry versions."""
 
     return hashlib.sha256(rule_text.encode("utf-8")).hexdigest()
+
+
+def canonical_rule_template(rule_text: str) -> str:
+    """Remove only the event date so policy wording revisions remain visible."""
+
+    return _RULE_DATE_TEXT.sub("on <LOCAL_DATE>", rule_text.strip())
+
+
+def local_day_utc_window(local_date: date, timezone_name: str) -> Dict[str, Any]:
+    """Return half-open UTC boundaries for one IANA local calendar day."""
+
+    zone = ZoneInfo(timezone_name)
+    start_local = datetime.combine(local_date, time.min, tzinfo=zone)
+    end_local = datetime.combine(local_date + timedelta(days=1), time.min, tzinfo=zone)
+    start_utc = start_local.astimezone(timezone.utc)
+    end_utc = end_local.astimezone(timezone.utc)
+    return {
+        "start_utc": start_utc.isoformat().replace("+00:00", "Z"),
+        "end_utc_exclusive": end_utc.isoformat().replace("+00:00", "Z"),
+        "duration_hours": (end_utc - start_utc).total_seconds() / 3600,
+    }
 
 
 def parse_bucket_bounds(label: str, expected_unit: str) -> Dict[str, Any]:

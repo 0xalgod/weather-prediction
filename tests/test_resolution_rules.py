@@ -1,11 +1,14 @@
 import copy
 import json
 import unittest
+from datetime import date
 from pathlib import Path
 
 from weather_quant.normalization.resolution_rules import (
     ResolutionRegistryError,
     build_bucket_records,
+    canonical_rule_template,
+    local_day_utc_window,
     parse_bucket_bounds,
     rule_sha256,
     validate_resolution_record,
@@ -65,6 +68,17 @@ class ResolutionRegistryTests(unittest.TestCase):
         candidate["buckets"][1]["lower_bound"] = 71
         with self.assertRaisesRegex(ResolutionRegistryError, "gap or overlap"):
             validate_resolution_record(candidate)
+
+    def test_rule_template_removes_date_but_preserves_wording(self):
+        first = canonical_rule_template("Highest recorded in degrees Celsius on 8 Mar '26. Finalized only.")
+        second = canonical_rule_template("Highest recorded in degrees Celsius on 9 Mar '26. Finalized only.")
+        self.assertEqual(first, second)
+        self.assertNotEqual(first, canonical_rule_template("Highest recorded in degrees Celsius on 9 Mar '26. Revised policy."))
+
+    def test_dst_local_days_have_23_and_25_hours(self):
+        self.assertEqual(local_day_utc_window(date(2026, 3, 8), "America/Toronto")["duration_hours"], 23)
+        self.assertEqual(local_day_utc_window(date(2026, 11, 1), "America/Toronto")["duration_hours"], 25)
+        self.assertEqual(local_day_utc_window(date(2026, 3, 8), "Asia/Kuala_Lumpur")["duration_hours"], 24)
 
 
 if __name__ == "__main__":

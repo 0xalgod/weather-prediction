@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.14.0
+**Plan versiyonu:** 0.15.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -759,6 +759,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase2-station-timezone-verification.md`, `reports/data_quality/EXP-20260830-phase2-resolution-registry-verified.jsonl`
 - **Sıradaki adım:** Tekrarlanan şehirlerde rule/station değişimini ölçmek ve DST/local-date boundary testlerini eklemek.
 
+### D-0016 — 2026-08-30 — Phase 2 rule revision/DST gate sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Phase 2 pre-registered gate geçti; yalnız verified registry kapsamı için. Şehir bazında sabit station/rule varsayımı yasak: event-effective station ve exact rule hash kullanılacak.
+- **Ölçülen kanıt:** 8.222 event/54 şehirde corrected analiz 7.321 complete parse (%89,0416), 901 incomplete parse, 2 gerçek station transition (Denver `KDEN→KBKF`, Paris `LFPG→LFPB`), 0 unit transition ve 52 multi-template şehir buldu. DST testleri Toronto için 23/25 saat, Kuala Lumpur için 24 saat local-day window doğruladı.
+- **Invalidation:** İlk koşudaki 46 multi-station sonucu NWS `?site=` URL parse hatası nedeniyle geçersizdi; regression test sonrası corrected count 2.
+- **Gate:** 11 final kayıt/11 şehir, retained critical completeness %100; ≥3 şehir eşiği geçti. 901 incomplete historical event kesinlikle label değildir.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase2-rule-family-dst.md`, `reports/data_quality/EXP-20260830-phase2-rule-family-revisions.json`
+- **Sonuç:** Experiment Phase 2 `PASSED`; Phase 3 executable order-book feasibility `IN_PROGRESS`.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -771,13 +781,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Tekrarlanan city family'lerde station/rule değişimini ölçmek ve DST/local-date boundary contract testlerini eklemek; ardından Phase 2 exit gate'ini değerlendirmek.
+**Tek sonraki adım:** Phase 3 için point-in-time executable CLOB order-book snapshot sözleşmesini tanımlamak ve public REST book coverage'ını authenticated call/live order olmadan test etmek.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- city-family rule/station revision artifact'ı
-- DST ve local-date boundary testleri
+- CLOB book snapshot schema ve read-only collector
+- REST coverage/latency/empty-book raporu
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.

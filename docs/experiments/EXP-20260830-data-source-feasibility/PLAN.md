@@ -585,7 +585,7 @@ Begin Phase 2 with the versioned resolution-rule and station registry schema.
 
 ### Phase 2 — Resolution-rule and station registry
 
-**Status:** `IN_PROGRESS`
+**Status:** `PASSED`
 
 #### Objective
 
@@ -602,10 +602,10 @@ Convert market rule text into versioned, manually verified station, source, time
 - [x] Parse local date, timezone and observation window. (11 retained records independently timezone-verified against IANA-aligned 2026c boundaries.)
 - [x] Parse temperature unit, bucket inclusivity and rounding. (161 buckets parsed; 128 belong to structurally valid candidates.)
 - [x] Hash and version rule text. (20 exact SHA-256 rule versions.)
-- [ ] Detect rule/station changes within a city family.
+- [x] Detect rule/station changes within a city family. (Corrected full history: Denver and Paris station transitions; 52 multi-template cities.)
 - [x] Cross-check source station metadata. (AviationWeather returned 12/12 candidates; 11 identity matches and one Karachi rule/source conflict.)
 - [x] Manually reconcile minimum 20 market-events. (All 20 received disposition; 11 now pass full registry verification.)
-- [ ] Add DST, Celsius/Fahrenheit and boundary tests.
+- [x] Add DST, Celsius/Fahrenheit and boundary tests. (Toronto 23/25-hour DST days, Kuala Lumpur 24-hour day, C/F buckets and partition boundaries.)
 
 #### Outputs
 
@@ -630,15 +630,15 @@ Registry schema versions `0.1.0`/`0.2.0` bind event identity, disposition, sourc
 
 #### Decision
 
-Contract, population and station/timezone verification substeps passed. Phase 2 remains `IN_PROGRESS` pending city-family revision analysis and DST/local-date boundary tests.
+Phase 2 passes: 11 retained cities exceed the ≥3-city gate with 100% critical-field completeness. Full-history diagnostics found two station transitions, no unit transitions, 52 multi-template cities and 901 excluded incomplete parses.
 
 #### Next action
 
-Measure rule/station revisions within repeated city families and add DST/local-date boundary tests, then evaluate the Phase 2 exit gate.
+Begin Phase 3 with a point-in-time executable CLOB order-book snapshot contract and public REST coverage test.
 
 ### Phase 3 — Executable order-book capture feasibility
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
 #### Objective
 
@@ -1105,6 +1105,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: City-family rule/station revision analysis and DST/local-date tests remain pending.
 - Next action: Complete revision and DST checks, then evaluate Phase 2 exit.
 
+### 2026-08-30 — Phase 2 revision/DST gate passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `PASSED`; Phase 3 is now `IN_PROGRESS`.
+- Work completed: Scanned all 8,222 closed events for station/unit/template revisions, corrected NWS query-parameter station parsing, and added IANA local-day DST duration tests.
+- Evidence: `reports/data_quality/EXP-20260830-phase2-rule-family-dst.md`, `reports/data_quality/EXP-20260830-phase2-rule-family-revisions.json`.
+- Verification: 7,321 complete parses, 901 explicit incomplete records, two station transitions, zero unit transitions, 52 multi-template cities; Toronto 23/25-hour and Kuala Lumpur 24-hour tests; 31 total tests pass.
+- Invalidation: Initial 46-city station-change count was caused by parsing `timeseries` instead of NWS `site` query values. It was discarded and replaced by the corrected two-city result before commit.
+- Gate: 11 retained cities exceed ≥3; retained critical completeness is 100%.
+- Next action: Define Phase 3 CLOB order-book snapshot contract and measure public REST coverage.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1152,6 +1163,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Trust the source URL code over prose; rejected because the resolution rule itself defines the intended station and ambiguity can change the realized maximum.
 - Consequence: Karachi becomes `NO_TRADE_AMBIGUOUS_RULE`; 11 of 12 candidates are promoted.
 - Revisit condition: A versioned Polymarket correction or authoritative resolution record explicitly disambiguates which station controlled that event.
+
+### ED-0012 — 2026-08-30 — Version station/rule semantics per event, never per city
+
+- Decision: City name is not a stable station/rule key. Every dataset join must use the event-effective station code and exact rule template/hash.
+- Evidence available at decision time: Denver changed KDEN→KBKF, Paris changed LFPG→LFPB, and 52/54 city families contain multiple date-normalized rule templates; no unit transitions were observed.
+- Alternatives considered: Maintain one current station/rule per city; rejected because it would retrospectively mislabel earlier events and hide provider wording changes.
+- Consequence: Registry versions are event-scoped; unknown templates and incomplete parses remain excluded until reconciled.
+- Revisit condition: None; historical point-in-time correctness permanently requires event-scoped versioning.
 
 ## 20. Decision Log — append only
 
