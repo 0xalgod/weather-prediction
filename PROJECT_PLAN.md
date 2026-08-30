@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.16.0
+**Plan versiyonu:** 0.17.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -778,6 +778,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase3-rest-orderbook-contract.md`, `reports/data_quality/EXP-20260830-phase3-rest-book-coverage.json`
 - **Sonuç:** REST substep geçti; Phase 3 `IN_PROGRESS`. WebSocket/reconnect ve 24 saat stability gate'i henüz geçmedi.
 
+### D-0018 — 2026-08-30 — Public WebSocket forced-reconnect sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Her bağlantı kendi authoritative full-book başlangıcını almak zorunda; önceki bağlantının state'i yeni bağlantıda kullanılamaz. Asset full book gelmeden görülen delta uygulanmayacak ve kalite ihlali olarak sayılacak.
+- **Önceden yazılan eşik:** İki token için her iki bağlantıda full book; reconnect ≤15 saniye; reconnect'te base öncesi delta 0; fresh REST ile aynı hash veya aynı executable best bid/ask.
+- **Ölçülen kanıt:** Aynı Mexico City marketinin Yes/No token'ları connection-1'de 0,416 saniye, forced reconnect sonrasında connection-2'de 0,341 saniyede full book aldı. Base öncesi delta 0; REST/WebSocket hash ve top-of-book eşleşmesi 2/2.
+- **Sınır:** Kısa koşuda yalnız initial `book` görüldü; canlı `price_change`/`tick_size_change`, heartbeat ve uzun süreli gap/stale davranışı henüz kanıtlanmadı.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase3-websocket-recovery.md`, `reports/data_quality/EXP-20260830-phase3-websocket-recovery.json`
+- **Sonuç:** Forced-reconnect substep geçti; Phase 3 `IN_PROGRESS`. Delta replay shakeout ve 24 saat stability gate'i bekliyor.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -790,7 +800,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Public market WebSocket prototipini geliştirip initial full book, delta ve tick-size change eventlerini persist etmek; forced reconnect sonrası fresh REST snapshot ile state recovery'yi doğrulamak.
+**Tek sonraki adım:** Heartbeat kullanan, delta/tick eventlerini state'e uygulayan ve periyodik REST anchor ile doğrulayan bounded collector/replayer'ı kısa shakeout koşusunda test etmek; ardından 24 saat stability capture'a başlamak.
 
 Beklenen artifact'lar:
 

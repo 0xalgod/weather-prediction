@@ -1,0 +1,20 @@
+[
+  {
+    "event_type": "book",
+    "asset_id": "token-yes",
+    "market": "condition-1",
+    "timestamp": "1760000000000",
+    "hash": "hash-yes",
+    "bids": [{"price": "0.45", "size": "10"}],
+    "asks": [{"price": "0.55", "size": "12"}]
+  },
+  {
+    "event_type": "book",
+    "asset_id": "token-no",
+    "market": "condition-1",
+    "timestamp": "1760000000000",
+    "hash": "hash-no",
+    "bids": [{"price": "0.44", "size": "12"}],
+    "asks": [{"price": "0.56", "size": "10"}]
+  }
+]

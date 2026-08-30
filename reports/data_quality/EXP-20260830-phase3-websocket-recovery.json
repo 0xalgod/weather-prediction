@@ -1,0 +1,86 @@
+{
+  "acceptance_criteria": {
+    "full_books_each_connection": 2,
+    "reconnect_timeout_seconds": 15.0,
+    "rest_reconciliation": "same hash OR same executable best bid/ask per token",
+    "second_connection_delta_before_book_max": 0
+  },
+  "accepted": true,
+  "comparisons": [
+    {
+      "asset_id": "36158537492965765960024370873252517025912927803934823868713659046109614935390",
+      "hash_match": true,
+      "rest_hash": "6abd3fd788a54187066ee8b79444f5e998333f0f",
+      "rest_received_at_utc": "2026-08-30T11:31:32.888966Z",
+      "rest_requested_at_utc": "2026-08-30T11:31:32.716494Z",
+      "rest_top": {
+        "best_ask": null,
+        "best_bid": "0.999"
+      },
+      "top_match": true,
+      "websocket_hash": "6abd3fd788a54187066ee8b79444f5e998333f0f",
+      "websocket_top": {
+        "best_ask": null,
+        "best_bid": "0.999"
+      }
+    },
+    {
+      "asset_id": "49559324578495956915459176260430883138947791065180643974088104940282372201608",
+      "hash_match": true,
+      "rest_hash": "7a9c920d52545f3948c624a12b07bab24cb36c1f",
+      "rest_received_at_utc": "2026-08-30T11:31:33.064546Z",
+      "rest_requested_at_utc": "2026-08-30T11:31:32.892709Z",
+      "rest_top": {
+        "best_ask": "0.001",
+        "best_bid": null
+      },
+      "top_match": true,
+      "websocket_hash": "7a9c920d52545f3948c624a12b07bab24cb36c1f",
+      "websocket_top": {
+        "best_ask": "0.001",
+        "best_bid": null
+      }
+    }
+  ],
+  "connections": [
+    {
+      "connection_id": "connection-1",
+      "delta_before_book_count": 0,
+      "event_counts": {
+        "book": 2
+      },
+      "frame_count": 1,
+      "full_book_count": 2,
+      "recovery_seconds": 0.41616995900000003
+    },
+    {
+      "connection_id": "connection-2",
+      "delta_before_book_count": 0,
+      "event_counts": {
+        "book": 2
+      },
+      "frame_count": 1,
+      "full_book_count": 2,
+      "recovery_seconds": 0.3411758330000001
+    }
+  ],
+  "forced_disconnect_at_utc": "2026-08-30T11:31:31.874024Z",
+  "raw_directory": "data/raw/polymarket_ws/run=20260830T-phase3-reconnect-v1",
+  "schema_version": "0.1.0",
+  "selection": [
+    {
+      "asset_id": "36158537492965765960024370873252517025912927803934823868713659046109614935390",
+      "city_label": "Mexico City",
+      "market_id": "3973061",
+      "outcome_label": "No"
+    },
+    {
+      "asset_id": "49559324578495956915459176260430883138947791065180643974088104940282372201608",
+      "city_label": "Mexico City",
+      "market_id": "3973061",
+      "outcome_label": "Yes"
+    }
+  ],
+  "started_at_utc": "2026-08-30T11:31:31.455985Z",
+  "websocket_url": "wss://ws-subscriptions-clob.polymarket.com/ws/market"
+}

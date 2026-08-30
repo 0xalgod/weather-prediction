@@ -652,11 +652,11 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 #### Tasks
 
 - [x] Implement public REST `/book` client.
-- [ ] Implement public market WebSocket client.
+- [x] Implement public market WebSocket client. (Public initial-book capture and forced reconnect passed.)
 - [x] Persist raw timestamps, receipt times, hashes and levels. (66 book + 66 dynamic-tick immutable envelopes.)
 - [x] Validate bid/ask sorting, bounds, tick size and empty-book behavior. (48 two-sided, 18 one-sided; 0 dynamic tick violations.)
 - [ ] Compare displayed/price-history values with executable book sides.
-- [ ] Force reconnect and demonstrate full-book recovery.
+- [x] Force reconnect and demonstrate full-book recovery. (2/2 assets; REST hash match 2/2.)
 - [ ] Run a minimum 24-hour stability capture.
 - [ ] Measure uptime, gap, stale-book, retry, bytes and storage metrics.
 - [ ] Document historical L2 availability or absence without assumption.
@@ -680,15 +680,15 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 
 #### Actual result
 
-Fresh active inventory selected three latest-end events and requested all 66 Yes/No token books. Public REST coverage was 66/66 with zero request failures: 48 two-sided and 18 one-sided books, 3,828 validated levels, median latency 147.9 ms and median two-sided spread 0.020. Dynamic ticks were `0.01` for 38 and `0.001` for 28 tokens; 8 differed from Gamma metadata. First-run static-tick violation count was invalidated; corrected v3 persists full normalized levels.
+Fresh active inventory selected three latest-end events and requested all 66 Yes/No token books. Public REST coverage was 66/66 with zero request failures: 48 two-sided and 18 one-sided books, 3,828 validated levels, median latency 147.9 ms and median two-sided spread 0.020. Dynamic ticks were `0.01` for 38 and `0.001` for 28 tokens; 8 differed from Gamma metadata. First-run static-tick violation count was invalidated; corrected v3 persists full normalized levels. A two-token forced-reconnect spike then recovered full books in 0.416/0.341 seconds and matched fresh REST hashes 2/2 with zero base-before-delta violations.
 
 #### Decision
 
-REST contract substep passed. Phase 3 remains `IN_PROGRESS`; WebSocket recovery and 24-hour stability gates are unevaluated.
+REST contract and forced-reconnect substeps passed. Phase 3 remains `IN_PROGRESS`; live delta replay and the 24-hour stability gate are unevaluated.
 
 #### Next action
 
-Implement public WebSocket capture and forced-reconnect recovery, reconciling recovered state with fresh REST books.
+Implement heartbeat, delta application and periodic REST anchoring; pass a short shakeout before the 24-hour stability run.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1127,6 +1127,17 @@ These inferences must be verified in Phases 3 and 4.
 - Blockers: WebSocket state/reconnect recovery and the 24-hour stability gate remain pending.
 - Next action: Implement WebSocket capture and forced reconnect with REST reconciliation.
 
+### 2026-08-30 — Phase 3 WebSocket forced reconnect passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Pre-registered threshold: Full books for both assets on both connections; reconnect ≤15 seconds; no reconnect delta before base; fresh REST same hash or same best bid/ask.
+- Work completed: Added public market-channel capture, immutable raw frame envelope/schema, fail-closed per-connection recovery state and an intentional disconnect/resubscribe probe.
+- Evidence: `reports/data_quality/EXP-20260830-phase3-websocket-recovery.md`, `reports/data_quality/EXP-20260830-phase3-websocket-recovery.json`; local raw run `run=20260830T-phase3-reconnect-v1`.
+- Verification: 2/2 initial books on both connections; 0.416/0.341-second recovery; zero base-before-delta; REST hash and top match 2/2; 39 tests pass.
+- Limitation: No live delta or tick-change arrived during this short run, so delta replay and the 24-hour stability gate remain pending.
+- Next action: Add heartbeat, delta application, REST anchoring and run a bounded shakeout before the 24-hour capture.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1190,6 +1201,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Retain Gamma tick as authoritative; rejected because official WebSocket documentation defines tick-size-change events and live observations contradicted it.
 - Consequence: Every book snapshot/capture state must version tick size; missing contemporaneous tick is a quality failure.
 - Revisit condition: None while dynamic tick changes remain part of the official market protocol.
+
+### ED-0014 — 2026-08-30 — Reset authoritative state at every WebSocket reconnect
+
+- Decision: A reconnect starts with empty per-asset state; no delta becomes usable until that asset receives a new full `book` on the new connection.
+- Evidence available at decision time: A forced disconnect recovered both sampled assets in 0.341 seconds, and both recovered hashes matched immediately fetched REST books exactly.
+- Alternatives considered: Carry the previous socket's last state through reconnect; rejected because messages lost during disconnection would be undetectable without a sequence contract.
+- Consequence: Production capture must persist connection IDs, local sequence and base-before-delta violations, and use REST only as a reconciliation anchor rather than inventing missing deltas.
+- Revisit condition: Only a documented server resume/sequence protocol with independently validated gap recovery could relax this rule.
 
 ## 20. Decision Log — append only
 

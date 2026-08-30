@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://weather-quant.local/schemas/websocket_raw_event.schema.json",
+  "title": "Polymarket market WebSocket raw frame",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "connection_id",
+    "sequence",
+    "received_at_utc",
+    "content_sha256",
+    "raw"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "source": {"const": "polymarket_clob_market_websocket"},
+    "connection_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "received_at_utc": {"type": "string", "format": "date-time"},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "raw": {"type": "string"}
+  }
+}
