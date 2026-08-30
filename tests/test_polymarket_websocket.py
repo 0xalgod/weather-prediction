@@ -39,6 +39,39 @@ class MarketWebSocketTests(unittest.TestCase):
         self.assertEqual(state.delta_before_book_count, 1)
         self.assertEqual(state.ticks["token-yes"], "0.001")
 
+    def test_price_changes_update_and_remove_levels(self):
+        state = RecoveryState(frozenset({"token-yes", "token-no"}))
+        apply_events(state, decode_market_frame(FIXTURE.read_text(encoding="utf-8")))
+        state.apply(
+            {
+                "event_type": "price_change",
+                "price_changes": [
+                    {
+                        "asset_id": "token-yes",
+                        "side": "BUY",
+                        "price": "0.45",
+                        "size": "0",
+                        "best_bid": "0.46",
+                        "best_ask": "0.55",
+                    },
+                    {
+                        "asset_id": "token-yes",
+                        "side": "BUY",
+                        "price": "0.46",
+                        "size": "8",
+                        "best_bid": "0.46",
+                        "best_ask": "0.55",
+                    },
+                ],
+            }
+        )
+        self.assertEqual(
+            book_top(state.books["token-yes"]),
+            {"best_bid": "0.46", "best_ask": "0.55"},
+        )
+        self.assertEqual(state.applied_change_count, 2)
+        self.assertEqual(state.advertised_top_mismatch_count, 0)
+
     def test_pong_and_raw_checksum_are_preserved(self):
         self.assertEqual(decode_market_frame("PONG"), [{"event_type": "pong"}])
         record = raw_event_record("PONG", "connection-1", 1, "2026-01-01T00:00:00Z")

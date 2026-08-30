@@ -680,15 +680,15 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 
 #### Actual result
 
-Fresh active inventory selected three latest-end events and requested all 66 Yes/No token books. Public REST coverage was 66/66 with zero request failures: 48 two-sided and 18 one-sided books, 3,828 validated levels, median latency 147.9 ms and median two-sided spread 0.020. Dynamic ticks were `0.01` for 38 and `0.001` for 28 tokens; 8 differed from Gamma metadata. First-run static-tick violation count was invalidated; corrected v3 persists full normalized levels. A two-token forced-reconnect spike then recovered full books in 0.416/0.341 seconds and matched fresh REST hashes 2/2 with zero base-before-delta violations.
+Fresh active inventory selected three latest-end events and requested all 66 Yes/No token books. Public REST coverage was 66/66 with zero request failures: 48 two-sided and 18 one-sided books, 3,828 validated levels, median latency 147.9 ms and median two-sided spread 0.020. Dynamic ticks were `0.01` for 38 and `0.001` for 28 tokens; 8 differed from Gamma metadata. First-run static-tick violation count was invalidated; corrected v3 persists full normalized levels. A two-token forced-reconnect spike then recovered full books in 0.416/0.341 seconds and matched fresh REST hashes 2/2 with zero base-before-delta violations. The subsequent 35-second/12-token heartbeat shakeout applied 78 real changes from 39 events with zero replay-top mismatch and reconciled final REST hashes 12/12.
 
 #### Decision
 
-REST contract and forced-reconnect substeps passed. Phase 3 remains `IN_PROGRESS`; live delta replay and the 24-hour stability gate are unevaluated.
+REST contract, forced reconnect and live delta replay shakeout passed. Phase 3 remains `IN_PROGRESS`; the 24-hour stability gate is unevaluated.
 
 #### Next action
 
-Implement heartbeat, delta application and periodic REST anchoring; pass a short shakeout before the 24-hour stability run.
+Implement the resumable collector with reconnect/backoff, periodic REST anchors and checkpoints, then start the 24-hour stability run.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1138,6 +1138,17 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: No live delta or tick-change arrived during this short run, so delta replay and the 24-hour stability gate remain pending.
 - Next action: Add heartbeat, delta application, REST anchoring and run a bounded shakeout before the 24-hour capture.
 
+### 2026-08-30 — Phase 3 heartbeat/delta shakeout passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Pre-registered threshold: 12/12 bases, ≥3 PING, ≥2 PONG, ≥1 applied change, zero delta-before-base/top mismatch and REST reconciliation ≥90%.
+- Work completed: Added 10-second application heartbeat, Decimal price-level replay, atomic batch top validation, size-zero deletion, liquid-token selection and concurrent final REST anchors.
+- Evidence: `reports/data_quality/EXP-20260830-phase3-websocket-shakeout.md`, `reports/data_quality/EXP-20260830-phase3-websocket-shakeout-v1.json`; local raw run `run=20260830T-phase3-shakeout-v1`.
+- Verification: 12/12 bases, 3 PING/PONG, 39 delta events, 78 changes, zero contract violations, 12/12 exact REST hash/top matches and 43/43 valid frame checksums; 40 tests pass.
+- Limitation: 35 seconds does not evaluate 24-hour uptime, long reconnects, stale state or daily storage; tick change was not observed.
+- Next action: Build resumable stability runner and begin the registered 24-hour capture.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1209,6 +1220,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Carry the previous socket's last state through reconnect; rejected because messages lost during disconnection would be undetectable without a sequence contract.
 - Consequence: Production capture must persist connection IDs, local sequence and base-before-delta violations, and use REST only as a reconciliation anchor rather than inventing missing deltas.
 - Revisit condition: Only a documented server resume/sequence protocol with independently validated gap recovery could relax this rule.
+
+### ED-0015 — 2026-08-30 — Apply price-change batches atomically before top validation
+
+- Decision: Apply every change in one `price_change` event before comparing reconstructed best bid/ask with the event-advertised values; use Decimal prices and delete size-zero levels.
+- Evidence available at decision time: The 35-second shakeout applied 78 changes from 39 events with zero advertised-top mismatch and ended with exact REST hashes for all 12 assets.
+- Alternatives considered: Validate advertised top after each item in a multi-change event; rejected because the advertised top represents the completed event and creates false intermediate mismatches.
+- Consequence: Replay validation is event-batch granular while raw item order remains preserved for audit.
+- Revisit condition: Official protocol semantics change or captured counterexamples demonstrate per-item rather than per-event top semantics.
 
 ## 20. Decision Log — append only
 

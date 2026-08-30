@@ -1,0 +1,340 @@
+{
+  "acceptance_criteria": {
+    "advertised_top_mismatch_max": 0,
+    "applied_price_change_min": 1,
+    "delta_before_book_max": 0,
+    "full_book_coverage": 1.0,
+    "heartbeat_sent_min": 3,
+    "pong_received_min": 2,
+    "rest_hash_or_top_match_rate_min": 0.9
+  },
+  "accepted": true,
+  "comparisons": [
+    {
+      "asset_id": "58921947479395482154907152311374529337866725450468333014048671364439044482590",
+      "hash_match": true,
+      "rest_hash": "aed2268d2da01a0b0f65f5e978d9df8ee04ee7c6",
+      "rest_received_at_utc": "2026-08-30T11:37:49.296142Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.138900Z",
+      "rest_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.998"
+      },
+      "top_match": true,
+      "websocket_hash": "aed2268d2da01a0b0f65f5e978d9df8ee04ee7c6",
+      "websocket_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.998"
+      }
+    },
+    {
+      "asset_id": "94520686318762647247962161997233030558051753981260206542392111024600477477775",
+      "hash_match": true,
+      "rest_hash": "7643dfa128dc513718301064b6d27bb9cb10abf5",
+      "rest_received_at_utc": "2026-08-30T11:37:49.294357Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.139958Z",
+      "rest_top": {
+        "best_ask": "0.002",
+        "best_bid": "0.001"
+      },
+      "top_match": true,
+      "websocket_hash": "7643dfa128dc513718301064b6d27bb9cb10abf5",
+      "websocket_top": {
+        "best_ask": "0.002",
+        "best_bid": "0.001"
+      }
+    },
+    {
+      "asset_id": "105299143689890572493069326609312869682740460137012024559748857189043984617094",
+      "hash_match": true,
+      "rest_hash": "8713223f085c4491a9fde01a9a7b5ae043005d5c",
+      "rest_received_at_utc": "2026-08-30T11:37:49.303506Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.141579Z",
+      "rest_top": {
+        "best_ask": "0.002",
+        "best_bid": "0.001"
+      },
+      "top_match": true,
+      "websocket_hash": "8713223f085c4491a9fde01a9a7b5ae043005d5c",
+      "websocket_top": {
+        "best_ask": "0.002",
+        "best_bid": "0.001"
+      }
+    },
+    {
+      "asset_id": "95083926218400186157926983588176497856217562896047474978244691887656306010456",
+      "hash_match": true,
+      "rest_hash": "73dead431448935a2465069112e16e13230d1794",
+      "rest_received_at_utc": "2026-08-30T11:37:49.307652Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.153952Z",
+      "rest_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.998"
+      },
+      "top_match": true,
+      "websocket_hash": "73dead431448935a2465069112e16e13230d1794",
+      "websocket_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.998"
+      }
+    },
+    {
+      "asset_id": "37129377027500691969791901577804081629222063906241311316985068005563230303426",
+      "hash_match": true,
+      "rest_hash": "af7faa0dedf01f6332cc2758b6d9da9b21e190c9",
+      "rest_received_at_utc": "2026-08-30T11:37:49.305431Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.154193Z",
+      "rest_top": {
+        "best_ask": "0.996",
+        "best_bid": "0.995"
+      },
+      "top_match": true,
+      "websocket_hash": "af7faa0dedf01f6332cc2758b6d9da9b21e190c9",
+      "websocket_top": {
+        "best_ask": "0.996",
+        "best_bid": "0.995"
+      }
+    },
+    {
+      "asset_id": "53231250622268424277871322068256317954256418653895079157376594830888814864066",
+      "hash_match": true,
+      "rest_hash": "cd655903645823bdef63b378292eedb6a7a46c21",
+      "rest_received_at_utc": "2026-08-30T11:37:49.296833Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.157624Z",
+      "rest_top": {
+        "best_ask": "0.005",
+        "best_bid": "0.004"
+      },
+      "top_match": true,
+      "websocket_hash": "cd655903645823bdef63b378292eedb6a7a46c21",
+      "websocket_top": {
+        "best_ask": "0.005",
+        "best_bid": "0.004"
+      }
+    },
+    {
+      "asset_id": "111303509316713141691845776340612151321964710973754259972738591900596194111564",
+      "hash_match": true,
+      "rest_hash": "879983bd72d9de8f53ef59fb6824ac79031995a9",
+      "rest_received_at_utc": "2026-08-30T11:37:49.306650Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.161599Z",
+      "rest_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.996"
+      },
+      "top_match": true,
+      "websocket_hash": "879983bd72d9de8f53ef59fb6824ac79031995a9",
+      "websocket_top": {
+        "best_ask": "0.999",
+        "best_bid": "0.996"
+      }
+    },
+    {
+      "asset_id": "75400858476335314096170664309162707883485963943411057302451574921581044952862",
+      "hash_match": true,
+      "rest_hash": "f55ec01ac4585caeec8972607c5e3446ff7134d5",
+      "rest_received_at_utc": "2026-08-30T11:37:49.309533Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.163481Z",
+      "rest_top": {
+        "best_ask": "0.004",
+        "best_bid": "0.001"
+      },
+      "top_match": true,
+      "websocket_hash": "f55ec01ac4585caeec8972607c5e3446ff7134d5",
+      "websocket_top": {
+        "best_ask": "0.004",
+        "best_bid": "0.001"
+      }
+    },
+    {
+      "asset_id": "36611810317768351734068121912827700913051795689208665199610475278039929272283",
+      "hash_match": true,
+      "rest_hash": "c5bc555195b466dc89ddf63d4c686e61b8060d4b",
+      "rest_received_at_utc": "2026-08-30T11:37:49.312602Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.165608Z",
+      "rest_top": {
+        "best_ask": "0.993",
+        "best_bid": "0.99"
+      },
+      "top_match": true,
+      "websocket_hash": "c5bc555195b466dc89ddf63d4c686e61b8060d4b",
+      "websocket_top": {
+        "best_ask": "0.993",
+        "best_bid": "0.99"
+      }
+    },
+    {
+      "asset_id": "46297187925129358582484406139772375840443049941587960389865842133116143365026",
+      "hash_match": true,
+      "rest_hash": "51f742f8209f614f16b9150433a77fc45c6a090e",
+      "rest_received_at_utc": "2026-08-30T11:37:49.329521Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.168012Z",
+      "rest_top": {
+        "best_ask": "0.01",
+        "best_bid": "0.007"
+      },
+      "top_match": true,
+      "websocket_hash": "51f742f8209f614f16b9150433a77fc45c6a090e",
+      "websocket_top": {
+        "best_ask": "0.01",
+        "best_bid": "0.007"
+      }
+    },
+    {
+      "asset_id": "111595327278378670023161302530220611612307824238296255764381330977312388491899",
+      "hash_match": true,
+      "rest_hash": "15a6b38c598504a8e3ae3859163e2eba3c766d33",
+      "rest_received_at_utc": "2026-08-30T11:37:49.324298Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.170247Z",
+      "rest_top": {
+        "best_ask": "0.62",
+        "best_bid": "0.61"
+      },
+      "top_match": true,
+      "websocket_hash": "15a6b38c598504a8e3ae3859163e2eba3c766d33",
+      "websocket_top": {
+        "best_ask": "0.62",
+        "best_bid": "0.61"
+      }
+    },
+    {
+      "asset_id": "1655551667650250711847605138417760766944689771368040348253487274446198272567",
+      "hash_match": true,
+      "rest_hash": "8b223cd0bd6f3fd83a2b767aad7207187c74bedb",
+      "rest_received_at_utc": "2026-08-30T11:37:49.315471Z",
+      "rest_requested_at_utc": "2026-08-30T11:37:49.172142Z",
+      "rest_top": {
+        "best_ask": "0.39",
+        "best_bid": "0.38"
+      },
+      "top_match": true,
+      "websocket_hash": "8b223cd0bd6f3fd83a2b767aad7207187c74bedb",
+      "websocket_top": {
+        "best_ask": "0.39",
+        "best_bid": "0.38"
+      }
+    }
+  ],
+  "finished_at_utc": "2026-08-30T11:37:49.341482Z",
+  "metrics": {
+    "advertised_top_mismatch_count": 0,
+    "applied_change_count": 78,
+    "delta_before_book_count": 0,
+    "delta_event_count": 39,
+    "duration_seconds": 35.083421917,
+    "event_counts": {
+      "book": 12,
+      "pong": 3,
+      "price_change": 39
+    },
+    "frame_count": 43,
+    "full_book_count": 12,
+    "heartbeat_sent_count": 3,
+    "pong_received_count": 3,
+    "tick_change_count": 0
+  },
+  "raw_directory": "data/raw/polymarket_ws/run=20260830T-phase3-shakeout-v1",
+  "rest_reconciliation_count": 12,
+  "rest_reconciliation_rate": 1.0,
+  "schema_version": "0.1.0",
+  "selection": [
+    {
+      "asset_id": "58921947479395482154907152311374529337866725450468333014048671364439044482590",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973075",
+      "outcome_label": "No",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "94520686318762647247962161997233030558051753981260206542392111024600477477775",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973075",
+      "outcome_label": "Yes",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "105299143689890572493069326609312869682740460137012024559748857189043984617094",
+      "city_label": "Mexico City",
+      "event_id": "930668",
+      "market_id": "3973066",
+      "outcome_label": "Yes",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "95083926218400186157926983588176497856217562896047474978244691887656306010456",
+      "city_label": "Mexico City",
+      "event_id": "930668",
+      "market_id": "3973066",
+      "outcome_label": "No",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "37129377027500691969791901577804081629222063906241311316985068005563230303426",
+      "city_label": "Toronto",
+      "event_id": "930667",
+      "market_id": "3973060",
+      "outcome_label": "No",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "53231250622268424277871322068256317954256418653895079157376594830888814864066",
+      "city_label": "Toronto",
+      "event_id": "930667",
+      "market_id": "3973060",
+      "outcome_label": "Yes",
+      "selection_spread": "0.001"
+    },
+    {
+      "asset_id": "111303509316713141691845776340612151321964710973754259972738591900596194111564",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973074",
+      "outcome_label": "No",
+      "selection_spread": "0.003"
+    },
+    {
+      "asset_id": "75400858476335314096170664309162707883485963943411057302451574921581044952862",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973074",
+      "outcome_label": "Yes",
+      "selection_spread": "0.003"
+    },
+    {
+      "asset_id": "36611810317768351734068121912827700913051795689208665199610475278039929272283",
+      "city_label": "Toronto",
+      "event_id": "930667",
+      "market_id": "3973059",
+      "outcome_label": "No",
+      "selection_spread": "0.004"
+    },
+    {
+      "asset_id": "46297187925129358582484406139772375840443049941587960389865842133116143365026",
+      "city_label": "Toronto",
+      "event_id": "930667",
+      "market_id": "3973059",
+      "outcome_label": "Yes",
+      "selection_spread": "0.004"
+    },
+    {
+      "asset_id": "111595327278378670023161302530220611612307824238296255764381330977312388491899",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973079",
+      "outcome_label": "No",
+      "selection_spread": "0.01"
+    },
+    {
+      "asset_id": "1655551667650250711847605138417760766944689771368040348253487274446198272567",
+      "city_label": "Panama City",
+      "event_id": "930669",
+      "market_id": "3973079",
+      "outcome_label": "Yes",
+      "selection_spread": "0.01"
+    }
+  ],
+  "started_at_utc": "2026-08-30T11:37:14.053112Z",
+  "websocket_url": "wss://ws-subscriptions-clob.polymarket.com/ws/market"
+}

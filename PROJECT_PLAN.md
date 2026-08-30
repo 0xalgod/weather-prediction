@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.17.0
+**Plan versiyonu:** 0.18.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -788,6 +788,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase3-websocket-recovery.md`, `reports/data_quality/EXP-20260830-phase3-websocket-recovery.json`
 - **Sonuç:** Forced-reconnect substep geçti; Phase 3 `IN_PROGRESS`. Delta replay shakeout ve 24 saat stability gate'i bekliyor.
 
+### D-0019 — 2026-08-30 — WebSocket heartbeat/delta shakeout sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Prospective state modeli full book + sıralı price delta + dynamic tick state olacak. Bir event içindeki değişiklikler atomik uygulanıp event-advertised best bid/ask sonrasında kontrol edilecek; size `0` seviyesi silinecek.
+- **Önceden yazılan eşik:** 35 saniye/12 two-sided token; full-book %100; ≥3 PING, ≥2 PONG, ≥1 applied change; base öncesi delta ve advertised-top mismatch 0; REST hash-or-top match ≥%90.
+- **Ölçülen kanıt:** 12/12 full book, 3/3 heartbeat/PONG, 39 price-change event ve 78 applied level change. Base öncesi delta 0, advertised-top mismatch 0; final REST hash ve top-of-book eşleşmesi 12/12. 43 raw frame checksum'u doğrulandı; median/maksimum inter-frame gap 0,0435/4,9662 saniye.
+- **Sınır:** 35 saniye uptime/retention kanıtı değildir; tick-size-change gözlenmedi. 24 saat runner reconnect/backoff, periodic REST anchor, stale/gap ve storage metriklerini ölçmeli.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase3-websocket-shakeout.md`, `reports/data_quality/EXP-20260830-phase3-websocket-shakeout-v1.json`
+- **Sonuç:** Bounded shakeout geçti; Phase 3 `IN_PROGRESS`. 24 saat stability gate'i bekliyor.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -800,7 +810,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Heartbeat kullanan, delta/tick eventlerini state'e uygulayan ve periyodik REST anchor ile doğrulayan bounded collector/replayer'ı kısa shakeout koşusunda test etmek; ardından 24 saat stability capture'a başlamak.
+**Tek sonraki adım:** Reconnect/backoff, periodic REST anchor, checkpoint ve uptime/gap/stale/bytes/storage ölçümleri olan resumable 24 saat collector'ı geliştirip stability capture'ı başlatmak.
 
 Beklenen artifact'lar:
 
