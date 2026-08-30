@@ -709,7 +709,7 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 - [x] Inspect NBM MaxT probabilistic/quantile fields and run cycles. (Matched 01Z required; 00Z historical counterexample preserved.)
 - [ ] Probe GFS/GEFS archive depth and ensemble structure.
 - [ ] Probe HRRR archive depth and short-lead applicability.
-- [ ] Probe ECMWF Open Data parameters, ensemble structure and rolling retention.
+- [x] Probe ECMWF Open Data parameters, ensemble structure and rolling retention.
 - [ ] Record nominal run, first-seen, publish and valid timestamps.
 - [ ] Record model upgrade/version boundaries.
 - [ ] Measure file size, retrieval time, compute and storage cost.
@@ -739,11 +739,11 @@ Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31,
 
 #### Decision
 
-NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. Fallback retains its later information time and cannot fill earlier market decisions. Historical first-seen and local-day semantics remain unresolved. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. Fallback retains its later information time and cannot fill earlier market decisions. ECMWF Open Data supplied the required deterministic and 50-member perturbed temperature fields for a real current run, but measured retention was only run-date −0/−1/−2; −3 through −365 probes returned 404. It is therefore prospective-only and cannot supply the historical global backtest.
 
 #### Next action
 
-Probe ECMWF Open Data deterministic/ensemble objects, variables, rolling retention and licence for retained international cities.
+Probe GEFS public archive deterministic/ensemble objects, temperature variables, member structure, as-issued availability, at least 365-day retention and data volume for retained international cities.
 
 ### Phase 5 — Observation and settlement reconciliation
 
@@ -1202,6 +1202,17 @@ These inferences must be verified in Phases 3 and 4.
 - Policy: 01Z→07Z→13Z→19Z is fixed for object selection, but a fallback is eligible only after its own conservative availability timestamp and remains a separately scored segment.
 - Next action: ECMWF Open Data global-provider and rolling-retention feasibility.
 
+### 2026-08-30 — Phase 4 ECMWF Open Data measured
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; ECMWF is `CONDITIONAL_PASS` prospective and `FAILED` as the direct historical source.
+- Pre-registered gate: Three temperature fields, 1 deterministic record each, 50 perturbed records each with exact members 1–50, valid GRIB subsets, and at least 365 days retention for historical use.
+- Evidence: `reports/research/EXP-20260830-phase4-ecmwf-open-data.md`, `reports/data_quality/EXP-20260830-phase4-ecmwf-open-data-probe.json`; local raw run `run=20260830T00Z-step24-v1`.
+- Verification: Actual deterministic 3-message/1.94 MB and perturbed 150-message/97.50 MB subsets passed SHA-256 and GRIB boundaries; inventory contains all required fields and members. Actual `cf` control did not exist in this index.
+- Retention: Date offsets 0/1/2 returned HTTP 200; 3/4/7/30/365 returned HTTP 404. The ≥365-day historical gate failed.
+- Consequence: ECMWF Open Data may be collected prospectively, but cannot be backfilled as-issued from this surface and cannot be replaced by reanalysis.
+- Next action: GEFS public historical archive feasibility under the same point-in-time contract.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1313,6 +1324,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Drop the entire day; retained as a sensitivity baseline but rejected as the sole dataset policy because a valid later forecast exists. Backdate 07Z to primary time; rejected as look-ahead leakage.
 - Consequence: Dataset rows carry `PRIMARY`/`FALLBACK`; forecast and EV reports segment them, and point-in-time joins enforce availability ≤ market snapshot.
 - Revisit condition: Coverage in another locked regime violates the threshold or official product-cycle semantics change.
+
+### ED-0020 — 2026-08-30 — Scope ECMWF Open Data to prospective collection
+
+- Decision: Treat ECMWF Open Data as a current/prospective global forecast source, never as the direct source for the historical backtest unless a separately verified archive is introduced.
+- Evidence available at decision time: Required deterministic and 50-member temperature fields were retrieved from the 2026-08-30 00Z run, but only offsets 0–2 existed and every probe from 3 through 365 days returned HTTP 404; `cf` control was absent from the actual step-24 index.
+- Alternatives considered: Use reanalysis or current forecasts to reconstruct past information; rejected because neither proves what was issued and available at the historical decision time.
+- Consequence: A global backtest requires another as-issued archive such as verified GEFS or a separately licensed ECMWF historical surface. Any prospective ECMWF collector must retain immutable run/cycle/step/availability provenance.
+- Revisit condition: An actual historical ECMWF archive with ≥365-day coverage, access terms and point-in-time timestamps passes an independent probe.
 
 ## 20. Decision Log — append only
 

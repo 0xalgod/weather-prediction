@@ -1,0 +1,4 @@
+{"domain":"g","date":"20260830","time":"0000","type":"fc","stream":"oper","step":"24","levtype":"sfc","param":"2t","_offset":100,"_length":10}
+{"domain":"g","date":"20260830","time":"0000","type":"fc","stream":"oper","step":"24","levtype":"sfc","param":"mx2t3","_offset":110,"_length":11}
+{"domain":"g","date":"20260830","time":"0000","type":"fc","stream":"oper","step":"24","levtype":"sfc","param":"mn2t3","_offset":121,"_length":12}
+{"domain":"g","date":"20260830","time":"0000","type":"fc","stream":"oper","step":"24","levtype":"sfc","param":"msl","_offset":133,"_length":9}

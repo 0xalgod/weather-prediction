@@ -1,0 +1,232 @@
+{
+  "checks": {
+    "control_present": false,
+    "oper_three_fields_once": true,
+    "pf_members_exactly_1_to_50": true,
+    "pf_three_fields_50_times": true,
+    "retention_at_least_365_days": false,
+    "retrieved_grib_integrity": true,
+    "retrieved_message_counts": {
+      "control": null,
+      "deterministic": 3,
+      "perturbed": 150
+    }
+  },
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "generated_at_utc": "2026-08-30T20:04:10.799596Z",
+  "indexes": {
+    "enfo": {
+      "inventory": {
+        "all_selected_have_ranges": true,
+        "perturbed_member_count": 50,
+        "perturbed_members": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "row_count": 8500,
+        "selected_range_bytes": 97501524,
+        "selected_row_count": 150,
+        "type_parameter_counts": {
+          "pf:2t": 50,
+          "pf:mn2t3": 50,
+          "pf:mx2t3": 50
+        }
+      },
+      "retrieval": {
+        "byte_count": 2004334,
+        "ends_with_7777": false,
+        "grib_message_count": 0,
+        "local_path": "data/raw/ecmwf_open/run=20260830T00Z-step24-v1/enfo-step24.index",
+        "reused_from_interrupted_probe": true,
+        "sha256": "cc4cb2ad0ad12aa2bf1b6e97e0120ba686b444146d3966ae5a378a431fda44ca",
+        "starts_with_grib": false
+      }
+    },
+    "oper": {
+      "inventory": {
+        "all_selected_have_ranges": true,
+        "perturbed_member_count": 0,
+        "perturbed_members": [],
+        "row_count": 184,
+        "selected_range_bytes": 1941310,
+        "selected_row_count": 3,
+        "type_parameter_counts": {
+          "fc:2t": 1,
+          "fc:mn2t3": 1,
+          "fc:mx2t3": 1
+        }
+      },
+      "retrieval": {
+        "byte_count": 40210,
+        "ends_with_7777": false,
+        "grib_message_count": 0,
+        "local_path": "data/raw/ecmwf_open/run=20260830T00Z-step24-v1/oper-step24.index",
+        "reused_from_interrupted_probe": true,
+        "sha256": "a2f492463917187e6c8090d267075c91c9c0f6bcc321385080e6d2b961b0e722",
+        "starts_with_grib": false
+      }
+    }
+  },
+  "pre_registered_acceptance": {
+    "grib_messages": {
+      "control": 3,
+      "deterministic": 3,
+      "perturbed": 150
+    },
+    "historical_backtest_retention_days": 365,
+    "oper_counts": {
+      "2t": 1,
+      "mn2t3": 1,
+      "mx2t3": 1
+    },
+    "pf_counts": {
+      "2t": 50,
+      "mn2t3": 50,
+      "mx2t3": 50
+    },
+    "pf_members": "exact integers 1..50"
+  },
+  "probe": "ecmwf-open-data",
+  "retention": [
+    {
+      "classification": "AVAILABLE",
+      "content_length": "40210",
+      "days_before_run_date": 0,
+      "http_status": 200,
+      "last_modified": "Sun, 30 Aug 2026 07:34:00 GMT",
+      "observed_at_utc": "2026-08-30T20:04:07.192288Z",
+      "url": "https://data.ecmwf.int/forecasts/20260830/00z/ifs/0p25/oper/20260830000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "AVAILABLE",
+      "content_length": "40210",
+      "days_before_run_date": 1,
+      "http_status": 200,
+      "last_modified": "Sat, 29 Aug 2026 07:34:00 GMT",
+      "observed_at_utc": "2026-08-30T20:04:07.657124Z",
+      "url": "https://data.ecmwf.int/forecasts/20260829/00z/ifs/0p25/oper/20260829000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "AVAILABLE",
+      "content_length": "40214",
+      "days_before_run_date": 2,
+      "http_status": 200,
+      "last_modified": "Fri, 28 Aug 2026 07:34:00 GMT",
+      "observed_at_utc": "2026-08-30T20:04:08.137543Z",
+      "url": "https://data.ecmwf.int/forecasts/20260828/00z/ifs/0p25/oper/20260828000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "NOT_FOUND",
+      "days_before_run_date": 3,
+      "http_status": 404,
+      "observed_at_utc": "2026-08-30T20:04:08.554215Z",
+      "url": "https://data.ecmwf.int/forecasts/20260827/00z/ifs/0p25/oper/20260827000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "NOT_FOUND",
+      "days_before_run_date": 4,
+      "http_status": 404,
+      "observed_at_utc": "2026-08-30T20:04:08.967111Z",
+      "url": "https://data.ecmwf.int/forecasts/20260826/00z/ifs/0p25/oper/20260826000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "NOT_FOUND",
+      "days_before_run_date": 7,
+      "http_status": 404,
+      "observed_at_utc": "2026-08-30T20:04:09.404136Z",
+      "url": "https://data.ecmwf.int/forecasts/20260823/00z/ifs/0p25/oper/20260823000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "NOT_FOUND",
+      "days_before_run_date": 30,
+      "http_status": 404,
+      "observed_at_utc": "2026-08-30T20:04:09.854037Z",
+      "url": "https://data.ecmwf.int/forecasts/20260731/00z/ifs/0p25/oper/20260731000000-24h-oper-fc.index"
+    },
+    {
+      "classification": "NOT_FOUND",
+      "days_before_run_date": 365,
+      "http_status": 404,
+      "observed_at_utc": "2026-08-30T20:04:10.373937Z",
+      "url": "https://data.ecmwf.int/forecasts/20250830/00z/ifs/0p25/oper/20250830000000-24h-oper-fc.index"
+    }
+  ],
+  "run": {
+    "cycle": 0,
+    "date": "20260830",
+    "step": 24
+  },
+  "schema_version": "1.0.0",
+  "subsets": {
+    "control": {
+      "error": "Cannot find index entries matching {'type': ['cf'], 'step': ['24'], 'param': ['2t', 'mx2t3', 'mn2t3']}",
+      "status": "NOT_PRESENT_IN_INDEX"
+    },
+    "deterministic": {
+      "byte_count": 1941310,
+      "ends_with_7777": true,
+      "grib_message_count": 3,
+      "local_path": "data/raw/ecmwf_open/run=20260830T00Z-step24-v1/oper-fc-step24.grib2",
+      "reused_from_interrupted_probe": true,
+      "sha256": "79ba6cff64c73bc4be45cb00308bc147ce16c810211948b025cbcb54cc35c60c",
+      "starts_with_grib": true
+    },
+    "perturbed": {
+      "byte_count": 97501524,
+      "ends_with_7777": true,
+      "grib_message_count": 150,
+      "local_path": "data/raw/ecmwf_open/run=20260830T00Z-step24-v1/enfo-pf-step24.grib2",
+      "reused_from_interrupted_probe": true,
+      "sha256": "ce3a468288dbd65673135a8856f58cd1a3848dbd899605949b44e7bc42ed8ffd",
+      "starts_with_grib": true
+    }
+  }
+}

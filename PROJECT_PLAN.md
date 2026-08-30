@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.23.0
+**Plan versiyonu:** 0.24.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -848,6 +848,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260830-phase4-nbm-daily-policy.md`, `reports/data_quality/EXP-20260830-phase4-nbm-daily-coverage-365d.json`, `reports/data_quality/EXP-20260830-phase4-nbm-fallback-kord-parsed.json`
 - **Sonuç:** 365 günlük policy substep geçti; NBM/KORD `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`.
 
+### D-0025 — 2026-08-30 — ECMWF Open Data gerçek ensemble ve retention sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** ECMWF Open Data global prospective forecast kaynağı olarak `CONDITIONAL_PASS`, doğrudan historical backtest kaynağı olarak `FAILED`. Reanalysis veya bugünkü forecast eski as-issued run yerine kullanılmayacak.
+- **Önceden yazılan gate:** `2t/mx2t3/mn2t3`; deterministic 1'er, perturbed ensemble 50'şer ve tam member 1–50; GRIB bütünlüğü; historical kullanım için ≥365 gün retention.
+- **Ölçülen kanıt:** 2026-08-30 00Z step-24 deterministic subset 3 mesaj/1.941.310 byte, perturbed subset 150 mesaj/97.501.524 byte; tam 1–50 member ve geçerli checksum/GRIB sınırları. Control `cf` gerçek indexte yok. −0/−1/−2 gün HTTP 200; −3/−4/−7/−30/−365 gün HTTP 404.
+- **Gate:** Current fields/member yapısı geçti; control ve 365 günlük retention geçmedi. Açık yüzeyden retrospective ECMWF dataset kurulamaz.
+- **Artifact:** `reports/research/EXP-20260830-phase4-ecmwf-open-data.md`, `reports/data_quality/EXP-20260830-phase4-ecmwf-open-data-probe.json`
+- **Sonuç:** Phase 4 `IN_PROGRESS`; global historical ensemble için sıradaki kaynak GEFS archive ölçümüdür.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -860,7 +870,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** ECMWF Open Data için gerçek deterministic/ensemble object, inventory, rolling retention, lisans ve temperature-variable fizibilitesini ölçmek.
+**Tek sonraki adım:** GEFS public archive için gerçek as-issued deterministic/ensemble object, temperature-variable/member inventory, run availability, ≥365 günlük retention ve veri hacmini ölçmek.
 
 Beklenen artifact'lar:
 

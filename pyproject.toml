@@ -12,6 +12,7 @@ authors = [
   { name = "Abdullah Sezdi", email = "abdullahsezdi@gmail.com" },
 ]
 dependencies = [
+  "ecmwf-opendata>=0.3.20,<0.4",
   "websockets>=12,<16",
 ]
 
