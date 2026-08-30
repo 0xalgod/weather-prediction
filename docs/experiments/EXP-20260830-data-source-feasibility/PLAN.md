@@ -707,7 +707,7 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 - [x] Define initial NBM variables and lead times for daily MaxT reconstruction. (KORD 01Z NBP: FHR 24–228, mean/SD and 10/25/50/75/90 percentiles; value parser pending.)
 - [ ] Retrieve actual NBM core/QMD files for current and earliest available dates.
 - [x] Inspect NBM MaxT probabilistic/quantile fields and run cycles. (Matched 01Z required; 00Z historical counterexample preserved.)
-- [ ] Probe GFS/GEFS archive depth and ensemble structure.
+- [x] Probe GFS/GEFS archive depth and ensemble structure. (GEFS initial gate: 31/31 members on current, 365-day and 2,166-day samples; daily continuity pending.)
 - [ ] Probe HRRR archive depth and short-lead applicability.
 - [x] Probe ECMWF Open Data parameters, ensemble structure and rolling retention.
 - [ ] Record nominal run, first-seen, publish and valid timestamps.
@@ -739,11 +739,11 @@ Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31,
 
 #### Decision
 
-NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. Fallback retains its later information time and cannot fill earlier market decisions. ECMWF Open Data supplied the required deterministic and 50-member perturbed temperature fields for a real current run, but measured retention was only run-date −0/−1/−2; −3 through −365 probes returned 404. It is therefore prospective-only and cannot supply the historical global backtest.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. ECMWF Open Data is prospective-only. GEFS operational archive now `CONDITIONAL_PASS`: current, 365-day and 2,166-day samples each contain complete control + p01–p30 membership and 2 m TMP/TMAX/TMIN; nine representative subsets passed actual range/GRIB/checksum verification. Three dates do not prove continuous daily coverage.
 
 #### Next action
 
-Probe GEFS public archive deterministic/ensemble objects, temperature variables, member structure, as-issued availability, at least 365-day retention and data volume for retained international cities.
+Measure locked 365-day GEFS 00Z f024 control/p01/p30 daily index coverage, investigate missing days across all members/cycles, and verify f006/f012/f018/f024 TMAX local-day window semantics for one DST and one non-DST city.
 
 ### Phase 5 — Observation and settlement reconciliation
 
@@ -1213,6 +1213,17 @@ These inferences must be verified in Phases 3 and 4.
 - Consequence: ECMWF Open Data may be collected prospectively, but cannot be backfilled as-issued from this surface and cannot be replaced by reanalysis.
 - Next action: GEFS public historical archive feasibility under the same point-in-time contract.
 
+### 2026-08-30 — Phase 4 GEFS initial operational archive gate passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; GEFS operational archive is `CONDITIONAL_PASS`.
+- Pre-registered gate: Current and ≥365-day-old operational runs; exact c00+p01–p30 set; one 2 m TMP/TMAX/TMIN record per member; real c00/p01/p30 range downloads with HTTP 206, GRIB integrity and SHA-256. Reforecast did not count.
+- Evidence: `reports/research/EXP-20260830-phase4-gefs-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-gefs-operational-archive-probe.json`; local raw run `run=20260830T-phase4-gefs-v1`.
+- Verification: Three run dates at ages 0/365/2,166 days each had 31/31 complete members. Nine actual subsets contained 27 valid GRIB messages. Full-member object availability was run+3.91–4.45 hours.
+- Storage: One f024 run's three required fields totaled 54.31–65.18 MB versus 464.69–577.68 MB for full member objects.
+- Limitation: Three point samples do not establish daily continuity, local-day multi-step MaxT construction or version-boundary stability.
+- Next action: Locked 365-day daily coverage and local-day TMAX step semantics.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1332,6 +1343,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Use reanalysis or current forecasts to reconstruct past information; rejected because neither proves what was issued and available at the historical decision time.
 - Consequence: A global backtest requires another as-issued archive such as verified GEFS or a separately licensed ECMWF historical surface. Any prospective ECMWF collector must retain immutable run/cycle/step/availability provenance.
 - Revisit condition: An actual historical ECMWF archive with ≥365-day coverage, access terms and point-in-time timestamps passes an independent probe.
+
+### ED-0021 — 2026-08-30 — Select operational GEFS for the global historical candidate
+
+- Decision: Advance the NOAA operational GEFS archive, not GEFS reforecast/replay, as the primary global historical ensemble candidate; status remains conditional until locked daily coverage and local-day aggregation pass.
+- Evidence available at decision time: Operational 00Z f024 objects at ages 0, 365 and 2,166 days each contained c00 plus p01–p30 and one 2 m TMP/TMAX/TMIN field per member. Nine actual range subsets passed HTTP 206, GRIB boundary and checksum controls.
+- Alternatives considered: ECMWF Open Data failed historical retention. GEFS reforecast/replay was rejected as a substitute because it was generated retrospectively rather than observed as issued at each historical market decision.
+- Consequence: Historical global-source work proceeds with operational GEFS timestamps and immutable member provenance; reforecast may later be a separate climatology/model-development input but never masquerades as as-issued operational data.
+- Revisit condition: Locked 365-day coverage fails materially, model boundaries cannot be versioned, or local-day MaxT cannot be reconstructed without leakage.
 
 ## 20. Decision Log — append only
 

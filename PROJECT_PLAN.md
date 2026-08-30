@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.24.0
+**Plan versiyonu:** 0.25.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -858,6 +858,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260830-phase4-ecmwf-open-data.md`, `reports/data_quality/EXP-20260830-phase4-ecmwf-open-data-probe.json`
 - **Sonuç:** Phase 4 `IN_PROGRESS`; global historical ensemble için sıradaki kaynak GEFS archive ölçümüdür.
 
+### D-0026 — 2026-08-30 — GEFS operasyonel archive ilk fizibilite sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** GEFS operational public archive, global historical as-issued ensemble kaynağı olarak `CONDITIONAL_PASS`; reforecast/replay operasyonel geçmiş yerine kullanılmayacak.
+- **Önceden yazılan gate:** Güncel ve ≥365 gün eski run; 31/31 control+perturbed üye; her üyede 2 m `TMP/TMAX/TMIN`; temsilî gerçek range download, GRIB bütünlüğü ve checksum.
+- **Ölçülen kanıt:** 2026-08-30, 2025-08-30 ve 2020-09-24 00Z f024 run'larının her birinde 31/31 tam üye ve üç alan bulundu. c00/p01/p30 için 9 gerçek subset/27 GRIB mesajı HTTP 206 ve bütünlük kontrolünden geçti. En eski örnek 2.166 gün; full-member availability run+3,91–4,45 saat.
+- **Hacim:** Tek f024 üç-alan range toplamı run başına 54,31–65,18 MB; full objeler 464,69–577,68 MB.
+- **Sınır:** Üç tarih continuous daily coverage değildir; local-day TMAX çoklu-step sözleşmesi ve version boundary henüz doğrulanmadı.
+- **Artifact:** `reports/research/EXP-20260830-phase4-gefs-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-gefs-operational-archive-probe.json`
+- **Sonuç:** Phase 4 `IN_PROGRESS`; sıradaki gate kilitli 365 günlük GEFS coverage ve local-day step semantiğidir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -870,7 +881,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS public archive için gerçek as-issued deterministic/ensemble object, temperature-variable/member inventory, run availability, ≥365 günlük retention ve veri hacmini ölçmek.
+**Tek sonraki adım:** Kilitli son 365 tamamlanmış gün için GEFS 00Z f024 control/p01/p30 index coverage'ını ve f006/f012/f018/f024 TMAX local-day window semantiğini ölçmek.
 
 Beklenen artifact'lar:
 

@@ -1,0 +1,5 @@
+1:0:d=2025083000:PRMSL:mean sea level:24 hour fcst:ENS=+1
+2:100:d=2025083000:TMP:2 m above ground:24 hour fcst:ENS=+1
+3:220:d=2025083000:TMAX:2 m above ground:18-24 hour max fcst:ENS=+1
+4:350:d=2025083000:TMIN:2 m above ground:18-24 hour min fcst:ENS=+1
+5:500:d=2025083000:UGRD:10 m above ground:24 hour fcst:ENS=+1
