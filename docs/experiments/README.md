@@ -4,7 +4,7 @@ This index is the project-level directory of material research experiments. Deta
 
 | Experiment ID | Title | Status | Started | Completed | Primary decision | Plan |
 |---|---|---|---|---|---|---|
-| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 3 capture active; NBM sampled archive/parser passed conditionally (48/49 dates) | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
+| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 3 capture active; KORD NBM 365d policy passed (364 primary + 1 fallback) | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
 
 
 ## Status policy

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.22.0
+**Plan versiyonu:** 0.23.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -838,6 +838,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260830-phase4-nbm-coverage-parser.md`, `reports/data_quality/EXP-20260830-phase4-nbm-monthly-boundary-coverage.json`, `reports/data_quality/EXP-20260830-phase4-nbm-kord-parsed-sample.json`
 - **Sonuç:** Sampled coverage/parser substep geçti; NBM source `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`.
 
+### D-0024 — 2026-08-30 — NBM 365 günlük coverage ve KORD run policy
+
+- **Durum:** `ACTIVE`
+- **Karar:** KORD canonical cycle policy `01Z → 07Z → 13Z → 19Z`; fallback ayrı information set'tir, gerçek run/availability timestamp'i korunur ve yalnız market snapshot'tan önce available ise kullanılabilir. Daha sonraki fallback ile eski karar zamanı doldurulamaz.
+- **Önceden yazılan gate:** Locked 365 gün; primary ≥%99, cascade policy %100, transient failure 0; kullanılan fallback gerçek dosya download/checksum/KORD parse geçmeli.
+- **Ölçülen kanıt:** 2025-08-30–2026-08-29: primary 364/365 (%99,726), fallback 1, unavailable 0, policy %100, transient failure 0. `2026-06-01 07Z` 34.712.943 byte indirildi, SHA-256 doğrulandı ve 9 KORD MaxT record/0 missing üretti.
+- **Look-ahead sınırı:** Fallback object Last-Modified `08:15:34Z`; bu run daha erken market snapshot'larında kullanılamaz. Primary/fallback skorları ayrı raporlanacak.
+- **Artifact:** `reports/research/EXP-20260830-phase4-nbm-daily-policy.md`, `reports/data_quality/EXP-20260830-phase4-nbm-daily-coverage-365d.json`, `reports/data_quality/EXP-20260830-phase4-nbm-fallback-kord-parsed.json`
+- **Sonuç:** 365 günlük policy substep geçti; NBM/KORD `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -850,7 +860,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Locked 365 günlük pencerede primary 01Z ve documented fallback cycle daily coverage'ını ölçüp KORD run-selection policy'yi model skorlamadan önce dondurmak.
+**Tek sonraki adım:** ECMWF Open Data için gerçek deterministic/ensemble object, inventory, rolling retention, lisans ve temperature-variable fizibilitesini ölçmek.
 
 Beklenen artifact'lar:
 

@@ -1,0 +1,48 @@
+{
+  "all_checksums_unique": true,
+  "all_http_200": true,
+  "all_maxt_markers_present": true,
+  "all_station_present": true,
+  "records": [
+    {
+      "cycle_utc": 7,
+      "inventory": {
+        "contains_probabilistic_maxt_markers": true,
+        "element_marker_counts": {
+          "TXNMN": 1,
+          "TXNP1": 1,
+          "TXNP2": 1,
+          "TXNP5": 1,
+          "TXNP7": 1,
+          "TXNP9": 1,
+          "TXNSD": 1
+        },
+        "first_station_offset": 21009929,
+        "nbm_version": "5.0",
+        "replacement_character_count": 0,
+        "station_code": "KORD",
+        "station_header": "KORD    NBM V5.0 NBP GUIDANCE    6/01/2026  0700 UTC",
+        "station_occurrence_count": 1
+      },
+      "model_run_time_utc": "2026-06-01T07:00:00Z",
+      "retrieval": {
+        "byte_count": 34712943,
+        "content_type": "application/octet-stream",
+        "http_etag": "\"e6bd8f23a8143b1be9e1b0392fed774f\"",
+        "http_last_modified": "Mon, 01 Jun 2026 08:15:34 GMT",
+        "http_status": 200,
+        "local_path": "data/raw/noaa_nbm/run=20260830T-phase4-nbp-fallback-v1/blend.20260601.t07z.nbptx",
+        "received_at_utc": "2026-08-30T19:48:45.301714Z",
+        "requested_at_utc": "2026-08-30T19:48:23.495956Z",
+        "retrieval_seconds": 21.805501582999998,
+        "sha256": "0e15713fb89a1fb45b4343f88ae6b1b15d2128c70f2200cacdd57d947e83f50f",
+        "source": "noaa_nbm_aws_public",
+        "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260601/07/text/blend_nbptx.t07z"
+      },
+      "run_date": "20260601"
+    }
+  ],
+  "schema_version": "0.1.0",
+  "source": "NOAA NBM probabilistic text via public AWS",
+  "station_probe": "KORD"
+}

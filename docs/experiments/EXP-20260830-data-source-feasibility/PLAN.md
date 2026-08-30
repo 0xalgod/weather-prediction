@@ -739,11 +739,11 @@ Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31,
 
 #### Decision
 
-NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. Actual files and the parser establish usable point data, but 48/49 sampled coverage is not continuous daily coverage, historical first-seen semantics remain unresolved, and fallback-cycle/local-day policy is not frozen. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. Fallback retains its later information time and cannot fill earlier market decisions. Historical first-seen and local-day semantics remain unresolved. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
 
 #### Next action
 
-Measure primary/fallback cycle coverage on every day in a locked 365-day window and freeze the KORD run-selection policy.
+Probe ECMWF Open Data deterministic/ensemble objects, variables, rolling retention and licence for retained international cities.
 
 ### Phase 5 — Observation and settlement reconciliation
 
@@ -1192,6 +1192,16 @@ These inferences must be verified in Phases 3 and 4.
 - Missingness: 2026-06-01 01Z is 404 while same-day 00/07/13/19Z and adjacent 01Z objects exist; no silent fallback is authorized.
 - Next action: Daily 365-day primary/fallback coverage and pre-registered KORD cycle-selection policy.
 
+### 2026-08-30 — Phase 4 KORD 365-day run-selection policy passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; NBM/KORD remains `CONDITIONAL_PASS`.
+- Pre-registered gate: 365 completed dates, primary 01Z ≥99%, cascade coverage 100%, zero transient failures and actual fallback download/checksum/parse.
+- Evidence: `reports/research/EXP-20260830-phase4-nbm-daily-policy.md`, `reports/data_quality/EXP-20260830-phase4-nbm-daily-coverage-365d.json`, `reports/data_quality/EXP-20260830-phase4-nbm-fallback-download.json`, `reports/data_quality/EXP-20260830-phase4-nbm-fallback-kord-parsed.json`.
+- Verification: Primary 364/365, fallback 1, unavailable 0, zero transient failures; actual 07Z fallback yielded 9 KORD MaxT records with zero missing values; 45 tests pass.
+- Policy: 01Z→07Z→13Z→19Z is fixed for object selection, but a fallback is eligible only after its own conservative availability timestamp and remains a separately scored segment.
+- Next action: ECMWF Open Data global-provider and rolling-retention feasibility.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1295,6 +1305,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Select the nearest available cycle retrospectively; rejected because it changes information time after observing missingness and can introduce selection bias.
 - Consequence: A locked daily coverage experiment must quantify primary, fallback and unavailable rates before model scoring; analyses segment fallback records.
 - Revisit condition: A provider-published canonical replacement policy can supersede the chosen fallback ordering, but historical timestamps remain mandatory.
+
+### ED-0019 — 2026-08-30 — Freeze KORD canonical cycle order without backdating fallback
+
+- Decision: Canonical daily object order is 01Z→07Z→13Z→19Z, selected without forecast-value inspection. A fallback never inherits the primary timestamp and is ineligible for earlier market snapshots.
+- Evidence available at decision time: The locked 365-day window had 364 primary objects and one 07Z fallback; that fallback's object timestamp was 08:15:34Z and its KORD values parsed correctly.
+- Alternatives considered: Drop the entire day; retained as a sensitivity baseline but rejected as the sole dataset policy because a valid later forecast exists. Backdate 07Z to primary time; rejected as look-ahead leakage.
+- Consequence: Dataset rows carry `PRIMARY`/`FALLBACK`; forecast and EV reports segment them, and point-in-time joins enforce availability ≤ market snapshot.
+- Revisit condition: Coverage in another locked regime violates the threshold or official product-cycle semantics change.
 
 ## 20. Decision Log — append only
 
