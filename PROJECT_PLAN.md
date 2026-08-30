@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.18.0
+**Plan versiyonu:** 0.19.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -798,6 +798,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase3-websocket-shakeout.md`, `reports/data_quality/EXP-20260830-phase3-websocket-shakeout-v1.json`
 - **Sonuç:** Bounded shakeout geçti; Phase 3 `IN_PROGRESS`. 24 saat stability gate'i bekliyor.
 
+### D-0020 — 2026-08-30 — Stability runner readiness sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** 24 saat gate metrikleri kilitlendi: useful uptime = tüm asset base'leri hazır saniye/wall time; coverage = tüm asset'lerin hazır olduğu 60 saniyelik checkpoint oranı. Gate sırasıyla ≥%99 ve ≥%95; minimum süre 86.400 saniye değişmez.
+- **Ölçülen kanıt:** 25 saniyelik smoke'ta 12/12 base, 36 delta event/72 change, 2 PING/PONG, 4/4 ready checkpoint ve 24/24 REST anchor match; sıfır contract/connection error. Ayrı koşu process ortasında kesilip aynı start/end ile connection-2 üzerinden 12 fresh base alarak resume edildi.
+- **Sınır:** Hard termination son checkpoint'ten sonraki aggregate sayaçları kaybedebilir; 60 saniyelik production checkpoint ile kayıp üst sınırı yaklaşık bir intervaldir. Flush edilmiş raw frameler korunur.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase3-stability-runner-smoke.md`
+- **Sonuç:** Runner readiness geçti; Phase 3 `IN_PROGRESS`. Sıradaki adım production 24 saat capture'ı başlatmaktır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -810,7 +819,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Reconnect/backoff, periodic REST anchor, checkpoint ve uptime/gap/stale/bytes/storage ölçümleri olan resumable 24 saat collector'ı geliştirip stability capture'ı başlatmak.
+**Tek sonraki adım:** Kilitli production parametreleriyle 24 saat stability capture'ı başlatmak; tamamlanınca gate sonucunu raw/checkpoint/anchor kanıtıyla değerlendirmek.
 
 Beklenen artifact'lar:
 

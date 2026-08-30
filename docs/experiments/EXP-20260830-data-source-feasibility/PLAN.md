@@ -1149,6 +1149,16 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: 35 seconds does not evaluate 24-hour uptime, long reconnects, stale state or daily storage; tick change was not observed.
 - Next action: Build resumable stability runner and begin the registered 24-hour capture.
 
+### 2026-08-30 — Phase 3 stability runner readiness passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Work completed: Added restart-safe connection files, atomic summaries, 60-second-ready coverage, useful-uptime accounting, exponential reconnect, periodic concurrent REST anchors and storage/gap counters.
+- Evidence: `reports/data_quality/EXP-20260830-phase3-stability-runner-smoke.md`; local ignored smoke and resume-smoke runs.
+- Verification: 25-second probe produced 12/12 bases, 36 delta events, 24/24 REST matches and 4/4 ready checkpoints; a forced termination resumed with a new connection and 12 new bases. Both correctly failed the immutable 86,400-second gate due to duration.
+- Metric lock: useful uptime ≥99%, ready checkpoint coverage ≥95%, elapsed ≥86,400 seconds and zero delta-before-base/replayed-top violations.
+- Next action: Start the production 24-hour stability capture with 12 assets, 60-second checkpoints and 300-second anchors.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1228,6 +1238,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Validate advertised top after each item in a multi-change event; rejected because the advertised top represents the completed event and creates false intermediate mismatches.
 - Consequence: Replay validation is event-batch granular while raw item order remains preserved for audit.
 - Revisit condition: Official protocol semantics change or captured counterexamples demonstrate per-item rather than per-event top semantics.
+
+### ED-0016 — 2026-08-30 — Define stability by authoritative-ready time
+
+- Decision: Stability uptime counts only time when every selected asset has a full-book base on the current connection; a merely open socket is insufficient. Coverage is measured independently at scheduled 60-second checkpoints.
+- Evidence available at decision time: The 25-second smoke had 25.072 connected seconds but only 24.741 authoritative-ready seconds, exposing startup time that socket-only uptime would hide.
+- Alternatives considered: Process uptime or TCP/WebSocket connected time; rejected because both can report health before state is safe to replay or use.
+- Consequence: The 24-hour gate requires useful uptime ≥99%, ready-checkpoint coverage ≥95%, elapsed ≥86,400 seconds and zero base/replay contract violations.
+- Revisit condition: Only a more conservative metric may supersede this definition; the threshold cannot be relaxed post-hoc.
 
 ## 20. Decision Log — append only
 
