@@ -1,0 +1,86 @@
+{
+  "all_checksums_reverified": true,
+  "all_station_blocks_have_maxt_markers": true,
+  "all_station_blocks_present": true,
+  "records": [
+    {
+      "checksum_reverified": true,
+      "cycle_utc": 1,
+      "inventory": {
+        "contains_probabilistic_maxt_markers": true,
+        "element_marker_counts": {
+          "TXNMN": 1,
+          "TXNP1": 1,
+          "TXNP2": 1,
+          "TXNP5": 1,
+          "TXNP7": 1,
+          "TXNP9": 1,
+          "TXNSD": 1
+        },
+        "first_station_offset": 20921513,
+        "nbm_version": "5.0",
+        "replacement_character_count": 0,
+        "station_code": "KORD",
+        "station_header": "KORD    NBM V5.0 NBP GUIDANCE    8/30/2026  0100 UTC",
+        "station_occurrence_count": 1
+      },
+      "model_run_time_utc": "2026-08-30T01:00:00Z",
+      "retrieval": {
+        "byte_count": 34724488,
+        "content_type": "application/octet-stream",
+        "http_etag": "\"42dc0797a94cf79201ab56acede5b807\"",
+        "http_last_modified": "Sun, 30 Aug 2026 02:07:01 GMT",
+        "http_status": 200,
+        "local_path": "data/raw/noaa_nbm/run=20260830T-phase4-nbp-v2-cycle01/blend.20260830.t01z.nbptx",
+        "received_at_utc": "2026-08-30T19:34:10.033147Z",
+        "requested_at_utc": "2026-08-30T19:33:47.325460Z",
+        "retrieval_seconds": 22.707583583999998,
+        "sha256": "c109acf07d454bb71baa8ebe83253d7c7ec1dcd3392a25dbe360cf46b3118b41",
+        "source": "noaa_nbm_aws_public",
+        "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260830/01/text/blend_nbptx.t01z"
+      },
+      "run_date": "20260830"
+    },
+    {
+      "checksum_reverified": true,
+      "cycle_utc": 1,
+      "inventory": {
+        "contains_probabilistic_maxt_markers": true,
+        "element_marker_counts": {
+          "TXNMN": 1,
+          "TXNP1": 1,
+          "TXNP2": 1,
+          "TXNP5": 1,
+          "TXNP7": 1,
+          "TXNP9": 1,
+          "TXNSD": 1
+        },
+        "first_station_offset": 23073014,
+        "nbm_version": "4.1",
+        "replacement_character_count": 0,
+        "station_code": "KORD",
+        "station_header": "KORD    NBM V4.1 NBP GUIDANCE    8/31/2023  0100 UTC",
+        "station_occurrence_count": 1
+      },
+      "model_run_time_utc": "2023-08-31T01:00:00Z",
+      "retrieval": {
+        "byte_count": 34806674,
+        "content_type": "application/octet-stream",
+        "http_etag": "\"147353e12d340863e876ecc74a5187c1\"",
+        "http_last_modified": "Thu, 31 Aug 2023 02:40:55 GMT",
+        "http_status": 200,
+        "local_path": "data/raw/noaa_nbm/run=20260830T-phase4-nbp-v2-cycle01/blend.20230831.t01z.nbptx",
+        "received_at_utc": "2026-08-30T19:34:37.375926Z",
+        "requested_at_utc": "2026-08-30T19:34:10.197053Z",
+        "retrieval_seconds": 27.178874541,
+        "sha256": "b8679959fb917cde228fe08808a91d1be398e12c6748544a35f32516499c6f25",
+        "source": "noaa_nbm_aws_public",
+        "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20230831/01/text/blend_nbptx.t01z"
+      },
+      "run_date": "20230831"
+    }
+  ],
+  "schema_version": "0.2.0",
+  "source_manifest": "reports/data_quality/EXP-20260830-phase4-nbm-archive-probe-cycle01.json",
+  "station_probe": "KORD"
+}

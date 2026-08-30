@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.20.0
+**Plan versiyonu:** 0.21.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -816,6 +816,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Local artifact:** `data/raw/polymarket_ws/run=20260830T1145Z-phase3-stability-24h-v1`, `data/interim/polymarket_ws/stability-24h-v1.json` (git-ignore; raw veri commitlenmeyecek).
 - **Sonuç:** Capture `RUNNING`; Phase 3 `IN_PROGRESS` ve gate sonucu bekleniyor.
 
+### D-0022 — 2026-08-30 — NBM/KORD ilk as-issued archive sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** NBM yalnız verified KORD/Chicago için aday baseline; cycle dataset anahtarının zorunlu parçası. `model_run_time`, object `Last-Modified`, historical unknown `first_seen_at` ve local ingestion zamanı ayrı tutulacak.
+- **Önceden yazılan eşik:** Güncel ve ≥365 gün eski gerçek dosya indirilecek; KORD bloğunda mean/SD ve 10/25/50/75/90 QMD MaxT-MinT marker'ları, checksum ve run identity doğrulanacak.
+- **Ölçülen kanıt:** 2026-08-30 ve 2023-08-31 01Z NBP dosyaları (1.095 gün aralık) HTTP 200 ile 34.724.488/34.806.674 byte indirildi; SHA-256 yeniden doğrulandı. KORD blokları NBM v5.0/v4.1 ve gerekli yedi marker'ın tamamını birer kez içeriyor.
+- **Invalidation:** İlk 00Z karşılaştırmasında 2023 KORD sıcaklık marker'ı yoktu; bu archive yokluğu değil cycle-availability farkıydı. Matched 01Z karşılaştırması iki tarihte de geçti.
+- **Sınır:** İki tarih continuous daily coverage, earliest retention veya historical first-publication kanıtı değildir; NBM mevcut retained evrende yalnız Chicago'ya doğrudan uygulanır.
+- **Artifact:** `reports/research/EXP-20260830-phase4-nbm-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-nbm-archive-probe-cycle01-v2-analysis.json`
+- **Sonuç:** NBM initial spike `CONDITIONAL_PASS`; experiment Phase 4 `IN_PROGRESS`.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -828,7 +839,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Running 24 saat capture'ın checkpoint ve process sağlığını izlemek; tamamlanınca gate sonucunu raw/checkpoint/anchor kanıtıyla değerlendirmek.
+**Tek sonraki adım:** NBM 01Z archive için deterministik monthly/boundary coverage probe ve KORD fixed-width value parser'ı geliştirmek; order-book capture arka planda izlenmeye devam edecek.
 
 Beklenen artifact'lar:
 

@@ -692,7 +692,7 @@ Implement the resumable collector with reconnect/backoff, periodic REST anchors 
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
 #### Objective
 
@@ -704,9 +704,9 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 
 #### Tasks
 
-- [ ] Define required variables and lead times for daily MaxT reconstruction.
+- [x] Define initial NBM variables and lead times for daily MaxT reconstruction. (KORD 01Z NBP: FHR 24–228, mean/SD and 10/25/50/75/90 percentiles; value parser pending.)
 - [ ] Retrieve actual NBM core/QMD files for current and earliest available dates.
-- [ ] Inspect NBM MaxT probabilistic/quantile fields and run cycles.
+- [x] Inspect NBM MaxT probabilistic/quantile fields and run cycles. (Matched 01Z required; 00Z historical counterexample preserved.)
 - [ ] Probe GFS/GEFS archive depth and ensemble structure.
 - [ ] Probe HRRR archive depth and short-lead applicability.
 - [ ] Probe ECMWF Open Data parameters, ensemble structure and rolling retention.
@@ -735,15 +735,15 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 
 #### Actual result
 
-Pending.
+Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31, 1,095 days apart. Immutable downloads were 34.72/34.81 MB with distinct, reverified SHA-256 hashes. The exact KORD station blocks identify NBM v5.0/v4.1 and each contains mean, standard deviation and 10/25/50/75/90 percentile temperature markers. An initial 00Z historical negative result was invalidated as a cycle-availability mismatch, not archive absence.
 
 #### Decision
 
-Pending.
+Initial NBM/KORD spike is `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. Two actual dates establish ≥1,095-day point availability but not continuous coverage, earliest retention, historical first-seen semantics or parsed-value correctness. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
 
 #### Next action
 
-Pending Phase 4 result.
+Measure deterministic monthly and model-boundary 01Z archive coverage, then parse KORD fixed-width values into explicit run/valid-time probabilistic records.
 
 ### Phase 5 — Observation and settlement reconciliation
 
@@ -1170,6 +1170,18 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: No gate decision is allowed before the target duration completes; first REST anchor was not yet due at this checkpoint.
 - Next action: Monitor checkpoints/process health and evaluate the locked gate after completion.
 
+### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
+
+- Previous phase status: `NOT_STARTED`
+- New phase status: `IN_PROGRESS`.
+- Pre-registered threshold: Download current and ≥365-day-old actual objects; exact KORD station block must contain mean/SD and 10/25/50/75/90 MaxT-MinT markers with run identity and checksums.
+- Work completed: Added immutable NOAA AWS retrieval, station-block/version inventory and checksum reanalysis; downloaded matched 01Z NBP files for 2026-08-30 and 2023-08-31.
+- Evidence: `reports/research/EXP-20260830-phase4-nbm-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-nbm-archive-probe-cycle01-v2-analysis.json`; local raw run `run=20260830T-phase4-nbp-v2-cycle01`.
+- Verification: Both actual files HTTP 200, 34.72/34.81 MB, distinct/reverified checksums, exactly one KORD block and seven required marker rows; 42 tests pass.
+- Invalidation: Historical 00Z lacked KORD temperature rows, but documented/full 01Z carries them; cycle mismatch replaced the false archive-absence interpretation.
+- Limitation: Point samples 1,095 days apart do not prove continuous coverage or historical first-publication time; NBM applies directly only to retained KORD/Chicago.
+- Next action: Monthly/model-boundary coverage probe and fixed-width KORD probabilistic-value parser.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1257,6 +1269,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Process uptime or TCP/WebSocket connected time; rejected because both can report health before state is safe to replay or use.
 - Consequence: The 24-hour gate requires useful uptime ≥99%, ready-checkpoint coverage ≥95%, elapsed ≥86,400 seconds and zero base/replay contract violations.
 - Revisit condition: Only a more conservative metric may supersede this definition; the threshold cannot be relaxed post-hoc.
+
+### ED-0017 — 2026-08-30 — Key NBM availability by cycle and version
+
+- Decision: NBM records and coverage tests must key by run date, cycle, product and model version; a missing field in one cycle cannot be generalized to the date/provider.
+- Evidence available at decision time: KORD's 2023-08-31 v4.1 00Z NBP block lacked temperature rows, while the same date's documented full 01Z block contained TXNMN, TXNSD and all five percentile rows. The 2026 01Z comparison used v5.0.
+- Alternatives considered: Use one daily representative cycle without verifying its field schedule; rejected because it produced a false historical-unavailability conclusion.
+- Consequence: Coverage and parser artifacts must segment model upgrades and cycle schedules; backtests cannot silently mix v4.1 and v5.0 as one stationary forecast product.
+- Revisit condition: None; point-in-time forecast identity permanently requires run cycle and version.
 
 ## 20. Decision Log — append only
 
