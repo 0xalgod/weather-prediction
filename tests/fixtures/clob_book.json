@@ -1,0 +1,8 @@
+{
+  "market": "0xcondition",
+  "asset_id": "token-yes",
+  "timestamp": "1760000000123",
+  "hash": "book-hash",
+  "bids": [{"price": "0.40", "size": "5"}, {"price": "0.45", "size": "2"}],
+  "asks": [{"price": "0.60", "size": "3"}, {"price": "0.55", "size": "4"}]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0xalgod/weather-prediction/schemas/orderbook_snapshot.schema.json",
+  "title": "Point-in-time Polymarket CLOB Book Snapshot",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "event_id", "city_label", "market_id", "asset_id", "outcome_label",
+    "exchange_timestamp_ms", "requested_at_utc", "received_at_utc",
+    "content_sha256", "book_hash", "dynamic_tick_size", "bids", "asks", "quality"
+  ],
+  "properties": {
+    "event_id": {"type": "string", "minLength": 1},
+    "city_label": {"type": "string", "minLength": 1},
+    "market_id": {"type": "string", "minLength": 1},
+    "asset_id": {"type": "string", "minLength": 1},
+    "outcome_label": {"enum": ["Yes", "No"]},
+    "exchange_timestamp_ms": {"type": "integer", "minimum": 1},
+    "requested_at_utc": {"type": "string", "format": "date-time"},
+    "received_at_utc": {"type": "string", "format": "date-time"},
+    "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "book_hash": {"type": ["string", "null"]},
+    "dynamic_tick_size": {"type": "string", "pattern": "^0\\.[0-9]+$"},
+    "bids": {"$ref": "#/$defs/levels"},
+    "asks": {"$ref": "#/$defs/levels"},
+    "quality": {"enum": ["TWO_SIDED_BOOK", "ONE_SIDED_BOOK", "EMPTY_BOOK", "CROSSED_BOOK"]}
+  },
+  "$defs": {
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["price", "size"],
+        "properties": {
+          "price": {"type": "string"},
+          "size": {"type": "string"}
+        }
+      }
+    }
+  }
+}

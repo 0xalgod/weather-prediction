@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.15.0
+**Plan versiyonu:** 0.16.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -769,6 +769,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase2-rule-family-dst.md`, `reports/data_quality/EXP-20260830-phase2-rule-family-revisions.json`
 - **Sonuç:** Experiment Phase 2 `PASSED`; Phase 3 executable order-book feasibility `IN_PROGRESS`.
 
+### D-0017 — 2026-08-30 — Public REST executable-book contract sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Point-in-time book snapshot; exchange timestamp, request/receipt UTC, raw checksum, book hash, asset identity, current dynamic tick ve iki tarafın tüm seviyelerini taşıyacak. One-sided/empty book'ta spread veya midpoint üretilmeyecek.
+- **Ölçülen kanıt:** Panama City, Mexico City ve Toronto'daki 66 Yes/No token için 66/66 public `/book` ve tick-size snapshot başarılı. 48 two-sided, 18 one-sided, 0 empty/crossed; 1.914 bid + 1.914 ask seviye doğrulandı. Median REST latency 147,9 ms; two-sided median spread 0,020.
+- **Invalidation:** İlk koşudaki 190 tick violation Gamma statik tick'i current değer sanan yanlış contract'tan kaynaklandı. Dynamic `/tick-size/{token_id}` ile v2'de ihlal 0; 8/66 token Gamma metadata'dan farklı current tick taşıdı.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase3-rest-orderbook-contract.md`, `reports/data_quality/EXP-20260830-phase3-rest-book-coverage.json`
+- **Sonuç:** REST substep geçti; Phase 3 `IN_PROGRESS`. WebSocket/reconnect ve 24 saat stability gate'i henüz geçmedi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -781,13 +790,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Phase 3 için point-in-time executable CLOB order-book snapshot sözleşmesini tanımlamak ve public REST book coverage'ını authenticated call/live order olmadan test etmek.
+**Tek sonraki adım:** Public market WebSocket prototipini geliştirip initial full book, delta ve tick-size change eventlerini persist etmek; forced reconnect sonrası fresh REST snapshot ile state recovery'yi doğrulamak.
 
 Beklenen artifact'lar:
 
 - `src/weather_quant/ingestion/polymarket_markets.py`
 - sanitized API fixtures ve identifier contract testleri
-- CLOB book snapshot schema ve read-only collector
-- REST coverage/latency/empty-book raporu
+- WebSocket raw event/replay contract'ı
+- forced reconnect + REST reconciliation artifact'ı
 
 Phase 1 sonunda experiment planı, experiment index ve project Decision Log ölçülen coverage/missingness sonuçlarıyla güncellenecek ve ayrı experiment commit'i oluşturulacaktır. Phase 0'ın kalan idari işi lisans seçimidir.

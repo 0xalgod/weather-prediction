@@ -651,10 +651,10 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 
 #### Tasks
 
-- [ ] Implement public REST `/book` client.
+- [x] Implement public REST `/book` client.
 - [ ] Implement public market WebSocket client.
-- [ ] Persist raw timestamps, receipt times, hashes and levels.
-- [ ] Validate bid/ask sorting, bounds, tick size and empty-book behavior.
+- [x] Persist raw timestamps, receipt times, hashes and levels. (66 book + 66 dynamic-tick immutable envelopes.)
+- [x] Validate bid/ask sorting, bounds, tick size and empty-book behavior. (48 two-sided, 18 one-sided; 0 dynamic tick violations.)
 - [ ] Compare displayed/price-history values with executable book sides.
 - [ ] Force reconnect and demonstrate full-book recovery.
 - [ ] Run a minimum 24-hour stability capture.
@@ -680,15 +680,15 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 
 #### Actual result
 
-Pending.
+Fresh active inventory selected three latest-end events and requested all 66 Yes/No token books. Public REST coverage was 66/66 with zero request failures: 48 two-sided and 18 one-sided books, 3,828 validated levels, median latency 147.9 ms and median two-sided spread 0.020. Dynamic ticks were `0.01` for 38 and `0.001` for 28 tokens; 8 differed from Gamma metadata. First-run static-tick violation count was invalidated; corrected v3 persists full normalized levels.
 
 #### Decision
 
-Pending.
+REST contract substep passed. Phase 3 remains `IN_PROGRESS`; WebSocket recovery and 24-hour stability gates are unevaluated.
 
 #### Next action
 
-Pending Phase 3 result.
+Implement public WebSocket capture and forced-reconnect recovery, reconciling recovered state with fresh REST books.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1116,6 +1116,17 @@ These inferences must be verified in Phases 3 and 4.
 - Gate: 11 retained cities exceed ≥3; retained critical completeness is 100%.
 - Next action: Define Phase 3 CLOB order-book snapshot contract and measure public REST coverage.
 
+### 2026-08-30 — Phase 3 public REST book coverage measured
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`
+- Work completed: Added public read-only `/book` and dynamic tick clients, immutable envelopes, snapshot schema, level validation and a deterministic three-event/all-token runner.
+- Evidence: `reports/data_quality/EXP-20260830-phase3-rest-orderbook-contract.md`, `reports/data_quality/EXP-20260830-phase3-rest-book-coverage.json`; local raw run `run=20260830T-phase3-rest-v3`.
+- Verification: 66/66 tokens, 0 failures, 48 two-sided, 18 one-sided, 0 empty/crossed, 3,828 valid levels, 0 dynamic-tick violations; 35 tests pass.
+- Invalidation: V1's 190 static-tick violations are invalid because Gamma metadata did not reflect dynamic CLOB tick changes. V2 fetched the current tick per token; 8/66 differed from Gamma.
+- Blockers: WebSocket state/reconnect recovery and the 24-hour stability gate remain pending.
+- Next action: Implement WebSocket capture and forced reconnect with REST reconciliation.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1171,6 +1182,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Maintain one current station/rule per city; rejected because it would retrospectively mislabel earlier events and hide provider wording changes.
 - Consequence: Registry versions are event-scoped; unknown templates and incomplete parses remain excluded until reconciled.
 - Revisit condition: None; historical point-in-time correctness permanently requires event-scoped versioning.
+
+### ED-0013 — 2026-08-30 — Treat tick size as point-in-time dynamic state
+
+- Decision: Validate order levels against the contemporaneous CLOB tick endpoint/WebSocket tick-size events, not Gamma's discovery-time tick metadata.
+- Evidence available at decision time: V1 produced 190 apparent violations; public dynamic tick retrieval showed 28 tokens at `0.001`, 38 at `0.01`, and 8/66 values different from Gamma metadata. V2 had zero violations.
+- Alternatives considered: Retain Gamma tick as authoritative; rejected because official WebSocket documentation defines tick-size-change events and live observations contradicted it.
+- Consequence: Every book snapshot/capture state must version tick size; missing contemporaneous tick is a quality failure.
+- Revisit condition: None while dynamic tick changes remain part of the official market protocol.
 
 ## 20. Decision Log — append only
 
