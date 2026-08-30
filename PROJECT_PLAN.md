@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.21.0
+**Plan versiyonu:** 0.22.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -827,6 +827,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260830-phase4-nbm-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-nbm-archive-probe-cycle01-v2-analysis.json`
 - **Sonuç:** NBM initial spike `CONDITIONAL_PASS`; experiment Phase 4 `IN_PROGRESS`.
 
+### D-0023 — 2026-08-30 — NBM sampled coverage ve KORD parser sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** NBM KORD records `run_date+cycle+product+version` ile key edilecek; MaxT valid time run+forecast-hour olarak üretilecek. Alternatif cycle sessizce doldurulmayacak ve kendi availability zamanıyla flag'lenecek.
+- **Ölçülen kanıt:** 2023-08–2026-08 arası 37 month-start + 12 model-boundary olmak üzere 49 unique 01Z obje kontrolünde 48 HTTP 200 (%97,959), boundary 12/12. Tek eksik `2026-06-01 01Z`; aynı gün 00/07/13/19Z ve komşu 01Z objeleri mevcut.
+- **Parser sonucu:** İki checksum'lı KORD dosyasından 9+9 MaxT record, 0 missing value; run, FHR 23–215, valid UTC, mean/SD ve monotonic 10/25/50/75/90 percentilleri provenance ile üretildi. 43 test geçti.
+- **Maliyet:** Ortalama full bulletin 34.796.159 byte; tek 01Z full raw/gün yaklaşık 12,70 GB/yıl.
+- **Sınır:** %97,959 sampled coverage günlük coverage değildir; valid UTC henüz Chicago contract local-date/window semantiğiyle reconcile edilmedi.
+- **Artifact:** `reports/research/EXP-20260830-phase4-nbm-coverage-parser.md`, `reports/data_quality/EXP-20260830-phase4-nbm-monthly-boundary-coverage.json`, `reports/data_quality/EXP-20260830-phase4-nbm-kord-parsed-sample.json`
+- **Sonuç:** Sampled coverage/parser substep geçti; NBM source `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -839,7 +850,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM 01Z archive için deterministik monthly/boundary coverage probe ve KORD fixed-width value parser'ı geliştirmek; order-book capture arka planda izlenmeye devam edecek.
+**Tek sonraki adım:** Locked 365 günlük pencerede primary 01Z ve documented fallback cycle daily coverage'ını ölçüp KORD run-selection policy'yi model skorlamadan önce dondurmak.
 
 Beklenen artifact'lar:
 

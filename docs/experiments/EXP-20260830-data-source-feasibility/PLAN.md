@@ -735,15 +735,15 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 
 #### Actual result
 
-Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31, 1,095 days apart. Immutable downloads were 34.72/34.81 MB with distinct, reverified SHA-256 hashes. The exact KORD station blocks identify NBM v5.0/v4.1 and each contains mean, standard deviation and 10/25/50/75/90 percentile temperature markers. An initial 00Z historical negative result was invalidated as a cycle-availability mismatch, not archive absence.
+Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31, 1,095 days apart. Immutable downloads were 34.72/34.81 MB with distinct, reverified SHA-256 hashes. The exact KORD station blocks identify NBM v5.0/v4.1 and each contains mean, standard deviation and 10/25/50/75/90 percentile temperature markers. An initial 00Z historical negative result was invalidated as a cycle-availability mismatch, not archive absence. A deterministic 49-date monthly/model-boundary probe found 48 objects (97.959%); only 2026-06-01 01Z was absent while four alternative cycles existed. The parser emitted 18 provenance-bearing KORD MaxT distributions with zero missing values.
 
 #### Decision
 
-Initial NBM/KORD spike is `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. Two actual dates establish ≥1,095-day point availability but not continuous coverage, earliest retention, historical first-seen semantics or parsed-value correctness. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. Actual files and the parser establish usable point data, but 48/49 sampled coverage is not continuous daily coverage, historical first-seen semantics remain unresolved, and fallback-cycle/local-day policy is not frozen. NBM is scoped to Chicago/KORD, not the ten retained non-US cities.
 
 #### Next action
 
-Measure deterministic monthly and model-boundary 01Z archive coverage, then parse KORD fixed-width values into explicit run/valid-time probabilistic records.
+Measure primary/fallback cycle coverage on every day in a locked 365-day window and freeze the KORD run-selection policy.
 
 ### Phase 5 — Observation and settlement reconciliation
 
@@ -1182,6 +1182,16 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: Point samples 1,095 days apart do not prove continuous coverage or historical first-publication time; NBM applies directly only to retained KORD/Chicago.
 - Next action: Monthly/model-boundary coverage probe and fixed-width KORD probabilistic-value parser.
 
+### 2026-08-30 — Phase 4 NBM sampled coverage and parser passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; NBM/KORD remains `CONDITIONAL_PASS`.
+- Work completed: Probed 37 month-start and 12 model-boundary 01Z objects, investigated the sole missing object across adjacent dates/cycles, and added an exact-station fixed-width MaxT parser/schema.
+- Evidence: `reports/research/EXP-20260830-phase4-nbm-coverage-parser.md`, `reports/data_quality/EXP-20260830-phase4-nbm-monthly-boundary-coverage.json`, `reports/data_quality/EXP-20260830-phase4-nbm-kord-parsed-sample.json`.
+- Verification: 48/49 HTTP 200, all 12 boundary dates present; 18 parsed MaxT records, zero missing values, monotonic percentiles and explicit run/valid/provenance; 43 tests pass.
+- Missingness: 2026-06-01 01Z is 404 while same-day 00/07/13/19Z and adjacent 01Z objects exist; no silent fallback is authorized.
+- Next action: Daily 365-day primary/fallback coverage and pre-registered KORD cycle-selection policy.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1277,6 +1287,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Use one daily representative cycle without verifying its field schedule; rejected because it produced a false historical-unavailability conclusion.
 - Consequence: Coverage and parser artifacts must segment model upgrades and cycle schedules; backtests cannot silently mix v4.1 and v5.0 as one stationary forecast product.
 - Revisit condition: None; point-in-time forecast identity permanently requires run cycle and version.
+
+### ED-0018 — 2026-08-30 — Treat NBM fallback cycles as different information sets
+
+- Decision: A missing primary 01Z object may be replaced only by a pre-declared eligible cycle, with its own run/publication timestamps and a fallback flag; it is never silent imputation.
+- Evidence available at decision time: 2026-06-01 01Z is absent while 00/07/13/19Z on the same day exist, and the earlier 00Z/01Z comparison showed that field availability can differ by cycle/version.
+- Alternatives considered: Select the nearest available cycle retrospectively; rejected because it changes information time after observing missingness and can introduce selection bias.
+- Consequence: A locked daily coverage experiment must quantify primary, fallback and unavailable rates before model scoring; analyses segment fallback records.
+- Revisit condition: A provider-published canonical replacement policy can supersede the chosen fallback ordering, but historical timestamps remain mandatory.
 
 ## 20. Decision Log — append only
 

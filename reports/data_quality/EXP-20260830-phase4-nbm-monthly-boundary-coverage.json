@@ -1,0 +1,700 @@
+{
+  "available_count": 48,
+  "boundary_sample_count": 12,
+  "coverage_rate": 0.9795918367346939,
+  "cycle_utc": 1,
+  "end_month": "2026-08",
+  "monthly_sample_count": 37,
+  "records": [
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"ee22d3094506ae9fd0967eb4b67aa2ce\"",
+      "http_status": 200,
+      "last_modified": "Tue, 01 Aug 2023 02:40:41 GMT",
+      "latency_seconds": 0.673562875,
+      "observed_at_utc": "2026-08-30T19:40:41.664558Z",
+      "run_date": "20230801",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20230801/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"d04409d9f7d7fd88080c4e5c0ad8dbf8\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 Sep 2023 02:38:53 GMT",
+      "latency_seconds": 0.6144785830000001,
+      "observed_at_utc": "2026-08-30T19:40:42.341998Z",
+      "run_date": "20230901",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20230901/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"4a0c9caa41f716bcf2d39ea55e83937d\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Oct 2023 02:37:21 GMT",
+      "latency_seconds": 0.6724261249999999,
+      "observed_at_utc": "2026-08-30T19:40:42.958005Z",
+      "run_date": "20231001",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20231001/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"bfc2d331e736070045dc98330944ef46\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 Nov 2023 02:41:05 GMT",
+      "latency_seconds": 0.6362082499999997,
+      "observed_at_utc": "2026-08-30T19:40:43.630987Z",
+      "run_date": "20231101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20231101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"7eed387aca2c7366f4ea198c10140a5a\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 Dec 2023 02:40:45 GMT",
+      "latency_seconds": 0.6121047080000004,
+      "observed_at_utc": "2026-08-30T19:40:44.268767Z",
+      "run_date": "20231201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20231201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"ea73173d32d517e185015c64f9ada175\"",
+      "http_status": 200,
+      "last_modified": "Mon, 01 Jan 2024 02:42:55 GMT",
+      "latency_seconds": 0.640898,
+      "observed_at_utc": "2026-08-30T19:40:44.882087Z",
+      "run_date": "20240101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"eac645d48b52fd6d7b9bcc17d633f69f\"",
+      "http_status": 200,
+      "last_modified": "Thu, 01 Feb 2024 02:34:14 GMT",
+      "latency_seconds": 0.6296192500000002,
+      "observed_at_utc": "2026-08-30T19:40:45.524002Z",
+      "run_date": "20240201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"34fff4feb75f02c4274453c85f92a4bc\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 Mar 2024 02:38:09 GMT",
+      "latency_seconds": 0.6322649169999996,
+      "observed_at_utc": "2026-08-30T19:40:46.155380Z",
+      "run_date": "20240301",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240301/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"a3ef9c5667832a86e8e4b2beccd3f2de\"",
+      "http_status": 200,
+      "last_modified": "Mon, 01 Apr 2024 02:34:03 GMT",
+      "latency_seconds": 0.6235724999999999,
+      "observed_at_utc": "2026-08-30T19:40:46.788344Z",
+      "run_date": "20240401",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240401/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"1e228c79da2cc0a7fc182d95817a259e\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 May 2024 02:38:04 GMT",
+      "latency_seconds": 0.6092939589999995,
+      "observed_at_utc": "2026-08-30T19:40:47.413469Z",
+      "run_date": "20240501",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240501/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"720d2d4e37e4bd71a8075ce348c647d0\"",
+      "http_status": 200,
+      "last_modified": "Tue, 14 May 2024 02:43:04 GMT",
+      "latency_seconds": 0.6175399590000001,
+      "observed_at_utc": "2026-08-30T19:40:48.024303Z",
+      "run_date": "20240514",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240514/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"49fe02c5ec624f70c1cd8c39afa3dfc8\"",
+      "http_status": 200,
+      "last_modified": "Wed, 15 May 2024 16:53:29 GMT",
+      "latency_seconds": 0.7029914999999995,
+      "observed_at_utc": "2026-08-30T19:40:48.643133Z",
+      "run_date": "20240515",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240515/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"50ecc476c26afaa6d10729214cab7b13\"",
+      "http_status": 200,
+      "last_modified": "Thu, 16 May 2024 02:06:02 GMT",
+      "latency_seconds": 0.71534225,
+      "observed_at_utc": "2026-08-30T19:40:49.347710Z",
+      "run_date": "20240516",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240516/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"7ac744ad1c2eda717121f5b49e87aff4\"",
+      "http_status": 200,
+      "last_modified": "Sat, 01 Jun 2024 02:05:57 GMT",
+      "latency_seconds": 0.6110777089999999,
+      "observed_at_utc": "2026-08-30T19:40:50.064570Z",
+      "run_date": "20240601",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240601/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"84a1f50f75f8c3681f37c1972cbf2531\"",
+      "http_status": 200,
+      "last_modified": "Mon, 01 Jul 2024 01:57:48 GMT",
+      "latency_seconds": 0.6568538749999995,
+      "observed_at_utc": "2026-08-30T19:40:50.676310Z",
+      "run_date": "20240701",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240701/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"b7b9deb1464ad781a1ad8283331ebf5e\"",
+      "http_status": 200,
+      "last_modified": "Thu, 01 Aug 2024 02:04:21 GMT",
+      "latency_seconds": 1.1020257499999992,
+      "observed_at_utc": "2026-08-30T19:40:51.334608Z",
+      "run_date": "20240801",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240801/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"709fd51f6ab150a2f8e22f2301f3a4b8\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Sep 2024 02:02:27 GMT",
+      "latency_seconds": 0.6590188340000012,
+      "observed_at_utc": "2026-08-30T19:40:52.438169Z",
+      "run_date": "20240901",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20240901/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"f0eb66bb4ca4db8e833c55992994b710\"",
+      "http_status": 200,
+      "last_modified": "Tue, 01 Oct 2024 02:02:54 GMT",
+      "latency_seconds": 0.6386321249999991,
+      "observed_at_utc": "2026-08-30T19:40:53.098876Z",
+      "run_date": "20241001",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20241001/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"469655acea9097bb319f4279d6c3d547\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 Nov 2024 02:08:28 GMT",
+      "latency_seconds": 0.6489653330000014,
+      "observed_at_utc": "2026-08-30T19:40:53.739047Z",
+      "run_date": "20241101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20241101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"154cf034ca4e244439d67f26cc6b9caf\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Dec 2024 02:03:04 GMT",
+      "latency_seconds": 0.6262120840000005,
+      "observed_at_utc": "2026-08-30T19:40:54.389455Z",
+      "run_date": "20241201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20241201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"451671caf4672baebd608f07293cdc23\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 Jan 2025 02:04:46 GMT",
+      "latency_seconds": 0.6174586250000011,
+      "observed_at_utc": "2026-08-30T19:40:55.016787Z",
+      "run_date": "20250101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"7fea21fdc8b844e15f503f81e130ccdf\"",
+      "http_status": 200,
+      "last_modified": "Sat, 01 Feb 2025 02:07:52 GMT",
+      "latency_seconds": 0.6077507910000008,
+      "observed_at_utc": "2026-08-30T19:40:55.635710Z",
+      "run_date": "20250201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"988621876cdbf5f1288209ca9a829d6e\"",
+      "http_status": 200,
+      "last_modified": "Sat, 01 Mar 2025 02:10:01 GMT",
+      "latency_seconds": 0.6076482920000004,
+      "observed_at_utc": "2026-08-30T19:40:56.244933Z",
+      "run_date": "20250301",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250301/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"a4ff69c802c7210bfec819cae0974ec1\"",
+      "http_status": 200,
+      "last_modified": "Tue, 01 Apr 2025 02:02:43 GMT",
+      "latency_seconds": 0.6003867500000002,
+      "observed_at_utc": "2026-08-30T19:40:56.854057Z",
+      "run_date": "20250401",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250401/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"9932b786649d254d982e814719248f2d\"",
+      "http_status": 200,
+      "last_modified": "Thu, 01 May 2025 02:06:05 GMT",
+      "latency_seconds": 0.6176192920000005,
+      "observed_at_utc": "2026-08-30T19:40:57.455058Z",
+      "run_date": "20250501",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250501/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"83d367e14ba943855d5323969ff1a68b\"",
+      "http_status": 200,
+      "last_modified": "Sun, 18 May 2025 02:08:54 GMT",
+      "latency_seconds": 0.6403869170000007,
+      "observed_at_utc": "2026-08-30T19:40:58.074225Z",
+      "run_date": "20250518",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250518/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"2f0d06843f044be94b5c89ad610b285a\"",
+      "http_status": 200,
+      "last_modified": "Mon, 19 May 2025 02:06:27 GMT",
+      "latency_seconds": 0.6112572500000013,
+      "observed_at_utc": "2026-08-30T19:40:58.716039Z",
+      "run_date": "20250519",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250519/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"a149703e3e02096f5052311005905f15\"",
+      "http_status": 200,
+      "last_modified": "Tue, 20 May 2025 02:07:10 GMT",
+      "latency_seconds": 0.6109055420000011,
+      "observed_at_utc": "2026-08-30T19:40:59.328370Z",
+      "run_date": "20250520",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250520/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"8a832b940990ba6bb80e967f31ac553e\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Jun 2025 02:06:33 GMT",
+      "latency_seconds": 0.6453237499999993,
+      "observed_at_utc": "2026-08-30T19:40:59.939991Z",
+      "run_date": "20250601",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250601/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"b7fae269a3ccf0487846410d99b4a244\"",
+      "http_status": 200,
+      "last_modified": "Tue, 01 Jul 2025 02:05:44 GMT",
+      "latency_seconds": 0.6147830840000026,
+      "observed_at_utc": "2026-08-30T19:41:00.587162Z",
+      "run_date": "20250701",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250701/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"cbc4281028b5a01e3a70df428bc7f529\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 Aug 2025 02:04:44 GMT",
+      "latency_seconds": 0.6375239159999992,
+      "observed_at_utc": "2026-08-30T19:41:01.203461Z",
+      "run_date": "20250801",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250801/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"286c7af3164779185c6e0f3ba4bc55c2\"",
+      "http_status": 200,
+      "last_modified": "Mon, 01 Sep 2025 02:09:43 GMT",
+      "latency_seconds": 0.6110277500000016,
+      "observed_at_utc": "2026-08-30T19:41:01.842841Z",
+      "run_date": "20250901",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20250901/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"c43601e5a0493d8c09a610834b87067b\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 Oct 2025 02:09:29 GMT",
+      "latency_seconds": 0.6244750840000002,
+      "observed_at_utc": "2026-08-30T19:41:02.455448Z",
+      "run_date": "20251001",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20251001/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"418978d1b09f1c74bbb25b8c9038eceb\"",
+      "http_status": 200,
+      "last_modified": "Sat, 01 Nov 2025 02:10:42 GMT",
+      "latency_seconds": 0.6083101249999991,
+      "observed_at_utc": "2026-08-30T19:41:03.081234Z",
+      "run_date": "20251101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20251101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"1997cdebda28ac88af4a475ae955d25e\"",
+      "http_status": 200,
+      "last_modified": "Mon, 01 Dec 2025 02:08:44 GMT",
+      "latency_seconds": 0.6008948339999982,
+      "observed_at_utc": "2026-08-30T19:41:03.690820Z",
+      "run_date": "20251201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20251201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"637c6e33ecf260357d4c6dfff64d570d\"",
+      "http_status": 200,
+      "last_modified": "Thu, 01 Jan 2026 02:05:04 GMT",
+      "latency_seconds": 0.6183050830000028,
+      "observed_at_utc": "2026-08-30T19:41:04.293228Z",
+      "run_date": "20260101",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260101/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"9814c06fbf3f68fa7f6775c143726da0\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Feb 2026 02:04:57 GMT",
+      "latency_seconds": 0.6216072080000004,
+      "observed_at_utc": "2026-08-30T19:41:04.913117Z",
+      "run_date": "20260201",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260201/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"9c82a54c6f2ecef891393ca707e4864b\"",
+      "http_status": 200,
+      "last_modified": "Sun, 01 Mar 2026 02:05:23 GMT",
+      "latency_seconds": 0.6266313329999988,
+      "observed_at_utc": "2026-08-30T19:41:05.535331Z",
+      "run_date": "20260301",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260301/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"2d4e49800c47c5cc7506aae62d4ea11e\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 Apr 2026 02:09:30 GMT",
+      "latency_seconds": 0.5697828340000015,
+      "observed_at_utc": "2026-08-30T19:41:06.163459Z",
+      "run_date": "20260401",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260401/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"080361fab67fe3303d048ef7021da9b3\"",
+      "http_status": 200,
+      "last_modified": "Fri, 01 May 2026 02:07:05 GMT",
+      "latency_seconds": 0.612782124999999,
+      "observed_at_utc": "2026-08-30T19:41:06.734949Z",
+      "run_date": "20260501",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260501/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"3e63a09e8ff216e86e0148fb78200f65\"",
+      "http_status": 200,
+      "last_modified": "Mon, 04 May 2026 02:05:56 GMT",
+      "latency_seconds": 0.630523874999998,
+      "observed_at_utc": "2026-08-30T19:41:07.348466Z",
+      "run_date": "20260504",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260504/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34806674,
+      "cycle_utc": 1,
+      "etag": "\"e73ae7e00cb373085044ac47efa90db0\"",
+      "http_status": 200,
+      "last_modified": "Tue, 05 May 2026 02:07:54 GMT",
+      "latency_seconds": 0.6312891249999986,
+      "observed_at_utc": "2026-08-30T19:41:07.980705Z",
+      "run_date": "20260505",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260505/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34712943,
+      "cycle_utc": 1,
+      "etag": "\"2241f50b40c86785bcf0aae15e20ed48\"",
+      "http_status": 200,
+      "last_modified": "Wed, 06 May 2026 02:05:46 GMT",
+      "latency_seconds": 0.6345091660000008,
+      "observed_at_utc": "2026-08-30T19:41:08.612613Z",
+      "run_date": "20260506",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260506/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": null,
+      "cycle_utc": 1,
+      "etag": null,
+      "http_status": 404,
+      "last_modified": null,
+      "latency_seconds": 0.6159812910000007,
+      "observed_at_utc": "2026-08-30T19:41:09.248329Z",
+      "run_date": "20260601",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260601/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34724473,
+      "cycle_utc": 1,
+      "etag": "\"618a70dc8bb74a250ffe692158eacde6\"",
+      "http_status": 200,
+      "last_modified": "Wed, 01 Jul 2026 02:05:16 GMT",
+      "latency_seconds": 0.6791595419999972,
+      "observed_at_utc": "2026-08-30T19:41:09.865463Z",
+      "run_date": "20260701",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260701/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34724473,
+      "cycle_utc": 1,
+      "etag": "\"55d0d414e210fa4947f7728b00cfab01\"",
+      "http_status": 200,
+      "last_modified": "Mon, 27 Jul 2026 02:12:28 GMT",
+      "latency_seconds": 0.6141805409999996,
+      "observed_at_utc": "2026-08-30T19:41:10.546313Z",
+      "run_date": "20260727",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260727/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34724473,
+      "cycle_utc": 1,
+      "etag": "\"d505c5486e732595ca4eed0006c1e7f1\"",
+      "http_status": 200,
+      "last_modified": "Tue, 28 Jul 2026 02:04:55 GMT",
+      "latency_seconds": 0.6255824160000003,
+      "observed_at_utc": "2026-08-30T19:41:11.161798Z",
+      "run_date": "20260728",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260728/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34724473,
+      "cycle_utc": 1,
+      "etag": "\"9bccb0833493895fc321c49d29b01459\"",
+      "http_status": 200,
+      "last_modified": "Wed, 29 Jul 2026 02:02:09 GMT",
+      "latency_seconds": 0.5905022090000003,
+      "observed_at_utc": "2026-08-30T19:41:11.788135Z",
+      "run_date": "20260729",
+      "sample_type": [
+        "MODEL_BOUNDARY"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260729/01/text/blend_nbptx.t01z"
+    },
+    {
+      "content_length": 34724473,
+      "cycle_utc": 1,
+      "etag": "\"5501e13c1c345854802f180c00aea9f8\"",
+      "http_status": 200,
+      "last_modified": "Sat, 01 Aug 2026 02:01:43 GMT",
+      "latency_seconds": 0.6302904169999977,
+      "observed_at_utc": "2026-08-30T19:41:12.380467Z",
+      "run_date": "20260801",
+      "sample_type": [
+        "MONTH_START"
+      ],
+      "url": "https://noaa-nbm-grib2-pds.s3.amazonaws.com/blend.20260801/01/text/blend_nbptx.t01z"
+    }
+  ],
+  "sample_count": 49,
+  "schema_version": "0.1.0",
+  "start_month": "2023-08",
+  "total_available_bytes": 1670215616
+}

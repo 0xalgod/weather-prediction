@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from time import monotonic
 from typing import Any
@@ -96,3 +96,72 @@ def inspect_probabilistic_text(path: Path, station_code: str) -> dict[str, Any]:
         "contains_probabilistic_maxt_markers": all(count > 0 for count in markers.values()),
         "replacement_character_count": text.count("�"),
     }
+
+
+def _station_block(text: str, station_code: str) -> tuple[str, str]:
+    pattern = re.compile(
+        rf"(?m)^ {re.escape(station_code)}\s+NBM V(?P<version>[0-9.]+) NBP GUIDANCE.*$"
+    )
+    matches = list(pattern.finditer(text))
+    if len(matches) != 1:
+        raise ValueError(f"expected one {station_code} NBP block, found {len(matches)}")
+    match = matches[0]
+    next_header = re.search(r"(?m)^ [A-Z0-9]{4}\s+NBM V", text[match.end() :])
+    end = match.end() + next_header.start() if next_header else len(text)
+    return text[match.start() : end], match.group("version")
+
+
+def parse_station_maxt(path: Path, station_code: str, model_run_time_utc: str) -> dict[str, Any]:
+    """Parse NBP fixed-width MaxT distribution rows for one exact station block."""
+
+    text = path.read_text(encoding="ascii", errors="strict")
+    block, version = _station_block(text, station_code)
+    required = ("FHR", "TXNMN", "TXNSD", "TXNP1", "TXNP2", "TXNP5", "TXNP7", "TXNP9")
+    rows = {}
+    for marker in required:
+        match = re.search(rf"(?m)^ {marker}\s+(.+)$", block)
+        if match is None:
+            raise ValueError(f"missing {marker} in {station_code} block")
+        tokens = re.findall(r"-?\d+|M", match.group(1).replace("|", " "))
+        rows[marker] = [None if token == "M" else int(token) for token in tokens]
+    lengths = {len(values) for values in rows.values()}
+    if len(lengths) != 1 or not lengths or 0 in lengths:
+        raise ValueError("NBP row lengths do not agree")
+    run_time = datetime.fromisoformat(model_run_time_utc.replace("Z", "+00:00"))
+    if run_time.tzinfo is None:
+        raise ValueError("model run time must be timezone-aware")
+    records = []
+    for index, forecast_hour in enumerate(rows["FHR"]):
+        if forecast_hour is None:
+            raise ValueError("forecast hour cannot be missing")
+        valid_time = run_time + timedelta(hours=forecast_hour)
+        if valid_time.hour != 0:
+            continue
+        values = {
+            "mean_f": rows["TXNMN"][index],
+            "standard_deviation_f": rows["TXNSD"][index],
+            "p10_f": rows["TXNP1"][index],
+            "p25_f": rows["TXNP2"][index],
+            "p50_f": rows["TXNP5"][index],
+            "p75_f": rows["TXNP7"][index],
+            "p90_f": rows["TXNP9"][index],
+        }
+        percentiles = [values[key] for key in ("p10_f", "p25_f", "p50_f", "p75_f", "p90_f")]
+        calibrated = [value for value in percentiles if value is not None]
+        if calibrated != sorted(calibrated):
+            raise ValueError("MaxT percentiles are not monotonic")
+        records.append(
+            {
+                "station_code": station_code,
+                "nbm_version": version,
+                "model_run_time_utc": model_run_time_utc,
+                "forecast_hour": forecast_hour,
+                "valid_time_utc": valid_time.isoformat().replace("+00:00", "Z"),
+                "temperature_kind": "MAXIMUM",
+                "temperature_unit": "F",
+                **values,
+            }
+        )
+    if not records:
+        raise ValueError("station block contains no 00Z-valid MaxT rows")
+    return {"station_code": station_code, "nbm_version": version, "records": records}

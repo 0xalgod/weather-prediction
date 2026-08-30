@@ -2,7 +2,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from weather_quant.ingestion.noaa_nbm import inspect_probabilistic_text, probabilistic_text_url
+from weather_quant.ingestion.noaa_nbm import (
+    inspect_probabilistic_text,
+    parse_station_maxt,
+    probabilistic_text_url,
+)
 
 
 class NoaaNbmTests(unittest.TestCase):
@@ -26,6 +30,26 @@ class NoaaNbmTests(unittest.TestCase):
         self.assertEqual(inventory["station_occurrence_count"], 1)
         self.assertEqual(inventory["nbm_version"], "4.1")
         self.assertTrue(inventory["contains_probabilistic_maxt_markers"])
+
+    def test_parses_only_00z_valid_maximum_rows(self):
+        content = """ KORD    NBM V5.0 NBP GUIDANCE    8/30/2026  0100 UTC
+ UTC    00  12| 00  12
+ FHR    23  35| 47  59
+ TXNMN  85  74| 88  76
+ TXNSD   3   2|  4   3
+ TXNP1  81  71| 84  73
+ TXNP2  83  73| 86  74
+ TXNP5  85  74| 87  75
+ TXNP7  86  75| 89  77
+ TXNP9  88  77| 95  80
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "nbp.txt"
+            path.write_text(content, encoding="ascii")
+            parsed = parse_station_maxt(path, "KORD", "2026-08-30T01:00:00Z")
+        self.assertEqual(len(parsed["records"]), 2)
+        self.assertEqual(parsed["records"][0]["valid_time_utc"], "2026-08-31T00:00:00Z")
+        self.assertEqual(parsed["records"][0]["p90_f"], 88)
 
 
 if __name__ == "__main__":
