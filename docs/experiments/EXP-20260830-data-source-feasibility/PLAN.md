@@ -1159,6 +1159,17 @@ These inferences must be verified in Phases 3 and 4.
 - Metric lock: useful uptime ≥99%, ready checkpoint coverage ≥95%, elapsed ≥86,400 seconds and zero delta-before-base/replayed-top violations.
 - Next action: Start the production 24-hour stability capture with 12 assets, 60-second checkpoints and 300-second anchors.
 
+### 2026-08-30 — Phase 3 production 24-hour stability capture started
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; capture status `RUNNING`.
+- Run: `run=20260830T1145Z-phase3-stability-24h-v1`; start `2026-08-30T11:44:58Z`; target end `2026-08-31T11:44:58Z`.
+- Locked parameters: 12 assets, 86,400 seconds, 60-second checkpoints, 300-second REST anchors, 15-second base timeout and 30-second maximum exponential reconnect backoff.
+- First checkpoint: useful uptime 99.4699%, ready coverage 1/1, 82 price-change events, 164 applied changes, 5/5 PING/PONG and zero reconnect/error/contract violation.
+- Local evidence: `data/raw/polymarket_ws/run=20260830T1145Z-phase3-stability-24h-v1`, `data/interim/polymarket_ws/stability-24h-v1.json`; raw/interim files remain git-ignored.
+- Limitation: No gate decision is allowed before the target duration completes; first REST anchor was not yet due at this checkpoint.
+- Next action: Monitor checkpoints/process health and evaluate the locked gate after completion.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.

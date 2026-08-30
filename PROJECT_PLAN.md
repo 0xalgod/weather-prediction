@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.19.0
+**Plan versiyonu:** 0.20.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -807,6 +807,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase3-stability-runner-smoke.md`
 - **Sonuç:** Runner readiness geçti; Phase 3 `IN_PROGRESS`. Sıradaki adım production 24 saat capture'ı başlatmaktır.
 
+### D-0021 — 2026-08-30 — Production 24 saat stability capture başlatıldı
+
+- **Durum:** `ACTIVE`
+- **Karar:** `run=20260830T1145Z-phase3-stability-24h-v1`, 12 asset, 86.400 saniye, 60 saniye checkpoint, 300 saniye REST anchor, 15 saniye base timeout ve maksimum 30 saniye exponential backoff ile başlatıldı. Gate koşu tamamlanmadan değerlendirilmeyecek.
+- **İlk checkpoint:** Start `2026-08-30T11:44:58Z`, target end `2026-08-31T11:44:58Z`. İlk 60 saniyede useful uptime %99,4699, ready checkpoint 1/1, 82 price-change event/164 applied change, 5 PING/PONG, 0 reconnect/error/base/top ihlali.
+- **Henüz bilinmeyen:** İlk REST anchor 300. saniyede; 24 saat uptime, coverage, gap, storage ve final anchor oranı henüz ölçülmedi.
+- **Local artifact:** `data/raw/polymarket_ws/run=20260830T1145Z-phase3-stability-24h-v1`, `data/interim/polymarket_ws/stability-24h-v1.json` (git-ignore; raw veri commitlenmeyecek).
+- **Sonuç:** Capture `RUNNING`; Phase 3 `IN_PROGRESS` ve gate sonucu bekleniyor.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -819,7 +828,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli production parametreleriyle 24 saat stability capture'ı başlatmak; tamamlanınca gate sonucunu raw/checkpoint/anchor kanıtıyla değerlendirmek.
+**Tek sonraki adım:** Running 24 saat capture'ın checkpoint ve process sağlığını izlemek; tamamlanınca gate sonucunu raw/checkpoint/anchor kanıtıyla değerlendirmek.
 
 Beklenen artifact'lar:
 
