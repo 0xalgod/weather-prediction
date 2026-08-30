@@ -684,11 +684,11 @@ Fresh active inventory selected three latest-end events and requested all 66 Yes
 
 #### Decision
 
-REST contract, forced reconnect and live delta replay shakeout passed. Phase 3 remains `IN_PROGRESS`; the 24-hour stability gate is unevaluated.
+REST contract, forced reconnect and live delta replay shakeout passed. The first long run is invalid for the stability gate because verified host sleep contaminated wall-clock uptime; its raw replay also exposed checkpoint bias, fixed-asset lifecycle failure and unresolved advertised-top mismatch. Phase 3 remains `IN_PROGRESS`.
 
 #### Next action
 
-Implement the resumable collector with reconnect/backoff, periodic REST anchors and checkpoints, then start the 24-hour stability run.
+Remediate wall-clock checkpoint accounting, non-blocking anchors, reconnect asset lifecycle and advertised-top/gap diagnosis; then run a 15-minute `caffeinate` regression before a one-hour soak.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1170,6 +1170,17 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: No gate decision is allowed before the target duration completes; first REST anchor was not yet due at this checkpoint.
 - Next action: Monitor checkpoints/process health and evaluate the locked gate after completion.
 
+### 2026-08-31 — Phase 3 first long run invalidated by host sleep
+
+- Previous phase status: `IN_PROGRESS`; capture status `RUNNING`.
+- New phase status: `IN_PROGRESS`; capture classification `HOST_SLEEP_CONTAMINATED_INTERRUPTED`.
+- Evidence: macOS power log confirmed multiple sleep intervals during the run. At controlled interruption the snapshot had 37,015 elapsed seconds, 82.14% useful uptime, 98.64% observed-checkpoint coverage and 99.789% REST anchor match.
+- Raw replay: 27 connection files, 69,461 frames and 16,936 advertised-top mismatches; concentration Toronto 11,394 and Panama City 5,542, with Mexico City zero.
+- Metric invalidation: Observed-checkpoint coverage omitted wall-clock slots missed while the host was suspended and therefore cannot be used as the registered coverage metric.
+- Additional failure: Late reconnects received only 6/12 full books, so fixed token lifecycle/availability must be checked separately from transport recovery.
+- Evidence artifact: `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.md`, `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.json`.
+- Next action: Collector remediation followed by 15-minute caffeinated regression and one-hour soak.
+
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 
 - Previous phase status: `NOT_STARTED`
@@ -1311,6 +1322,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Process uptime or TCP/WebSocket connected time; rejected because both can report health before state is safe to replay or use.
 - Consequence: The 24-hour gate requires useful uptime ≥99%, ready-checkpoint coverage ≥95%, elapsed ≥86,400 seconds and zero base/replay contract violations.
 - Revisit condition: Only a more conservative metric may supersede this definition; the threshold cannot be relaxed post-hoc.
+
+### ED-0022 — 2026-08-31 — Invalidate host-suspended runs and count scheduled slots
+
+- Decision: Any run with confirmed host sleep is excluded from the stability gate. Coverage denominator is the number of wall-clock checkpoint slots that should have occurred, not only callbacks the process executed.
+- Evidence available at decision time: macOS logs confirmed several sleep intervals during the first long run; useful uptime was 82.14% while callback-only ready coverage misleadingly reported 98.64%.
+- Alternatives considered: Remove sleep intervals and score the remaining time; rejected post-hoc because the registered gate measures an operational collection system and missed market events cannot be reconstructed.
+- Consequence: Future local gates run under `caffeinate`, record host monotonic/wall-clock discontinuities and mark missed slots not-ready. The contaminated raw data remains valid only for failure diagnosis.
+- Revisit condition: A managed always-on host replaces laptop execution, with host health measured independently.
 
 ### ED-0017 — 2026-08-30 — Key NBM availability by cycle and version
 

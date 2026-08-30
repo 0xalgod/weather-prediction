@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.25.0
+**Plan versiyonu:** 0.26.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -869,6 +869,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260830-phase4-gefs-initial-feasibility.md`, `reports/data_quality/EXP-20260830-phase4-gefs-operational-archive-probe.json`
 - **Sonuç:** Phase 4 `IN_PROGRESS`; sıradaki gate kilitli 365 günlük GEFS coverage ve local-day step semantiğidir.
 
+### D-0027 — 2026-08-31 — Phase 3 host-sleep kontaminasyonu ve raw replay
+
+- **Durum:** `ACTIVE`
+- **Karar:** İlk 24 saat koşusu stability gate'e uygun değildir; `HOST_SLEEP_CONTAMINATED_INTERRUPTED` olarak korunur ve yalnız failure diagnosis için kullanılır.
+- **Ölçülen kanıt:** 37.015 saniyede useful uptime `%82,14`; macOS power log çoklu gerçek sleep aralığı doğruladı. Raw replay 27 connection/69.461 frame ve 16.936 advertised-top mismatch buldu; Toronto 11.394, Panama City 5.542, Mexico City 0.
+- **Ayrım:** Host sleep uptime/reconnect'i açıklar fakat mismatch'i tamamen açıklamaz. REST anchor match `%99,789`; event-level protocol/state veya gap handling ayrıca düzeltilmeli. Son reconnect'lerde yalnız 6/12 full book, fixed asset lifecycle riskini gösterdi.
+- **Metrik hatası:** Ready-checkpoint oranı kaçırılan wall-clock slotlarını paydaya eklemediği için yukarı yönlü yanlıdır.
+- **Artifact:** `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.md`, `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.json`
+- **Sonuç:** Phase 3 `IN_PROGRESS`; collector düzeltmesi → 15 dakika regression → 1 saat caffeinated soak → yeni 24 saat gate sırası kilitlendi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -881,7 +891,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli son 365 tamamlanmış gün için GEFS 00Z f024 control/p01/p30 index coverage'ını ve f006/f012/f018/f024 TMAX local-day window semantiğini ölçmek.
+**Tek sonraki adım:** Phase 3 collector'da wall-clock checkpoint, non-blocking REST anchor, reconnect asset-lifecycle ve advertised-top/gap teşhisini düzeltip 15 dakikalık `caffeinate` regression çalıştırmak.
 
 Beklenen artifact'lar:
 
