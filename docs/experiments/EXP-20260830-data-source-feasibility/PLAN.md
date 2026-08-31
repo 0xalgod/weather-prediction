@@ -688,7 +688,7 @@ REST contract, forced reconnect and live delta replay shakeout passed. The first
 
 #### Next action
 
-Remediate wall-clock checkpoint accounting, non-blocking anchors, reconnect asset lifecycle and advertised-top/gap diagnosis; then run a 15-minute `caffeinate` regression before a one-hour soak.
+Run the remediated collector for a one-hour `caffeinate` soak with a current lifecycle-safe 12-token selection; only then authorize a replacement 24-hour gate.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1181,6 +1181,16 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence artifact: `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.md`, `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.json`.
 - Next action: Collector remediation followed by 15-minute caffeinated regression and one-hour soak.
 
+### 2026-08-31 — Phase 3 remediated 15-minute regression passed
+
+- Previous phase status: `IN_PROGRESS`.
+- New phase status: `IN_PROGRESS`; remediation regression `PASSED`.
+- Remediation: Wall-clock slot denominator and final boundary accounting; missed-slot metric; non-blocking REST anchor tasks; market-end horizon guard; advertised-top mismatch marks state desynchronized and forces fresh-base recovery.
+- Invalidation: v2 completed economically clean but reported 14 rather than 15 scheduled slots at 900 seconds. It was not accepted; v3 reran after final-slot correction.
+- Evidence: `reports/data_quality/EXP-20260831-phase3-collector-regression-15m.md`; local run `run=20260830T2224Z-phase3-regression-15m-v3`.
+- Verification: 900.068 seconds, useful uptime 99.9592%, 15/15 ready, 0 missed slot, 0 reconnect/error/base/top violation, 24/24 REST anchor match and 89/89 heartbeat/PONG.
+- Next action: One-hour caffeinated soak on the same lifecycle-safe selection/code.
+
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 
 - Previous phase status: `NOT_STARTED`
@@ -1330,6 +1340,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Remove sleep intervals and score the remaining time; rejected post-hoc because the registered gate measures an operational collection system and missed market events cannot be reconstructed.
 - Consequence: Future local gates run under `caffeinate`, record host monotonic/wall-clock discontinuities and mark missed slots not-ready. The contaminated raw data remains valid only for failure diagnosis.
 - Revisit condition: A managed always-on host replaces laptop execution, with host health measured independently.
+
+### ED-0023 — 2026-08-31 — Fail closed on event-level top disagreement
+
+- Decision: An advertised-top mismatch invalidates the current connection state; do not prune or overwrite local levels to force agreement. Recovery requires a new connection and fresh full book.
+- Evidence available at decision time: The contaminated capture produced 16,936 mismatches while most REST anchors matched. The exact missing/implicit delta semantics remain unproven, so silent state repair would fabricate depth.
+- Alternatives considered: Trust advertised best bid/ask and delete every contradictory local level; rejected because it changes full depth without an explicit size-zero event and could invent executable liquidity. Ignore mismatch because anchors mostly match; rejected because event-time fills could still be wrong.
+- Consequence: Regression/soak fails on any mismatch and reconnects fail closed. A future documented sequence/resume protocol or exact raw+REST proof may refine recovery, but cannot rewrite historical gaps.
+- Revisit condition: Primary protocol documentation plus captured counterexamples establish a deterministic, replayable repair rule.
 
 ### ED-0017 — 2026-08-30 — Key NBM availability by cycle and version
 

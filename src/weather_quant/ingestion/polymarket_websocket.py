@@ -56,6 +56,7 @@ class RecoveryState:
     delta_before_book_count: int = 0
     applied_change_count: int = 0
     advertised_top_mismatch_count: int = 0
+    desynchronized: bool = False
 
     @staticmethod
     def _decimal(value: Any, field_name: str) -> Decimal:
@@ -121,6 +122,7 @@ class RecoveryState:
             for asset_id, advertised in advertised_by_asset.items():
                 if asset_id in self.books and advertised != book_top(self.books[asset_id]):
                     self.advertised_top_mismatch_count += 1
+                    self.desynchronized = True
             return
         if event_type == "tick_size_change":
             asset_id = str(event.get("asset_id") or "")
@@ -130,7 +132,7 @@ class RecoveryState:
 
     @property
     def ready(self) -> bool:
-        return self.expected_assets.issubset(self.books)
+        return not self.desynchronized and self.expected_assets.issubset(self.books)
 
 
 def apply_events(state: RecoveryState, events: Iterable[Mapping[str, Any]]) -> None:

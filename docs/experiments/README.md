@@ -4,7 +4,7 @@ This index is the project-level directory of material research experiments. Deta
 
 | Experiment ID | Title | Status | Started | Completed | Primary decision | Plan |
 |---|---|---|---|---|---|---|
-| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 3 first run host-sleep contaminated; collector remediation active; GEFS conditional pass | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
+| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 3 remediated 15m regression passed; 1h soak next; GEFS conditional pass | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
 
 
 ## Status policy

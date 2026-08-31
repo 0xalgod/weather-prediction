@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import copy
 import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -47,6 +48,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--anchor-seconds", type=float, default=300.0)
     parser.add_argument("--initial-timeout-seconds", type=float, default=15.0)
     parser.add_argument("--max-backoff-seconds", type=float, default=30.0)
+    parser.add_argument("--gate-minimum-seconds", type=float, default=86400.0)
     parser.add_argument("--run-directory", type=Path, required=True)
     parser.add_argument("--summary", type=Path, required=True)
     parser.add_argument("--resume", action="store_true")
@@ -73,6 +75,7 @@ def initial_metrics() -> dict[str, Any]:
         "max_interframe_gap_seconds": 0.0,
         "checkpoint_count": 0,
         "ready_checkpoint_count": 0,
+        "missed_checkpoint_count": 0,
         "anchor_count": 0,
         "anchor_asset_count": 0,
         "anchor_match_count": 0,
@@ -94,6 +97,7 @@ def checkpoint_payload(
     selection: list[dict[str, Any]],
     metrics: dict[str, Any],
     status: str,
+    gate_minimum_seconds: float,
 ) -> dict[str, Any]:
     now = utc_now()
     elapsed = max((now - started_at).total_seconds(), 0.0)
@@ -124,7 +128,7 @@ def checkpoint_payload(
             "rest_anchor_match_rate": anchor_match_rate,
         },
         "gate": {
-            "minimum_elapsed_seconds": 86400,
+            "minimum_elapsed_seconds": gate_minimum_seconds,
             "useful_uptime_rate_min": 0.99,
             "ready_checkpoint_coverage_min": 0.95,
             "delta_before_book_max": 0,
@@ -173,6 +177,42 @@ async def fetch_anchor(
     return compared, matched, errors
 
 
+def collect_finished_anchors(
+    tasks: dict[int, asyncio.Task[tuple[int, int, int]]], metrics: dict[str, Any]
+) -> None:
+    for anchor_index, task in list(tasks.items()):
+        if not task.done():
+            continue
+        del tasks[anchor_index]
+        try:
+            compared, matched, errors = task.result()
+        except Exception as error:
+            metrics["anchor_error_count"] += 1
+            metrics["errors"].append(
+                {"observed_at_utc": utc_iso(), "error": f"anchor: {type(error).__name__}: {error}"}
+            )
+        else:
+            metrics["anchor_asset_count"] += compared
+            metrics["anchor_match_count"] += matched
+            metrics["anchor_error_count"] += errors
+
+
+def account_checkpoint_slots(
+    started_at: datetime,
+    checkpoint_seconds: float,
+    metrics: dict[str, Any],
+    ready_now: bool,
+) -> int:
+    elapsed = max((utc_now() - started_at).total_seconds(), 0.0)
+    expected_slots = int(elapsed // checkpoint_seconds)
+    due_slots = max(expected_slots - metrics["checkpoint_count"], 0)
+    if due_slots:
+        metrics["checkpoint_count"] += due_slots
+        metrics["missed_checkpoint_count"] += max(due_slots - 1, 0)
+        metrics["ready_checkpoint_count"] += int(ready_now)
+    return due_slots
+
+
 async def run(args: argparse.Namespace) -> dict[str, Any]:
     if args.resume:
         previous = json.loads(args.summary.read_text(encoding="utf-8"))
@@ -188,15 +228,28 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
         target_end_at = started_at + timedelta(seconds=args.duration_seconds)
         selection = select_liquid_assets(args.rest_coverage, args.asset_count)
         metrics = initial_metrics()
+    for key, value in initial_metrics().items():
+        metrics.setdefault(key, value)
     assets = [item["asset_id"] for item in selection]
     atomic_json(
         args.summary,
-        checkpoint_payload(started_at, target_end_at, selection, metrics, "RUNNING"),
+        checkpoint_payload(
+            started_at,
+            target_end_at,
+            selection,
+            metrics,
+            "RUNNING",
+            args.gate_minimum_seconds,
+        ),
     )
+    for item in selection:
+        if item.get("end_at") and parse_utc(item["end_at"]) <= target_end_at:
+            raise ValueError("selected market expires before the stability horizon")
     backoff = 1.0
     last_frame_at: float | None = None
     next_checkpoint = monotonic() + args.checkpoint_seconds
     next_anchor = monotonic() + args.anchor_seconds
+    anchor_tasks: dict[int, asyncio.Task[tuple[int, int, int]]] = {}
     existing_connections = [
         int(path.stem.split("-")[1]) for path in args.run_directory.glob("connection-*.jsonl")
     ]
@@ -223,6 +276,7 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
                     next_ping = monotonic() + 10.0
                     while utc_now() < target_end_at:
                         now = monotonic()
+                        collect_finished_anchors(anchor_tasks, metrics)
                         if (
                             not state.ready
                             and now - connected_started >= args.initial_timeout_seconds
@@ -235,13 +289,15 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
                         if now >= next_anchor:
                             if state.ready:
                                 anchor_index = metrics["anchor_count"] + 1
-                                compared, matched, errors = await fetch_anchor(
-                                    assets, state, args.run_directory, anchor_index
+                                anchor_tasks[anchor_index] = asyncio.create_task(
+                                    fetch_anchor(
+                                        assets,
+                                        copy.deepcopy(state),
+                                        args.run_directory,
+                                        anchor_index,
+                                    )
                                 )
                                 metrics["anchor_count"] += 1
-                                metrics["anchor_asset_count"] += compared
-                                metrics["anchor_match_count"] += matched
-                                metrics["anchor_error_count"] += errors
                             next_anchor = monotonic() + args.anchor_seconds
                         if now >= next_checkpoint:
                             metrics["connected_seconds"] += now - connected_accounted_at
@@ -249,12 +305,21 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
                             if ready_accounted_at is not None:
                                 metrics["ready_seconds"] += now - ready_accounted_at
                                 ready_accounted_at = now
-                            metrics["checkpoint_count"] += 1
-                            metrics["ready_checkpoint_count"] += int(state.ready)
+                            account_checkpoint_slots(
+                                started_at,
+                                args.checkpoint_seconds,
+                                metrics,
+                                state.ready,
+                            )
                             atomic_json(
                                 args.summary,
                                 checkpoint_payload(
-                                    started_at, target_end_at, selection, metrics, "RUNNING"
+                                    started_at,
+                                    target_end_at,
+                                    selection,
+                                    metrics,
+                                    "RUNNING",
+                                    args.gate_minimum_seconds,
                                 ),
                             )
                             next_checkpoint = monotonic() + args.checkpoint_seconds
@@ -310,6 +375,8 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
                         metrics["advertised_top_mismatch_count"] += (
                             state.advertised_top_mismatch_count - before_top_mismatch
                         )
+                        if state.desynchronized:
+                            raise RuntimeError("advertised top mismatch desynchronized state")
                         if state.ready and ready_started is None:
                             ready_started = monotonic()
                             ready_accounted_at = ready_started
@@ -328,16 +395,39 @@ async def run(args: argparse.Namespace) -> dict[str, Any]:
                 metrics["reconnect_count"] += 1
                 atomic_json(
                     args.summary,
-                    checkpoint_payload(started_at, target_end_at, selection, metrics, "RUNNING"),
+                    checkpoint_payload(
+                        started_at,
+                        target_end_at,
+                        selection,
+                        metrics,
+                        "RUNNING",
+                        args.gate_minimum_seconds,
+                    ),
                 )
                 remaining = max((target_end_at - utc_now()).total_seconds(), 0)
                 await asyncio.sleep(min(backoff, remaining))
                 backoff = min(backoff * 2, args.max_backoff_seconds)
 
-    final = checkpoint_payload(started_at, target_end_at, selection, metrics, "COMPLETE")
+    if anchor_tasks:
+        await asyncio.gather(*anchor_tasks.values(), return_exceptions=True)
+        collect_finished_anchors(anchor_tasks, metrics)
+    account_checkpoint_slots(
+        started_at,
+        args.checkpoint_seconds,
+        metrics,
+        state.ready,
+    )
+    final = checkpoint_payload(
+        started_at,
+        target_end_at,
+        selection,
+        metrics,
+        "COMPLETE",
+        args.gate_minimum_seconds,
+    )
     derived = final["derived"]
     final["accepted"] = (
-        final["elapsed_seconds"] >= 86400
+        final["elapsed_seconds"] >= args.gate_minimum_seconds
         and derived["useful_uptime_rate"] >= 0.99
         and derived["ready_checkpoint_coverage"] >= 0.95
         and metrics["delta_before_book_count"] == 0

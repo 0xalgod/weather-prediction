@@ -61,6 +61,7 @@ def select_liquid_assets(path: Path, asset_count: int) -> list[dict[str, Any]]:
             "city_label": item["city_label"],
             "outcome_label": item["outcome_label"],
             "selection_spread": item["spread"],
+            "end_at": item.get("end_at"),
         }
         for item in selected
     ]

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.26.0
+**Plan versiyonu:** 0.27.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -879,6 +879,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.md`, `reports/data_quality/EXP-20260830-phase3-stability-host-sleep-analysis.json`
 - **Sonuç:** Phase 3 `IN_PROGRESS`; collector düzeltmesi → 15 dakika regression → 1 saat caffeinated soak → yeni 24 saat gate sırası kilitlendi.
 
+### D-0028 — 2026-08-31 — Collector remediation 15 dakika regression sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** Wall-clock checkpoint, lifecycle horizon, non-blocking anchor ve fail-closed desync düzeltmeleri 15 dakika v3 regression gate'ini geçti; Phase 3 henüz geçmedi.
+- **Invalidation:** İlk v2 sonucu 900 saniyede final boundary slotunu saymadığı için 14 checkpoint üretti; post-hoc kabul edilmedi. Final slot düzeltildikten sonra v3 sıfırdan çalıştırıldı.
+- **Ölçülen kanıt:** v3 elapsed 900,068 sn; useful uptime `%99,9592`; 15/15 ready slot, 0 missed; 12/12 full book; 785 price event/1.570 change; 0 reconnect/error/delta-before-book/mismatch; 24/24 REST anchor; 89/89 heartbeat/PONG.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase3-collector-regression-15m.md`; local raw/interim run `run=20260830T2224Z-phase3-regression-15m-v3`.
+- **Sonuç:** Regression `PASSED`; sıradaki gate aynı kodla 1 saatlik `caffeinate` soak.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -891,7 +900,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Phase 3 collector'da wall-clock checkpoint, non-blocking REST anchor, reconnect asset-lifecycle ve advertised-top/gap teşhisini düzeltip 15 dakikalık `caffeinate` regression çalıştırmak.
+**Tek sonraki adım:** Güncel lifecycle-safe 12 tokenla 1 saatlik `caffeinate` Phase 3 soak çalıştırmak; gate geçerse yeni 24 saat capture planlamak.
 
 Beklenen artifact'lar:
 

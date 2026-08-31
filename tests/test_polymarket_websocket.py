@@ -71,6 +71,29 @@ class MarketWebSocketTests(unittest.TestCase):
         )
         self.assertEqual(state.applied_change_count, 2)
         self.assertEqual(state.advertised_top_mismatch_count, 0)
+        self.assertFalse(state.desynchronized)
+
+    def test_advertised_top_mismatch_invalidates_ready_state(self):
+        state = RecoveryState(frozenset({"token-yes", "token-no"}))
+        apply_events(state, decode_market_frame(FIXTURE.read_text(encoding="utf-8")))
+        self.assertTrue(state.ready)
+        state.apply(
+            {
+                "event_type": "price_change",
+                "price_changes": [
+                    {
+                        "asset_id": "token-yes",
+                        "side": "BUY",
+                        "price": "0.44",
+                        "size": "1",
+                        "best_bid": "0.44",
+                        "best_ask": "0.55",
+                    }
+                ],
+            }
+        )
+        self.assertTrue(state.desynchronized)
+        self.assertFalse(state.ready)
 
     def test_pong_and_raw_checksum_are_preserved(self):
         self.assertEqual(decode_market_frame("PONG"), [{"event_type": "pong"}])
