@@ -827,6 +827,15 @@ The locked 24-page spike and subsequent 730-page full coverage both passed for C
 - **Evidence limit:** Passing authorizes current/final outcome labels for calibration. It does not upgrade them to historical market-freeze-as-of settlement evidence.
 - **Artifact:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-coverage-365d.json`.
 
+#### Pre-registration — 2026-08-31 — CYYZ 2026-03-08 anomaly diagnostic
+
+- **Hypothesis:** Wunderground's two-row page is intraday-incomplete, while its 9°C daily high remains consistent with the exact-station ECCC hourly local-day maximum.
+- **Independent source:** Official ECCC `climate-hourly` OGC API; `TORONTO INTL A`, climate identifier `6158731`, with station coordinates checked against CYYZ evidence.
+- **Acceptance:** Exactly 23 unique local-hour rows on the DST spring-forward date, 23 non-null temperatures, exact local date/station identity, and half-up whole-degree maximum equal to Wunderground's 9°C high.
+- **Time contract:** Filter ECCC hourly `LOCAL_DATE`; do not use ECCC daily aggregates because official climatological-day boundaries need not equal the Polymarket local calendar day.
+- **Settlement check:** Scan the complete preserved 8,222-event closed inventory for the exact Toronto/date event. No event yields `NOT_APPLICABLE`, not a passed settlement reconciliation.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json`.
+
 #### Decision
 
 Pending.

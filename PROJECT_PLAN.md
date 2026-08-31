@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.37.0
+**Plan versiyonu:** 0.38.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -986,6 +986,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260831-phase5-wunderground-observation-coverage-365d.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-coverage-365d.json`; local raw `run=20260831T-phase5-coverage-365d-v1`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; CYYZ anomalisi ve üçüncü şehir/settlement join'i sıradadır.
 
+### D-0039 — 2026-08-31 — CYYZ 2026-03-08 anomaly diagnostic ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Wunderground'ın iki satırlı CYYZ sayfası sub-daily eksiktir fakat 9°C daily high, exact Toronto Pearson istasyonunun resmî ECCC local-calendar-day saatlik maksimumuyla tutarlıdır.
+- **Kaynak:** ECCC `climate-hourly` OGC API, `TORONTO INTL A`, climate identifier `6158731`; Wunderground immutable raw page; 8.222-event Polymarket closed raw inventory.
+- **Gate:** Local date 2026-03-08 için DST nedeniyle exact 23 unique hourly row, 23 non-null TEMP, station/coordinate identity, raw maximumun half-up whole °C değeri 9 ve Wunderground daily high ile eşleşme.
+- **Settlement kontrolü:** Exact Toronto/date event count raporlanır. Event yoksa settlement `NOT_APPLICABLE`, başarı diye sayılmaz.
+- **Zaman sözleşmesi:** ECCC daily aggregate kullanılmaz; resmî climatological-day boundary local calendar day ile farklı olabileceğinden yalnız hourly `LOCAL_DATE` filtrelenir.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -998,7 +1008,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** CYYZ 2026-03-08 iki-observation anomalisini bağımsız station kaynağı ve Polymarket settlement ile araştırmak; sonucu exclusion/sensitivity politikasına bağlamak.
+**Tek sonraki adım:** Resmî ECCC hourly kayıtları ve full Polymarket inventory ile CYYZ 2026-03-08 anomaly diagnostic'ini çalıştırmak; sonucu exclusion/sensitivity politikasına bağlamak.
 
 Beklenen artifact'lar:
 
