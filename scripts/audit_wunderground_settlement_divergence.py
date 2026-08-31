@@ -74,9 +74,12 @@ def summarize(records: list[dict]) -> dict:
         "comparison_counts": dict(Counter(record["comparison"] for record in records)),
         "diverged_event_ids": [record["event_id"] for record in divergences],
         "all_divergences_quarantined": all(
-            not record["settlement_bucket_eligible"]
+            not record["current_page_bucket_consistent"]
             and not record["temperature_label_eligible"]
             for record in divergences
+        ),
+        "market_terminal_label_available_count": sum(
+            record["market_terminal_label_available"] for record in records
         ),
         "temperature_label_eligible_count": sum(
             record["temperature_label_eligible"] for record in records

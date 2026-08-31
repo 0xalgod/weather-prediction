@@ -38,7 +38,8 @@ def classify_settlement_record(record: Mapping[str, Any]) -> dict[str, Any]:
             **base,
             "comparison": "INELIGIBLE",
             "disposition": record.get("disposition"),
-            "settlement_bucket_eligible": False,
+            "market_terminal_label_available": False,
+            "current_page_bucket_consistent": False,
             "temperature_label_eligible": False,
         }
     comparison = outcome_rule_check(
@@ -46,18 +47,19 @@ def classify_settlement_record(record: Mapping[str, Any]) -> dict[str, Any]:
     )
     if comparison == "MATCH":
         disposition = "CURRENT_PAGE_TERMINAL_BUCKET_MATCH"
-        settlement_bucket_eligible = True
+        current_page_bucket_consistent = True
     elif comparison == "MISMATCH":
         disposition = "HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT"
-        settlement_bucket_eligible = False
+        current_page_bucket_consistent = False
     else:
         disposition = "UNRESOLVED_ELIGIBLE"
-        settlement_bucket_eligible = False
+        current_page_bucket_consistent = False
     return {
         **base,
         "comparison": comparison,
         "disposition": disposition,
-        "settlement_bucket_eligible": settlement_bucket_eligible,
+        "market_terminal_label_available": True,
+        "current_page_bucket_consistent": current_page_bucket_consistent,
         "temperature_label_eligible": False,
     }
 
