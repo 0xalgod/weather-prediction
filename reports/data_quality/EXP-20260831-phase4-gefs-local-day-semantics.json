@@ -1,0 +1,1391 @@
+{
+  "cases": [
+    {
+      "actual_tmax_ranges": {
+        "f030": {
+          "byte_count": 421347,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260722/gec00-f030-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:19.964344Z",
+          "requested_at_utc": "2026-08-31T17:20:18.395369Z",
+          "retrieval_seconds": 1.5689946249999984,
+          "sha256": "586c183dd6536302054359e6b06d6e886a9774cb74c0156719dc2559a433b42b",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f030"
+        },
+        "f036": {
+          "byte_count": 426055,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260722/gec00-f036-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:22.813153Z",
+          "requested_at_utc": "2026-08-31T17:20:21.294341Z",
+          "retrieval_seconds": 1.5188265839999993,
+          "sha256": "c2dde2f10cc35136a3a2b34adaa91405bddff6d5243d0dfeb5f2b601a4d7eaf5",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f036"
+        },
+        "f042": {
+          "byte_count": 427268,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260722/gec00-f042-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:25.617781Z",
+          "requested_at_utc": "2026-08-31T17:20:24.091579Z",
+          "retrieval_seconds": 1.5262156669999953,
+          "sha256": "000bf9983ed03976224f2d2f173129079af2ca45229c644d0d099471a6f5f889",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f042"
+        },
+        "f048": {
+          "byte_count": 422721,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260722/gec00-f048-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:28.476396Z",
+          "requested_at_utc": "2026-08-31T17:20:26.940974Z",
+          "retrieval_seconds": 1.5354371250000014,
+          "sha256": "60f2c33a13706da9fb6031827c30a3f7dfcd24655d92e5e68f451394ee3afaf7",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f048"
+        },
+        "f054": {
+          "byte_count": 429005,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260722/gec00-f054-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:31.507869Z",
+          "requested_at_utc": "2026-08-31T17:20:29.949015Z",
+          "retrieval_seconds": 1.558881624999998,
+          "sha256": "fd461bf8dee9492e69044454003698f86b68353c501b91afd91fdaa52b879420",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f054"
+        }
+      },
+      "city": "Toronto",
+      "coverage": {
+        "covered_seconds": 86400.0,
+        "exact_partition": false,
+        "outside_local_seconds": 21600.0,
+        "selected_window_count": 5,
+        "target_seconds": 86400.0,
+        "uncovered_seconds": 0.0
+      },
+      "dst_expected": true,
+      "gate_a_all_three_hour_windows": false,
+      "inventories": {
+        "f003": {
+          "http_etag": "\"9a579d0d940f2c36ed56f5bc1f59f152\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:48:05 GMT",
+          "http_status": 200,
+          "index_byte_count": 2781,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:48:06 GMT",
+          "index_http_status": 200,
+          "index_sha256": "d84d0680dddf7c3827b59d2d363db353f781be1dc57173e0faa5100feec93a23",
+          "object_byte_count": 17836509,
+          "received_at_utc": "2026-08-31T17:19:54.906412Z",
+          "requested_at_utc": "2026-08-31T17:19:53.544931Z",
+          "retrieval_seconds": 1.3614111660000001,
+          "tmax_row": {
+            "end": 5592340,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "0-3 hour max fcst",
+            "length": 420895,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5171446,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f003"
+        },
+        "f006": {
+          "http_etag": "\"a9e5960665eac3333f9f7a818b89357b\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:49:12 GMT",
+          "http_status": 200,
+          "index_byte_count": 2781,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:49:13 GMT",
+          "index_http_status": 200,
+          "index_sha256": "28f64443ce92023dfa947d9a4f5de8294269fb223f36d9a0d6d1398c62ae0c89",
+          "object_byte_count": 18142754,
+          "received_at_utc": "2026-08-31T17:19:56.138205Z",
+          "requested_at_utc": "2026-08-31T17:19:54.906917Z",
+          "retrieval_seconds": 1.231316042,
+          "tmax_row": {
+            "end": 5606035,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "0-6 hour max fcst",
+            "length": 419020,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5187016,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f006"
+        },
+        "f009": {
+          "http_etag": "\"d73e5f7c9f363f4ec8c3657698e1ad1f\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:50:20 GMT",
+          "http_status": 200,
+          "index_byte_count": 2781,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:50:22 GMT",
+          "index_http_status": 200,
+          "index_sha256": "dba4ffa78ddf8f7f830de97e259e6e9836da8f8e2e74b45addae828df8e6352c",
+          "object_byte_count": 18363190,
+          "received_at_utc": "2026-08-31T17:19:57.434963Z",
+          "requested_at_utc": "2026-08-31T17:19:56.138589Z",
+          "retrieval_seconds": 1.2963867500000004,
+          "tmax_row": {
+            "end": 5638955,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "6-9 hour max fcst",
+            "length": 424203,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5214753,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f009"
+        },
+        "f012": {
+          "http_etag": "\"56967fbf3437605f8dd1fd63e64cc008\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:50:16 GMT",
+          "http_status": 200,
+          "index_byte_count": 2819,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:50:18 GMT",
+          "index_http_status": 200,
+          "index_sha256": "122800b6dbbbd53fe0ebbd5db96290f9ad50b3afed657c49d6b8ab99782f2060",
+          "object_byte_count": 18324416,
+          "received_at_utc": "2026-08-31T17:19:58.708437Z",
+          "requested_at_utc": "2026-08-31T17:19:57.435173Z",
+          "retrieval_seconds": 1.2732847079999998,
+          "tmax_row": {
+            "end": 5655581,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "6-12 hour max fcst",
+            "length": 423295,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5232287,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f012"
+        },
+        "f015": {
+          "http_etag": "\"7a94e8c932e35fe0030578e603f51f8c\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:52:28 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:52:30 GMT",
+          "index_http_status": 200,
+          "index_sha256": "859ef3339050adbe2655d02e6357a561d239fc0a2b69a6e1f2d60d41f79a48ef",
+          "object_byte_count": 18173748,
+          "received_at_utc": "2026-08-31T17:20:00.207298Z",
+          "requested_at_utc": "2026-08-31T17:19:58.708664Z",
+          "retrieval_seconds": 1.4986620829999993,
+          "tmax_row": {
+            "end": 5668736,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "12-15 hour max fcst",
+            "length": 424966,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5243771,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f015"
+        },
+        "f018": {
+          "http_etag": "\"3ec0d1de53474f9c8151d5f2aeadd2a3\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:53:34 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:53:36 GMT",
+          "index_http_status": 200,
+          "index_sha256": "f8f7193bf2aa1a940b273ab42af6607314d35c5e157b225f58a636e25ee14cc7",
+          "object_byte_count": 18123676,
+          "received_at_utc": "2026-08-31T17:20:01.484688Z",
+          "requested_at_utc": "2026-08-31T17:20:00.207613Z",
+          "retrieval_seconds": 1.2771039160000006,
+          "tmax_row": {
+            "end": 5687063,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "12-18 hour max fcst",
+            "length": 425011,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5262053,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f018"
+        },
+        "f021": {
+          "http_etag": "\"50ae44c49b640df5470fd1f167f4591d\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:53:34 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:53:36 GMT",
+          "index_http_status": 200,
+          "index_sha256": "6419ca53c1170a23107eab64cba61df92104bbb331e97287bf91fa7e5767a37c",
+          "object_byte_count": 18212406,
+          "received_at_utc": "2026-08-31T17:20:02.792213Z",
+          "requested_at_utc": "2026-08-31T17:20:01.485082Z",
+          "retrieval_seconds": 1.3071604159999994,
+          "tmax_row": {
+            "end": 5682625,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "18-21 hour max fcst",
+            "length": 427136,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5255490,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f021"
+        },
+        "f024": {
+          "http_etag": "\"4787dd015014c0c3e4eef6c20fe6b9d2\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:55:50 GMT",
+          "http_status": 200,
+          "index_byte_count": 2833,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:55:51 GMT",
+          "index_http_status": 200,
+          "index_sha256": "32ab5e81e725eff7332e76bd1e26459705de10b716702d938a92239095250615",
+          "object_byte_count": 18106922,
+          "received_at_utc": "2026-08-31T17:20:04.157440Z",
+          "requested_at_utc": "2026-08-31T17:20:02.792462Z",
+          "retrieval_seconds": 1.3649984590000006,
+          "tmax_row": {
+            "end": 5650103,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "18-24 hour max fcst",
+            "length": 422283,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5227821,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f024"
+        },
+        "f027": {
+          "http_etag": "\"9d22917d75739690ca0593709dc6caa4\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:56:55 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:56:57 GMT",
+          "index_http_status": 200,
+          "index_sha256": "cc8d97e9f52dc8bdf0ded448ab53b8ae569aeae68e7b4eb74d4a8fd28888e76f",
+          "object_byte_count": 18302689,
+          "received_at_utc": "2026-08-31T17:20:05.505808Z",
+          "requested_at_utc": "2026-08-31T17:20:04.157637Z",
+          "retrieval_seconds": 1.3482026659999988,
+          "tmax_row": {
+            "end": 5986039,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "24-27 hour max fcst",
+            "length": 422745,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5563295,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f027"
+        },
+        "f030": {
+          "http_etag": "\"3bc2ebcff4c8a96806e3317c6d1271a7\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:58:03 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:58:04 GMT",
+          "index_http_status": 200,
+          "index_sha256": "b6b1e071086016890ccad86bfa8dd5eadb3f8166daa1d7f88e82921923d4ca7d",
+          "object_byte_count": 18347913,
+          "received_at_utc": "2026-08-31T17:20:06.777787Z",
+          "requested_at_utc": "2026-08-31T17:20:05.506487Z",
+          "retrieval_seconds": 1.2713153750000004,
+          "tmax_row": {
+            "end": 5681509,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "24-30 hour max fcst",
+            "length": 421347,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5260163,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f030"
+        },
+        "f033": {
+          "http_etag": "\"08aa6da30768a7bbe49bc91c31465580\"",
+          "http_last_modified": "Wed, 22 Jul 2026 03:59:11 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 03:59:12 GMT",
+          "index_http_status": 200,
+          "index_sha256": "8f2ee119fb6d039fd0f4dd7ba9d3ef5e6ea0dc14612ee17287faf6e7f3a6d0b3",
+          "object_byte_count": 18360672,
+          "received_at_utc": "2026-08-31T17:20:08.073955Z",
+          "requested_at_utc": "2026-08-31T17:20:06.778142Z",
+          "retrieval_seconds": 1.2958107499999993,
+          "tmax_row": {
+            "end": 5686451,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "30-33 hour max fcst",
+            "length": 424948,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5261504,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f033"
+        },
+        "f036": {
+          "http_etag": "\"eb8590711734e0e56fd9accdb030cb8f\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:00:23 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:00:24 GMT",
+          "index_http_status": 200,
+          "index_sha256": "60056725008a58ba0d77cd1c49c7bd28e29da97a2e6f45a9800d0ca4bc1ea407",
+          "object_byte_count": 18488131,
+          "received_at_utc": "2026-08-31T17:20:09.318600Z",
+          "requested_at_utc": "2026-08-31T17:20:08.074166Z",
+          "retrieval_seconds": 1.244474541999999,
+          "tmax_row": {
+            "end": 5701839,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "30-36 hour max fcst",
+            "length": 426055,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5275785,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f036"
+        },
+        "f039": {
+          "http_etag": "\"46b4d06e4f518a5316d455239c1ac4bb\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:01:32 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:01:35 GMT",
+          "index_http_status": 200,
+          "index_sha256": "a2fde316fef252d02a9560f35411249c8a0570fb77d12533e61349819e9dddef",
+          "object_byte_count": 18039186,
+          "received_at_utc": "2026-08-31T17:20:10.686406Z",
+          "requested_at_utc": "2026-08-31T17:20:09.319115Z",
+          "retrieval_seconds": 1.3673065000000015,
+          "tmax_row": {
+            "end": 5700375,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "36-39 hour max fcst",
+            "length": 427949,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5272427,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f039"
+        },
+        "f042": {
+          "http_etag": "\"b2beb6a95d94a6d6305cc9b672cd6350\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:02:40 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:02:42 GMT",
+          "index_http_status": 200,
+          "index_sha256": "c3b361b4d55a1bee7b3841d4cd9a8b42da9e4124e3bdd9968b86c095d8807841",
+          "object_byte_count": 18165140,
+          "received_at_utc": "2026-08-31T17:20:11.973248Z",
+          "requested_at_utc": "2026-08-31T17:20:10.686724Z",
+          "retrieval_seconds": 1.2865390420000011,
+          "tmax_row": {
+            "end": 5701232,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "36-42 hour max fcst",
+            "length": 427268,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5273965,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f042"
+        },
+        "f045": {
+          "http_etag": "\"c1e569fb247849d4da2b5a177a0e9821\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:03:51 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:03:52 GMT",
+          "index_http_status": 200,
+          "index_sha256": "aefccd5838bdf9e5b67d1e058e3fab8afb189a192d5b59d461d75afe523674ab",
+          "object_byte_count": 18072183,
+          "received_at_utc": "2026-08-31T17:20:13.193581Z",
+          "requested_at_utc": "2026-08-31T17:20:11.973468Z",
+          "retrieval_seconds": 1.2201408749999985,
+          "tmax_row": {
+            "end": 5697659,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "42-45 hour max fcst",
+            "length": 428900,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5268760,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f045"
+        },
+        "f048": {
+          "http_etag": "\"805edb99b9c93d8857ec04b0adf93221\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:04:59 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:05:01 GMT",
+          "index_http_status": 200,
+          "index_sha256": "957a0078f2e5d55d0accd60e2d60bef128448d0c2870f04bf1d44a35abba7df9",
+          "object_byte_count": 18124120,
+          "received_at_utc": "2026-08-31T17:20:14.465715Z",
+          "requested_at_utc": "2026-08-31T17:20:13.193872Z",
+          "retrieval_seconds": 1.271860458999999,
+          "tmax_row": {
+            "end": 5671157,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "42-48 hour max fcst",
+            "length": 422721,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5248437,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f048"
+        },
+        "f051": {
+          "http_etag": "\"0345c939c0778736c9cee43e6476cc21\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:07:20 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:07:21 GMT",
+          "index_http_status": 200,
+          "index_sha256": "2b77feca40d95bd45d407a6b79f5544a16f12db7024214a8e3acdddfe6e04766",
+          "object_byte_count": 17499678,
+          "received_at_utc": "2026-08-31T17:20:15.722508Z",
+          "requested_at_utc": "2026-08-31T17:20:14.465912Z",
+          "retrieval_seconds": 1.2566235839999997,
+          "tmax_row": {
+            "end": 5682069,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "48-51 hour max fcst",
+            "length": 426016,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5256054,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f051"
+        },
+        "f054": {
+          "http_etag": "\"351c90560c34a3c6b8318e5553865b6a\"",
+          "http_last_modified": "Wed, 22 Jul 2026 04:08:28 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Wed, 22 Jul 2026 04:08:30 GMT",
+          "index_http_status": 200,
+          "index_sha256": "d4b3c259aec764c1fc1f1404cc656c6d1f4ab3453ffad8cedbd25d8d168fad66",
+          "object_byte_count": 17830255,
+          "received_at_utc": "2026-08-31T17:20:17.025107Z",
+          "requested_at_utc": "2026-08-31T17:20:15.722788Z",
+          "retrieval_seconds": 1.3023451669999986,
+          "tmax_row": {
+            "end": 5733741,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "48-54 hour max fcst",
+            "length": 429005,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5304737,
+            "parameter": "TMAX",
+            "run": "d=2026072200"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260722/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f054"
+        }
+      },
+      "local_date": "2026-07-23",
+      "local_day_duration_hours": 24.0,
+      "local_day_end_utc": "2026-07-24T04:00:00Z",
+      "local_day_start_utc": "2026-07-23T04:00:00Z",
+      "observed_six_hour_series_consecutive": true,
+      "overlapping_steps": [
+        30,
+        36,
+        42,
+        48,
+        54
+      ],
+      "run_date": "20260722",
+      "run_time_utc": "2026-07-22T00:00:00Z",
+      "station": "CYYZ",
+      "timezone": "America/Toronto",
+      "window_rows": [
+        {
+          "end_hour": 3,
+          "forecast_window": "0-3 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 0,
+          "step": 3
+        },
+        {
+          "end_hour": 6,
+          "forecast_window": "0-6 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 0,
+          "step": 6
+        },
+        {
+          "end_hour": 9,
+          "forecast_window": "6-9 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 6,
+          "step": 9
+        },
+        {
+          "end_hour": 12,
+          "forecast_window": "6-12 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 6,
+          "step": 12
+        },
+        {
+          "end_hour": 15,
+          "forecast_window": "12-15 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 12,
+          "step": 15
+        },
+        {
+          "end_hour": 18,
+          "forecast_window": "12-18 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 12,
+          "step": 18
+        },
+        {
+          "end_hour": 21,
+          "forecast_window": "18-21 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 18,
+          "step": 21
+        },
+        {
+          "end_hour": 24,
+          "forecast_window": "18-24 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 18,
+          "step": 24
+        },
+        {
+          "end_hour": 27,
+          "forecast_window": "24-27 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 24,
+          "step": 27
+        },
+        {
+          "end_hour": 30,
+          "forecast_window": "24-30 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 24,
+          "step": 30
+        },
+        {
+          "end_hour": 33,
+          "forecast_window": "30-33 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 30,
+          "step": 33
+        },
+        {
+          "end_hour": 36,
+          "forecast_window": "30-36 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 30,
+          "step": 36
+        },
+        {
+          "end_hour": 39,
+          "forecast_window": "36-39 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 36,
+          "step": 39
+        },
+        {
+          "end_hour": 42,
+          "forecast_window": "36-42 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 36,
+          "step": 42
+        },
+        {
+          "end_hour": 45,
+          "forecast_window": "42-45 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 42,
+          "step": 45
+        },
+        {
+          "end_hour": 48,
+          "forecast_window": "42-48 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 42,
+          "step": 48
+        },
+        {
+          "end_hour": 51,
+          "forecast_window": "48-51 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 48,
+          "step": 51
+        },
+        {
+          "end_hour": 54,
+          "forecast_window": "48-54 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 48,
+          "step": 54
+        }
+      ]
+    },
+    {
+      "actual_tmax_ranges": {
+        "f018": {
+          "byte_count": 429027,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260621/gec00-f018-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:20:57.416424Z",
+          "requested_at_utc": "2026-08-31T17:20:55.925542Z",
+          "retrieval_seconds": 1.490902208999998,
+          "sha256": "b74345c0c18c5a6aede4a2cc9194b521e2b7808b47121d7dc1ab5eff5f08af97",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f018"
+        },
+        "f024": {
+          "byte_count": 425999,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260621/gec00-f024-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:21:00.060746Z",
+          "requested_at_utc": "2026-08-31T17:20:58.709326Z",
+          "retrieval_seconds": 1.3514364999999913,
+          "sha256": "c51c69b757fb27e5792e22ef662deff0e00a888dc0be7b6b978ffd301d0e1dd4",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f024"
+        },
+        "f030": {
+          "byte_count": 423123,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260621/gec00-f030-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:21:02.863097Z",
+          "requested_at_utc": "2026-08-31T17:21:01.358818Z",
+          "retrieval_seconds": 1.5042940000000016,
+          "sha256": "364e23a8c5ef0a55a9cd6e1589999da09c520d9abb223f3c19f3658d410c8267",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f030"
+        },
+        "f036": {
+          "byte_count": 425080,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260621/gec00-f036-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:21:05.360088Z",
+          "requested_at_utc": "2026-08-31T17:21:04.085597Z",
+          "retrieval_seconds": 1.2745215839999986,
+          "sha256": "f48504eabc7bed4abea66af192c8e81ca87d1f4c1c8da2df22b6c0c9de4c1a43",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f036"
+        },
+        "f042": {
+          "byte_count": 429901,
+          "ends_with_7777": true,
+          "grib_message_count": 1,
+          "local_path": "data/raw/noaa-gefs/run=20260831T-local-day-v2/20260621/gec00-f042-tmax.grib2",
+          "range_http_statuses": [
+            206
+          ],
+          "received_at_utc": "2026-08-31T17:21:08.120659Z",
+          "requested_at_utc": "2026-08-31T17:21:06.611645Z",
+          "retrieval_seconds": 1.5090342080000028,
+          "sha256": "3576eea48915905361e2021edfd0956cdc6b5a22c5a764188f758ae3370ae32d",
+          "starts_with_grib": true,
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f042"
+        }
+      },
+      "city": "Kuala Lumpur",
+      "coverage": {
+        "covered_seconds": 86400.0,
+        "exact_partition": false,
+        "outside_local_seconds": 21600.0,
+        "selected_window_count": 5,
+        "target_seconds": 86400.0,
+        "uncovered_seconds": 0.0
+      },
+      "dst_expected": false,
+      "gate_a_all_three_hour_windows": false,
+      "inventories": {
+        "f003": {
+          "http_etag": "\"5621a7d843c56f8324f367f11cb5ca34\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:48:00 GMT",
+          "http_status": 200,
+          "index_byte_count": 2782,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:48:02 GMT",
+          "index_http_status": 200,
+          "index_sha256": "77f0d50b62d183f495bebce8a1f435e62c59ed1107f47fa67d494692311946bb",
+          "object_byte_count": 18672790,
+          "received_at_utc": "2026-08-31T17:20:32.737694Z",
+          "requested_at_utc": "2026-08-31T17:20:31.508762Z",
+          "retrieval_seconds": 1.2289503330000002,
+          "tmax_row": {
+            "end": 6357918,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "0-3 hour max fcst",
+            "length": 748190,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5609729,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f003"
+        },
+        "f006": {
+          "http_etag": "\"dbf97e5c46d51fed64ca776a72aa4417\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:48:03 GMT",
+          "http_status": 200,
+          "index_byte_count": 2781,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:48:04 GMT",
+          "index_http_status": 200,
+          "index_sha256": "6f7e802b44324e4b2287add8c20308bb827e10988562da4ba0b249397fc21409",
+          "object_byte_count": 17921750,
+          "received_at_utc": "2026-08-31T17:20:34.038664Z",
+          "requested_at_utc": "2026-08-31T17:20:32.737952Z",
+          "retrieval_seconds": 1.3007435829999991,
+          "tmax_row": {
+            "end": 5716078,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "0-6 hour max fcst",
+            "length": 425182,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5290897,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f006"
+        },
+        "f009": {
+          "http_etag": "\"07509a67b65eff8471f7c45e7fb3c235\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:49:07 GMT",
+          "http_status": 200,
+          "index_byte_count": 2781,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:49:08 GMT",
+          "index_http_status": 200,
+          "index_sha256": "f6f50160bddf9bf61f39807d916b51c7beeac1f43b871ec0320386be5dfa2d2d",
+          "object_byte_count": 17891355,
+          "received_at_utc": "2026-08-31T17:20:35.444413Z",
+          "requested_at_utc": "2026-08-31T17:20:34.039114Z",
+          "retrieval_seconds": 1.405306416000002,
+          "tmax_row": {
+            "end": 5723255,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "6-9 hour max fcst",
+            "length": 423827,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5299429,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f009"
+        },
+        "f012": {
+          "http_etag": "\"42fd6463c77260940a3df8f44e128062\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:50:13 GMT",
+          "http_status": 200,
+          "index_byte_count": 2819,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:50:14 GMT",
+          "index_http_status": 200,
+          "index_sha256": "6bd6e1748e126a4fc9904d3b40e7452084c4002ae67d2cec5dd2a8d5c4323bf1",
+          "object_byte_count": 18101976,
+          "received_at_utc": "2026-08-31T17:20:36.784670Z",
+          "requested_at_utc": "2026-08-31T17:20:35.444603Z",
+          "retrieval_seconds": 1.3400875419999991,
+          "tmax_row": {
+            "end": 5740578,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "6-12 hour max fcst",
+            "length": 422753,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5317826,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f012"
+        },
+        "f015": {
+          "http_etag": "\"6f1a76abcf883acfc0aea2526fe732e5\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:51:17 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:51:19 GMT",
+          "index_http_status": 200,
+          "index_sha256": "2601069590e512c8466c1299118ac7f97637abca588983dbb11abbb9a6c9e725",
+          "object_byte_count": 18257516,
+          "received_at_utc": "2026-08-31T17:20:38.034959Z",
+          "requested_at_utc": "2026-08-31T17:20:36.784899Z",
+          "retrieval_seconds": 1.2500854159999975,
+          "tmax_row": {
+            "end": 5773435,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "12-15 hour max fcst",
+            "length": 430266,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5343170,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f015"
+        },
+        "f018": {
+          "http_etag": "\"b2aa93a36b1abbbd0a5eb51eb72e1a4c\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:52:23 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:52:24 GMT",
+          "index_http_status": 200,
+          "index_sha256": "26d5d199ac34dc563eca6295b392514665e51bd25be9ee2cb979189169bc81c2",
+          "object_byte_count": 17991986,
+          "received_at_utc": "2026-08-31T17:20:39.262686Z",
+          "requested_at_utc": "2026-08-31T17:20:38.035272Z",
+          "retrieval_seconds": 1.227433916999999,
+          "tmax_row": {
+            "end": 5783438,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "12-18 hour max fcst",
+            "length": 429027,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5354412,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f018"
+        },
+        "f021": {
+          "http_etag": "\"6809334e2fc433ef54b8d7c4e4498413\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:53:31 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:53:33 GMT",
+          "index_http_status": 200,
+          "index_sha256": "4127112810128cf85034f1bd60eb3c4f7d3dacd7ee3e625aef97baa402e5c9b5",
+          "object_byte_count": 18078756,
+          "received_at_utc": "2026-08-31T17:20:40.528543Z",
+          "requested_at_utc": "2026-08-31T17:20:39.262987Z",
+          "retrieval_seconds": 1.2655740840000007,
+          "tmax_row": {
+            "end": 5770198,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "18-21 hour max fcst",
+            "length": 430105,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5340094,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f021"
+        },
+        "f024": {
+          "http_etag": "\"74b93a339054b74f45afae727374065b\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:54:36 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:54:38 GMT",
+          "index_http_status": 200,
+          "index_sha256": "d6494d1aedd3148759b985254e6b82c89e8c593d05f86aa9da59307df7f18362",
+          "object_byte_count": 18106662,
+          "received_at_utc": "2026-08-31T17:20:41.793096Z",
+          "requested_at_utc": "2026-08-31T17:20:40.528858Z",
+          "retrieval_seconds": 1.264258667,
+          "tmax_row": {
+            "end": 5733501,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "18-24 hour max fcst",
+            "length": 425999,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5307503,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f024"
+        },
+        "f027": {
+          "http_etag": "\"a1b9460acdde0ac58d9c43f8b0601292\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:55:42 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:55:43 GMT",
+          "index_http_status": 200,
+          "index_sha256": "58f496b1fb8e48627aae5fdebff4b3bd0bd04dcfb7201c64167473e352899637",
+          "object_byte_count": 18645718,
+          "received_at_utc": "2026-08-31T17:20:43.099844Z",
+          "requested_at_utc": "2026-08-31T17:20:41.793501Z",
+          "retrieval_seconds": 1.3063651249999992,
+          "tmax_row": {
+            "end": 5734835,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "24-27 hour max fcst",
+            "length": 426722,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5308114,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f027"
+        },
+        "f030": {
+          "http_etag": "\"75b64f549a6907876331ce603a608a58\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:57:53 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:57:54 GMT",
+          "index_http_status": 200,
+          "index_sha256": "5906ced964c91487cc3e562db95f7a9023652786467a09f2a216c5697f69448c",
+          "object_byte_count": 18479946,
+          "received_at_utc": "2026-08-31T17:20:44.364651Z",
+          "requested_at_utc": "2026-08-31T17:20:43.100142Z",
+          "retrieval_seconds": 1.2645260829999998,
+          "tmax_row": {
+            "end": 5729970,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "24-30 hour max fcst",
+            "length": 423123,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5306848,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f030"
+        },
+        "f033": {
+          "http_etag": "\"ec53412abd94a2cf9b54a622c215851c\"",
+          "http_last_modified": "Sun, 21 Jun 2026 03:57:53 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 03:57:54 GMT",
+          "index_http_status": 200,
+          "index_sha256": "c5607128fed03e5baf0bee0d7fbce9725b4122e9cac3a1cbb23a0e150da5e902",
+          "object_byte_count": 18467970,
+          "received_at_utc": "2026-08-31T17:20:45.648908Z",
+          "requested_at_utc": "2026-08-31T17:20:44.364949Z",
+          "retrieval_seconds": 1.2839773750000063,
+          "tmax_row": {
+            "end": 5751080,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "30-33 hour max fcst",
+            "length": 429214,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5321867,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f033"
+        },
+        "f036": {
+          "http_etag": "\"1ce2069654fbb3e4683cf8b3c5392c57\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:00:09 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:00:10 GMT",
+          "index_http_status": 200,
+          "index_sha256": "805461dcf1ace8fb4bc517a634bfbac4c78c46268c9b5babea84d3dd82e81e13",
+          "object_byte_count": 18596171,
+          "received_at_utc": "2026-08-31T17:20:46.968207Z",
+          "requested_at_utc": "2026-08-31T17:20:45.649198Z",
+          "retrieval_seconds": 1.3190272079999943,
+          "tmax_row": {
+            "end": 5748147,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "30-36 hour max fcst",
+            "length": 425080,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5323068,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f036"
+        },
+        "f039": {
+          "http_etag": "\"86c98ecf43e767e6ab718acac0c190a2\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:00:08 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:00:10 GMT",
+          "index_http_status": 200,
+          "index_sha256": "2c613bbdbae6bb548c263541502246312902e2db3e6ee46ec1517bbd913b4d5c",
+          "object_byte_count": 18210404,
+          "received_at_utc": "2026-08-31T17:20:48.247509Z",
+          "requested_at_utc": "2026-08-31T17:20:46.968517Z",
+          "retrieval_seconds": 1.2790104579999948,
+          "tmax_row": {
+            "end": 5770605,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "36-39 hour max fcst",
+            "length": 430405,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5340201,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f039"
+        },
+        "f042": {
+          "http_etag": "\"eb02d6ceaf85374f57396efdd93f6dc5\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:02:22 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:02:23 GMT",
+          "index_http_status": 200,
+          "index_sha256": "92d19438b401b55b96ca27438b08ce5bb2a1720e743af561bbf2283ec8b7ffd7",
+          "object_byte_count": 18296249,
+          "received_at_utc": "2026-08-31T17:20:49.521192Z",
+          "requested_at_utc": "2026-08-31T17:20:48.247822Z",
+          "retrieval_seconds": 1.2733932920000015,
+          "tmax_row": {
+            "end": 5768443,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "36-42 hour max fcst",
+            "length": 429901,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5338543,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f042"
+        },
+        "f045": {
+          "http_etag": "\"e024512c784808c7597bd17a0a909776\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:02:22 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:02:23 GMT",
+          "index_http_status": 200,
+          "index_sha256": "91c890aa1e46ed0d3c2ad1139224a140012a3fb654977a116e8e1d220665f7b8",
+          "object_byte_count": 18121221,
+          "received_at_utc": "2026-08-31T17:20:50.791807Z",
+          "requested_at_utc": "2026-08-31T17:20:49.521596Z",
+          "retrieval_seconds": 1.2702228750000017,
+          "tmax_row": {
+            "end": 5760873,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "42-45 hour max fcst",
+            "length": 433020,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5327854,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f045"
+        },
+        "f048": {
+          "http_etag": "\"31459443b9a9ce439fd5eb16df3eb657\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:04:35 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:04:37 GMT",
+          "index_http_status": 200,
+          "index_sha256": "14f84d9126e623d12c5e300dfc3f80f0d74090e0629baac47a31172940af0f07",
+          "object_byte_count": 18166630,
+          "received_at_utc": "2026-08-31T17:20:52.065375Z",
+          "requested_at_utc": "2026-08-31T17:20:50.792017Z",
+          "retrieval_seconds": 1.2733686669999997,
+          "tmax_row": {
+            "end": 5729527,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "42-48 hour max fcst",
+            "length": 428156,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5301372,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f048"
+        },
+        "f051": {
+          "http_etag": "\"af560afe5a04459d9bfcd76b1b033ed2\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:04:36 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:04:37 GMT",
+          "index_http_status": 200,
+          "index_sha256": "2f5d9a8d035f906a16159fe19b99a8579a7d7260d8ee83af316c0f269fa51cf4",
+          "object_byte_count": 18080104,
+          "received_at_utc": "2026-08-31T17:20:53.365104Z",
+          "requested_at_utc": "2026-08-31T17:20:52.065504Z",
+          "retrieval_seconds": 1.2996171249999975,
+          "tmax_row": {
+            "end": 5718534,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "48-51 hour max fcst",
+            "length": 426711,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5291824,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f051"
+        },
+        "f054": {
+          "http_etag": "\"10245d21f670c8030123992833477d5d\"",
+          "http_last_modified": "Sun, 21 Jun 2026 04:06:49 GMT",
+          "http_status": 200,
+          "index_byte_count": 2834,
+          "index_http_last_modified": "Sun, 21 Jun 2026 04:06:51 GMT",
+          "index_http_status": 200,
+          "index_sha256": "624079164290f55150cfab53c8924cfdb0243dfd62ebc650c2365a14b17f6059",
+          "object_byte_count": 18783909,
+          "received_at_utc": "2026-08-31T17:20:54.637849Z",
+          "requested_at_utc": "2026-08-31T17:20:53.365396Z",
+          "retrieval_seconds": 1.2724666249999999,
+          "tmax_row": {
+            "end": 5713713,
+            "ensemble": "ENS=low-res ctl",
+            "forecast_window": "48-54 hour max fcst",
+            "length": 424631,
+            "level": "2 m above ground",
+            "message": 13,
+            "offset": 5289083,
+            "parameter": "TMAX",
+            "run": "d=2026062100"
+          },
+          "url": "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260621/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f054"
+        }
+      },
+      "local_date": "2026-06-22",
+      "local_day_duration_hours": 24.0,
+      "local_day_end_utc": "2026-06-22T16:00:00Z",
+      "local_day_start_utc": "2026-06-21T16:00:00Z",
+      "observed_six_hour_series_consecutive": true,
+      "overlapping_steps": [
+        18,
+        24,
+        30,
+        36,
+        42
+      ],
+      "run_date": "20260621",
+      "run_time_utc": "2026-06-21T00:00:00Z",
+      "station": "WMKK",
+      "timezone": "Asia/Kuala_Lumpur",
+      "window_rows": [
+        {
+          "end_hour": 3,
+          "forecast_window": "0-3 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 0,
+          "step": 3
+        },
+        {
+          "end_hour": 6,
+          "forecast_window": "0-6 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 0,
+          "step": 6
+        },
+        {
+          "end_hour": 9,
+          "forecast_window": "6-9 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 6,
+          "step": 9
+        },
+        {
+          "end_hour": 12,
+          "forecast_window": "6-12 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 6,
+          "step": 12
+        },
+        {
+          "end_hour": 15,
+          "forecast_window": "12-15 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 12,
+          "step": 15
+        },
+        {
+          "end_hour": 18,
+          "forecast_window": "12-18 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 12,
+          "step": 18
+        },
+        {
+          "end_hour": 21,
+          "forecast_window": "18-21 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 18,
+          "step": 21
+        },
+        {
+          "end_hour": 24,
+          "forecast_window": "18-24 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 18,
+          "step": 24
+        },
+        {
+          "end_hour": 27,
+          "forecast_window": "24-27 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 24,
+          "step": 27
+        },
+        {
+          "end_hour": 30,
+          "forecast_window": "24-30 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 24,
+          "step": 30
+        },
+        {
+          "end_hour": 33,
+          "forecast_window": "30-33 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 30,
+          "step": 33
+        },
+        {
+          "end_hour": 36,
+          "forecast_window": "30-36 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 30,
+          "step": 36
+        },
+        {
+          "end_hour": 39,
+          "forecast_window": "36-39 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 36,
+          "step": 39
+        },
+        {
+          "end_hour": 42,
+          "forecast_window": "36-42 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 36,
+          "step": 42
+        },
+        {
+          "end_hour": 45,
+          "forecast_window": "42-45 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 42,
+          "step": 45
+        },
+        {
+          "end_hour": 48,
+          "forecast_window": "42-48 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 42,
+          "step": 48
+        },
+        {
+          "end_hour": 51,
+          "forecast_window": "48-51 hour max fcst",
+          "matches_preregistered_three_hour_window": true,
+          "start_hour": 48,
+          "step": 51
+        },
+        {
+          "end_hour": 54,
+          "forecast_window": "48-54 hour max fcst",
+          "matches_preregistered_three_hour_window": false,
+          "start_hour": 48,
+          "step": 54
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "actual_range_integrity_passed": true,
+    "gate_a_passed": false,
+    "gate_b_passed": false,
+    "observed_six_hour_series_consecutive": true
+  },
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "generated_at_utc": "2026-08-31T17:21:08.121275Z",
+  "pre_registered_acceptance": {
+    "actual_range_integrity": "HTTP 206, one GRIB message, GRIB/7777 boundaries",
+    "gate_a": "each f003 step is an exact (step-3)-step three-hour TMAX window",
+    "gate_b": "selected windows exactly partition each station-local day"
+  },
+  "probe": "noaa-gefs-local-day-tmax-semantics",
+  "schema_version": "1.0.0"
+}

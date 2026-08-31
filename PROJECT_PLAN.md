@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.33.0
+**Plan versiyonu:** 0.34.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -945,6 +945,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Fail-closed:** Gate B geçmezse interval TMAX label-equivalent günlük MaxT sayılmaz; sınır kontaminasyonu feature olarak açıkça işaretlenir ve exact-local-day alternatif sözleşmesi ayrıca sınanır.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json` ve eşlik eden research raporu.
 
+### D-0035 — 2026-08-31 — GEFS TMAX exact local-day gate başarısız
+
+- **Durum:** `ACTIVE`
+- **Karar:** GEFS interval TMAX resolution-equivalent günlük MaxT/label olarak kullanılamaz. Canonical 6h pencereler yalnız açık boundary-contamination taşıyan forecast feature'ları olabilir ve outcome kalibrasyonu geçmeden probability/EV girdisi sayılmaz.
+- **Gate A:** `FAILED`. Gerçek metadata dönüşümlüdür: f003=`0-3h`, f006=`0-6h`, f009=`6-9h`, f012=`6-12h`; her f003 step bağımsız `(step-3)-step` değildir.
+- **Düzeltici bulgu:** `f006,f012,...` canonical 6h serisi gap/overlap 0 ile ardışıktır.
+- **Gate B:** `FAILED`. Toronto 04Z–04Z ve Kuala Lumpur 16Z–16Z local-day aralıkları 5'er 6h blokla tam kapsandı fakat her birinde 6 saat outside-local contamination oluştu.
+- **Bütünlük:** 10/10 gerçek TMAX range, toplam 4.259.526 byte; HTTP 206, tek mesaj, GRIB/7777 sınırları geçti.
+- **İzinli feature sözleşmesi:** Tamamen içerideki üç bloktan 18h interior feature ve dokunan beş bloktan contamination-tagged overlap feature; run/publish/interval provenance zorunlu.
+- **Artifact:** `reports/research/EXP-20260831-phase4-gefs-local-day-semantics.md`, `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json` ve superseded `-attempt1.json`.
+- **Sonuç:** GEFS `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`; sıradaki düzeltici deney CYYZ/WMKK observation feasibility ve bu feature politikalarının outcome calibration testidir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -957,7 +969,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Bir DST kullanan ve bir DST kullanmayan şehir için GEFS f006/f012/f018/f024 TMAX valid-time/window semantiğini doğrulayıp leakage-safe yerel-gün MaxT dönüşüm sözleşmesini kilitlemek.
+**Tek sonraki adım:** CYYZ ve WMKK için source-matching station observation geçmişini/revision semantiğini ölçmek; GEFS interior/overlap/TMP feature karşılaştırmasını yapabilmek için Phase 5 outcome sözleşmesini önceden kaydetmek.
 
 Beklenen artifact'lar:
 

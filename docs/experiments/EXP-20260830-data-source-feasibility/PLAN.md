@@ -739,11 +739,11 @@ Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31,
 
 #### Decision
 
-NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. ECMWF Open Data is prospective-only. GEFS operational archive remains `CONDITIONAL_PASS`: initial samples had 31/31 membership, and the locked 365-day c00/p01/p30 continuity gate passed 1,095/1,095 indexes. This does not prove 31/31 daily completeness or local-day aggregation semantics.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. ECMWF Open Data is prospective-only. GEFS operational archive remains `CONDITIONAL_PASS`: initial samples had 31/31 membership and the 365-day representative continuity gate passed, but exact local-day TMAX aggregation failed for CYYZ and WMKK because canonical UTC windows add six outside-local hours.
 
 #### Next action
 
-Verify f006/f012/f018/f024 TMAX valid-time/window semantics and leakage-safe local-day aggregation for one DST and one non-DST city.
+Measure source-matching CYYZ/WMKK station-observation history and revision semantics before comparing contamination-tagged GEFS feature policies against local-day outcomes.
 
 #### Pre-registration — 2026-08-31 — GEFS daily representative coverage
 
@@ -1317,6 +1317,18 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: Representative members do not prove 31/31 daily coverage; local-day MaxT and model-version boundaries remain unresolved.
 - Next action: Lock local-day TMAX step semantics for one DST and one non-DST city.
 
+### 2026-08-31 — Phase 4 GEFS exact local-day TMAX gate failed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; GEFS remains `CONDITIONAL_PASS` with a narrowed feature-only contract.
+- Pre-registered gates: Every f003 step must be an independent `(step-3)-step` maximum; selected windows must exactly partition Toronto/CYYZ and Kuala Lumpur/WMKK local days with zero gap and outside-local seconds.
+- Evidence: `reports/research/EXP-20260831-phase4-gefs-local-day-semantics.md`, `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json`; local raw run `run=20260831T-local-day-v2`.
+- Result: Gate A failed because metadata alternates 3h partial and 6h canonical windows. The f006/f012/... canonical series was consecutive. Gate B failed: both 24h local days had zero uncovered time but six hours outside-local contamination.
+- Integrity: Ten actual TMAX ranges totaling 4,259,526 bytes passed HTTP 206, one-message and GRIB/7777 controls.
+- Failure memory: The first probe mixed partial and canonical windows. It is preserved as `-attempt1`; canonical-only selection produced the final artifact without changing thresholds.
+- Decision: Never use raw interval TMAX as a resolution-equivalent daily label. Permit only provenance-bearing interior/overlap predictors pending station-outcome calibration.
+- Next action: Phase 5 CYYZ/WMKK observation coverage and revision semantics.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1484,6 +1496,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Generalize three members to full 31-member daily completeness; rejected because it exceeds the sampled evidence. Fail the gate for recovered resets; rejected because the pre-registered failure metric was terminal failure after bounded retries.
 - Consequence: Local-day valid-time/window semantics become the next smallest gate; historical modeling remains unauthorized until the joined-data gates pass.
 - Revisit condition: Full-member sampling, a documented model boundary or local-day reconstruction contradicts the representative result.
+
+### ED-0027 — 2026-08-31 — Restrict GEFS TMAX to contamination-aware features
+
+- Decision: GEFS interval TMAX is not a station-local daily-MaxT label. Retain it only as two explicit predictors: the maximum across three fully contained 6h blocks and the maximum across five overlapping blocks with six outside-local hours recorded.
+- Evidence available at decision time: Actual GEFS metadata alternated partial 3h and canonical 6h windows. The canonical series covered both CYYZ and WMKK local days without gaps but could not align their UTC boundaries, adding six outside-local hours. Ten GRIB ranges passed integrity checks.
+- Alternatives considered: Call the five-window maximum “daily TMAX”; rejected because it includes another local date. Drop GEFS entirely; deferred because outcome calibration may extract incremental probabilistic value from explicitly tagged predictors.
+- Consequence: Feature rows carry interval start/end, run/publish timestamps and outside-local seconds. Phase 5 observations are required before any forecast-skill or EV claim.
+- Revisit condition: A provider field or transformation with exact station-local daily windows passes a separately pre-registered test.
 
 ## 20. Decision Log — append only
 
