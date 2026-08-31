@@ -806,7 +806,7 @@ Verify that exact resolution-station observations, revisions/final daily values,
 
 #### Actual result
 
-The locked 24-page Wunderground spike passed every identity/date/high/observation/repeatability check for CYYZ and WMKK. Full 365-day coverage is authorized. Historical current/final pages and exact market-freeze snapshots remain different evidence classes.
+The locked 24-page spike and subsequent 730-page full coverage both passed for CYYZ and WMKK. Each station has 365/365 current/final daily labels with exact identity and daily-high/observation-max agreement. CYYZ 2026-03-08 has only two sub-daily observations and is explicitly anomalous. Historical current/final pages and exact market-freeze snapshots remain different evidence classes.
 
 #### Pre-registration — 2026-08-31 — Wunderground observation retention spike
 
@@ -1358,6 +1358,17 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence boundary: Pages are current/final historical views, not snapshots from the rule's next-day freeze time.
 - Next action: Locked 365-day coverage for each station.
 
+### 2026-08-31 — Phase 5 CYYZ/WMKK 365-day current/final coverage passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`.
+- Pre-registered gate: 365 pages/station, ≥99% complete coverage, zero terminal transport failures, 100% identity among available pages and 100% daily-high/observation-max agreement.
+- Evidence: `reports/research/EXP-20260831-phase5-wunderground-observation-coverage-365d.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-coverage-365d.json`; local raw `run=20260831T-phase5-coverage-365d-v1`.
+- Verification: CYYZ and WMKK each passed 365/365 complete pages and identity/high reconstruction; six transient requests recovered on attempt two, terminal failures zero.
+- Anomaly: CYYZ 2026-03-08 contains only two observations versus 44/24 on adjacent days. The registered gate remains passed, but this date is post-hoc flagged `SUBDAILY_INCOMPLETE_SUSPECTED` and cannot support a full intraday reconstruction claim.
+- Evidence boundary: Current/final calibration labels passed; market-freeze-as-of settlement evidence did not.
+- Next action: Investigate the CYYZ anomaly with an independent station source and market settlement.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1541,6 +1552,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Treat the current historical page as immutable settlement truth; rejected because the rule explicitly allows revisions until a defined next-day point. Reject the source entirely; deferred because it remains the exact resolution surface and a useful final calibration label.
 - Consequence: Dataset rows carry an evidence class. Prospective next-day snapshots are required for exact settlement-as-of validation.
 - Revisit condition: Versioned Wunderground history or another preserved source proves historical values at the applicable freeze timestamps.
+
+### ED-0029 — 2026-08-31 — Pass daily labels while quarantining sub-daily incompleteness
+
+- Decision: Accept CYYZ/WMKK Wunderground daily-high coverage for current/final calibration labels, but quarantine CYYZ 2026-03-08 from claims requiring complete intraday observations.
+- Evidence available at decision time: All 730 daily pages passed the registered contract. The sole extreme count anomaly had two CYYZ observations, while adjacent days had 44 and 24; DST produces a 23-hour day but does not explain only two reports.
+- Alternatives considered: Fail the entire daily gate; rejected because the source's daily high exists and matches its observed maximum under the pre-registered contract. Ignore the anomaly; rejected because it could bias feature comparison and confidence.
+- Consequence: Daily-label and sub-daily-completeness flags remain separate. The anomaly is excluded in sensitivity analysis unless independent evidence resolves it.
+- Revisit condition: Independent station records prove complete coverage/value or reveal that Wunderground's displayed high is incorrect.
 
 ## 20. Decision Log — append only
 

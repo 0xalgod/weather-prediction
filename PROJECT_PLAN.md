@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.36.0
+**Plan versiyonu:** 0.37.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -976,6 +976,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260831-phase5-wunderground-observation-spike.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json`; local raw `run=20260831T-phase5-spike-v1`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; sıradaki gate kilitli iki 365 günlük current/final coverage ölçümüdür.
 
+### D-0038 — 2026-08-31 — CYYZ/WMKK 365 günlük current/final observation gate geçti
+
+- **Durum:** `ACTIVE`
+- **Karar:** Wunderground current/final daily outcome coverage CYYZ ve WMKK için `PASSED`; historical market-freeze-as-of settlement kanıtı hâlâ çözülmemiştir.
+- **Ölçülen kanıt:** Her istasyonda 365/365 complete page (%100), identity 365/365, daily-high/observation-max 365/365, terminal failure 0. Altı transient istek ikinci attempt'te düzeldi.
+- **Hacim:** 730 sayfa, toplam 41.178.264 byte. CYYZ daily high −13–36°C ve 2–60 observation/gün; WMKK 25–36°C ve 40–54 observation/gün.
+- **Anomali:** CYYZ 2026-03-08 yalnız 2 observation içeriyor; daily high 9°C yine parsed max ile eşit. Ön-kayıtlı gate değişmeden geçti, fakat post-hoc diagnostic ile `SUBDAILY_INCOMPLETE_SUSPECTED`; CYYZ sub-daily diagnostic 364/365.
+- **Artifact:** `reports/research/EXP-20260831-phase5-wunderground-observation-coverage-365d.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-coverage-365d.json`; local raw `run=20260831T-phase5-coverage-365d-v1`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; CYYZ anomalisi ve üçüncü şehir/settlement join'i sıradadır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -988,7 +998,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** CYYZ ve WMKK için reconciled anchor tarihlerinde biten 365'er günlük Wunderground current/final coverage'ı ölçmek; eksikleri source/parser/transport olarak ayırmak.
+**Tek sonraki adım:** CYYZ 2026-03-08 iki-observation anomalisini bağımsız station kaynağı ve Polymarket settlement ile araştırmak; sonucu exclusion/sensitivity politikasına bağlamak.
 
 Beklenen artifact'lar:
 

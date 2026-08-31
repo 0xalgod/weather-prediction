@@ -4,7 +4,7 @@ This index is the project-level directory of material research experiments. Deta
 
 | Experiment ID | Title | Status | Started | Completed | Primary decision | Plan |
 |---|---|---|---|---|---|---|
-| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 5: WU spike passed; CYYZ/WMKK 365d coverage next | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
+| EXP-20260830-data-source-feasibility | Point-in-time market and weather data feasibility | `IN_PROGRESS` | 2026-08-30 | — | Phase 5: two 365d labels passed; CYYZ anomaly next | [PLAN.md](EXP-20260830-data-source-feasibility/PLAN.md) |
 
 
 ## Status policy
