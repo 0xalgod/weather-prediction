@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.44.0
+**Plan versiyonu:** 0.45.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1060,6 +1060,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** Final ve `-attempt1` JSON, research raporu; raw v2 `data/raw/noaa_lcdv2/run=20260831T-phase5-kord-lcdv2-v2`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; third-city current/final diagnostic bulundu fakat locked latest-365 gate geçmedi ve freeze-as-of çözülmedi.
 
+### D-0046 — 2026-08-31 — KORD/LCDv2 lag-safe final archive ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Latest-window failure trailing publication lag'den kaynaklanıyorsa, aynı KORD/LCDv2 contract'ı 40 günlük as-of buffer'lı sabit 2025-07-23–2026-07-22 penceresinde ≥%99 exact-date ve non-null daily maximum coverage sağlamalıdır.
+- **Cohort:** 365 tarih; sonuç görüldükten sonra replacement date yok. Aynı `USW00094846`, SOD ve `DailyMaximumDryBulbTemperature` parser/identity contract'ı kullanılacak.
+- **Gate:** Date coverage ≥%99, non-null maximum ≥%99, duplicate date 0, identity failure 0, terminal transport failure 0. İmputation ve provider mixing yok.
+- **Publication-lag metriği:** Her annual object için observed Last-Modified ve dosyadaki son SOD tarihi saklanacak; 2026 object için calendar-day farkı bir publication-lag proxy olarak raporlanacak. Bu revision history değildir.
+- **Interpretation:** Pass yalnız `FINAL_ARCHIVE_COVERAGE_PASS`; historical decision-time availability ve Wunderground freeze-as-of statüsü yine `UNRESOLVED`. Fail, LCDv2'nin final research label coverage'ını da zayıflatır.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-lag-safe-coverage.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1072,7 +1082,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** KORD/LCDv2 için ≥30 günlük as-of buffer'lı 365 günlük lag-safe historical coverage ve observed publication-lag diagnostic'ini ön-kayıt altına almak.
+**Tek sonraki adım:** Ön-kayıtlı 2025-07-23–2026-07-22 KORD/LCDv2 lag-safe coverage ve publication-lag proxy ölçümünü çalıştırmak.
 
 Beklenen artifact'lar:
 

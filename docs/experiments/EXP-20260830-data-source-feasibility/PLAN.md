@@ -876,6 +876,15 @@ Pre-register a lag-safe KORD/LCDv2 365-day historical window with at least a 30-
 - **Revision decision:** Object Last-Modified proves only the observed object version. Without immutable historical snapshots/version history, set `HISTORICAL_FREEZE_AS_OF_UNRESOLVED` and require prospective append-only capture.
 - **Artifacts:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-observation-coverage.json` and `reports/research/EXP-20260831-phase5-kord-lcdv2-observation-coverage.md`.
 
+#### Pre-registration — 2026-08-31 — KORD/LCDv2 lag-safe final archive coverage
+
+- **Hypothesis:** If the latest-window failure is a trailing publication-lag effect, the unchanged KORD/LCDv2 contract will provide ≥99% exact-date and non-null daily-maximum coverage in the fixed 2025-07-23–2026-07-22 window, which has a 40-day buffer at analysis time.
+- **Cohort:** Exactly 365 dates; no outcome-selected replacements. Use the same `USW00094846`, `REPORT_TYPE=SOD`, `DailyMaximumDryBulbTemperature`, name/coordinate identity and annual objects.
+- **Acceptance:** Exact-date coverage ≥99%, non-null maximum coverage ≥99%, zero duplicate dates, zero identity failures and zero terminal transport failures. No imputation or provider mixing.
+- **Lag metric:** Preserve observed annual-object Last-Modified and final SOD date; report their calendar-day difference for the current 2026 object as a publication-lag proxy, not a revision history.
+- **Interpretation:** Passing means only `FINAL_ARCHIVE_COVERAGE_PASS`. It does not establish historical decision-time availability, Wunderground equivalence or freeze-time reconstruction. Failure weakens LCDv2 even for final research labels.
+- **Artifacts:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-lag-safe-coverage.json` and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1460,6 +1469,14 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence: final and `-attempt1` JSON artifacts, research report and local immutable raw v2 run; 69 tests passed.
 - Next action: Pre-register lag-safe historical coverage with a ≥30-day as-of buffer and a publication-lag metric.
 
+### 2026-08-31 — KORD/LCDv2 lag-safe coverage pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Locked window: 2025-07-23–2026-07-22, exactly 365 dates and a 40-day analysis-time buffer.
+- Parser, station identity and ≥99% thresholds are unchanged from the failed latest-window test.
+- Passing is limited to final archive coverage; decision-time and settlement-freeze availability remain unresolved by construction.
+- Next action: Extend only the artifact's publication-lag metadata, rerun under a new immutable raw run and apply the registered gate.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1699,6 +1716,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Shift the window post-hoc and report a pass; rejected because it changes the tested cohort after observing the result. Fill recent dates from Wunderground; rejected because that would mix providers and revision semantics.
 - Consequence: The latest-365 result remains `FAILED`. A new ≥30-day-buffer experiment may test final archive completeness but cannot establish decision-time or settlement-freeze availability.
 - Revisit condition: Prospective repeated retrievals estimate the actual publication-lag distribution or NOAA exposes versioned publication timestamps.
+
+### ED-0036 — 2026-08-31 — Lock a separate 40-day-buffer cohort
+
+- Decision: Evaluate final LCDv2 completeness on 2025-07-23–2026-07-22 as a new preregistered cohort, preserving the failed latest-window result unchanged.
+- Evidence available at decision time: The first failure was a contiguous nine-day trailing block and all earlier dates in its window were complete, suggesting a testable publication-lag hypothesis.
+- Alternatives considered: Re-label the original window after dropping recent dates; rejected as post-hoc cohort editing. Wait and silently rerun the same artifact; rejected because it would overwrite the observed failure state.
+- Consequence: The new result answers only final archive completeness with a 40-day buffer and cannot satisfy point-in-time settlement evidence.
+- Revisit condition: None; both cohort results remain in experiment memory.
 
 ## 20. Decision Log — append only
 
