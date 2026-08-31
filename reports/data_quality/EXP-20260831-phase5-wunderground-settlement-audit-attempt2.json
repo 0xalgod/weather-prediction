@@ -1,0 +1,423 @@
+{
+  "audit": "fixed-wunderground-current-page-vs-terminal-settlement",
+  "combined_with_sentinel_summary": {
+    "all_divergences_quarantined": true,
+    "comparison_counts": {
+      "INELIGIBLE": 6,
+      "MATCH": 12,
+      "MISMATCH": 3
+    },
+    "diverged_city_count": 3,
+    "diverged_event_count": 3,
+    "diverged_event_ids": [
+      "493659",
+      "493666",
+      "249630"
+    ],
+    "divergence_rate": 0.2,
+    "divergence_wilson_95_high": 0.45185448715169363,
+    "divergence_wilson_95_low": 0.07047549346981563,
+    "eligible_city_count": 13,
+    "eligible_event_count": 15,
+    "ineligible_event_count": 6,
+    "match_city_count": 12,
+    "match_event_count": 12,
+    "registered_record_count": 21,
+    "temperature_label_eligible_count": 0,
+    "unresolved_eligible_count": 0
+  },
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "fixed_sample_summary": {
+    "all_divergences_quarantined": true,
+    "comparison_counts": {
+      "INELIGIBLE": 6,
+      "MATCH": 12,
+      "MISMATCH": 2
+    },
+    "diverged_city_count": 2,
+    "diverged_event_count": 2,
+    "diverged_event_ids": [
+      "493659",
+      "493666"
+    ],
+    "divergence_rate": 0.14285714285714285,
+    "divergence_wilson_95_high": 0.39941379496970353,
+    "divergence_wilson_95_low": 0.040093921271464966,
+    "eligible_city_count": 13,
+    "eligible_event_count": 14,
+    "ineligible_event_count": 6,
+    "match_city_count": 12,
+    "match_event_count": 12,
+    "registered_record_count": 20,
+    "temperature_label_eligible_count": 0,
+    "unresolved_eligible_count": 0
+  },
+  "generated_at_utc": "2026-08-31T19:04:13.227690Z",
+  "inputs": {
+    "fixed_sample_path": "reports/data_quality/EXP-20260830-phase1-manual-reconciliation-v2.json",
+    "fixed_sample_retrieved_at_utc": "2026-08-29T22:17:13.812235Z",
+    "fixed_sample_sha256": "e671f5bf6ea0617deec069e0cd61303c68790575cfe28a2f008fae4638c08cab",
+    "sentinel_generated_at_utc": "2026-08-31T18:04:36.642043Z",
+    "sentinel_path": "reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json",
+    "sentinel_sha256": "b888a49e56e868d611753ae13a79a9396c4a0fb6ba35047cb515c40b56afbf34"
+  },
+  "interpretation_limit": "A match is current-page/terminal-bucket consistency, not proof that the page was identical at the historical freeze timestamp.",
+  "pre_registered_gate": {
+    "all_divergences_quarantined": true,
+    "match_city_count_minimum": 3,
+    "match_event_count_minimum": 10,
+    "unresolved_eligible_count": 0
+  },
+  "records": [
+    {
+      "city": "Hong Kong",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "eligible": false,
+      "event_id": "624485",
+      "observed_high_display": null,
+      "settlement_bucket_eligible": false,
+      "station_code": null,
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "32\u00b0C",
+      "title": "Highest temperature in Hong Kong on June 25?"
+    },
+    {
+      "city": "Moscow",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "eligible": false,
+      "event_id": "668435",
+      "observed_high_display": null,
+      "settlement_bucket_eligible": false,
+      "station_code": null,
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "20\u00b0C",
+      "title": "Highest temperature in Moscow on July 7?"
+    },
+    {
+      "city": "Tel Aviv",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NO_TRADE_MISSING_RESOLUTION_SOURCE",
+      "eligible": false,
+      "event_id": "899793",
+      "observed_high_display": null,
+      "settlement_bucket_eligible": false,
+      "station_code": null,
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Tel Aviv on August 26?"
+    },
+    {
+      "city": "Karachi",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "493722",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 36
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "OPKC",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "36\u00b0C",
+      "title": "Highest temperature in Karachi on May 19?"
+    },
+    {
+      "city": "Munich",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "593023",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 22
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "EDDM",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "22\u00b0C",
+      "title": "Highest temperature in Munich on June 16?"
+    },
+    {
+      "city": "Guangzhou",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "515716",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 36
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "ZGGG",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "36\u00b0C",
+      "title": "Highest temperature in Guangzhou on May 25?"
+    },
+    {
+      "city": "Dallas",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MISMATCH",
+      "disposition": "HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT",
+      "eligible": true,
+      "event_id": "493659",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 30
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "KDAL",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "73\u00b0F or below",
+      "title": "Highest temperature in Dallas on May 19?"
+    },
+    {
+      "city": "Jakarta",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "490270",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 34
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "WIHH",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "34\u00b0C",
+      "title": "Highest temperature in Jakarta on May 18?"
+    },
+    {
+      "city": "Munich",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MISMATCH",
+      "disposition": "HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT",
+      "eligible": true,
+      "event_id": "493666",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 19
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "EDDM",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "11\u00b0C or below",
+      "title": "Highest temperature in Munich on May 19?"
+    },
+    {
+      "city": "Jinan",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "eligible": false,
+      "event_id": "504566",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 25
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "ZSJN",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Jinan on May 22?"
+    },
+    {
+      "city": "Zhengzhou",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "eligible": false,
+      "event_id": "504568",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "ZHCC",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Zhengzhou on May 22?"
+    },
+    {
+      "city": "Cape Town",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "INELIGIBLE",
+      "disposition": "NON_TERMINAL_OR_CANCELLED",
+      "eligible": false,
+      "event_id": "493696",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 24
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "FACT",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": null,
+      "title": "Highest temperature in Cape Town on May 19?"
+    },
+    {
+      "city": "Panama City",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "497028",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "MPMG",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "31\u00b0C or higher",
+      "title": "Highest temperature in Panama City on May 20?"
+    },
+    {
+      "city": "Shenzhen",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "515700",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "ZGSZ",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Shenzhen on May 25?"
+    },
+    {
+      "city": "Kuala Lumpur",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "614117",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 33
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "WMKK",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "33\u00b0C",
+      "title": "Highest temperature in Kuala Lumpur on June 22?"
+    },
+    {
+      "city": "Buenos Aires",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "132826",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 31
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "SAEZ",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "31\u00b0C",
+      "title": "Highest temperature in Buenos Aires on January 1?"
+    },
+    {
+      "city": "Toronto",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "731100",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "CYYZ",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "26\u00b0C",
+      "title": "Highest temperature in Toronto on July 23?"
+    },
+    {
+      "city": "Chicago",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "553903",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 27
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "KORD",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "68\u00b0F or higher",
+      "title": "Highest temperature in Chicago on June 5?"
+    },
+    {
+      "city": "Mexico City",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "589059",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 26
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "MMMX",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "26\u00b0C",
+      "title": "Highest temperature in Mexico City on June 14?"
+    },
+    {
+      "city": "Milan",
+      "cohort_role": "FIXED_STRATIFIED_SAMPLE",
+      "comparison": "MATCH",
+      "disposition": "CURRENT_PAGE_TERMINAL_BUCKET_MATCH",
+      "eligible": true,
+      "event_id": "322484",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 18
+      },
+      "settlement_bucket_eligible": true,
+      "station_code": "LIMC",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "18\u00b0C",
+      "title": "Highest temperature in Milan on April 2?"
+    },
+    {
+      "city": "Toronto",
+      "cohort_role": "ANOMALY_SENTINEL",
+      "comparison": "MISMATCH",
+      "disposition": "HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT",
+      "eligible": true,
+      "event_id": "249630",
+      "observed_high_display": {
+        "unit": "C",
+        "value": 9
+      },
+      "settlement_bucket_eligible": false,
+      "station_code": "CYYZ",
+      "temperature_label_eligible": false,
+      "terminal_winner_bucket": "10\u00b0C or higher",
+      "title": "Highest temperature in Toronto on March 8?"
+    }
+  ],
+  "sample_observation_settlement_gate_passed": true,
+  "schema_version": "1.0.0"
+}

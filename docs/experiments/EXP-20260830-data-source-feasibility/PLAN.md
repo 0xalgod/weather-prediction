@@ -855,11 +855,13 @@ The locked 24-page spike and 730-page availability coverage passed, but outcome-
 
 #### Decision
 
-Pending.
+The registered fixed-sample observation/settlement subgate `PASSED`: 12 current-page/terminal-bucket matches across 12 cities, two divergences quarantined, and zero unresolved eligible records. The primary fixed-sample divergence was 2/14 (14.29%, Wilson 95% CI 4.01%–39.94%). Adding the anomaly-selected CYYZ sentinel gives 3/15 (20.00%, sensitivity only).
+
+This does not validate current Wunderground historical pages as exact-temperature labels. Terminal Polymarket bucket labels were available for 14/14 eligible fixed-sample events, while exact-temperature label eligibility was 0/14 because no preserved freeze-time page/version exists. Phase 5 remains `IN_PROGRESS`.
 
 #### Next action
 
-Pending Phase 5 result.
+Pre-register and measure a third-city KORD/Chicago 365-day official-station observation, revision/final semantics and terminal-settlement join without treating current Wunderground pages as exact-temperature truth.
 
 ### Phase 6 — End-to-end join, city scoring and cost model
 
@@ -1414,6 +1416,17 @@ These inferences must be verified in Phases 3 and 4.
 - Decision: Quarantine the date as `HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT`; page availability can no longer imply label validity.
 - Next action: Fixed ≥10-event/≥3-city divergence audit before Phase 5 exit.
 
+### 2026-08-31 — Phase 5 fixed settlement-divergence audit passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; only the registered sample observation/settlement subgate passed.
+- Primary evidence: Fixed 20-event cohort had 14 eligible records, 12 matches across 12 cities, two divergences across two cities, six ineligible records and zero unresolved eligible records. Divergence was 14.29% with Wilson 95% CI 4.01%–39.94%.
+- Sensitivity: Adding the anomaly-selected CYYZ sentinel produced 3/15 divergence (20.00%, Wilson 95% CI 7.05%–45.19%); this is not a population estimate.
+- Label result: Terminal Polymarket outcome was available for 14/14 eligible fixed records, but exact-temperature eligibility was 0/14 because no freeze-time page/version was preserved.
+- Failure memory: `-attempt1` conflated bucket and temperature eligibility; `-attempt2` conflated page divergence with terminal-label availability. Both artifacts remain superseded and auditable.
+- Evidence: `reports/research/EXP-20260831-phase5-wunderground-settlement-audit.md` and final plus two attempt JSON artifacts.
+- Next action: Pre-register KORD/Chicago 365-day official observation, revision/final semantics and settlement join as the third-city evidence package.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1629,6 +1642,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Select a fresh set of convenient matching events; rejected because outcome-aware replacement would bias divergence downward. Treat the sentinel as representative; rejected, so it is tagged separately.
 - Consequence: Primary counts expose cohort composition and a sensitivity count excluding the sentinel. No divergence is silently dropped.
 - Revisit condition: A broader probability sample is preregistered from the full event population.
+
+### ED-0033 — 2026-08-31 — Separate terminal bucket outcomes from exact-temperature labels
+
+- Decision: Treat the verified terminal Polymarket winner as the eligible market-outcome label, while requiring preserved freeze-time evidence before any current historical page can become an exact-temperature label.
+- Evidence available at decision time: The fixed cohort produced 12 matches and two divergences among 14 eligible events; all 14 had terminal market labels but none had preserved freeze-time exact-temperature evidence. The anomaly sentinel added a third divergence.
+- Alternatives considered: Discard terminal outcomes whenever the current page diverges; rejected because the terminal winner is the market's outcome and remains identified. Promote bucket-consistent current pages to exact temperatures; rejected because consistency within a bucket does not identify the settled numeric value.
+- Consequence: The sample settlement subgate passes for bucket-outcome feasibility, Wunderground current pages fail as universal exact-temperature labels, and Phase 5 stays in progress pending third-city observation/revision evidence.
+- Revisit condition: Immutable settlement-time snapshots or an authoritative version history reconstruct the exact applicable temperature.
 
 ## 20. Decision Log — append only
 

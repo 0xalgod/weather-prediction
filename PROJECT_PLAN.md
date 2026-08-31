@@ -1,9 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.41.0
+**Plan versiyonu:** 0.42.0
 **Son güncelleme:** 2026-08-31
-**Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
+**Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -1026,6 +1026,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** MATCH current-page/bucket consistency gösterir, freeze-time snapshot kanıtı değildir. DIVERGED kayıt label olarak kullanılamaz.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-wunderground-settlement-audit.json` ve research raporu.
 
+### D-0043 — 2026-08-31 — Fixed settlement audit geçti; exact-temperature label geçmedi
+
+- **Durum:** `ACTIVE`
+- **Primary sonuç:** Fixed 20-event sample'da 14 eligible event; 12 `MATCH`/12 şehir, 2 `MISMATCH`/2 şehir, 6 `INELIGIBLE`, unresolved eligible 0. Divergence 2/14 = %14,29; Wilson %95 CI %4,01–%39,94.
+- **Sensitivity:** Anomaly-selected CYYZ sentinel dahil 3/15 divergence = %20,00; Wilson %95 CI %7,05–%45,19. Bu population estimate değildir.
+- **Gate:** Ön-kayıtlı sample observation-settlement subgate `PASSED`; Dallas 493659, Munich 493666 ve sentinel Toronto 249630 ayrışmaları `NO_TRAIN_NO_BACKTEST` olarak karantinada.
+- **Label ayrımı:** Eligible fixed sample eventlerin 14/14'ünde terminal Polymarket bucket label var. Preserved freeze-time snapshot bulunmadığı için exact-temperature label eligibility 0/14; sentinel dahil 0/15.
+- **Karar:** Wunderground current historical page'in universal exact-temperature label kullanımı `FAILED`. Terminal Polymarket winner bucket, identifier/terminal durum doğrulandığında ayrı market-outcome hedefi olarak kullanılabilir.
+- **Artifact:** Final audit JSON, iki superseded attempt JSON'u ve `reports/research/EXP-20260831-phase5-wunderground-settlement-audit.md`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; sample alt-gate geçti fakat üçüncü şehir 365 günlük observation/revision kanıtı ve freeze-time exact-temperature semantiği çözülmedi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1038,7 +1049,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli 20-event sample + CYYZ sentinel üzerinde Wunderground current-page high ile terminal winner divergence audit'ini çalıştırmak.
+**Tek sonraki adım:** KORD/Chicago için exact resolution rule ile 365 günlük official-station observation coverage, revision/final semantiği ve terminal settlement join'ini ön-kayıt altına almak ve ölçmek; Wunderground current page'i exact-temperature truth saymamak.
 
 Beklenen artifact'lar:
 
