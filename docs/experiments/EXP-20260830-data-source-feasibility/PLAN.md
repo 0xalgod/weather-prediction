@@ -3,7 +3,7 @@
 **Status:** `IN_PROGRESS`
 **Owner:** Abdullah Sezdi
 **Created:** 2026-08-30
-**Last updated:** 2026-08-30
+**Last updated:** 2026-08-31
 **Project phase:** Phase 0/G0 feasibility, enabling Phase 1
 **Related hypotheses:** H1, H2, H3, H5, H6
 **Related experiments:** None
@@ -707,7 +707,7 @@ Verify actual retrievability, archive depth, timestamp semantics, parameters, li
 - [x] Define initial NBM variables and lead times for daily MaxT reconstruction. (KORD 01Z NBP: FHR 24–228, mean/SD and 10/25/50/75/90 percentiles; value parser pending.)
 - [ ] Retrieve actual NBM core/QMD files for current and earliest available dates.
 - [x] Inspect NBM MaxT probabilistic/quantile fields and run cycles. (Matched 01Z required; 00Z historical counterexample preserved.)
-- [x] Probe GFS/GEFS archive depth and ensemble structure. (GEFS initial gate: 31/31 members on current, 365-day and 2,166-day samples; daily continuity pending.)
+- [x] Probe GFS/GEFS archive depth and ensemble structure. (Initial 31/31 samples plus 365/365 representative daily continuity; full-member daily continuity and local-day semantics pending.)
 - [ ] Probe HRRR archive depth and short-lead applicability.
 - [x] Probe ECMWF Open Data parameters, ensemble structure and rolling retention.
 - [ ] Record nominal run, first-seen, publish and valid timestamps.
@@ -739,11 +739,11 @@ Public AWS delivered complete NBM NBP 01Z objects for 2026-08-30 and 2023-08-31,
 
 #### Decision
 
-NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. ECMWF Open Data is prospective-only. GEFS operational archive now `CONDITIONAL_PASS`: current, 365-day and 2,166-day samples each contain complete control + p01–p30 membership and 2 m TMP/TMAX/TMIN; nine representative subsets passed actual range/GRIB/checksum verification. Three dates do not prove continuous daily coverage.
+NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked latest 365-day window has 364/365 primary 01Z objects and one verified 07Z fallback, for 100% object-policy coverage with zero transient failures. ECMWF Open Data is prospective-only. GEFS operational archive remains `CONDITIONAL_PASS`: initial samples had 31/31 membership, and the locked 365-day c00/p01/p30 continuity gate passed 1,095/1,095 indexes. This does not prove 31/31 daily completeness or local-day aggregation semantics.
 
 #### Next action
 
-Measure locked 365-day GEFS 00Z f024 control/p01/p30 daily index coverage, investigate missing days across all members/cycles, and verify f006/f012/f018/f024 TMAX local-day window semantics for one DST and one non-DST city.
+Verify f006/f012/f018/f024 TMAX valid-time/window semantics and leakage-safe local-day aggregation for one DST and one non-DST city.
 
 #### Pre-registration — 2026-08-31 — GEFS daily representative coverage
 
@@ -1296,6 +1296,16 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: Three point samples do not establish daily continuity, local-day multi-step MaxT construction or version-boundary stability.
 - Next action: Locked 365-day daily coverage and local-day TMAX step semantics.
 
+### 2026-08-31 — Phase 4 GEFS 365-day representative continuity passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; GEFS remains `CONDITIONAL_PASS`.
+- Pre-registered gate: Locked 2025-08-31–2026-08-30 window; 00Z/f024 c00/p01/p30; ≥99% of 1,095 indexes with exact 2 m TMP/TMAX/TMIN and zero terminal transport failures after bounded retry.
+- Evidence: `reports/research/EXP-20260831-phase4-gefs-daily-coverage.md`, `reports/data_quality/EXP-20260831-phase4-gefs-daily-coverage-365d.json`.
+- Verification: 365/365 complete dates and 1,095/1,095 complete indexes (%100). Three transient connection errors recovered on attempt two; terminal failures and missing dates were zero.
+- Limitation: Representative members do not prove 31/31 daily coverage; local-day MaxT and model-version boundaries remain unresolved.
+- Next action: Lock local-day TMAX step semantics for one DST and one non-DST city.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1455,6 +1465,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: ECMWF Open Data failed historical retention. GEFS reforecast/replay was rejected as a substitute because it was generated retrospectively rather than observed as issued at each historical market decision.
 - Consequence: Historical global-source work proceeds with operational GEFS timestamps and immutable member provenance; reforecast may later be a separate climatology/model-development input but never masquerades as as-issued operational data.
 - Revisit condition: Locked 365-day coverage fails materially, model boundaries cannot be versioned, or local-day MaxT cannot be reconstructed without leakage.
+
+### ED-0026 — 2026-08-31 — Pass GEFS representative continuity without overclaiming membership
+
+- Decision: Mark the locked 365-day c00/p01/p30 continuity subgate `PASSED`, while retaining GEFS provider status as `CONDITIONAL_PASS` until local-day semantics and broader membership stability are verified.
+- Evidence available at decision time: All 1,095 representative 00Z/f024 indexes returned exact 2 m TMP/TMAX/TMIN across 365/365 dates. Three transient resets recovered on the second attempt and no terminal failure remained.
+- Alternatives considered: Generalize three members to full 31-member daily completeness; rejected because it exceeds the sampled evidence. Fail the gate for recovered resets; rejected because the pre-registered failure metric was terminal failure after bounded retries.
+- Consequence: Local-day valid-time/window semantics become the next smallest gate; historical modeling remains unauthorized until the joined-data gates pass.
+- Revisit condition: Full-member sampling, a documented model boundary or local-day reconstruction contradicts the representative result.
 
 ## 20. Decision Log — append only
 

@@ -1,9 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.31.0
-**Son güncelleme:** 2026-08-30
-**Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
+**Plan versiyonu:** 0.32.0
+**Son güncelleme:** 2026-08-31
+**Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -924,6 +924,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Phase 3 `IN_PROGRESS`; historical executable L2/backtest veya live readiness iddiası yok. Recovery/backoff düzeltmesi kısa deterministic testlerle daha sonra devam eder.
 - **Sonuç:** Ana araştırma hattı Phase 4 GEFS coverage'a döner; 24 saat gate paper/live altyapıdan önce managed host'ta zorunludur.
 
+### D-0033 — 2026-08-31 — GEFS 365 günlük temsilî continuity gate geçti
+
+- **Durum:** `ACTIVE`
+- **Karar:** GEFS 365 günlük representative-member continuity alt-gate'i `PASSED`; provider genel statüsü local-day ve full-member sınırları nedeniyle `CONDITIONAL_PASS` kalır.
+- **Önceden yazılan gate:** 2025-08-31–2026-08-30, 00Z f024, c00/p01/p30; 1.095 indeksin ≥%99'u exact 2 m TMP/TMAX/TMIN ve retry sonrası terminal transport failure 0.
+- **Ölçülen kanıt:** 365/365 tam gün, 1.095/1.095 tam indeks (%100), tümü HTTP 200 ve exact 1/1/1 alan. 1.092 ilk denemede, 3 ikinci denemede geçti; transient error 3, terminal failure 0, missing date 0.
+- **Sınır:** Üç temsilî üye 31/31 günlük tamlığı kanıtlamaz; f024 varlığı yerel-gün MaxT step semantiğini çözmez.
+- **Artifact:** `reports/research/EXP-20260831-phase4-gefs-daily-coverage.md`, `reports/data_quality/EXP-20260831-phase4-gefs-daily-coverage-365d.json`
+- **Sonuç:** Phase 4 `IN_PROGRESS`; sıradaki gate DST ve non-DST şehirlerde leakage-safe local-day step sözleşmesidir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -936,7 +946,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli son 365 tamamlanmış gün için GEFS 00Z f024 control/p01/p30 index coverage'ını ölçmek; eksikleri tüm üyeler/cycle'lar açısından araştırmak.
+**Tek sonraki adım:** Bir DST kullanan ve bir DST kullanmayan şehir için GEFS f006/f012/f018/f024 TMAX valid-time/window semantiğini doğrulayıp leakage-safe yerel-gün MaxT dönüşüm sözleşmesini kilitlemek.
 
 Beklenen artifact'lar:
 
