@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.28.0
+**Plan versiyonu:** 0.29.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -897,6 +897,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260831-phase3-collector-soak-1h.md`; local raw/interim `run=20260831T0045Z-phase3-soak-1h-v1`.
 - **Sonuç:** Soak subgate geçti; sıradaki adım remediated 24 saat `caffeinate` capture.
 
+### D-0030 — 2026-08-31 — Remediated replacement 24 saat capture başlatıldı
+
+- **Durum:** `ACTIVE`
+- **Karar:** `run=20260831T0820Z-phase3-stability-24h-v2`, 12 lifecycle-safe asset, 86.400 saniye, 60 saniye wall-clock slot, 300 saniye non-blocking REST anchor ve fail-closed desync ile `caffeinate` altında başlatıldı.
+- **Horizon:** Start `2026-08-31T08:15:51Z`, target end `2026-09-01T08:15:51Z`; seçili market end `2026-09-01T12:00:00Z`, dolayısıyla target'tan 3 saat 44 dakika sonra.
+- **İlk kanıt:** 360 saniyede useful uptime `%99,9057`; 6/6 ready, 0 missed; 12/12 full base; 1 REST anchor/12 asset ve 12/12 match; 0 error/reconnect/base/mismatch.
+- **Faaliyet:** İlk 6 dakikada price-change yok; activity final raporda ayrı gate/limitation olarak gösterilecek.
+- **Local artifact:** `data/raw/polymarket_ws/run=20260831T0820Z-phase3-stability-24h-v2`, `data/interim/polymarket_ws/stability-24h-v2.json`.
+- **Sonuç:** Capture `RUNNING`; Phase 3 `IN_PROGRESS`, final gate target end'den önce değerlendirilmeyecek.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -909,7 +919,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Güncel ve target end'den sonra kapanan lifecycle-safe tokenlarla remediated 24 saat `caffeinate` Phase 3 capture başlatmak.
+**Tek sonraki adım:** Remediated 24 saat v2 capture'ı target end'e kadar korumak ve final uptime/slot/anchor/activity/lifecycle gate'ini değerlendirmek.
 
 Beklenen artifact'lar:
 

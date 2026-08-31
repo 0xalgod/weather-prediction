@@ -688,7 +688,7 @@ REST contract, forced reconnect and live delta replay shakeout passed. The first
 
 #### Next action
 
-Start the replacement 24-hour `caffeinate` gate with current tokens whose market end exceeds the target end; retain the remediated wall-clock, anchor and fail-closed contracts.
+Keep replacement run `run=20260831T0820Z-phase3-stability-24h-v2` alive through `2026-09-01T08:15:51Z`, then evaluate the immutable uptime, wall-slot, anchor, activity, lifecycle and fail-closed gates.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1200,6 +1200,18 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: Zero price-change events occurred during this quiet selection/hour. Delta behavior is supported by the preceding remediated 15-minute run with 785 events and 1,570 changes, not by the soak alone.
 - Decision: The combined active-delta regression and quiet-hour persistence soak authorize a replacement 24-hour gate; they do not pass Phase 3 themselves.
 - Next action: Start a remediated caffeinated 24-hour capture with market-end horizon validation.
+
+### 2026-08-31 — Phase 3 remediated replacement 24-hour capture started
+
+- Previous phase status: `IN_PROGRESS`.
+- New phase status: `IN_PROGRESS`; capture `RUNNING`.
+- Run: `run=20260831T0820Z-phase3-stability-24h-v2`; start `2026-08-31T08:15:51Z`; target `2026-09-01T08:15:51Z`.
+- Horizon contract: All 12 selected assets belong to markets ending `2026-09-01T12:00:00Z`, after the target end; runner enforces this before collection.
+- Locked runtime: `caffeinate`, 86,400-second gate, 60-second wall-clock slots, 300-second non-blocking anchors, fresh base after any reconnect and fail-closed advertised-top mismatch.
+- First six minutes: useful uptime 99.9057%, 6/6 ready, zero missed slot/error/reconnect/base/top violation and 12/12 first-anchor match.
+- Limitation: No price changes in the first six minutes; final activity is reported separately and cannot be manufactured.
+- Local evidence: `data/raw/polymarket_ws/run=20260831T0820Z-phase3-stability-24h-v2`, `data/interim/polymarket_ws/stability-24h-v2.json`.
+- Next action: Evaluate only after the immutable target end.
 
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 
