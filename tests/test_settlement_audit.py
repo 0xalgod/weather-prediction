@@ -21,12 +21,14 @@ class SettlementAuditTests(unittest.TestCase):
             {**base, "terminal_winner_bucket": "10°C or higher"}
         )
         self.assertEqual(match["comparison"], "MATCH")
-        self.assertTrue(match["training_eligible"])
+        self.assertTrue(match["settlement_bucket_eligible"])
+        self.assertFalse(match["temperature_label_eligible"])
         mismatch = classify_settlement_record(
             {**base, "terminal_winner_bucket": "9°C or below"}
         )
         self.assertEqual(mismatch["comparison"], "MISMATCH")
-        self.assertFalse(mismatch["training_eligible"])
+        self.assertFalse(mismatch["settlement_bucket_eligible"])
+        self.assertFalse(mismatch["temperature_label_eligible"])
 
     def test_ineligible_record_preserves_reason(self):
         record = {
