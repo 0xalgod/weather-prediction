@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import hashlib
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from time import monotonic
 from typing import Any
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 GEFS_AWS_BASE = "https://noaa-gefs-pds.s3.amazonaws.com"
@@ -76,6 +78,88 @@ def parse_index(text: str, content_length: int) -> dict[str, Any]:
     }
 
 
+def summarize_index(text: str) -> dict[str, Any]:
+    """Summarize required fields without retrieving the much larger GRIB object."""
+    rows = []
+    for line in (line for line in text.splitlines() if line):
+        fields = line.split(":")
+        if len(fields) < 7:
+            raise ValueError(f"malformed GEFS index row: {line}")
+        rows.append(
+            {
+                "parameter": fields[3],
+                "level": fields[4],
+                "forecast_window": fields[5],
+                "ensemble": fields[6],
+            }
+        )
+    selected = [
+        row
+        for row in rows
+        if row["parameter"] in REQUIRED_FIELDS and row["level"] == "2 m above ground"
+    ]
+    return {
+        "row_count": len(rows),
+        "selected_row_count": len(selected),
+        "required_field_counts": {
+            field: sum(row["parameter"] == field for row in selected)
+            for field in REQUIRED_FIELDS
+        },
+        "selected_rows": selected,
+    }
+
+
+def fetch_index_summary(
+    url: str, timeout: float = 30.0, attempts: int = 3
+) -> dict[str, Any]:
+    """Fetch a GEFS index with bounded retries and explicit failure provenance."""
+    index_url = url + ".idx"
+    requested_at = utc_iso()
+    started = monotonic()
+    errors = []
+    for attempt in range(1, attempts + 1):
+        try:
+            request = Request(
+                index_url, headers={"User-Agent": "weather-quant-research/0.1"}
+            )
+            with urlopen(request, timeout=timeout) as response:
+                raw = response.read()
+                headers = dict(response.headers.items())
+                status = response.status
+            return {
+                "url": url,
+                "index_url": index_url,
+                "requested_at_utc": requested_at,
+                "received_at_utc": utc_iso(),
+                "retrieval_seconds": monotonic() - started,
+                "attempt_count": attempt,
+                "http_status": status,
+                "index_byte_count": len(raw),
+                "index_sha256": hashlib.sha256(raw).hexdigest(),
+                "http_last_modified": headers.get("Last-Modified"),
+                "http_etag": headers.get("ETag"),
+                "inventory": summarize_index(raw.decode("ascii")),
+                "errors": errors,
+            }
+        except HTTPError as error:
+            errors.append({"attempt": attempt, "kind": "http", "status": error.code})
+            if error.code == 404:
+                break
+        except (URLError, TimeoutError) as error:
+            errors.append({"attempt": attempt, "kind": "transport", "detail": str(error)})
+        if attempt < attempts:
+            time.sleep(0.25 * attempt)
+    return {
+        "url": url,
+        "index_url": index_url,
+        "requested_at_utc": requested_at,
+        "received_at_utc": utc_iso(),
+        "retrieval_seconds": monotonic() - started,
+        "attempt_count": len(errors),
+        "http_status": errors[-1].get("status") if errors else None,
+        "inventory": None,
+        "errors": errors,
+    }
 def fetch_inventory(url: str, timeout: float = 60.0) -> dict[str, Any]:
     requested_at = utc_iso()
     started = monotonic()

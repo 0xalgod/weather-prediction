@@ -745,6 +745,16 @@ NBM/KORD remains `CONDITIONAL_PASS`; Phase 4 remains `IN_PROGRESS`. The locked l
 
 Measure locked 365-day GEFS 00Z f024 control/p01/p30 daily index coverage, investigate missing days across all members/cycles, and verify f006/f012/f018/f024 TMAX local-day window semantics for one DST and one non-DST city.
 
+#### Pre-registration — 2026-08-31 — GEFS daily representative coverage
+
+- **Hypothesis:** Operational GEFS 00Z/f024 indexes provide sufficiently continuous as-issued temperature-field coverage for historical calibration.
+- **Locked window:** 2025-08-31 through 2026-08-30 inclusive (365 completed UTC run dates).
+- **Primary sample:** `gec00`, `gep01`, and `gep30`; exactly one 2 m `TMP`, `TMAX`, and `TMIN` record per index.
+- **Acceptance:** At least 99% of the 1,095 representative indexes are complete and zero transport failures remain after three bounded attempts.
+- **Mandatory diagnosis:** Any incomplete date triggers probes of all 31 members at 00Z and representative members at 06/12/18Z; missing data is not silently replaced.
+- **Interpretation limit:** Passing establishes representative daily continuity only. It does not establish 31/31 daily completeness, local-day MaxT construction, or model-version stability.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase4-gefs-daily-coverage-365d.json`.
+
 ### Phase 5 — Observation and settlement reconciliation
 
 **Status:** `NOT_STARTED`

@@ -1,7 +1,12 @@
 import unittest
 from pathlib import Path
 
-from weather_quant.ingestion.noaa_gefs import member_names, object_url, parse_index
+from weather_quant.ingestion.noaa_gefs import (
+    member_names,
+    object_url,
+    parse_index,
+    summarize_index,
+)
 
 FIXTURE = Path(__file__).parent / "fixtures" / "gefs_index.txt"
 
@@ -24,6 +29,11 @@ class NoaaGefsTests(unittest.TestCase):
         self.assertEqual(parsed["required_field_counts"], {"TMP": 1, "TMAX": 1, "TMIN": 1})
         self.assertEqual(parsed["selected_range_bytes"], 400)
         self.assertEqual([row["length"] for row in parsed["selected_rows"]], [120, 130, 150])
+
+    def test_index_summary_does_not_require_full_object_size(self):
+        parsed = summarize_index(FIXTURE.read_text(encoding="ascii"))
+        self.assertEqual(parsed["required_field_counts"], {"TMP": 1, "TMAX": 1, "TMIN": 1})
+        self.assertEqual(parsed["selected_row_count"], 3)
 
 
 if __name__ == "__main__":
