@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.34.0
+**Plan versiyonu:** 0.35.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -957,6 +957,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260831-phase4-gefs-local-day-semantics.md`, `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json` ve superseded `-attempt1.json`.
 - **Sonuç:** GEFS `CONDITIONAL_PASS`, Phase 4 `IN_PROGRESS`; sıradaki düzeltici deney CYYZ/WMKK observation feasibility ve bu feature politikalarının outcome calibration testidir.
 
+### D-0036 — 2026-08-31 — Wunderground observation spike ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Polymarket'in exact resolution source'u olan Wunderground daily sayfaları CYYZ ve WMKK için en az 365 gün geriye parse edilebilir station/date/high ve saatlik observation kanıtı sunar.
+- **Kilitli spike:** Her istasyonun reconciled market tarihinden geriye `0,1,7,30,60,90,120,150,180,240,300,364` gün; toplam 24 sayfa.
+- **Gate:** 24/24 HTTP 200; station code/name, requested date, daily high ve en az bir observation satırı parse oranı %100; ikinci parse deterministik. Transport failure retry sonrası 0.
+- **Scale policy:** Spike tam geçmeden 730 sayfalık 365×2 koşu yapılmaz. Eksik sayfa/alanlar archive missingness, parser drift ve transport olarak ayrılır.
+- **Revision sınırı:** Bugün çekilen historical sayfa current/final görünümü kanıtlar, marketin next-day freeze anındaki değeri kanıtlamaz. Exact settlement-as-of için korunmuş historical snapshot veya prospective next-day capture gerekir.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -969,7 +979,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** CYYZ ve WMKK için source-matching station observation geçmişini/revision semantiğini ölçmek; GEFS interior/overlap/TMP feature karşılaştırmasını yapabilmek için Phase 5 outcome sözleşmesini önceden kaydetmek.
+**Tek sonraki adım:** CYYZ/WMKK için kilitli 24 tarihli Wunderground retention/parser spike'ını çalıştırmak; yalnız tam geçerse 365×2 coverage'a ölçeklemek.
 
 Beklenen artifact'lar:
 

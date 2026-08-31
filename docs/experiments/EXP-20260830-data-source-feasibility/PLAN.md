@@ -768,7 +768,7 @@ Measure source-matching CYYZ/WMKK station-observation history and revision seman
 
 ### Phase 5 — Observation and settlement reconciliation
 
-**Status:** `NOT_STARTED`
+**Status:** `IN_PROGRESS`
 
 #### Objective
 
@@ -806,7 +806,17 @@ Verify that exact resolution-station observations, revisions/final daily values,
 
 #### Actual result
 
-Pending.
+Source-matching Wunderground HTML feasibility is pre-registered for CYYZ and WMKK. Historical current/final pages and exact market-freeze snapshots are treated as different evidence classes.
+
+#### Pre-registration — 2026-08-31 — Wunderground observation retention spike
+
+- **Hypothesis:** The exact Wunderground resolution pages expose parseable station/date/daily-high and observation rows for at least 365 days for CYYZ and WMKK.
+- **Locked dates:** Offsets `0,1,7,30,60,90,120,150,180,240,300,364` from each station's reconciled market date; 24 pages total.
+- **Acceptance:** 24/24 HTTP 200, exact station code/name, requested-date identity, daily high and non-empty observation table; zero terminal transport failures; deterministic normalized parse.
+- **Scaling rule:** Do not issue the 730-page full probe unless the spike passes completely. Classify missing object, parser drift and transport separately.
+- **Revision limitation:** A page retrieved now is current/final evidence, not proof of the value visible at the rule's next-day freeze time. Exact historical settlement-as-of remains conditional without a preserved snapshot; prospective capture must be append-only.
+- **Metrics:** Coverage by station/date, response bytes/hash/timestamps, parsed identity/high/unit/observation count, missingness class and normalized repeatability.
+- **Artifacts:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json`, `reports/research/EXP-20260831-phase5-wunderground-observation-spike.md`.
 
 #### Decision
 
