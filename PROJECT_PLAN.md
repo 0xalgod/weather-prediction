@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.38.0
+**Plan versiyonu:** 0.39.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -996,6 +996,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Zaman sözleşmesi:** ECCC daily aggregate kullanılmaz; resmî climatological-day boundary local calendar day ile farklı olabileceğinden yalnız hourly `LOCAL_DATE` filtrelenir.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json` ve research raporu.
 
+### D-0040 — 2026-08-31 — CYYZ anomaly diagnostic v1 başarısız ve settlement bulundu
+
+- **Durum:** `ACTIVE`
+- **Sonuç:** Ön-kayıtlı diagnostic `FAILED`: ECCC `LOCAL_DATE` 24 sıra ve 0–23 saat üretti, beklenen civil-DST 23 saatini vermedi; max 12,1°C ve half-up değeri Wunderground 9°C ile eşleşmedi.
+- **Settlement bulgusu:** Önceki text araması yanlıştı; structured 8.222-event taraması exact event `249630` buldu. Terminal winner `10°C or higher`; dolayısıyla bugünkü Wunderground 9°C sayfasıyla settlement çelişiyor.
+- **Yorum:** ECCC `LOCAL_DATE` alanı civil IANA DST günü varsayımıyla kullanılamaz. Corrective v2, UTC_DATE değerlerini `America/Toronto` civil `[00:00,next 00:00)` sınırlarıyla filtreleyecek ve winner bucket'ı artifact'a çıkaracak.
+- **Gate değişikliği yok:** v1 `FAILED` olarak korunur. v2 yeni bir forensic correction'dır; ilk gate'i geçmiş saymaz.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly-attempt1.json`.
+- **Sonuç:** D-0038'in “current/final calibration label” yorumu bu tarih için yanlışlandı; corrective v2 sonrasında CYYZ label policy daraltılacaktır.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1008,7 +1018,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Resmî ECCC hourly kayıtları ve full Polymarket inventory ile CYYZ 2026-03-08 anomaly diagnostic'ini çalıştırmak; sonucu exclusion/sensitivity politikasına bağlamak.
+**Tek sonraki adım:** ECCC UTC_DATE kayıtlarını IANA civil-day sınırlarıyla filtreleyen ve event 249630 terminal winner'ını çıkaran corrective CYYZ diagnostic v2'yi çalıştırmak.
 
 Beklenen artifact'lar:
 

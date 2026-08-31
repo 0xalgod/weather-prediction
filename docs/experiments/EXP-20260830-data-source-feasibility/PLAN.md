@@ -836,6 +836,14 @@ The locked 24-page spike and subsequent 730-page full coverage both passed for C
 - **Settlement check:** Scan the complete preserved 8,222-event closed inventory for the exact Toronto/date event. No event yields `NOT_APPLICABLE`, not a passed settlement reconciliation.
 - **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json`.
 
+#### Corrective registration — 2026-08-31 — CYYZ civil-time and settlement v2
+
+- **Trigger:** v1 failed: ECCC `LOCAL_DATE` returned 24 standard-time-labelled rows, official max was 12.1°C rather than Wunderground's 9°C, and structured inventory scanning found Polymarket event 249630 with winner `10°C or higher`.
+- **Correction:** Filter ECCC `UTC_DATE` by IANA `America/Toronto` civil `[00:00,next 00:00)` boundaries; require 23 rows on the spring-forward date and no duplicate UTC timestamps.
+- **Forensic comparison:** Report raw/half-up ECCC maximum, Wunderground current-page high and terminal Polymarket bucket. No source is silently overwritten or promoted to historical freeze evidence.
+- **Decision rule:** If civil ECCC maximum belongs to the terminal bucket while current Wunderground high does not, mark the current Wunderground label `HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT` and exclude it from outcome training.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json`; v1 remains `-attempt1.json`.
+
 #### Decision
 
 Pending.
@@ -1378,6 +1386,15 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence boundary: Current/final calibration labels passed; market-freeze-as-of settlement evidence did not.
 - Next action: Investigate the CYYZ anomaly with an independent station source and market settlement.
 
+### 2026-08-31 — Phase 5 CYYZ anomaly diagnostic v1 failed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`.
+- Registered result: `FAILED`; ECCC `LOCAL_DATE` produced 24 rather than 23 civil-DST rows and maximum 12.1°C did not match the current Wunderground 9°C page.
+- Unexpected settlement evidence: Structured scan found exact event 249630 and terminal winner `10°C or higher`; the current Wunderground page is inconsistent with settlement.
+- Failure memory: `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly-attempt1.json`.
+- Next action: Correct only the ECCC time filter to IANA civil UTC boundaries and preserve all three source values in v2.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1569,6 +1586,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Fail the entire daily gate; rejected because the source's daily high exists and matches its observed maximum under the pre-registered contract. Ignore the anomaly; rejected because it could bias feature comparison and confidence.
 - Consequence: Daily-label and sub-daily-completeness flags remain separate. The anomaly is excluded in sensitivity analysis unless independent evidence resolves it.
 - Revisit condition: Independent station records prove complete coverage/value or reveal that Wunderground's displayed high is incorrect.
+
+### ED-0030 — 2026-08-31 — Do not treat ECCC LOCAL_DATE as civil DST time
+
+- Decision: ECCC hourly rows used for Polymarket local-calendar days must be selected by UTC timestamps transformed through the event-effective IANA timezone, not by ECCC `LOCAL_DATE` alone.
+- Evidence available at decision time: On Toronto's 2026 spring-forward date ECCC exposed local hours 0–23 with UTC offsets consistent with local standard-time labels, producing 24 rows rather than the civil day's 23 hours.
+- Alternatives considered: Force-drop local hour 2; rejected because it edits source labels without an explicit civil-time transform. Use ECCC daily maximum; rejected because official climatological-day boundaries differ from the market's local day.
+- Consequence: Corrective v2 filters the half-open civil UTC interval and preserves original ECCC local/UTC fields.
+- Revisit condition: ECCC publishes an explicit DST-aware field or revised timestamp contract.
 
 ## 20. Decision Log — append only
 
