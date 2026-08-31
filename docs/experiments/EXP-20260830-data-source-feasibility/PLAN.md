@@ -688,7 +688,7 @@ REST contract, forced reconnect and live delta replay shakeout passed. The first
 
 #### Next action
 
-Run the remediated collector for a one-hour `caffeinate` soak with a current lifecycle-safe 12-token selection; only then authorize a replacement 24-hour gate.
+Start the replacement 24-hour `caffeinate` gate with current tokens whose market end exceeds the target end; retain the remediated wall-clock, anchor and fail-closed contracts.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1191,6 +1191,16 @@ These inferences must be verified in Phases 3 and 4.
 - Verification: 900.068 seconds, useful uptime 99.9592%, 15/15 ready, 0 missed slot, 0 reconnect/error/base/top violation, 24/24 REST anchor match and 89/89 heartbeat/PONG.
 - Next action: One-hour caffeinated soak on the same lifecycle-safe selection/code.
 
+### 2026-08-31 — Phase 3 remediated one-hour soak passed with activity limitation
+
+- Previous phase status: `IN_PROGRESS`.
+- New phase status: `IN_PROGRESS`; one-hour soak `PASSED_WITH_ACTIVITY_LIMITATION`.
+- Evidence: `reports/data_quality/EXP-20260831-phase3-collector-soak-1h.md`; local run `run=20260831T0045Z-phase3-soak-1h-v1`.
+- Verification: 3,600.069 seconds, 99.9915% useful uptime, 60/60 ready slots, zero missed slot/error/reconnect/base/top violation, 132/132 REST anchor match and 359/359 heartbeat/PONG.
+- Limitation: Zero price-change events occurred during this quiet selection/hour. Delta behavior is supported by the preceding remediated 15-minute run with 785 events and 1,570 changes, not by the soak alone.
+- Decision: The combined active-delta regression and quiet-hour persistence soak authorize a replacement 24-hour gate; they do not pass Phase 3 themselves.
+- Next action: Start a remediated caffeinated 24-hour capture with market-end horizon validation.
+
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 
 - Previous phase status: `NOT_STARTED`
@@ -1348,6 +1358,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Trust advertised best bid/ask and delete every contradictory local level; rejected because it changes full depth without an explicit size-zero event and could invent executable liquidity. Ignore mismatch because anchors mostly match; rejected because event-time fills could still be wrong.
 - Consequence: Regression/soak fails on any mismatch and reconnects fail closed. A future documented sequence/resume protocol or exact raw+REST proof may refine recovery, but cannot rewrite historical gaps.
 - Revisit condition: Primary protocol documentation plus captured counterexamples establish a deterministic, replayable repair rule.
+
+### ED-0024 — 2026-08-31 — Require combined activity and persistence evidence
+
+- Decision: Treat the 15-minute active-delta regression and one-hour quiet persistence soak as complementary evidence; neither alone substitutes for the replacement 24-hour gate.
+- Evidence available at decision time: The regression applied 1,570 changes with zero mismatch and 24/24 anchors; the soak maintained 60/60 scheduled slots and 132/132 anchors with zero reconnect/error but observed no price changes.
+- Alternatives considered: Reject the soak because it had no deltas; rejected because transport/state persistence was its primary gate and actual market quietness is not collector failure. Declare Phase 3 passed from both short runs; rejected because the registered minimum remains 86,400 seconds.
+- Consequence: Replacement 24-hour capture is authorized, while its report must separately show activity, uptime, checkpoint, anchor and lifecycle metrics.
+- Revisit condition: The 24-hour run has insufficient activity or exposes a new protocol/lifecycle failure.
 
 ### ED-0017 — 2026-08-30 — Key NBM availability by cycle and version
 

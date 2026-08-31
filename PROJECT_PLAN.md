@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.27.0
+**Plan versiyonu:** 0.28.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -888,6 +888,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260831-phase3-collector-regression-15m.md`; local raw/interim run `run=20260830T2224Z-phase3-regression-15m-v3`.
 - **Sonuç:** Regression `PASSED`; sıradaki gate aynı kodla 1 saatlik `caffeinate` soak.
 
+### D-0029 — 2026-08-31 — Remediated collector 1 saat soak sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** 1 saat transport/state soak `PASSED_WITH_ACTIVITY_LIMITATION`; 15 dakika aktif-delta regression ile birlikte replacement 24 saat gate başlatılabilir. Phase 3 henüz geçmedi.
+- **Ölçülen kanıt:** 3.600,069 sn; useful uptime `%99,9915`; 60/60 ready, 0 missed; 1 connection, 0 error/reconnect; 12/12 full book; 132/132 REST anchor; 359/359 heartbeat/PONG; 0 base/mismatch.
+- **Faaliyet sınırı:** Soak boyunca 0 price-change gözlendi. Delta replay kanıtı önceki v3 regression'daki 785 event/1.570 applied change ve 24/24 anchor sonucundan gelir; iki koşu birlikte yorumlanır.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase3-collector-soak-1h.md`; local raw/interim `run=20260831T0045Z-phase3-soak-1h-v1`.
+- **Sonuç:** Soak subgate geçti; sıradaki adım remediated 24 saat `caffeinate` capture.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -900,7 +909,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Güncel lifecycle-safe 12 tokenla 1 saatlik `caffeinate` Phase 3 soak çalıştırmak; gate geçerse yeni 24 saat capture planlamak.
+**Tek sonraki adım:** Güncel ve target end'den sonra kapanan lifecycle-safe tokenlarla remediated 24 saat `caffeinate` Phase 3 capture başlatmak.
 
 Beklenen artifact'lar:
 
