@@ -145,7 +145,7 @@ def fetch_index_summary(
             errors.append({"attempt": attempt, "kind": "http", "status": error.code})
             if error.code == 404:
                 break
-        except (URLError, TimeoutError) as error:
+        except (URLError, TimeoutError, ConnectionError) as error:
             errors.append({"attempt": attempt, "kind": "transport", "detail": str(error)})
         if attempt < attempts:
             time.sleep(0.25 * attempt)

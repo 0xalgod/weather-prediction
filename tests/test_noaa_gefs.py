@@ -1,7 +1,9 @@
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from weather_quant.ingestion.noaa_gefs import (
+    fetch_index_summary,
     member_names,
     object_url,
     parse_index,
@@ -34,6 +36,17 @@ class NoaaGefsTests(unittest.TestCase):
         parsed = summarize_index(FIXTURE.read_text(encoding="ascii"))
         self.assertEqual(parsed["required_field_counts"], {"TMP": 1, "TMAX": 1, "TMIN": 1})
         self.assertEqual(parsed["selected_row_count"], 3)
+
+    @patch("weather_quant.ingestion.noaa_gefs.time.sleep")
+    @patch(
+        "weather_quant.ingestion.noaa_gefs.urlopen",
+        side_effect=ConnectionResetError("peer reset"),
+    )
+    def test_connection_reset_is_bounded_and_recorded(self, _urlopen, _sleep):
+        result = fetch_index_summary("https://example.test/object", attempts=3)
+        self.assertIsNone(result["inventory"])
+        self.assertEqual(result["attempt_count"], 3)
+        self.assertEqual([error["kind"] for error in result["errors"]], ["transport"] * 3)
 
 
 if __name__ == "__main__":
