@@ -101,10 +101,16 @@ def main() -> None:
             } | {"tmax_row": tmax_rows[0]}
 
         target_start, target_end = local_day_utc(case["local_date"], case["timezone"])
-        coverage = window_coverage(target_start, target_end, windows)
+        six_hour_pairs = [
+            (row, window)
+            for row, window in zip(gate_a_rows, windows)
+            if row["step"] % 6 == 0
+        ]
+        six_hour_windows = [window for _, window in six_hour_pairs]
+        coverage = window_coverage(target_start, target_end, six_hour_windows)
         overlapping_steps = [
             row["step"]
-            for row, (start, end) in zip(gate_a_rows, windows)
+            for row, (start, end) in six_hour_pairs
             if start < target_end and end > target_start
         ]
         for step in overlapping_steps:
@@ -121,7 +127,7 @@ def main() -> None:
             )
             actual_ranges[f"f{step:03d}"] = download_selected_ranges(full, destination)
 
-        six_hour_rows = [row for row in gate_a_rows if row["step"] % 6 == 0]
+        six_hour_rows = [row for row, _ in six_hour_pairs]
         six_hour_consecutive = all(
             current["end_hour"] == following["start_hour"]
             for current, following in zip(six_hour_rows, six_hour_rows[1:])
