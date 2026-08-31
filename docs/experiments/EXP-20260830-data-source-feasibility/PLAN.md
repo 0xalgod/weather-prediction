@@ -688,7 +688,7 @@ REST contract, forced reconnect and live delta replay shakeout passed. The first
 
 #### Next action
 
-Keep replacement run `run=20260831T0820Z-phase3-stability-24h-v2` alive through `2026-09-01T08:15:51Z`, then evaluate the immutable uptime, wall-slot, anchor, activity, lifecycle and fail-closed gates.
+Add reason-segmented network/protocol failures, stable-grace backoff reset and desync circuit breaker; then run a forced-disconnect recovery regression before another long gate.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1212,6 +1212,16 @@ These inferences must be verified in Phases 3 and 4.
 - Limitation: No price changes in the first six minutes; final activity is reported separately and cannot be manufactured.
 - Local evidence: `data/raw/polymarket_ws/run=20260831T0820Z-phase3-stability-24h-v2`, `data/interim/polymarket_ws/stability-24h-v2.json`.
 - Next action: Evaluate only after the immutable target end.
+
+### 2026-08-31 — Phase 3 replacement v2 invalidated by local network outage
+
+- Previous phase status: `IN_PROGRESS`; capture `RUNNING`.
+- New phase status: `IN_PROGRESS`; capture `NETWORK_OUTAGE_CONTAMINATED_INTERRUPTED`.
+- Evidence: Local DNS failures began at `2026-08-31T10:26:00Z`. Stop snapshot had 11,463 seconds, 91.4008% useful uptime, 174/190 ready slots, 13 missed slots, 116 connection errors and 160 fail-closed top mismatches.
+- Positive diagnostic: All 408 completed REST asset anchors matched; raw evidence spans 117 immutable connection files.
+- New bug: Backoff resets immediately after socket connect, so repeated short-lived desync connections caused a reconnect storm after network restoration.
+- Evidence artifact: `reports/data_quality/EXP-20260831-phase3-network-outage-v2.md`.
+- Next action: Stable-grace backoff, circuit breaker, reason-specific metrics and forced-disconnect recovery regression.
 
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 

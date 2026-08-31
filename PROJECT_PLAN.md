@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.29.0
+**Plan versiyonu:** 0.30.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -907,6 +907,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Local artifact:** `data/raw/polymarket_ws/run=20260831T0820Z-phase3-stability-24h-v2`, `data/interim/polymarket_ws/stability-24h-v2.json`.
 - **Sonuç:** Capture `RUNNING`; Phase 3 `IN_PROGRESS`, final gate target end'den önce değerlendirilmeyecek.
 
+### D-0031 — 2026-08-31 — Replacement v2 internet kesintisi sonucu
+
+- **Durum:** `ACTIVE`
+- **Karar:** v2 `NETWORK_OUTAGE_CONTAMINATED_INTERRUPTED`; stability gate'e dahil edilmeyecek. 117 reconnect storm nedeniyle gereksiz endpoint yükünü önlemek için kontrollü durduruldu.
+- **Ölçülen kanıt:** 11.463 sn; useful uptime `%91,4008`; 174/190 ready, 13 missed; 117 attempt/116 error/117 reconnect; 160 mismatch. Error log `gaierror` ile yerel DNS/internet kesintisini doğruladı. REST anchor 408/408 kaldı.
+- **Yeni failure mode:** Bağlantı kurulunca backoff hemen 1 saniyeye resetlendiği için kısa ömürlü desync bağlantıları reconnect storm yarattı. Network ve protocol-desync sayaçları ayrılmalı, stable-grace/circuit-breaker eklenmeli.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase3-network-outage-v2.md`; local raw/interim `run=20260831T0820Z-phase3-stability-24h-v2`.
+- **Sonuç:** Phase 3 `IN_PROGRESS`; yeni 24 saatten önce recovery/backoff remediation ve forced-disconnect regression gerekir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -919,7 +928,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Remediated 24 saat v2 capture'ı target end'e kadar korumak ve final uptime/slot/anchor/activity/lifecycle gate'ini değerlendirmek.
+**Tek sonraki adım:** Network/protocol error sınıfları, stable-grace backoff reset ve desync circuit breaker ekleyip forced-disconnect recovery regression çalıştırmak.
 
 Beklenen artifact'lar:
 
