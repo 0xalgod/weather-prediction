@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.40.0
+**Plan versiyonu:** 0.41.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -1016,6 +1016,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/research/EXP-20260831-phase5-cyyz-20260308-anomaly.md`, final ve `-attempt1` JSON artifact'ları; local raw ECCC `run=20260831T-cyyz-anomaly-v2`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; fixed ≥10 event/≥3 city settlement divergence audit zorunludur.
 
+### D-0042 — 2026-08-31 — Fixed settlement-divergence audit ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Cohort:** Önceden kilitli 20-event Phase 1 stratified sample + CYYZ event 249630 anomaly sentinel; yeni sonuç-seçilmiş örnek yok.
+- **Eligibility:** Exact terminal winner, identity match ve parse edilmiş Wunderground daily high birlikte zorunlu. Diğer kayıtlar denominator'a eklenmez, `INELIGIBLE` nedeni ile korunur.
+- **Metrikler:** Eligible/match/diverged/ineligible event ve unique-city sayıları, divergence oranı + Wilson %95 CI, event-level evidence class ve quarantine disposition.
+- **Gate:** Sample observation-settlement subgate için ≥10 `MATCH`, ≥3 şehir ve tüm divergence'larda explicit `NO_TRAIN_NO_BACKTEST`; unresolved eligible record 0.
+- **Sınır:** MATCH current-page/bucket consistency gösterir, freeze-time snapshot kanıtı değildir. DIVERGED kayıt label olarak kullanılamaz.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-wunderground-settlement-audit.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1028,7 +1038,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Sabitlenmiş en az 10 event/3 city örnekleminde current Wunderground high ile terminal Polymarket winner bucket divergence audit'i yapmak; label eligibility'yi event bazında belirlemek.
+**Tek sonraki adım:** Kilitli 20-event sample + CYYZ sentinel üzerinde Wunderground current-page high ile terminal winner divergence audit'ini çalıştırmak.
 
 Beklenen artifact'lar:
 

@@ -844,6 +844,15 @@ The locked 24-page spike and 730-page availability coverage passed, but outcome-
 - **Decision rule:** If civil ECCC maximum belongs to the terminal bucket while current Wunderground high does not, mark the current Wunderground label `HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT` and exclude it from outcome training.
 - **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly.json`; v1 remains `-attempt1.json`.
 
+#### Pre-registration — 2026-08-31 — Fixed Wunderground/settlement divergence audit
+
+- **Cohort:** The pre-existing 20-event Phase 1 stratified sample plus CYYZ event 249630 as the anomaly sentinel. No outcome-selected replacement events.
+- **Eligibility:** Exact terminal winner, identifier match and parsed Wunderground daily high. All other records remain `INELIGIBLE` with their original reason.
+- **Primary metrics:** Eligible, match, diverged and ineligible events/cities; divergence rate with Wilson 95% interval; explicit event-level evidence class and quarantine.
+- **Gate:** At least 10 current-page/winner `MATCH` records across at least three cities, every divergence set `NO_TRAIN_NO_BACKTEST`, and zero unresolved eligible records.
+- **Interpretation:** A match is current-page/terminal-bucket consistency, not proof of freeze-time page identity. A divergence invalidates the current page as an outcome label.
+- **Artifacts:** `reports/data_quality/EXP-20260831-phase5-wunderground-settlement-audit.json`, `reports/research/EXP-20260831-phase5-wunderground-settlement-audit.md`.
+
 #### Decision
 
 Pending.
@@ -1612,6 +1621,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Keep 9°C as a current/final label; rejected because it contradicts both independent official data and settlement. Replace all Wunderground labels with ECCC; rejected because provider/time-window semantics differ and WMKK lacks the same source.
 - Consequence: CYYZ anomaly is `NO_TRAIN_NO_BACKTEST`; all sampled historical labels undergo event-level settlement reconciliation. Page coverage and valid-label coverage are reported separately.
 - Revisit condition: A preserved freeze-time Wunderground snapshot or version history proves the applicable historical value.
+
+### ED-0032 — 2026-08-31 — Reuse the fixed sample and add only the anomaly sentinel
+
+- Decision: Audit the original 20-event stratified cohort without replacement and add event 249630 only as a declared anomaly sentinel; report fixed-sample and sentinel roles explicitly.
+- Evidence available at decision time: The original cohort already preserved 12 matches, two source/settlement mismatches and six structurally ineligible events. Event 249630 was discovered through a separately registered anomaly investigation.
+- Alternatives considered: Select a fresh set of convenient matching events; rejected because outcome-aware replacement would bias divergence downward. Treat the sentinel as representative; rejected, so it is tagged separately.
+- Consequence: Primary counts expose cohort composition and a sensitivity count excluding the sentinel. No divergence is silently dropped.
+- Revisit condition: A broader probability sample is preregistered from the full event population.
 
 ## 20. Decision Log — append only
 
