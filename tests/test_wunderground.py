@@ -1,7 +1,12 @@
 import unittest
+from datetime import date
 from pathlib import Path
 
-from weather_quant.ingestion.wunderground import daily_url, parse_daily_page
+from weather_quant.ingestion.wunderground import (
+    daily_url,
+    date_window_ending,
+    parse_daily_page,
+)
 
 FIXTURE = Path(__file__).parent / "fixtures" / "wunderground_daily.html"
 
@@ -23,6 +28,14 @@ class WundergroundTests(unittest.TestCase):
         self.assertEqual(result["temperature_unit"], "C")
         self.assertEqual(result["observation_count"], 2)
         self.assertEqual(result["observation_temperature_max"], 26)
+
+    def test_date_window_is_inclusive_and_locked(self):
+        self.assertEqual(
+            date_window_ending(date(2026, 1, 2), 3),
+            [date(2025, 12, 31), date(2026, 1, 1), date(2026, 1, 2)],
+        )
+        with self.assertRaises(ValueError):
+            date_window_ending(date(2026, 1, 2), 0)
 
 
 if __name__ == "__main__":

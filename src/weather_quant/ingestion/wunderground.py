@@ -7,7 +7,7 @@ import html
 import json
 import re
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from time import monotonic
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -32,6 +32,12 @@ def utc_iso() -> str:
 def daily_url(base_url: str, requested_date: str) -> str:
     parsed = datetime.strptime(requested_date, "%Y-%m-%d").date()
     return f"{base_url.rstrip('/')}/date/{parsed.year}-{parsed.month}-{parsed.day}"
+
+
+def date_window_ending(anchor: date, days: int) -> list[date]:
+    if days <= 0:
+        raise ValueError("days must be positive")
+    return [anchor - timedelta(days=offset) for offset in range(days - 1, -1, -1)]
 
 
 def parse_daily_page(page: str) -> dict[str, Any]:
