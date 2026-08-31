@@ -1,0 +1,95 @@
+{
+  "coverage_gate_passed": false,
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "generated_at_utc": "2026-08-31T19:19:33.274105Z",
+  "locked_contract": {
+    "date_coverage_minimum": 0.99,
+    "duplicate_daily_summary_maximum": 0,
+    "end_date": "2026-08-30",
+    "expected_date_count": 365,
+    "icao": "KORD",
+    "identity_rate_required": 1.0,
+    "non_null_daily_maximum_coverage_minimum": 0.99,
+    "start_date": "2025-08-31",
+    "station": "USW00094846",
+    "timezone": "America/Chicago"
+  },
+  "metrics": {
+    "admitted_row_count": 356,
+    "daily_maximum_c_max": 35.6,
+    "daily_maximum_c_min": -15.0,
+    "date_coverage": 0.9753424657534246,
+    "duplicate_date_count": 0,
+    "duplicate_dates": [],
+    "identity_failure_count": 0,
+    "missing_date_count": 9,
+    "missing_dates": [
+      "2026-08-22",
+      "2026-08-23",
+      "2026-08-24",
+      "2026-08-25",
+      "2026-08-26",
+      "2026-08-27",
+      "2026-08-28",
+      "2026-08-29",
+      "2026-08-30"
+    ],
+    "non_null_daily_maximum_coverage": 0.9753424657534246,
+    "non_null_daily_maximum_date_count": 356,
+    "represented_date_count": 356
+  },
+  "objects": [
+    {
+      "byte_count": 8975009,
+      "filename": "LCD_USW00094846_2025.csv",
+      "headers": {
+        "content_type": "text/csv; charset=utf-8",
+        "etag": "\"c5044122333bcc57b682ec681fa9c780\"",
+        "last_modified": "Tue, 05 May 2026 21:02:57 GMT"
+      },
+      "retrieved_at_utc": "2026-08-31T19:19:33.274105Z",
+      "sha256": "beea30938e4102645a6ddccd7f7253be13dbafa1707dc7a193c5c605f1b68e34",
+      "sod_row_count": 365,
+      "url": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access/2025/LCD_USW00094846_2025.csv"
+    },
+    {
+      "byte_count": 5717399,
+      "filename": "LCD_USW00094846_2026.csv",
+      "headers": {
+        "content_type": "text/csv; charset=utf-8",
+        "etag": "\"c41080e6ba379ad8c392c79163653637\"",
+        "last_modified": "Wed, 26 Aug 2026 21:03:31 GMT"
+      },
+      "retrieved_at_utc": "2026-08-31T19:19:33.274105Z",
+      "sha256": "4475c272ff46cec4e4c649261305be6f60a59e331711e95f21b6cab1e8e7bb28",
+      "sod_row_count": 233,
+      "url": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access/2026/LCD_USW00094846_2026.csv"
+    }
+  ],
+  "probe": "KORD NOAA LCDv2 365-day observation coverage",
+  "raw_local_directory": "data/raw/noaa_lcdv2/run=20260831T-phase5-kord-lcdv2-v1",
+  "schema_version": "0.1.0",
+  "semantics": {
+    "dataset": "Local Climatological Data v2",
+    "field": "DailyMaximumDryBulbTemperature",
+    "historical_freeze_as_of_status": "HISTORICAL_FREEZE_AS_OF_UNRESOLVED",
+    "provider": "NOAA NCEI",
+    "report_type": "SOD",
+    "role": "INDEPENDENT_FINAL_DIAGNOSTIC_ONLY",
+    "settlement_source": "Wunderground KORD",
+    "unit": "C"
+  },
+  "settlement_sentinel": {
+    "event_id": "553903",
+    "interpretation": "FORENSIC_CONSISTENCY_ONLY",
+    "lcdv2_daily_maximum_c": 27.2,
+    "lcdv2_daily_maximum_f": 80.96,
+    "lcdv2_terminal_bucket_consistent": true,
+    "market_date_local": "2026-06-05",
+    "terminal_winner_bucket": "68\u00b0F or higher",
+    "wunderground_current_high": {
+      "unit": "C",
+      "value": 27
+    }
+  }
+}

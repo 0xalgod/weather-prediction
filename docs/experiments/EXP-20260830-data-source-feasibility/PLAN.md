@@ -859,9 +859,11 @@ The registered fixed-sample observation/settlement subgate `PASSED`: 12 current-
 
 This does not validate current Wunderground historical pages as exact-temperature labels. Terminal Polymarket bucket labels were available for 14/14 eligible fixed-sample events, while exact-temperature label eligibility was 0/14 because no preserved freeze-time page/version exists. Phase 5 remains `IN_PROGRESS`.
 
+The locked KORD/LCDv2 latest-365 package subsequently `FAILED` coverage: 356/365 dates (97.53%) versus the registered ≥99% threshold. The nine missing dates are the trailing 2026-08-22–2026-08-30 block, consistent with publication lag. Identity, duplicates and transport checks passed; event 553903 was forensically bucket-consistent. LCDv2 remains an independent final diagnostic, not settlement-as-of evidence.
+
 #### Next action
 
-Pre-register and measure a third-city KORD/Chicago 365-day official-station observation, revision/final semantics and terminal-settlement join without treating current Wunderground pages as exact-temperature truth.
+Pre-register a lag-safe KORD/LCDv2 365-day historical window with at least a 30-day as-of buffer and explicitly measure publication lag; do not reinterpret it as freeze-time settlement evidence.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1447,6 +1449,17 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence boundary: LCDv2 is an independent official diagnostic, not the Wunderground settlement source. Current annual-object Last-Modified does not reconstruct the market's historical freeze-time version.
 - Next action: Implement the smallest parser/probe, contract tests and immutable result artifact.
 
+### 2026-08-31 — KORD/LCDv2 latest-365 coverage failed
+
+- Phase status remains `IN_PROGRESS`.
+- Registered result: `FAILED`; exact-date and non-null daily-maximum coverage were both 356/365 (97.53%), below ≥99%.
+- Missingness: Nine consecutive trailing dates, 2026-08-22–2026-08-30. The observed 2026 object was last modified on 2026-08-26 but ended at SOD 2026-08-21, indicating publication lag rather than random station gaps.
+- Passed checks: zero duplicate dates, zero identity failures, zero terminal transport failures; admitted maximum range −15.0°C to 35.6°C.
+- Sentinel: Event 553903 LCDv2 maximum 27.2°C / 80.96°F was consistent with terminal `68°F or higher`; interpretation remains forensic only.
+- Revision result: `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; annual-object metadata does not reconstruct historical versions.
+- Evidence: final and `-attempt1` JSON artifacts, research report and local immutable raw v2 run; 69 tests passed.
+- Next action: Pre-register lag-safe historical coverage with a ≥30-day as-of buffer and a publication-lag metric.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1678,6 +1691,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Use deprecated LCDv1/ISD files; rejected because NOAA states LCDv1 ended in August 2025 and the locked window crosses that boundary. Treat LCDv2 daily maximum as exact settlement truth; rejected because daily-window and historical version semantics are not yet equivalent.
 - Consequence: Coverage can pass while historical freeze-as-of remains unresolved. Exact temperature labels stay ineligible unless version and window equivalence are proven.
 - Revisit condition: NOAA/Wunderground provenance or preserved settlement-time snapshots prove exact equivalence.
+
+### ED-0035 — 2026-08-31 — Separate final archive coverage from recent publication latency
+
+- Decision: Treat the failed latest-365 gate as evidence of trailing publication lag, not as a reason to impute the nine missing outcomes or weaken the registered threshold. Test final research-label coverage only in a separately preregistered lag-safe window.
+- Evidence available at decision time: KORD LCDv2 represented 356/365 dates with a single nine-day trailing missing block, no internal duplicates or identity failures, and a 2026 object whose last-modified date still preceded the requested window end.
+- Alternatives considered: Shift the window post-hoc and report a pass; rejected because it changes the tested cohort after observing the result. Fill recent dates from Wunderground; rejected because that would mix providers and revision semantics.
+- Consequence: The latest-365 result remains `FAILED`. A new ≥30-day-buffer experiment may test final archive completeness but cannot establish decision-time or settlement-freeze availability.
+- Revisit condition: Prospective repeated retrievals estimate the actual publication-lag distribution or NOAA exposes versioned publication timestamps.
 
 ## 20. Decision Log — append only
 

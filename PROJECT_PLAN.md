@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.43.0
+**Plan versiyonu:** 0.44.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1049,6 +1049,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Revision gate:** Historical as-of version reconstruction, yalnız annual object Last-Modified ile kanıtlanmış sayılmaz. Immutable eski snapshot/version history yoksa `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; prospective snapshot gerekecek.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-observation-coverage.json` ve `reports/research/EXP-20260831-phase5-kord-lcdv2-observation-coverage.md`.
 
+### D-0045 — 2026-08-31 — KORD/LCDv2 latest-365 coverage publication lag nedeniyle başarısız
+
+- **Durum:** `ACTIVE`
+- **Gate sonucu:** `FAILED`; 2025-08-31–2026-08-30 aralığında 356/365 date ve non-null daily maximum = %97,534; ön-kayıtlı ≥%99 eşiğinin altında. Duplicate 0, identity failure 0, terminal transport failure 0.
+- **Missingness:** Dokuz ardışık tarih `2026-08-22`–`2026-08-30`. 2026 annual object Last-Modified 2026-08-26 iken son SOD 2026-08-21; current product publication lag'iyle tutarlı.
+- **Sentinel:** Event 553903 için LCDv2 27,2°C = 80,96°F, current WU 27°C ve terminal `68°F or higher` bucket yönsel olarak tutarlı; statü yalnız `FORENSIC_CONSISTENCY_ONLY`.
+- **Semantik karar:** LCDv2 `INDEPENDENT_FINAL_DIAGNOSTIC_ONLY`; Wunderground yerine settlement label değildir. Annual-object Last-Modified historical version kanıtı olmadığından `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`.
+- **Kalite:** KORD/GHCN `USW00094846` identity %100; admitted 356 daily maximum −15,0–35,6°C; imputation yok. 69 test geçti.
+- **Artifact:** Final ve `-attempt1` JSON, research raporu; raw v2 `data/raw/noaa_lcdv2/run=20260831T-phase5-kord-lcdv2-v2`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; third-city current/final diagnostic bulundu fakat locked latest-365 gate geçmedi ve freeze-as-of çözülmedi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1061,7 +1072,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı KORD/LCDv2 365 günlük observation, identity, revision ve event 553903 settlement diagnostic paketini kodlayıp çalıştırmak.
+**Tek sonraki adım:** KORD/LCDv2 için ≥30 günlük as-of buffer'lı 365 günlük lag-safe historical coverage ve observed publication-lag diagnostic'ini ön-kayıt altına almak.
 
 Beklenen artifact'lar:
 
