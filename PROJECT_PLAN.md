@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.32.0
+**Plan versiyonu:** 0.33.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -933,6 +933,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Üç temsilî üye 31/31 günlük tamlığı kanıtlamaz; f024 varlığı yerel-gün MaxT step semantiğini çözmez.
 - **Artifact:** `reports/research/EXP-20260831-phase4-gefs-daily-coverage.md`, `reports/data_quality/EXP-20260831-phase4-gefs-daily-coverage-365d.json`
 - **Sonuç:** Phase 4 `IN_PROGRESS`; sıradaki gate DST ve non-DST şehirlerde leakage-safe local-day step sözleşmesidir.
+
+### D-0034 — 2026-08-31 — GEFS local-day semantik gate ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** GEFS 2 m TMAX index metadata'sı ardışık 3 saatlik UTC pencereleri doğru tanımlar; bu pencereler Toronto/CYYZ ve Kuala Lumpur/WMKK yerel günleri için dış saat eklemeden tam bir günlük MaxT feature'ına çevrilebilir.
+- **Kilitli örnekler:** Toronto 2026-07-23 (`America/Toronto`, DST aktif) ve Kuala Lumpur 2026-06-22 (`Asia/Kuala_Lumpur`, DST yok); ikisi de Phase 2 `RECONCILED` registry kaydıdır.
+- **Veri:** İlgili önceki/güncel 00Z control run'ların f003 adımlarıyla en az f048'e kadar gerçek index satırları; seçilen TMAX range'lerinde HTTP 206/GRIB bütünlüğü.
+- **Gate A:** Kontrol edilen her f003 adımında exact bir 2 m TMAX ve metadata penceresi `(step-3)-step hour max fcst`; gap/overlap 0.
+- **Gate B:** Her yerel gün için seçilen UTC pencerelerinin birleşimi local `[00:00, 24:00)` aralığına tam eşit; uncovered ve outside-local süre 0. DST günlerinde gerçek 23/25 saat korunur.
+- **Fail-closed:** Gate B geçmezse interval TMAX label-equivalent günlük MaxT sayılmaz; sınır kontaminasyonu feature olarak açıkça işaretlenir ve exact-local-day alternatif sözleşmesi ayrıca sınanır.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json` ve eşlik eden research raporu.
 
 ## 13. Open Questions
 

@@ -755,6 +755,17 @@ Verify f006/f012/f018/f024 TMAX valid-time/window semantics and leakage-safe loc
 - **Interpretation limit:** Passing establishes representative daily continuity only. It does not establish 31/31 daily completeness, local-day MaxT construction, or model-version stability.
 - **Artifact:** `reports/data_quality/EXP-20260831-phase4-gefs-daily-coverage-365d.json`.
 
+#### Pre-registration — 2026-08-31 — GEFS local-day TMAX semantics
+
+- **Hypothesis:** GEFS 2 m TMAX metadata forms consecutive three-hour UTC windows that can also partition the selected station-local days without gaps or outside-local contamination.
+- **Locked cases:** Toronto/CYYZ on 2026-07-23 (`America/Toronto`, DST active) and Kuala Lumpur/WMKK on 2026-06-22 (`Asia/Kuala_Lumpur`, no DST); both are Phase 2 `RECONCILED` records.
+- **Data:** Actual 00Z control-member indexes in three-hour steps through at least f048, plus real TMAX range downloads and GRIB boundary/checksum verification for both cases.
+- **Gate A — product semantics:** Every inspected step contains exactly one 2 m TMAX row labeled `(step-3)-step hour max fcst`; consecutive windows have zero gap and overlap.
+- **Gate B — local-day identity:** Selected windows exactly equal local `[00:00, next 00:00)` in UTC, with zero uncovered seconds and zero outside-local seconds. DST dates must retain their actual 23/25-hour duration.
+- **Failure policy:** Gate B failure forbids treating interval TMAX as the resolution-equivalent daily label. Any boundary-overlap feature must expose contamination duration; an instantaneous-TMP or other explicit alternative requires its own contract.
+- **Metrics:** Field/window completeness, gap/overlap seconds, local-day duration, uncovered seconds, outside-local seconds, selected run/step set, actual range integrity and data availability timestamps.
+- **Artifacts:** `reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json`, `reports/research/EXP-20260831-phase4-gefs-local-day-semantics.md`.
+
 ### Phase 5 — Observation and settlement reconciliation
 
 **Status:** `NOT_STARTED`
