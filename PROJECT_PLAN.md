@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.39.0
+**Plan versiyonu:** 0.40.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -978,7 +978,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0038 — 2026-08-31 — CYYZ/WMKK 365 günlük current/final observation gate geçti
 
-- **Durum:** `ACTIVE`
+- **Durum:** `SUPERSEDED_BY_D0041`
 - **Karar:** Wunderground current/final daily outcome coverage CYYZ ve WMKK için `PASSED`; historical market-freeze-as-of settlement kanıtı hâlâ çözülmemiştir.
 - **Ölçülen kanıt:** Her istasyonda 365/365 complete page (%100), identity 365/365, daily-high/observation-max 365/365, terminal failure 0. Altı transient istek ikinci attempt'te düzeldi.
 - **Hacim:** 730 sayfa, toplam 41.178.264 byte. CYYZ daily high −13–36°C ve 2–60 observation/gün; WMKK 25–36°C ve 40–54 observation/gün.
@@ -1006,6 +1006,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly-attempt1.json`.
 - **Sonuç:** D-0038'in “current/final calibration label” yorumu bu tarih için yanlışlandı; corrective v2 sonrasında CYYZ label policy daraltılacaktır.
 
+### D-0041 — 2026-08-31 — Wunderground historical page settlement'tan ayrıştı
+
+- **Durum:** `ACTIVE`
+- **Karar:** Wunderground current historical page availability outcome-label validity değildir. Settlement bucket ile doğrulanmamış Wunderground daily high, training/backtest label olarak kullanılamaz.
+- **Corrective kanıt:** IANA civil window ile ECCC 23/23 saat ve max 12,1°C; exact CYYZ kimliği/koordinatı geçti. Event 249630 terminal winner `10°C or higher` ECCC ile `MATCH`, bugünkü Wunderground 9°C ile `MISMATCH`.
+- **Karantina:** `CYYZ 2026-03-08 = HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT / NO_TRAIN_NO_BACKTEST`.
+- **D-0038 düzeltmesi:** 365/365 page availability değişmez; CYYZ usable-label üst sınırı 364/365 (%99,726). WMKK label validity settlement audit yapılmadan bilinmez.
+- **Artifact:** `reports/research/EXP-20260831-phase5-cyyz-20260308-anomaly.md`, final ve `-attempt1` JSON artifact'ları; local raw ECCC `run=20260831T-cyyz-anomaly-v2`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; fixed ≥10 event/≥3 city settlement divergence audit zorunludur.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1018,7 +1028,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** ECCC UTC_DATE kayıtlarını IANA civil-day sınırlarıyla filtreleyen ve event 249630 terminal winner'ını çıkaran corrective CYYZ diagnostic v2'yi çalıştırmak.
+**Tek sonraki adım:** Sabitlenmiş en az 10 event/3 city örnekleminde current Wunderground high ile terminal Polymarket winner bucket divergence audit'i yapmak; label eligibility'yi event bazında belirlemek.
 
 Beklenen artifact'lar:
 

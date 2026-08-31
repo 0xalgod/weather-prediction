@@ -806,7 +806,7 @@ Verify that exact resolution-station observations, revisions/final daily values,
 
 #### Actual result
 
-The locked 24-page spike and subsequent 730-page full coverage both passed for CYYZ and WMKK. Each station has 365/365 current/final daily labels with exact identity and daily-high/observation-max agreement. CYYZ 2026-03-08 has only two sub-daily observations and is explicitly anomalous. Historical current/final pages and exact market-freeze snapshots remain different evidence classes.
+The locked 24-page spike and 730-page availability coverage passed, but outcome-label validity did not generalize. CYYZ 2026-03-08's current page shows 9°C/two rows while official civil-day ECCC max is 12.1°C and Polymarket settled `10°C or higher`. Page availability and settlement-valid labels are now separate gates.
 
 #### Pre-registration — 2026-08-31 — Wunderground observation retention spike
 
@@ -1395,6 +1395,16 @@ These inferences must be verified in Phases 3 and 4.
 - Failure memory: `reports/data_quality/EXP-20260831-phase5-cyyz-20260308-anomaly-attempt1.json`.
 - Next action: Correct only the ECCC time filter to IANA civil UTC boundaries and preserve all three source values in v2.
 
+### 2026-08-31 — Phase 5 CYYZ corrective forensic diagnostic passed
+
+- Previous phase status: `IN_PROGRESS`
+- New phase status: `IN_PROGRESS`; Wunderground label validity is downgraded.
+- Correction: ECCC `UTC_DATE` was filtered through the event-effective `America/Toronto` half-open civil-day interval; no source values or original failed thresholds were rewritten.
+- Evidence: `reports/research/EXP-20260831-phase5-cyyz-20260308-anomaly.md`, final and `-attempt1` JSON artifacts; local raw `run=20260831T-cyyz-anomaly-v2`.
+- Result: 23/23 civil hours, official max 12.1°C, exact event 249630 and terminal winner `10°C or higher`. ECCC matched the winner; current Wunderground 9°C mismatched.
+- Decision: Quarantine the date as `HISTORICAL_PAGE_DIVERGED_FROM_SETTLEMENT`; page availability can no longer imply label validity.
+- Next action: Fixed ≥10-event/≥3-city divergence audit before Phase 5 exit.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1594,6 +1604,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Force-drop local hour 2; rejected because it edits source labels without an explicit civil-time transform. Use ECCC daily maximum; rejected because official climatological-day boundaries differ from the market's local day.
 - Consequence: Corrective v2 filters the half-open civil UTC interval and preserves original ECCC local/UTC fields.
 - Revisit condition: ECCC publishes an explicit DST-aware field or revised timestamp contract.
+
+### ED-0031 — 2026-08-31 — Require settlement validation for historical page labels
+
+- Decision: A Wunderground historical page retrieved after settlement is not an eligible model label solely because it has exact identity and a daily high. Eligibility requires terminal-bucket agreement or preserved freeze-time evidence.
+- Evidence available at decision time: CYYZ 2026-03-08 current page showed 9°C and two rows, while ECCC civil-day maximum was 12.1°C and terminal Polymarket winner was `10°C or higher`.
+- Alternatives considered: Keep 9°C as a current/final label; rejected because it contradicts both independent official data and settlement. Replace all Wunderground labels with ECCC; rejected because provider/time-window semantics differ and WMKK lacks the same source.
+- Consequence: CYYZ anomaly is `NO_TRAIN_NO_BACKTEST`; all sampled historical labels undergo event-level settlement reconciliation. Page coverage and valid-label coverage are reported separately.
+- Revisit condition: A preserved freeze-time Wunderground snapshot or version history proves the applicable historical value.
 
 ## 20. Decision Log — append only
 
