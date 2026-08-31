@@ -106,8 +106,14 @@ def main() -> None:
         is_complete(probe) for members in daily.values() for probe in members.values()
     )
     expected_probe_count = args.days * len(REPRESENTATIVE_MEMBERS)
-    transport_failure_count = sum(
-        any(error["kind"] == "transport" for error in probe["errors"])
+    transient_transport_error_count = sum(
+        sum(error["kind"] == "transport" for error in probe["errors"])
+        for members in daily.values()
+        for probe in members.values()
+    )
+    terminal_transport_failure_count = sum(
+        probe["inventory"] is None
+        and any(error["kind"] == "transport" for error in probe["errors"])
         for members in daily.values()
         for probe in members.values()
     )
@@ -138,10 +144,11 @@ def main() -> None:
             "complete_date_count": args.days - len(missing_dates),
             "missing_date_count": len(missing_dates),
             "missing_dates": missing_dates,
-            "transport_failure_count": transport_failure_count,
+            "transient_transport_error_count": transient_transport_error_count,
+            "terminal_transport_failure_count": terminal_transport_failure_count,
             "representative_gate_passed": (
                 complete_probe_count / expected_probe_count >= 0.99
-                and transport_failure_count == 0
+                and terminal_transport_failure_count == 0
             ),
         },
         "limitation": (
