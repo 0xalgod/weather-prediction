@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.42.0
+**Plan versiyonu:** 0.43.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1037,6 +1037,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** Final audit JSON, iki superseded attempt JSON'u ve `reports/research/EXP-20260831-phase5-wunderground-settlement-audit.md`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; sample alt-gate geçti fakat üçüncü şehir 365 günlük observation/revision kanıtı ve freeze-time exact-temperature semantiği çözülmedi.
 
+### D-0044 — 2026-08-31 — KORD/LCDv2 365 günlük observation paketi ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** NOAA NCEI LCDv2, KORD ile aynı O'Hare istasyonunu temsil eden `USW00094846` kaydında 2025-08-31–2026-08-30 arasındaki 365 tamamlanmış Chicago local date için bağımsız daily maximum observation coverage sağlayabilir ve event 553903 terminal bucket'ıyla yönsel bir forensic kontrol üretir.
+- **Primary kaynak:** NOAA NCEI LCDv2 yıllık CSV'leri `LCD_USW00094846_<YYYY>.csv`; station identity KORD/O'Hare, WBAN 94846, koordinat ve isimle doğrulanacak. Kaynak URL, response Last-Modified/ETag, retrieval time, byte count ve SHA-256 saklanacak.
+- **Resolution contract:** Event 553903'ün gerçek settlement kaynağı Wunderground KORD, `America/Chicago` local calendar day, whole °F ve ilk sonraki-gün datapoint freeze kuralıdır. LCDv2 bağımsız diagnostic kaynaktır; Wunderground yerine geçirilmez.
+- **Coverage gate:** Kilitli 365 tarihin tamamı temsil edilmeli; exact date coverage ≥%99, non-null daily maximum ≥%99, duplicate daily summary 0, station/name/coordinate identity %100 ve terminal transport failure 0. Missing/duplicate/flagged değerler ayrı raporlanacak, impute edilmeyecek.
+- **Semantik gate:** LCDv2 daily-summary alanı, birimi, report type ve source documentation kaydedilecek. NOAA'nın günlük pencere/finalization semantiği Wunderground freeze kuralıyla eşit kanıtlanamazsa `INDEPENDENT_FINAL_DIAGNOSTIC_ONLY`; exact settlement label statüsü verilmeyecek.
+- **Settlement kontrolü:** Exact event 553903, date 2026-06-05 ve terminal winner `68°F or higher` sabit sentinel'dir. LCDv2 maximum, Wunderground current high ve terminal bucket ayrı saklanacak. Tek event Phase 5 sample gate'ini tekrar geçirmez.
+- **Revision gate:** Historical as-of version reconstruction, yalnız annual object Last-Modified ile kanıtlanmış sayılmaz. Immutable eski snapshot/version history yoksa `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; prospective snapshot gerekecek.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-observation-coverage.json` ve `reports/research/EXP-20260831-phase5-kord-lcdv2-observation-coverage.md`.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1049,7 +1061,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** KORD/Chicago için exact resolution rule ile 365 günlük official-station observation coverage, revision/final semantiği ve terminal settlement join'ini ön-kayıt altına almak ve ölçmek; Wunderground current page'i exact-temperature truth saymamak.
+**Tek sonraki adım:** Ön-kayıtlı KORD/LCDv2 365 günlük observation, identity, revision ve event 553903 settlement diagnostic paketini kodlayıp çalıştırmak.
 
 Beklenen artifact'lar:
 

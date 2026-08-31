@@ -863,6 +863,17 @@ This does not validate current Wunderground historical pages as exact-temperatur
 
 Pre-register and measure a third-city KORD/Chicago 365-day official-station observation, revision/final semantics and terminal-settlement join without treating current Wunderground pages as exact-temperature truth.
 
+#### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
+
+- **Hypothesis:** NOAA NCEI LCDv2 can provide an independently sourced daily-maximum observation for at least 99% of the locked 2025-08-31–2026-08-30 KORD dates, with exact station identity and explicit revision limitations.
+- **Locked source:** Annual LCDv2 CSV objects `LCD_USW00094846_2025.csv` and `LCD_USW00094846_2026.csv`. Preserve URL, retrieval timestamp, HTTP Last-Modified/ETag, byte count and SHA-256. NOAA documentation and station metadata are provenance inputs.
+- **Identity:** KORD / Chicago O'Hare, WBAN 94846 / GHCN `USW00094846`, station name and coordinates. Identity mismatch is a hard failure, not a nearest-station substitution.
+- **Coverage acceptance:** All 365 dates represented; ≥99% exact-date coverage and non-null daily maximum; zero duplicate daily summaries; 100% identity among admitted rows; zero terminal transport failures. No imputation.
+- **Semantic acceptance:** Record the LCDv2 daily field, units, report/source type and known quality flags. Unless NOAA's daily window and version time are proven identical to the Wunderground rule, classify observations only as `INDEPENDENT_FINAL_DIAGNOSTIC_ONLY`.
+- **Settlement sentinel:** Fixed event 553903 / 2026-06-05 / terminal winner `68°F or higher`. Preserve LCDv2 maximum, current Wunderground high and terminal winner separately. Agreement is forensic consistency, not exact settlement-as-of proof.
+- **Revision decision:** Object Last-Modified proves only the observed object version. Without immutable historical snapshots/version history, set `HISTORICAL_FREEZE_AS_OF_UNRESOLVED` and require prospective append-only capture.
+- **Artifacts:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-observation-coverage.json` and `reports/research/EXP-20260831-phase5-kord-lcdv2-observation-coverage.md`.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1427,6 +1438,15 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence: `reports/research/EXP-20260831-phase5-wunderground-settlement-audit.md` and final plus two attempt JSON artifacts.
 - Next action: Pre-register KORD/Chicago 365-day official observation, revision/final semantics and settlement join as the third-city evidence package.
 
+### 2026-08-31 — KORD/LCDv2 observation package pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Locked window: 2025-08-31–2026-08-30, 365 completed Chicago local dates.
+- Locked source: NOAA NCEI LCDv2 annual files for GHCN `USW00094846`; KORD/O'Hare identity, response metadata and immutable checksums are mandatory.
+- Acceptance: ≥99% exact-date and non-null daily-maximum coverage, zero duplicates, 100% admitted-row identity and zero terminal transport failures.
+- Evidence boundary: LCDv2 is an independent official diagnostic, not the Wunderground settlement source. Current annual-object Last-Modified does not reconstruct the market's historical freeze-time version.
+- Next action: Implement the smallest parser/probe, contract tests and immutable result artifact.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1650,6 +1670,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Discard terminal outcomes whenever the current page diverges; rejected because the terminal winner is the market's outcome and remains identified. Promote bucket-consistent current pages to exact temperatures; rejected because consistency within a bucket does not identify the settled numeric value.
 - Consequence: The sample settlement subgate passes for bucket-outcome feasibility, Wunderground current pages fail as universal exact-temperature labels, and Phase 5 stays in progress pending third-city observation/revision evidence.
 - Revisit condition: Immutable settlement-time snapshots or an authoritative version history reconstruct the exact applicable temperature.
+
+### ED-0034 — 2026-08-31 — Use LCDv2 as an independent diagnostic, not a settlement substitute
+
+- Decision: Test NOAA NCEI LCDv2 for KORD observation coverage and station-level forensic consistency, but never silently replace the event's declared Wunderground rule with NOAA values.
+- Evidence available at decision time: NOAA documents LCDv2 as an official hourly/daily airport-station product derived from GHCN sources, while event 553903 explicitly names Wunderground KORD, whole °F and a next-day first-datapoint revision freeze.
+- Alternatives considered: Use deprecated LCDv1/ISD files; rejected because NOAA states LCDv1 ended in August 2025 and the locked window crosses that boundary. Treat LCDv2 daily maximum as exact settlement truth; rejected because daily-window and historical version semantics are not yet equivalent.
+- Consequence: Coverage can pass while historical freeze-as-of remains unresolved. Exact temperature labels stay ineligible unless version and window equivalence are proven.
+- Revisit condition: NOAA/Wunderground provenance or preserved settlement-time snapshots prove exact equivalence.
 
 ## 20. Decision Log — append only
 
