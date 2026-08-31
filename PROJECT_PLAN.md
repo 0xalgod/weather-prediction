@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.35.0
+**Plan versiyonu:** 0.36.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility
 **Genel durum:** `IN_PROGRESS`  
@@ -967,6 +967,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Revision sınırı:** Bugün çekilen historical sayfa current/final görünümü kanıtlar, marketin next-day freeze anındaki değeri kanıtlamaz. Exact settlement-as-of için korunmuş historical snapshot veya prospective next-day capture gerekir.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json` ve research raporu.
 
+### D-0037 — 2026-08-31 — Wunderground 24-date observation spike geçti
+
+- **Durum:** `ACTIVE`
+- **Karar:** CYYZ/WMKK Wunderground current/final observation yüzeyi 365×2 coverage ölçümüne ilerler; historical market-freeze-as-of statüsü ayrı ve çözülmemiş kalır.
+- **Ölçülen kanıt:** 24/24 complete page, HTTP/identity/date/timezone/high/unit/observations/repeatability kontrollerinin tamamı 24/24, terminal failure 0 ve tümü ilk attempt'te başarı.
+- **İç tutarlılık:** 24/24 daily high, parse edilen observation sıcaklık maksimumuna eşitti. CYYZ 24–41, WMKK 41–50 observation/gün; toplam HTML 1.344.540 byte.
+- **Artifact:** `reports/research/EXP-20260831-phase5-wunderground-observation-spike.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json`; local raw `run=20260831T-phase5-spike-v1`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; sıradaki gate kilitli iki 365 günlük current/final coverage ölçümüdür.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -979,7 +988,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** CYYZ/WMKK için kilitli 24 tarihli Wunderground retention/parser spike'ını çalıştırmak; yalnız tam geçerse 365×2 coverage'a ölçeklemek.
+**Tek sonraki adım:** CYYZ ve WMKK için reconciled anchor tarihlerinde biten 365'er günlük Wunderground current/final coverage'ı ölçmek; eksikleri source/parser/transport olarak ayırmak.
 
 Beklenen artifact'lar:
 

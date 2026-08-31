@@ -806,7 +806,7 @@ Verify that exact resolution-station observations, revisions/final daily values,
 
 #### Actual result
 
-Source-matching Wunderground HTML feasibility is pre-registered for CYYZ and WMKK. Historical current/final pages and exact market-freeze snapshots are treated as different evidence classes.
+The locked 24-page Wunderground spike passed every identity/date/high/observation/repeatability check for CYYZ and WMKK. Full 365-day coverage is authorized. Historical current/final pages and exact market-freeze snapshots remain different evidence classes.
 
 #### Pre-registration — 2026-08-31 — Wunderground observation retention spike
 
@@ -817,6 +817,15 @@ Source-matching Wunderground HTML feasibility is pre-registered for CYYZ and WMK
 - **Revision limitation:** A page retrieved now is current/final evidence, not proof of the value visible at the rule's next-day freeze time. Exact historical settlement-as-of remains conditional without a preserved snapshot; prospective capture must be append-only.
 - **Metrics:** Coverage by station/date, response bytes/hash/timestamps, parsed identity/high/unit/observation count, missingness class and normalized repeatability.
 - **Artifacts:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json`, `reports/research/EXP-20260831-phase5-wunderground-observation-spike.md`.
+
+#### Pre-registration — 2026-08-31 — Wunderground 365×2 coverage
+
+- **Locked windows:** CYYZ 2025-07-24–2026-07-23 and WMKK 2025-06-23–2026-06-22, inclusive; 730 pages.
+- **Acceptance:** Current/final complete-page coverage ≥99% per station, terminal transport failure 0 after bounded retry, and station/date/timezone identity 100% among HTTP-available pages.
+- **Daily contract:** Daily high/unit and non-empty observation table required. `daily_high == max(observation temp)` is reported and must be 100% for direct reconstruction; otherwise discrepancy dates are retained and investigated, not imputed.
+- **Missingness:** HTTP absence, transport exhaustion, identity mismatch, missing high and missing observations are separate classes.
+- **Evidence limit:** Passing authorizes current/final outcome labels for calibration. It does not upgrade them to historical market-freeze-as-of settlement evidence.
+- **Artifact:** `reports/data_quality/EXP-20260831-phase5-wunderground-observation-coverage-365d.json`.
 
 #### Decision
 
@@ -1339,6 +1348,16 @@ These inferences must be verified in Phases 3 and 4.
 - Decision: Never use raw interval TMAX as a resolution-equivalent daily label. Permit only provenance-bearing interior/overlap predictors pending station-outcome calibration.
 - Next action: Phase 5 CYYZ/WMKK observation coverage and revision semantics.
 
+### 2026-08-31 — Phase 5 Wunderground observation spike passed
+
+- Previous phase status: `NOT_STARTED`
+- New phase status: `IN_PROGRESS`.
+- Pre-registered gate: 24 fixed pages across CYYZ/WMKK; every HTTP, station/date/timezone, Celsius high, observation and repeatability check must pass with zero terminal transport failures.
+- Evidence: `reports/research/EXP-20260831-phase5-wunderground-observation-spike.md`, `reports/data_quality/EXP-20260831-phase5-wunderground-observation-spike.json`; local raw `run=20260831T-phase5-spike-v1`.
+- Verification: 24/24 complete and first-attempt responses; daily high equaled maximum parsed observation temperature on 24/24 pages. CYYZ had 24–41 and WMKK 41–50 observations/day.
+- Evidence boundary: Pages are current/final historical views, not snapshots from the rule's next-day freeze time.
+- Next action: Locked 365-day coverage for each station.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1514,6 +1533,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Call the five-window maximum “daily TMAX”; rejected because it includes another local date. Drop GEFS entirely; deferred because outcome calibration may extract incremental probabilistic value from explicitly tagged predictors.
 - Consequence: Feature rows carry interval start/end, run/publish timestamps and outside-local seconds. Phase 5 observations are required before any forecast-skill or EV claim.
 - Revisit condition: A provider field or transformation with exact station-local daily windows passes a separately pre-registered test.
+
+### ED-0028 — 2026-08-31 — Separate current/final observations from settlement-as-of evidence
+
+- Decision: Scale the exact Wunderground source to 365-day current/final observation coverage, but never label a page retrieved later as the value visible at Polymarket's next-day revision freeze.
+- Evidence available at decision time: All 24 locked pages exposed exact station/date identity, daily high and observations, but retrieval occurred on 2026-08-31 rather than each event's historical freeze timestamp.
+- Alternatives considered: Treat the current historical page as immutable settlement truth; rejected because the rule explicitly allows revisions until a defined next-day point. Reject the source entirely; deferred because it remains the exact resolution surface and a useful final calibration label.
+- Consequence: Dataset rows carry an evidence class. Prospective next-day snapshots are required for exact settlement-as-of validation.
+- Revisit condition: Versioned Wunderground history or another preserved source proves historical values at the applicable freeze timestamps.
 
 ## 20. Decision Log — append only
 
