@@ -861,9 +861,11 @@ This does not validate current Wunderground historical pages as exact-temperatur
 
 The locked KORD/LCDv2 latest-365 package subsequently `FAILED` coverage: 356/365 dates (97.53%) versus the registered ≥99% threshold. The nine missing dates are the trailing 2026-08-22–2026-08-30 block, consistent with publication lag. Identity, duplicates and transport checks passed; event 553903 was forensically bucket-consistent. LCDv2 remains an independent final diagnostic, not settlement-as-of evidence.
 
+The separately preregistered 40-day-buffer window then `PASSED` final archive coverage at 365/365 dates and non-null maxima with zero duplicates, identity failures or transport failures. This establishes KORD LCDv2 final archive completeness for that cohort, while leaving decision-time and Wunderground freeze-time reconstruction unresolved.
+
 #### Next action
 
-Pre-register a lag-safe KORD/LCDv2 365-day historical window with at least a 30-day as-of buffer and explicitly measure publication lag; do not reinterpret it as freeze-time settlement evidence.
+Pre-register and implement an append-only prospective KORD Wunderground next-day-first-datapoint freeze snapshot contract with fixture/replay/idempotency tests. Do not start a long-running collector without separate user intent.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1477,6 +1479,17 @@ These inferences must be verified in Phases 3 and 4.
 - Passing is limited to final archive coverage; decision-time and settlement-freeze availability remain unresolved by construction.
 - Next action: Extend only the artifact's publication-lag metadata, rerun under a new immutable raw run and apply the registered gate.
 
+### 2026-08-31 — KORD/LCDv2 lag-safe final archive coverage passed
+
+- Phase status remains `IN_PROGRESS`.
+- Registered result: `PASSED` for final archive coverage; 365/365 exact dates and non-null maxima, zero duplicates, identity failures and terminal transport failures.
+- Value range: −15.0°C–35.6°C; no missing values or imputation.
+- Lag proxy: The observed 2026 annual object Last-Modified was five calendar days after its final SOD date. This is object-level freshness metadata, not row-level first-publication or revision history.
+- Decision: Assign `FINAL_ARCHIVE_COVERAGE_PASS` and retain `INDEPENDENT_FINAL_DIAGNOSTIC_ONLY`; the failed latest-365 result remains unchanged.
+- Evidence boundary: `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; final completeness does not prove decision-time availability.
+- Evidence: JSON artifact, research report and local immutable raw run; 69 tests and Ruff passed.
+- Next action: Build and test an append-only prospective KORD Wunderground freeze snapshot contract without launching a persistent collector.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1724,6 +1737,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Re-label the original window after dropping recent dates; rejected as post-hoc cohort editing. Wait and silently rerun the same artifact; rejected because it would overwrite the observed failure state.
 - Consequence: The new result answers only final archive completeness with a 40-day buffer and cannot satisfy point-in-time settlement evidence.
 - Revisit condition: None; both cohort results remain in experiment memory.
+
+### ED-0037 — 2026-08-31 — Accept final archive coverage without promoting point-in-time status
+
+- Decision: Mark KORD LCDv2 as passing final archive coverage for the lag-safe cohort while keeping historical freeze-as-of unresolved and the latest-window gate failed.
+- Evidence available at decision time: The preregistered lag-safe window had 365/365 observations and no quality failures; observed object metadata still lacked per-row publication/version history.
+- Alternatives considered: Promote LCDv2 to historical settlement truth; rejected because the declared source is Wunderground and freeze-time versions are unavailable. Discard LCDv2 entirely; rejected because complete final observations remain useful for independent diagnostics and forecast verification.
+- Consequence: Future datasets must distinguish `final_observation_available` from `available_at_decision_time` and `settlement_source_snapshot_available`.
+- Revisit condition: Prospective append-only captures or authoritative version history resolve the missing point-in-time evidence.
 
 ## 20. Decision Log — append only
 

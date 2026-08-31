@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.45.0
+**Plan versiyonu:** 0.46.0
 **Son güncelleme:** 2026-08-31
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1070,6 +1070,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Interpretation:** Pass yalnız `FINAL_ARCHIVE_COVERAGE_PASS`; historical decision-time availability ve Wunderground freeze-as-of statüsü yine `UNRESOLVED`. Fail, LCDv2'nin final research label coverage'ını da zayıflatır.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-lag-safe-coverage.json` ve research raporu.
 
+### D-0047 — 2026-08-31 — KORD/LCDv2 lag-safe final archive coverage geçti
+
+- **Durum:** `ACTIVE`
+- **Gate sonucu:** `PASSED` yalnız final archive coverage için; 2025-07-23–2026-07-22 aralığında 365/365 exact date ve non-null daily maximum, duplicate 0, identity failure 0, terminal transport failure 0.
+- **Değer aralığı:** −15,0–35,6°C; missing ve imputation yok.
+- **Lag proxy:** Observed 2026 annual object Last-Modified 2026-08-26, son SOD 2026-08-21, fark 5 calendar day. 2025 annual object farkı 125 gün; bunlar per-row publication/revision timestamp değildir.
+- **Karar:** KORD/LCDv2 `FINAL_ARCHIVE_COVERAGE_PASS` ve `INDEPENDENT_FINAL_DIAGNOSTIC_ONLY`. D-0045 latest-365 `FAILED` sonucu değişmez.
+- **Sınır:** `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; final archive pass, settlement veya karar anında erişilebilirlik kanıtı değildir.
+- **Kalite:** 69 test ve Ruff geçti; artifact ile local immutable raw `run=20260831T-phase5-kord-lcdv2-lag-safe-v1` saklandı.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; third-city final observation coverage var, prospective freeze snapshot contract'ı yok.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1082,7 +1093,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı 2025-07-23–2026-07-22 KORD/LCDv2 lag-safe coverage ve publication-lag proxy ölçümünü çalıştırmak.
+**Tek sonraki adım:** Wunderground KORD için append-only prospective next-day-first-datapoint freeze snapshot contract'ını ön-kayıt altına alıp fixture/replay/idempotency testleriyle uygulamak; uzun süreli collector'ı ayrıca başlatmamak.
 
 Beklenen artifact'lar:
 

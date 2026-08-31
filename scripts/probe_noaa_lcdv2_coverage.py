@@ -9,6 +9,7 @@ import json
 import urllib.request
 from collections import Counter
 from datetime import date, datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
@@ -59,6 +60,13 @@ def main() -> None:
         (raw_dir / filename).write_bytes(content)
         rows = parse_lcdv2_sod(content)
         all_rows.extend(rows)
+        last_sod_date = max(row["date"] for row in rows) if rows else None
+        last_modified = headers["last_modified"]
+        lag_days = None
+        if last_sod_date and last_modified:
+            lag_days = (
+                parsedate_to_datetime(last_modified).date() - date.fromisoformat(last_sod_date)
+            ).days
         objects.append(
             {
                 "url": url,
@@ -68,6 +76,8 @@ def main() -> None:
                 "sha256": hashlib.sha256(content).hexdigest(),
                 "headers": headers,
                 "sod_row_count": len(rows),
+                "last_sod_date": last_sod_date,
+                "last_modified_to_last_sod_calendar_days": lag_days,
             }
         )
 
