@@ -6,16 +6,19 @@ from __future__ import annotations
 import argparse
 import json
 import math
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from weather_quant.ingestion.eccc import (
     fetch_geojson,
     hourly_query_url,
     round_half_up,
+    station_civil_day_rows,
     station_local_rows,
 )
 from weather_quant.ingestion.wunderground import parse_daily_page
+from weather_quant.normalization.manual_reconciliation import outcome_rule_check
 
 LOCAL_DATE = "2026-03-08"
 CLIMATE_IDENTIFIER = "6158731"
@@ -71,12 +74,20 @@ def scan_polymarket(directory: Path) -> dict:
                 )
             )
             if exact:
+                winners = []
+                for market in event.get("markets", []):
+                    prices = market.get("outcomePrices")
+                    if isinstance(prices, str):
+                        prices = json.loads(prices)
+                    if prices == ["1", "0"] or prices == [1, 0]:
+                        winners.append(str(market.get("groupItemTitle") or ""))
                 matches.append(
                     {
                         "event_id": str(event.get("id")),
                         "title": title,
                         "slug": slug,
                         "markets": len(event.get("markets", [])),
+                        "terminal_winners": winners,
                     }
                 )
     return {"scanned_event_count": total, "exact_match_count": len(matches), "matches": matches}
@@ -95,7 +106,13 @@ def main() -> None:
     args.raw_output.parent.mkdir(parents=True, exist_ok=True)
     args.raw_output.write_bytes(retrieval.pop("raw"))
     document = retrieval.pop("document")
-    rows = station_local_rows(document, CLIMATE_IDENTIFIER, LOCAL_DATE)
+    source_local_rows = station_local_rows(document, CLIMATE_IDENTIFIER, LOCAL_DATE)
+    rows = station_civil_day_rows(
+        document,
+        CLIMATE_IDENTIFIER,
+        date.fromisoformat(LOCAL_DATE),
+        "America/Toronto",
+    )
     temperatures = [row["TEMP"] for row in rows if row.get("TEMP") is not None]
     station_names = sorted({row["STATION_NAME"] for row in rows})
     coordinates = sorted(
@@ -111,19 +128,44 @@ def main() -> None:
     market = scan_polymarket(args.gamma_raw_dir)
     max_temperature = max(temperatures) if temperatures else None
     rounded_max = round_half_up(max_temperature) if max_temperature is not None else None
-    local_hours = [row["LOCAL_HOUR"] for row in rows]
+    zone = ZoneInfo("America/Toronto")
+    civil_local_hours = [
+        datetime.fromisoformat(row["UTC_DATE"])
+        .replace(tzinfo=timezone.utc)
+        .astimezone(zone)
+        .hour
+        for row in rows
+    ]
+    winners = (
+        market["matches"][0]["terminal_winners"]
+        if market["exact_match_count"] == 1
+        else []
+    )
+    winner = winners[0] if len(winners) == 1 else None
+    eccc_bucket_check = (
+        outcome_rule_check(winner, {"value": rounded_max, "unit": "C"})
+        if rounded_max is not None
+        else "INCONCLUSIVE"
+    )
+    wu_bucket_check = outcome_rule_check(
+        winner, {"value": wu["daily_high"], "unit": "C"}
+    )
     checks = {
         "http_200": retrieval["http_status"] == 200,
         "exact_23_rows": len(rows) == 23,
-        "unique_23_local_hours": len(set(local_hours)) == 23,
-        "dst_missing_hour_02": 2 not in local_hours,
+        "unique_23_civil_hours": len(set(civil_local_hours)) == 23,
+        "dst_missing_civil_hour_02": 2 not in civil_local_hours,
         "all_temperatures_present": len(temperatures) == 23,
         "station_name_match": station_names == [EXPECTED_STATION_NAME],
         "single_coordinate": len(coordinates) == 1,
         "coordinate_within_one_km": distance_km is not None and distance_km <= 1.0,
         "wunderground_identity": wu["station_code"] == "CYYZ" and wu["page_date"] == "2026-3-8",
         "wunderground_two_rows": wu["observation_count"] == 2,
-        "rounded_max_matches_wunderground": rounded_max == wu["daily_high"] == WU_EXPECTED_HIGH,
+        "wunderground_current_high_is_9": wu["daily_high"] == WU_EXPECTED_HIGH,
+        "single_market_and_terminal_winner": market["exact_match_count"] == 1
+        and len(winners) == 1,
+        "eccc_max_matches_terminal_bucket": eccc_bucket_check == "MATCH",
+        "wunderground_high_diverges_from_terminal_bucket": wu_bucket_check == "MISMATCH",
     }
     artifact = {
         "experiment_id": "EXP-20260830-data-source-feasibility",
@@ -141,8 +183,9 @@ def main() -> None:
             "coordinates": coordinates,
             "distance_from_verified_cyyz_km": distance_km,
             "local_date": LOCAL_DATE,
+            "source_local_date_row_count": len(source_local_rows),
             "row_count": len(rows),
-            "local_hours": local_hours,
+            "civil_local_hours": civil_local_hours,
             "temperature_count": len(temperatures),
             "temperature_max_c": max_temperature,
             "temperature_max_half_up_c": rounded_max,
@@ -156,6 +199,9 @@ def main() -> None:
             "settlement_status": (
                 "NOT_APPLICABLE" if market["exact_match_count"] == 0 else "AVAILABLE"
             ),
+            "terminal_winner": winner,
+            "eccc_bucket_check": eccc_bucket_check,
+            "wunderground_bucket_check": wu_bucket_check,
         },
         "checks": checks,
         "diagnostic_passed": all(checks.values()),
