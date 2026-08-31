@@ -657,7 +657,7 @@ Demonstrate recoverable prospective L2 order-book capture and quantify why price
 - [x] Validate bid/ask sorting, bounds, tick size and empty-book behavior. (48 two-sided, 18 one-sided; 0 dynamic tick violations.)
 - [ ] Compare displayed/price-history values with executable book sides.
 - [x] Force reconnect and demonstrate full-book recovery. (2/2 assets; REST hash match 2/2.)
-- [ ] Run a minimum 24-hour stability capture.
+- [ ] Run a minimum 24-hour stability capture. (`DEFERRED_UNTIL_MANAGED_HOST`; registered gate unchanged.)
 - [ ] Measure uptime, gap, stale-book, retry, bytes and storage metrics.
 - [ ] Document historical L2 availability or absence without assumption.
 
@@ -688,7 +688,7 @@ REST contract, forced reconnect and live delta replay shakeout passed. The first
 
 #### Next action
 
-Add reason-segmented network/protocol failures, stable-grace backoff reset and desync circuit breaker; then run a forced-disconnect recovery regression before another long gate.
+Measure the locked latest 365 completed days of operational GEFS 00Z f024 c00/p01/p30 index coverage and investigate any missing date across full membership/cycles.
 
 ### Phase 4 — Forecast-as-issued source feasibility
 
@@ -1223,6 +1223,15 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence artifact: `reports/data_quality/EXP-20260831-phase3-network-outage-v2.md`.
 - Next action: Stable-grace backoff, circuit breaker, reason-specific metrics and forced-disconnect recovery regression.
 
+### 2026-08-31 — Phase 3 long gate deferred to managed host
+
+- Previous phase status: `IN_PROGRESS`.
+- New phase status: `IN_PROGRESS`; 24-hour subgate `DEFERRED_UNTIL_MANAGED_HOST`.
+- Decision: Preserve the registered 86,400-second thresholds and do not infer a pass from the 15-minute/one-hour runs. Further home-laptop reruns are deferred because host sleep and local internet dominate the measured failure surface.
+- Available evidence: Active-delta regression and persistence soak passed their own bounded gates; two long attempts are explicitly contaminated and excluded.
+- Consequence: No historical executable-L2 or live-readiness claim is authorized. Managed-host stability remains mandatory before paper/live execution work.
+- Next action: Resume Phase 4 with locked 365-day operational GEFS coverage.
+
 ### 2026-08-30 — Phase 4 NBM/KORD initial archive spike conditionally passed
 
 - Previous phase status: `NOT_STARTED`
@@ -1388,6 +1397,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Reject the soak because it had no deltas; rejected because transport/state persistence was its primary gate and actual market quietness is not collector failure. Declare Phase 3 passed from both short runs; rejected because the registered minimum remains 86,400 seconds.
 - Consequence: Replacement 24-hour capture is authorized, while its report must separately show activity, uptime, checkpoint, anchor and lifecycle metrics.
 - Revisit condition: The 24-hour run has insufficient activity or exposes a new protocol/lifecycle failure.
+
+### ED-0025 — 2026-08-31 — Defer, do not relax, the long stability gate
+
+- Decision: Move the unchanged 24-hour collector gate to an always-on managed host/VPS milestone; keep Phase 3 open and continue weather-source feasibility in parallel.
+- Evidence available at decision time: Short active/persistence contracts passed, while both long local runs were invalidated by independently evidenced host sleep or DNS/internet loss rather than a clean collector-only experiment.
+- Alternatives considered: Declare Phase 3 passed from short runs; rejected because it relaxes a pre-registered threshold after results. Keep rerunning on the laptop; rejected because it primarily remeasures host/network instability at low incremental research value.
+- Consequence: GEFS/observation/model research may proceed, but execution backtests must expose missing prospective L2 coverage and no live/paper readiness can be claimed.
+- Revisit condition: A managed always-on environment and stable network are available for a fresh immutable 24-hour run.
 
 ### ED-0017 — 2026-08-30 — Key NBM availability by cycle and version
 

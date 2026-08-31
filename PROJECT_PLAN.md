@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.30.0
+**Plan versiyonu:** 0.31.0
 **Son güncelleme:** 2026-08-30
 **Mevcut faz:** Phase 0 idari kapanış + Phase 1 veri fizibilitesi
 **Genel durum:** `IN_PROGRESS`  
@@ -916,6 +916,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260831-phase3-network-outage-v2.md`; local raw/interim `run=20260831T0820Z-phase3-stability-24h-v2`.
 - **Sonuç:** Phase 3 `IN_PROGRESS`; yeni 24 saatten önce recovery/backoff remediation ve forced-disconnect regression gerekir.
 
+### D-0032 — 2026-08-31 — 24 saat gate managed host'a ertelendi
+
+- **Durum:** `ACTIVE`
+- **Karar:** Registered 24 saat Phase 3 kriteri silinmedi, gevşetilmedi ve geçmiş kısa koşularla `PASSED` sayılmadı; ev laptopu/internetinden bağımsız always-on managed host veya VPS aşamasına `DEFERRED_UNTIL_MANAGED_HOST` olarak ertelendi.
+- **Gerekçe:** İki uzun deneme collector'dan bağımsız host sleep ve yerel network outage ile kontamine oldu. 15 dakika aktif-delta regression ve 1 saat persistence soak kısa sözleşmeleri geçti; tekrar ev ortamında 24 saat çalıştırmanın incremental bilgi değeri düşüktür.
+- **Sınır:** Phase 3 `IN_PROGRESS`; historical executable L2/backtest veya live readiness iddiası yok. Recovery/backoff düzeltmesi kısa deterministic testlerle daha sonra devam eder.
+- **Sonuç:** Ana araştırma hattı Phase 4 GEFS coverage'a döner; 24 saat gate paper/live altyapıdan önce managed host'ta zorunludur.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -928,7 +936,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Network/protocol error sınıfları, stable-grace backoff reset ve desync circuit breaker ekleyip forced-disconnect recovery regression çalıştırmak.
+**Tek sonraki adım:** Kilitli son 365 tamamlanmış gün için GEFS 00Z f024 control/p01/p30 index coverage'ını ölçmek; eksikleri tüm üyeler/cycle'lar açısından araştırmak.
 
 Beklenen artifact'lar:
 
