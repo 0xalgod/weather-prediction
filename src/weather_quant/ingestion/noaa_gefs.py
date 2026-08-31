@@ -3,16 +3,19 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from time import monotonic
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
 
 GEFS_AWS_BASE = "https://noaa-gefs-pds.s3.amazonaws.com"
 REQUIRED_FIELDS = ("TMP", "TMAX", "TMIN")
+MAX_WINDOW_PATTERN = re.compile(r"^(\d+)-(\d+) hour max fcst$")
 
 
 def utc_iso() -> str:
@@ -106,6 +109,63 @@ def summarize_index(text: str) -> dict[str, Any]:
             for field in REQUIRED_FIELDS
         },
         "selected_rows": selected,
+    }
+
+
+def parse_max_window(value: str) -> tuple[int, int]:
+    match = MAX_WINDOW_PATTERN.fullmatch(value)
+    if not match:
+        raise ValueError(f"invalid GEFS maximum window: {value}")
+    start, end = (int(part) for part in match.groups())
+    if start >= end:
+        raise ValueError(f"non-positive GEFS maximum window: {value}")
+    return start, end
+
+
+def local_day_utc(local_date: date, timezone_name: str) -> tuple[datetime, datetime]:
+    zone = ZoneInfo(timezone_name)
+    local_start = datetime.combine(local_date, datetime.min.time(), tzinfo=zone)
+    local_end = datetime.combine(local_date + timedelta(days=1), datetime.min.time(), tzinfo=zone)
+    return local_start.astimezone(timezone.utc), local_end.astimezone(timezone.utc)
+
+
+def window_coverage(
+    target_start: datetime,
+    target_end: datetime,
+    windows: list[tuple[datetime, datetime]],
+) -> dict[str, Any]:
+    if target_start.tzinfo is None or target_end.tzinfo is None:
+        raise ValueError("target datetimes must be timezone-aware")
+    selected = sorted(
+        (start, end)
+        for start, end in windows
+        if start < target_end and end > target_start
+    )
+    covered_intervals = []
+    for start, end in selected:
+        clipped = (max(start, target_start), min(end, target_end))
+        if clipped[0] < clipped[1]:
+            covered_intervals.append(clipped)
+    merged = []
+    for start, end in covered_intervals:
+        if not merged or start > merged[-1][1]:
+            merged.append([start, end])
+        else:
+            merged[-1][1] = max(merged[-1][1], end)
+    covered_seconds = sum((end - start).total_seconds() for start, end in merged)
+    target_seconds = (target_end - target_start).total_seconds()
+    outside_seconds = sum(
+        max(0.0, (min(end, target_start) - start).total_seconds())
+        + max(0.0, (end - max(start, target_end)).total_seconds())
+        for start, end in selected
+    )
+    return {
+        "target_seconds": target_seconds,
+        "covered_seconds": covered_seconds,
+        "uncovered_seconds": target_seconds - covered_seconds,
+        "outside_local_seconds": outside_seconds,
+        "selected_window_count": len(selected),
+        "exact_partition": covered_seconds == target_seconds and outside_seconds == 0,
     }
 
 
