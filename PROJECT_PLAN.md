@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.47.0
+**Plan versiyonu:** 0.48.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1093,6 +1093,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Fixture gate'i collector uptime veya canlı Wunderground davranışını kanıtlamaz. Persistent collector bu adımda başlatılmayacak.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-wunderground-freeze-snapshot-contract.json` ve research raporu.
 
+### D-0049 — 2026-09-02 — Prospective freeze snapshot fixture contract geçti
+
+- **Durum:** `ACTIVE`
+- **Gate sonucu:** `PASSED`; 12/12 fixture/replay/idempotency/fail-closed case geçti. Geçerli target+trigger bundle qualify; pre-midnight, empty trigger, station/unit/rule hash mismatch fail closed.
+- **Immutable davranış:** İlk write append, duplicate aynı snapshot ID ile idempotent, değişmiş target content ikinci revision, byte tamper checksum failure üretti.
+- **Evidence:** Target/trigger raw SHA-256, event/date/rule/parser versions, requested/received/capture timestamps, parsed identity/high/observation ve qualification checks canonical manifest'te.
+- **Kalite:** Ruff ve 76 test geçti. Artifact `reports/data_quality/EXP-20260902-phase5-wunderground-freeze-snapshot-contract.json`; research raporu kaydedildi.
+- **Sınır:** Fixture synthetic; live Wunderground davranışı, uptime veya geçmiş settlement kanıtı değildir. Persistent collector başlatılmadı.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; storage contract hazır, ilk uygun canlı KORD event/capture cohort'u seçilmedi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1105,7 +1115,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı Wunderground freeze snapshot writer/replay sözleşmesini fixture ve fail-closed/idempotency testleriyle uygulamak; persistent collector başlatmamak.
+**Tek sonraki adım:** Read-only Polymarket inventory discovery ile exact Wunderground/KORD rule'a sahip upcoming tek event adayı bulmak; varsa bounded prospective capture cohort'unu ön-kaydetmek, yoksa `NOT_AVAILABLE` raporlamak.
 
 Beklenen artifact'lar:
 

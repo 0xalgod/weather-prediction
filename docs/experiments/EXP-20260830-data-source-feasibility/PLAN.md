@@ -863,9 +863,11 @@ The locked KORD/LCDv2 latest-365 package subsequently `FAILED` coverage: 356/365
 
 The separately preregistered 40-day-buffer window then `PASSED` final archive coverage at 365/365 dates and non-null maxima with zero duplicates, identity failures or transport failures. This establishes KORD LCDv2 final archive completeness for that cohort, while leaving decision-time and Wunderground freeze-time reconstruction unresolved.
 
+The prospective two-page freeze snapshot fixture contract `PASSED` 12/12 qualification, replay, immutability, idempotency, revision and tamper-detection cases. This validates storage semantics only; no live event or collector uptime evidence exists yet.
+
 #### Next action
 
-Pre-register and implement an append-only prospective KORD Wunderground next-day-first-datapoint freeze snapshot contract with fixture/replay/idempotency tests. Do not start a long-running collector without separate user intent.
+Run read-only inventory discovery for one upcoming event with an exact Wunderground/KORD rule. If found, preregister a bounded one-event prospective capture cohort; otherwise record `NOT_AVAILABLE`. Do not launch a background collector.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1508,6 +1510,15 @@ These inferences must be verified in Phases 3 and 4.
 - The test cohort is synthetic KORD fixture data; no claim about live settlement reconstruction or uptime is authorized.
 - Next action: Implement the smallest writer/verifier/replay module and exercise all fail-closed cases.
 
+### 2026-09-02 — Prospective Wunderground freeze snapshot fixture contract passed
+
+- Phase status remains `IN_PROGRESS`.
+- Registered result: `PASSED`; all 12 valid, fail-closed, replay, append-only, idempotency, revision and tamper cases behaved as expected.
+- Full suite: 76 tests and Ruff passed.
+- Evidence: Module stores content-addressed target/trigger raw pages plus a canonical manifest with event/date/rule/parser/timestamp/checksum and qualification fields.
+- Boundary: Synthetic fixture only; no live Wunderground behavior, uptime or historical settlement reconstruction claim. No persistent collector was started.
+- Next action: Read-only discovery of one exact-rule upcoming KORD event, followed by a separately preregistered bounded live cohort if available.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1771,6 +1782,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Snapshot target page exactly at midnight; rejected because the trigger datapoint may not yet exist. Store only parsed temperature; rejected because parser changes and source disputes require original bytes.
 - Consequence: Snapshot records are larger but independently replayable and fail closed when trigger evidence is absent.
 - Revisit condition: The declared market rule changes or Wunderground exposes an authoritative version/freeze identifier.
+
+### ED-0039 — 2026-09-02 — Keep fixture qualification separate from live evidence
+
+- Decision: Passing the storage contract does not advance any event to settlement-as-of eligible; only a real exact-rule target/trigger capture can do so.
+- Evidence available at decision time: All synthetic cases passed but no live event response was included, and historical current pages have already been shown to diverge from settlements.
+- Alternatives considered: Treat contract tests as Phase 5 completion; rejected because they validate software behavior rather than data availability. Start an indefinite collector immediately; rejected because no event cohort or bounded runtime is registered.
+- Consequence: Phase 5 remains in progress and next work is read-only event discovery plus bounded cohort registration.
+- Revisit condition: At least one real event completes the registered prospective capture and later reconciles with terminal settlement.
 
 ## 20. Decision Log — append only
 
