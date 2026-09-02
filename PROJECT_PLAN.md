@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.55.0
+**Plan versiyonu:** 0.56.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1180,6 +1180,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar sınıfları:** Başarı `PROSPECTIVE_TRIGGER_CAPTURE_PASS_PENDING_SETTLEMENT`; capture failure current Chicago NOAA-primary pipeline `NO_GO`; tek settlement match edge kanıtı değildir.
 - **Güvenlik:** Read-only browser; order/wallet/credential/token inspection/outcome lookup yok.
 
+### D-0057 — 2026-09-02 — NOAA rendered-table snapshot adapter ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Pure/deterministic bir adapter, browser'dan gelen sanitized table payload'ını locked event contract ile validate edip content-addressed append-only manifest'e dönüştürebilir; invalid zaman/identity/schema/unit/coverage/duplicate/source-lock girdileri fail-closed olur.
+- **Fixture:** Synthetic Sep 3 target + Sep 4 trigger KORD payload; gerçek event 946566'nın public identity/rule/source checksum kilidi, fakat gerçek weather outcome kullanılmaz.
+- **Gate:** Valid fixture qualify; pre-midnight, wrong identity/unit/schema/source checksum, target <20, following 0, duplicate timestamp ve tamper fail; first-following=min timestamp; identical replay idempotent; changed payload new revision. En az 12 contract assertion ve full test suite pass.
+- **Artifact:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-snapshot-adapter.json` ve research raporu.
+- **Sınır:** Adapter pass canlı capture/uptime/settlement kanıtı değildir; gerçek pencere ve D-0056 eşikleri değişmez.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1192,7 +1201,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `2026-09-04T05:45Z–06:30Z` bounded penceresinde event 946566 için ön-kayıtlı browser capture'ı çalıştır; ilk Sep 4 local row görülünce append-only snapshot/replay artifact üret, outcome veya order yüzeyine erişme.
+**Tek sonraki adım:** Ön-kayıtlı NOAA rendered-table snapshot adapter'ını fixture/testlerle uygula ve fail-closed gate'i ölç. Ardından gerçek capture için `2026-09-04T05:45Z–06:30Z` penceresini bekle.
 
 Beklenen artifact'lar:
 

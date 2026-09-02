@@ -951,6 +951,15 @@ Pre-register one outcome-unobserved, single-event prospective NOAA-primary KORD 
 - **Safety:** Browser DOM read-only; no order, wallet, credential, browser-secret/network-token inspection or outcome lookup.
 - **Artifacts:** `configs/EXP-20260904-kord-prospective-capture.json`, prospective snapshot manifest and research report.
 
+#### Pre-registration — 2026-09-02 — NOAA rendered-table snapshot adapter
+
+- **Hypothesis:** A pure deterministic adapter can validate a sanitized browser table against the locked event contract and produce a content-addressed append-only manifest, while every invalid identity/time/schema/unit/coverage/duplicate/source-lock case fails closed.
+- **Fixture:** Synthetic Sep 3 target plus Sep 4 following-date KORD rows. Use event 946566 public identity, rule hash and discovery-source checksum but no real outcome value.
+- **Acceptance:** Valid fixture qualifies; pre-midnight, wrong station/title/unit/schema/source checksum, target rows <20, no following row and duplicate timestamps fail; selected trigger is the minimum following-date timestamp; identical replay is idempotent; changed payload appends; tampering fails verification. At least 12 contract assertions and the full suite pass.
+- **Provenance:** Canonical sanitized table JSON and manifest are independently SHA-256-addressed. Store no browser credentials, cookies, local storage, network tokens or unsanitized DOM.
+- **Interpretation:** `ADAPTER_CONTRACT_PASS` prepares but does not execute the Sep 4 capture and does not validate uptime, freeze timing, settlement or edge.
+- **Artifacts:** `src/weather_quant/ingestion/noaa_wrh_snapshot.py`, sanitized fixtures/tests, `reports/data_quality/EXP-20260902-phase5-noaa-wrh-snapshot-adapter.json` and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1627,6 +1636,13 @@ These inferences must be verified in Phases 3 and 4.
 - Sep 4 `05:45Z–06:30Z` is the preferred bounded capture window; maximum 10 renders over 45 minutes, no background collector or schedule.
 - Acceptance/failure thresholds, append-only provenance, settlement-pending interpretation and safety limits were fixed before capture.
 - Next action: Run the bounded browser capture inside the registered window without reading the outcome.
+
+### 2026-09-02 — NOAA rendered-table snapshot adapter pre-registered
+
+- Phase status remains `IN_PROGRESS`; the Sep 4 live window is unchanged.
+- A fixture-only, fail-closed adapter contract was locked before implementation so the live capture requires no ad-hoc data transformation.
+- Acceptance covers identity, time, schema, unit, coverage, duplicates, source lock, trigger selection, idempotency, revisions and tamper detection.
+- Next action: Implement and measure the adapter contract; do not access the real event outcome or start a collector.
 
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
