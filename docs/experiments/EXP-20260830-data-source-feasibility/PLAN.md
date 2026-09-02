@@ -865,9 +865,11 @@ The separately preregistered 40-day-buffer window then `PASSED` final archive co
 
 The prospective two-page freeze snapshot fixture contract `PASSED` 12/12 qualification, replay, immutability, idempotency, revision and tamper-detection cases. This validates storage semantics only; no live event or collector uptime evidence exists yet.
 
+Current read-only discovery returned `NOT_AVAILABLE` for the preregistered Wunderground-primary KORD cohort: 0/3 Chicago events used Wunderground as primary. Two events were observed-future and identity-complete, but all current Chicago rules named NOAA WRH KORD as primary and Wunderground only as fallback, establishing a provider-regime boundary.
+
 #### Next action
 
-Run read-only inventory discovery for one upcoming event with an exact Wunderground/KORD rule. If found, preregister a bounded one-event prospective capture cohort; otherwise record `NOT_AVAILABLE`. Do not launch a background collector.
+Inspect the current NOAA WRH KORD primary surface read-only and preregister its timestamp/timezone/unit, hourly-row, next-day-trigger and revision gate before any prospective capture.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1536,6 +1538,16 @@ These inferences must be verified in Phases 3 and 4.
 - No broad-tag/city substitution, order action or background collector is permitted.
 - Next action: Execute one read-only traversal and preserve the raw envelopes plus candidate audit.
 
+### 2026-09-02 — Wunderground-primary KORD live cohort not available
+
+- Phase status remains `IN_PROGRESS`.
+- Inventory: two keyset pages, 150 events, zero duplicates and 51 cities; three Chicago events, two observed-future, all three identity-complete.
+- Registered result: zero Wunderground-primary qualified KORD events, `NOT_AVAILABLE`; no event or city replacement occurred.
+- Regime evidence: Events 940517, 946566 and 952456 use NOAA WRH KORD as primary; Wunderground appears only as fallback. Historical event 553903 was Wunderground-primary.
+- Decision: Version the provider boundary and do not apply the Wunderground freeze collector as primary evidence to the current Chicago regime.
+- Evidence: Discovery JSON, research report and ignored immutable raw run; 79 tests and scoped Ruff passed.
+- Next action: Read-only NOAA WRH KORD surface discovery and preregistration of a source-specific prospective contract.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1815,6 +1827,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Manually choose any convenient Chicago page; rejected because it may not correspond to a current market/rule. Switch cities if Chicago is absent; rejected because that expands scope after seeing availability.
 - Consequence: The discovery result can be empty and still remain a valid feasibility finding.
 - Revisit condition: A separately preregistered multi-city prospective cohort is approved.
+
+### ED-0041 — 2026-09-02 — Treat current Chicago NOAA rules as a new provider regime
+
+- Decision: Split historical Wunderground-primary and current NOAA-primary Chicago events at the rule/provider boundary; Wunderground fallback does not make a current event Wunderground-primary.
+- Evidence available at decision time: All three discovered Chicago events named NOAA WRH KORD in `resolutionSource`, including both observed-future events, while the historical verified event 553903 named Wunderground KORD.
+- Alternatives considered: Capture Wunderground anyway and label it settlement evidence; rejected because the primary source is NOAA unless the documented fallback condition occurs. Drop Chicago; deferred because NBM/KORD forecast and official observation coverage remain strong, and NOAA source feasibility can be tested.
+- Consequence: Feature, label and backtest datasets require a versioned `resolution_provider_regime`; current prospective work pivots to NOAA WRH without merging labels across regimes.
+- Revisit condition: A future event returns to Wunderground-primary or a verified fallback activation is observed.
 
 ## 20. Decision Log — append only
 

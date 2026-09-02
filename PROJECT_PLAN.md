@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.49.0
+**Plan versiyonu:** 0.50.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1114,6 +1114,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Güvenlik:** Public GET dışında çağrı yok; wallet/credential/order yok. Bu adım collector başlatmaz.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json`, research raporu ve ignored immutable raw run.
 
+### D-0051 — 2026-09-02 — Wunderground-primary KORD live cohort yok; NOAA-primary regime bulundu
+
+- **Durum:** `ACTIVE`
+- **Inventory:** 2 keyset page, 150 source event, 0 duplicate, 51 şehir. Chicago event 3; observed-future 2; identity-complete 3.
+- **Gate sonucu:** Exact Wunderground-primary KORD qualified event 0; `availability_status=NOT_AVAILABLE`. Deterministic selection uygulanamadı, şehir/event ikamesi yapılmadı.
+- **Rule drift:** Event 940517/946566/952456 primary source olarak NOAA WRH `timeseries?site=kord` kullanıyor; historical event 553903 Wunderground-primary idi. Wunderground current rule'da yalnız fallback.
+- **Karar:** Chicago provider rejimleri versioned ayrılacak; Wunderground freeze contract current NOAA-primary eventlere primary evidence olarak uygulanmayacak.
+- **Kalite/güvenlik:** 79 test ve yeni modüllerde Ruff geçti; public GET dışında işlem, credential veya background collector yok.
+- **Artifact:** Discovery JSON, research raporu; raw `data/raw/polymarket_gamma-kord-discovery/run=20260902T120408Z`.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; current NOAA-primary KORD observation/freeze semantiği henüz doğrulanmadı.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1126,7 +1137,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı complete Gamma keyset traversal'ı çalıştırıp exact-rule KORD candidate sonucunu artifact'a kaydetmek.
+**Tek sonraki adım:** Current NOAA WRH KORD primary source'un endpoint/veri şeması, timestamp/timezone/unit, next-day trigger ve revision semantiğini read-only keşfedip prospective gate'i sonuçlardan önce tanımlamak.
 
 Beklenen artifact'lar:
 
