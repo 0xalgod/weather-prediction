@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.50.0
+**Plan versiyonu:** 0.51.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1125,6 +1125,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** Discovery JSON, research raporu; raw `data/raw/polymarket_gamma-kord-discovery/run=20260902T120408Z`.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; current NOAA-primary KORD observation/freeze semantiği henüz doğrulanmadı.
 
+### D-0052 — 2026-09-02 — NOAA WRH KORD source-surface discovery ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Event 946566/952456'nın declared primary URL'si `weather.gov/wrh/timeseries?site=kord`, exact KORD identity ile observation timestamp, temperature value/unit ve hourly/table records sağlayan resmî, read-only ve makinece parse edilebilir bir surface veya aynı resmî sayfanın çağırdığı documented data endpoint'ine sahiptir.
+- **Scope:** Yalnız `weather.gov`/resmî NOAA-NWS origin ve sayfanın kendi first-party asset/data çağrıları; üçüncü taraf weather aggregator yok. GET/HEAD dışında işlem yok.
+- **Discovery artifact:** URL, requested/received UTC, HTTP status/headers, byte count, SHA-256, content type; HTML/script/network referansları; bulunan candidate endpoint ve örnek şema alanları. Credential gereksinimi ve erişim koşulu açık raporlanacak.
+- **Semantic gate:** Exact `KORD` identity; en az bir timezone-aware veya timezone semantiği belgelenmiş observation timestamp; temperature value + açık unit; en az bir hourly observation; timestamp'i `America/Chicago` local date'e deterministik çevirebilme. Hepsi birlikte yoksa source `NOT_MACHINE_RECONCILABLE`.
+- **Trigger gate:** Following local date'e ait ilk observation, timestamp'li kayıtlardan deterministik seçilebilmeli. Sayfanın yalnız görüntülenmesi trigger kanıtı değildir.
+- **Revision sınırı:** Current response historical first-seen/freeze version değildir. Version/revision endpoint bulunmazsa `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`; prospective raw capture gerekir.
+- **Stability:** Aynı endpoint iki bounded ardışık retrieval'da HTTP/schema/identity açısından tutarlı olmalı; dynamic record/checksum farkı hata değildir ve timestamp ile saklanır. Persistent polling yok.
+- **Gate sonucu:** `PASSED`, `CONDITIONAL_PASS` veya `FAILED`; sonuçtan sonra alan/eşik değiştirilmeyecek. Artifact hedefi `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-source-discovery.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1137,7 +1149,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Current NOAA WRH KORD primary source'un endpoint/veri şeması, timestamp/timezone/unit, next-day trigger ve revision semantiğini read-only keşfedip prospective gate'i sonuçlardan önce tanımlamak.
+**Tek sonraki adım:** Ön-kayıtlı NOAA WRH KORD source-surface discovery'yi iki bounded retrieval ile çalıştırıp endpoint/schema/semantic sonucu artifact'a kaydetmek.
 
 Beklenen artifact'lar:
 

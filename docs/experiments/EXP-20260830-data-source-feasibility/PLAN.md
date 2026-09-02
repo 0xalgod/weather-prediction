@@ -912,6 +912,18 @@ Inspect the current NOAA WRH KORD primary surface read-only and preregister its 
 - **Safety:** Public GET only; no wallet, credential, order or background collector.
 - **Artifacts:** `reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json`, research report and ignored immutable raw envelopes.
 
+#### Pre-registration — 2026-09-02 — NOAA WRH KORD source-surface discovery
+
+- **Hypothesis:** The declared `weather.gov/wrh/timeseries?site=kord` primary source or its first-party NOAA/NWS data calls expose exact KORD identity, observation timestamps, explicit temperature values/units and hourly rows in a machine-reconcilable form.
+- **Scope:** Official `weather.gov`/NOAA/NWS origins and first-party resources referenced by the page; GET/HEAD only, no third-party weather provider.
+- **Provenance:** Preserve URL, request/receive UTC, status/headers, bytes, SHA-256, content type, referenced scripts/data calls, candidate endpoint and sample schema. Report credentials/access constraints.
+- **Semantic acceptance:** Exact KORD; at least one observation timestamp with explicit/documented timezone semantics; temperature value and unit; at least one hourly row; deterministic conversion to `America/Chicago` local date.
+- **Trigger acceptance:** The first observation belonging to the following local date can be deterministically selected from timestamped rows. Page presence alone is insufficient.
+- **Revision boundary:** Without a version/revision surface, current retrieval stays `HISTORICAL_FREEZE_AS_OF_UNRESOLVED` and requires prospective raw capture.
+- **Stability:** Two bounded consecutive requests must agree on HTTP/schema/identity. Dynamic data/checksum differences are preserved, not failures. No persistent polling.
+- **Decision:** `PASSED`, `CONDITIONAL_PASS` or `FAILED` without post-result threshold edits.
+- **Artifacts:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-source-discovery.json` and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1548,6 +1560,13 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence: Discovery JSON, research report and ignored immutable raw run; 79 tests and scoped Ruff passed.
 - Next action: Read-only NOAA WRH KORD surface discovery and preregistration of a source-specific prospective contract.
 
+### 2026-09-02 — NOAA WRH KORD source discovery pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Official-origin scope, two-request stability check, machine-readable semantic gate, following-date trigger requirement and revision boundary were locked before inspecting the live page/data calls.
+- No polling, credentials, orders or third-party weather substitution are permitted.
+- Next action: Retrieve the declared page twice, identify first-party data calls and apply the registered semantic gate.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1835,6 +1854,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Capture Wunderground anyway and label it settlement evidence; rejected because the primary source is NOAA unless the documented fallback condition occurs. Drop Chicago; deferred because NBM/KORD forecast and official observation coverage remain strong, and NOAA source feasibility can be tested.
 - Consequence: Feature, label and backtest datasets require a versioned `resolution_provider_regime`; current prospective work pivots to NOAA WRH without merging labels across regimes.
 - Revisit condition: A future event returns to Wunderground-primary or a verified fallback activation is observed.
+
+### ED-0042 — 2026-09-02 — Require timestamped rows for NOAA trigger evidence
+
+- Decision: NOAA WRH page availability or a displayed daily maximum alone cannot establish the next-day-first-datapoint trigger; eligibility requires timestamped station rows from which the first following-local-date observation is selected.
+- Evidence available at decision time: Current Chicago rules define the freeze using the first following-date datapoint, and prior Wunderground current pages demonstrated that later display state can diverge from settlement.
+- Alternatives considered: Use retrieval time as the trigger; rejected because a page may load before a following-date observation exists. Use only the final daily maximum; rejected because it omits the freeze event.
+- Consequence: Source discovery can pass basic access yet remain conditional or fail trigger reconciliation.
+- Revisit condition: NOAA exposes an authoritative explicit freeze/publication marker tied to the event rule.
 
 ## 20. Decision Log — append only
 
