@@ -1,0 +1,56 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "run_id": "EXP-20260902-phase5-noaa-wrh-snapshot-adapter",
+  "observed_at_utc": "2026-09-02T14:27:52Z",
+  "decision": "SNAPSHOT_ADAPTER_CONTRACT_PASS",
+  "hypothesis": "A deterministic adapter can validate sanitized NOAA WRH rendered-table payloads against the locked event contract and create content-addressed append-only manifests while invalid inputs fail closed.",
+  "fixture": {
+    "weather_data": "synthetic",
+    "event_identity": "946566 public locked metadata",
+    "target_local_date": "2026-09-03",
+    "following_local_date": "2026-09-04",
+    "target_rows": 20,
+    "following_rows": 2,
+    "expected_selected_trigger": "2026-09-04 00:51 America/Chicago"
+  },
+  "metrics": {
+    "adapter_test_cases_passed": 13,
+    "adapter_test_cases_failed": 0,
+    "full_test_suite_passed": 94,
+    "full_test_suite_failed": 0,
+    "scoped_ruff_errors": 0
+  },
+  "contract_checks": {
+    "valid_fixture_qualifies": true,
+    "minimum_following_timestamp_selected": true,
+    "following_midnight_dst_conversion_correct": true,
+    "wrong_station_fails_closed": true,
+    "wrong_unit_schema_fails_closed": true,
+    "wrong_source_url_fails_closed": true,
+    "insufficient_target_coverage_fails_closed": true,
+    "missing_following_row_fails_closed": true,
+    "duplicate_timestamp_fails_closed": true,
+    "invalid_temperature_fails_closed": true,
+    "pre_midnight_capture_fails_closed": true,
+    "source_checksum_tamper_fails_closed": true,
+    "identical_replay_is_idempotent": true,
+    "changed_payload_creates_revision": true,
+    "payload_tamper_is_detected": true,
+    "manifest_payload_mismatch_is_rejected": true,
+    "manifest_build_is_deterministic": true
+  },
+  "implementation": {
+    "module": "src/weather_quant/ingestion/noaa_wrh_snapshot.py",
+    "tests": "tests/test_noaa_wrh_snapshot.py",
+    "input_boundary": "sanitized rendered table only",
+    "persisted_browser_secrets": false
+  },
+  "limitations": [
+    "No live NOAA payload was captured in this run.",
+    "No browser uptime or trigger-window timing was tested.",
+    "No settlement outcome was accessed or reconciled.",
+    "Passing this contract is not evidence of forecast edge or trading profitability."
+  ],
+  "next_action": "Execute the locked event 946566 capture only inside the 2026-09-04T05:45Z to 06:30Z bounded window."
+}

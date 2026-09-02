@@ -1637,6 +1637,15 @@ These inferences must be verified in Phases 3 and 4.
 - Acceptance/failure thresholds, append-only provenance, settlement-pending interpretation and safety limits were fixed before capture.
 - Next action: Run the bounded browser capture inside the registered window without reading the outcome.
 
+### 2026-09-02 — NOAA rendered-table snapshot adapter passed
+
+- Phase status remains `IN_PROGRESS`; adapter decision is `SNAPSHOT_ADAPTER_CONTRACT_PASS`.
+- Focused fixture suite passed 13/13, full suite passed 94/94 and scoped Ruff passed.
+- Identity/unit/schema/source URL, coverage, following-row, duplicate, numeric parse, pre-midnight and source checksum failure paths reject admission.
+- Content addressing passed deterministic build, idempotent replay, separate revision and tamper/mismatch detection cases.
+- Only synthetic weather rows were used; no live capture, outcome or settlement evidence was introduced.
+- Next action: Wait for the fixed Sep 4 window, then feed one sanitized live DOM payload into the adapter and verify the append-only snapshot.
+
 ### 2026-09-02 — NOAA rendered-table snapshot adapter pre-registered
 
 - Phase status remains `IN_PROGRESS`; the Sep 4 live window is unchanged.
@@ -1971,6 +1980,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Event 952456; rejected by the predeclared earliest-end rule. Always-on collector; rejected as unnecessary for a known local-midnight trigger and inconsistent with the bounded feasibility objective. Hard-code 00:51; rejected because cadence can change.
 - Consequence: Capture may fail if the row arrives outside the bounded window, and that operational risk is measured rather than hidden.
 - Revisit condition: Registered window completes or is missed.
+
+### ED-0047 — 2026-09-02 — Separate browser acquisition from snapshot validation
+
+- Decision: Browser automation may emit only a sanitized station/title/URL/header/row payload; deterministic validation, source-lock checks, trigger selection and persistence live in a tested Python adapter.
+- Evidence available at decision time: Browser DOM feasibility passed, while the new adapter passed 13 focused contract cases including tamper and revision behavior.
+- Alternatives considered: Persist raw browser state/DOM; rejected because it can include irrelevant or sensitive state. Hand-build a manifest after capture; rejected because it weakens reproducibility and fail-closed checks.
+- Consequence: Upcoming browser work has a narrow data boundary and no credential/cookie/network-token persistence.
+- Revisit condition: Live payload exposes a schema element that cannot be represented without weakening the preregistered gate; such a case must fail and be separately investigated.
 
 ## 20. Decision Log — append only
 

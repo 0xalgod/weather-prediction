@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.56.0
+**Plan versiyonu:** 0.57.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1189,6 +1189,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Artifact:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-snapshot-adapter.json` ve research raporu.
 - **Sınır:** Adapter pass canlı capture/uptime/settlement kanıtı değildir; gerçek pencere ve D-0056 eşikleri değişmez.
 
+### D-0058 — 2026-09-02 — NOAA snapshot adapter contract gate geçti
+
+- **Durum:** `ACTIVE`
+- **Sonuç:** `SNAPSHOT_ADAPTER_CONTRACT_PASS`; focused 13/13, full suite 94/94, scoped Ruff 0 error.
+- **Kanıt:** Valid synthetic fixture qualify; min following timestamp seçimi ve Chicago DST conversion doğru. Wrong identity/unit/schema/URL, target coverage, following row, duplicate, numeric parse, pre-midnight ve source tamper fail-closed.
+- **Immutability:** Identical replay idempotent; changed payload yeni revision; payload tamperi ve manifest/payload mismatch reddediliyor; build deterministic.
+- **Sınır:** Live NOAA payload, browser uptime, gerçek trigger timing ve settlement test edilmedi. Edge/P&L kanıtı değildir.
+- **Karar:** Event 946566 capture sözleşmesi uygulamaya hazır; D-0056 pencere/eşikleri değişmedi.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1201,7 +1210,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı NOAA rendered-table snapshot adapter'ını fixture/testlerle uygula ve fail-closed gate'i ölç. Ardından gerçek capture için `2026-09-04T05:45Z–06:30Z` penceresini bekle.
+**Tek sonraki adım:** Gerçek capture için `2026-09-04T05:45Z–06:30Z` penceresini bekle; event 946566 browser payload'ını sanitize edip hazır adapter ile append-only kaydet ve replay doğrula. Pencere öncesi outcome lookup veya capture yok.
 
 Beklenen artifact'lar:
 
