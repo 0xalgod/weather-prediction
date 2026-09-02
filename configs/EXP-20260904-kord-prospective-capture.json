@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "run_id": "EXP-20260904-phase5-kord-prospective-capture",
+  "status": "PREREGISTERED",
+  "preregistered_at_utc": "2026-09-02T14:08:40Z",
+  "hypothesis": "A bounded browser session at the rule trigger can preserve an immutable NOAA WRH KORD snapshot containing all Sep 3 rows and the first Sep 4 local observation before the selected event outcome is used.",
+  "selection": {
+    "method": "earliest end_at among observed-future, identity-complete Chicago events using NOAA WRH KORD as primary resolution source",
+    "source_artifact": "reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json",
+    "source_artifact_sha256": "e003e77b7f0083e4f3d1322512f8731de1f49fc4463f843c2079348cd82c7da0",
+    "source_observed_at_utc": "2026-09-02T12:04:22.608Z",
+    "event_id": "946566",
+    "title": "Highest temperature in Chicago on September 3?",
+    "end_at_utc": "2026-09-03T12:00:00Z",
+    "rule_text_sha256": "15ce309df35d3bb6f1f3eb7988adb87b3ff8d1fb831b775a3642f4cba75158ec",
+    "resolution_source": "https://www.weather.gov/wrh/timeseries?site=kord",
+    "market_identity_json_pointer": "/chicago_audits/1/token_identities",
+    "market_count": 11,
+    "condition_count": 11,
+    "token_count": 22
+  },
+  "observation_contract": {
+    "station_id": "KORD",
+    "rendered_station_title": "Chicago, Chicago-O'Hare International Airport",
+    "timezone": "America/Chicago",
+    "temperature_unit": "degF",
+    "target_local_date": "2026-09-03",
+    "following_local_date": "2026-09-04",
+    "declared_url": "https://www.weather.gov/wrh/timeseries?site=kord&hours=72&units=english_k&hourly=true",
+    "trigger_definition": "minimum rendered KORD local timestamp belonging to 2026-09-04",
+    "expected_but_not_required_first_row": "2026-09-04 00:51 America/Chicago"
+  },
+  "execution_window": {
+    "not_before_utc": "2026-09-04T05:00:00Z",
+    "preferred_start_utc": "2026-09-04T05:45:00Z",
+    "stop_no_later_than_utc": "2026-09-04T06:30:00Z",
+    "maximum_session_minutes": 45,
+    "maximum_render_attempts": 10,
+    "minimum_seconds_between_attempts": 240,
+    "persistent_background_collector": false,
+    "automatic_schedule_authorized": false
+  },
+  "acceptance": {
+    "capture_received_at_or_after_following_local_midnight": true,
+    "exact_station_identity": true,
+    "fahrenheit_temperature_header": true,
+    "target_date_timestamped_numeric_rows_minimum": 20,
+    "following_date_timestamped_numeric_rows_minimum": 1,
+    "duplicate_timestamps_maximum": 0,
+    "first_following_row_selected_by_minimum_timestamp": true,
+    "rule_and_market_identity_source_checksum_matches": true,
+    "raw_rendered_table_payload_sha256_present": true,
+    "canonical_manifest_sha256_present": true,
+    "append_only_replay_verification_passes": true
+  },
+  "failure_codes": [
+    "MISSED_CAPTURE_WINDOW",
+    "NO_FOLLOWING_DATE_ROW",
+    "STATION_IDENTITY_MISMATCH",
+    "UNIT_OR_SCHEMA_MISMATCH",
+    "INSUFFICIENT_TARGET_DATE_ROWS",
+    "DUPLICATE_TIMESTAMP",
+    "SOURCE_LOCK_CHECKSUM_MISMATCH",
+    "APPEND_ONLY_VERIFICATION_FAILED",
+    "BROWSER_LOAD_FAILED"
+  ],
+  "interpretation": {
+    "capture_pass": "PROSPECTIVE_TRIGGER_CAPTURE_PASS_PENDING_SETTLEMENT",
+    "capture_failure": "CURRENT_CHICAGO_NOAA_PRIMARY_PIPELINE_NO_GO",
+    "settlement_match": "ONE_EVENT_RECONCILIATION_PASS_NOT_EDGE_EVIDENCE",
+    "settlement_divergence": "QUARANTINE_EVENT_AND_REJECT_LABEL_PIPELINE"
+  },
+  "safety": {
+    "read_only_browser": true,
+    "orders": false,
+    "wallet": false,
+    "credentials": false,
+    "cookies_or_local_storage_capture": false,
+    "network_token_inspection": false,
+    "outcome_must_not_be_used_during_capture": true
+  }
+}

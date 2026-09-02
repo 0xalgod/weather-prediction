@@ -939,6 +939,18 @@ Pre-register one outcome-unobserved, single-event prospective NOAA-primary KORD 
 - **Safety:** Read-only navigation and DOM inspection; no forms, downloads, orders or persistent polling.
 - **Artifacts:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-rendered-dom.json` and research report.
 
+#### Pre-registration — 2026-09-02 — Event 946566 prospective KORD trigger capture
+
+- **Hypothesis:** A bounded browser session at the actual rule trigger can preserve immutable target-date rows and the first following-date KORD row before the event outcome is used.
+- **Selection:** Lock event 946566 by outcome-independent earliest-end ordering among the two observed-future NOAA-primary KORD events. Source discovery artifact SHA-256 `e003e77b7f0083e4f3d1322512f8731de1f49fc4463f843c2079348cd82c7da0`; exact rule hash and all 11 market/condition plus 22 token identities remain locked by source checksum and JSON pointer.
+- **Dates:** Target `2026-09-03`, following `2026-09-04`, `America/Chicago`. Trigger is the minimum rendered timestamp belonging to the following date; `00:51` is expected from prior cadence but not required.
+- **Window:** Not before `05:00Z`, preferred start `05:45Z`, hard stop `06:30Z` on Sep 4; ≤45 minutes, ≤10 renders, ≥240 seconds between attempts. No persistent/background collector or automatic schedule.
+- **Acceptance:** Exact identity/°F; capture after local midnight; target rows ≥20, following rows ≥1, duplicates 0; deterministic minimum trigger; source lock, table/manifest checksums and append-only replay pass.
+- **Failure:** Missed window, no following row, identity/unit/schema/coverage/duplicate/lock/replay/browser failure yields fail-closed; thresholds cannot change post-result.
+- **Interpretation:** Capture pass is pending settlement and is not edge evidence. After terminal settlement, reconcile without overwriting. Divergence quarantines the event.
+- **Safety:** Browser DOM read-only; no order, wallet, credential, browser-secret/network-token inspection or outcome lookup.
+- **Artifacts:** `configs/EXP-20260904-kord-prospective-capture.json`, prospective snapshot manifest and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1608,6 +1620,14 @@ These inferences must be verified in Phases 3 and 4.
 - No browser secrets, credential values, network tokens, raw DOM or screenshots were captured.
 - Next action: Pre-register one prospective, outcome-unobserved KORD event capture with bounded browser execution and append-only evidence.
 
+### 2026-09-02 — Event 946566 prospective capture pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Event 946566 / Sep 3 was locked by earliest-end selection while observed-future; rule and 11-market/22-token identities are content-addressed by the discovery artifact.
+- Sep 4 `05:45Z–06:30Z` is the preferred bounded capture window; maximum 10 renders over 45 minutes, no background collector or schedule.
+- Acceptance/failure thresholds, append-only provenance, settlement-pending interpretation and safety limits were fixed before capture.
+- Next action: Run the bounded browser capture inside the registered window without reading the outcome.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1927,6 +1947,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Mark the full observation pipeline passed; rejected because API, revision and trigger-time provenance remain unresolved. Mark immediate `NO_GO`; rejected because declared-source parser feasibility passed the registered gate.
 - Consequence: Phase 5 remains `IN_PROGRESS`; next evidence must be prospectively captured before outcome observation and reconciled after settlement.
 - Revisit condition: One preregistered event completes trigger-time append-only capture and terminal reconciliation, or the bounded browser capture fails.
+
+### ED-0046 — 2026-09-02 — Lock event 946566 without an always-on collector
+
+- Decision: Use event 946566 and a short foreground Sep 4 trigger window instead of a 24-hour collector.
+- Evidence available at decision time: Event 946566 was the earliest observed-future NOAA-primary KORD candidate; the rendered table previously showed hourly rows near `:51`, while exact arrival timing is not guaranteed.
+- Alternatives considered: Event 952456; rejected by the predeclared earliest-end rule. Always-on collector; rejected as unnecessary for a known local-midnight trigger and inconsistent with the bounded feasibility objective. Hard-code 00:51; rejected because cadence can change.
+- Consequence: Capture may fail if the row arrives outside the bounded window, and that operational risk is measured rather than hidden.
+- Revisit condition: Registered window completes or is missed.
 
 ## 20. Decision Log — append only
 

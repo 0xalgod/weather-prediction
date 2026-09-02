@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.54.0
+**Plan versiyonu:** 0.55.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1170,6 +1170,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Güvenlik:** Yalnız read-only navigation/DOM; credential, cookie, local storage, network token, raw DOM veya screenshot kaydı yok.
 - **Karar:** Chicago exact-temperature hattı `NO_GO` yapılmadı; yalnız tek-event prospective bounded browser capture araştırmasına conditional olarak açık. Phase 5 `IN_PROGRESS`, training/backtest/live sermaye kapalı.
 
+### D-0056 — 2026-09-02 — İlk NOAA-primary prospective KORD cohort kilitlendi
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Trigger penceresindeki bounded browser session, event 946566 için Sep 3 target rows + ilk Sep 4 local row'u outcome kullanılmadan immutable kanıt olarak saklayabilir.
+- **Selection:** Checksum-locked discovery'deki iki observed-future NOAA-primary KORD event arasından outcome bağımsız `earliest end_at` ile event `946566` seçildi. Rule hash, 11 market/condition ve 22 token identity source checksum/JSON pointer ile kilitli.
+- **Zaman:** `America/Chicago`; not-before `2026-09-04T05:00Z`, preferred `05:45Z`, hard stop `06:30Z`; ≤45 dakika, ≤10 render, araları ≥240 saniye. Persistent/background collector ve automatic schedule yok.
+- **Gate:** Exact identity/°F; target-date ≥20 numeric row; following-date ≥1 row; duplicate 0; min following timestamp seçimi; source-lock, payload/manifest checksum ve append-only replay pass.
+- **Karar sınıfları:** Başarı `PROSPECTIVE_TRIGGER_CAPTURE_PASS_PENDING_SETTLEMENT`; capture failure current Chicago NOAA-primary pipeline `NO_GO`; tek settlement match edge kanıtı değildir.
+- **Güvenlik:** Read-only browser; order/wallet/credential/token inspection/outcome lookup yok.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1182,7 +1192,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Outcome görülmeden en erken observed-future NOAA-primary KORD event'ini kilitleyen tek-event prospective capture deneyini ön-kaydet; trigger anında bounded browser snapshot, append-only provenance ve settlement sonrası reconciliation şartlarını tanımla. Persistent collector başlatma.
+**Tek sonraki adım:** `2026-09-04T05:45Z–06:30Z` bounded penceresinde event 946566 için ön-kayıtlı browser capture'ı çalıştır; ilk Sep 4 local row görülünce append-only snapshot/replay artifact üret, outcome veya order yüzeyine erişme.
 
 Beklenen artifact'lar:
 
