@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.52.0
+**Plan versiyonu:** 0.53.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1148,6 +1148,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Kalite:** 81 test ve scoped Ruff geçti. Artifact, rapor ve ignored raw page/client script run'ı kaydedildi.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; Chicago NOAA-primary automated exact-temperature source gate başarısız, browser-rendered declared-source evidence son sınırlı seçenek.
 
+### D-0054 — 2026-09-02 — NOAA WRH browser-rendered DOM diagnostic ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Declared URL `weather.gov/wrh/timeseries?site=kord&hours=72&units=english_k&hourly=true` browser'da render edildiğinde credential çıkarmadan exact KORD/name, °F Temp header ve timestamp+temperature içeren hourly table rows deterministik parse edilebilir; Sep 1→Sep 2 ilk-local-row trigger algoritması canlı DOM üzerinde gösterilebilir.
+- **Cohort:** İki bounded render/reload; sabit KORD, 72 saat, `english_k`, `hourly=true`. Sep 1 target ve Sep 2 following date yalnız parser/trigger diagnostic'tir; historical freeze-time capture veya outcome label değildir.
+- **Gate:** Her iki render ≤30 saniyede load; exact KORD/O'Hare identity; °F temperature header; her render ≥24 timestamped non-null temperature row; parse edilen timestamp'ler timezone semantiğiyle `America/Chicago` local date'e çevrilebilir; duplicate timestamp 0; column schema iki renderda aynı.
+- **Trigger diagnostic:** Sep 2 local date'e ait ilk timestamp deterministik ve Sep 1 satırlarından sonra seçilmeli. Capture'ın trigger anında yapılmış olması gerekmez ve iddia edilmeyecek.
+- **Artifact/provenance:** URL, navigation/reload observed time, DOM table schema, row count/date range, first-following row, visible warning text ve rendered DOM/body checksum; credential/cookie/local storage/network token kaydı yok. Screenshot/raw DOM yalnız ignored local artifact olabilir.
+- **Karar:** Gate geçerse `BROWSER_RENDERED_DIAGNOSTIC_PASS`, fakat automated/API ve freeze-as-of unresolved kalır. Gate kalırsa current Chicago NOAA-primary exact-temperature pipeline `NO_GO`.
+- **Güvenlik:** Browser navigation/DOM read-only; form submission, download, credential extraction, order veya persistent polling yok.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-rendered-dom.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1160,7 +1172,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Credential çıkarmadan NOAA WRH KORD browser-rendered DOM snapshot'ının exact identity/timestamp/unit/hourly rows ve following-date trigger açısından deterministik parse edilmesini ön-kayıt altına alıp bounded test etmek.
+**Tek sonraki adım:** Ön-kayıtlı iki bounded NOAA WRH KORD browser render/reload diagnostic'ini çalıştırıp DOM schema/rows/trigger sonucunu artifact'a kaydetmek.
 
 Beklenen artifact'lar:
 

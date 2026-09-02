@@ -926,6 +926,17 @@ Pre-register and run one bounded browser-rendered NOAA WRH KORD DOM test without
 - **Decision:** `PASSED`, `CONDITIONAL_PASS` or `FAILED` without post-result threshold edits.
 - **Artifacts:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-source-discovery.json` and research report.
 
+#### Pre-registration — 2026-09-02 — NOAA WRH KORD browser-rendered DOM diagnostic
+
+- **Hypothesis:** Browser-rendering the declared page with fixed `site=kord`, 72 hours, `english_k` and hourly-only settings exposes exact KORD/O'Hare identity, a Fahrenheit temperature column and timestamped non-null hourly rows that can be deterministically parsed without extracting a client credential.
+- **Cohort:** Two bounded render/reload observations. Sep 1 target and Sep 2 following date are parser/trigger diagnostics only, not historical freeze-time evidence or outcome labels.
+- **Acceptance:** Each render loads within 30 seconds; exact identity and °F header; ≥24 timestamped non-null-temperature rows; timestamps map deterministically to `America/Chicago`; zero duplicate timestamps; identical column schema across renders.
+- **Trigger diagnostic:** Deterministically identify the first Sep 2 local row after Sep 1 rows. Do not claim capture occurred at that trigger time.
+- **Provenance:** Preserve URL, observed times, table schema, counts/date range, first-following row, visible warnings and rendered body/DOM checksum. Never inspect/persist credential values, cookies, local storage or network tokens.
+- **Decision:** A pass means only `BROWSER_RENDERED_DIAGNOSTIC_PASS`; automated/API and freeze-as-of remain unresolved. A failure makes the current Chicago NOAA-primary exact-temperature pipeline `NO_GO`.
+- **Safety:** Read-only navigation and DOM inspection; no forms, downloads, orders or persistent polling.
+- **Artifacts:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-rendered-dom.json` and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1579,6 +1590,13 @@ These inferences must be verified in Phases 3 and 4.
 - Safety: No third-party data call, credential persistence/output or polling. 81 tests and scoped Ruff passed.
 - Next action: Separately preregister a bounded browser-rendered declared-page DOM test with no credential extraction.
 
+### 2026-09-02 — NOAA WRH browser-rendered DOM diagnostic pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Fixed URL settings, two-render cohort, identity/schema/row/timezone thresholds, Sep 1→2 trigger diagnostic and evidence limits were locked before browser inspection.
+- Browser state secrets/network credentials are out of scope; only rendered DOM and visible text may be read.
+- Next action: Execute two bounded renders and apply the registered gate without changing thresholds.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1882,6 +1900,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Call the third-party endpoint with the embedded value; rejected due to credential handling, access-right and provenance uncertainty. Pretend the static HTML contains data; rejected because two inspected responses did not.
 - Consequence: Official-origin machine gate fails. Browser-rendered evidence is the final bounded feasibility test before a Chicago exact-temperature `NO_GO` decision.
 - Revisit condition: NOAA publishes a documented first-party data endpoint or explicit reusable access terms for the underlying service are independently verified.
+
+### ED-0044 — 2026-09-02 — Limit rendered-page success to diagnostic evidence
+
+- Decision: Even a fully parseable rendered table cannot be promoted to historical freeze evidence unless captured prospectively at the rule trigger; this test validates only visible source semantics and parser feasibility.
+- Evidence available at decision time: The static source gate failed and current page data is preliminary/revisable, while the planned Sep 1→2 trigger is necessarily observed after its historical occurrence.
+- Alternatives considered: Treat a late rendered table as the freeze snapshot; rejected because revision timing is unknown. Skip the rendered surface; rejected because it is the exact URL market participants are instructed to use.
+- Consequence: A pass preserves Chicago for bounded browser-based prospective research only; a failure yields exact-temperature `NO_GO` for the current regime.
+- Revisit condition: A prospective event is captured at its actual following-date trigger and later reconciled with terminal settlement.
 
 ## 20. Decision Log — append only
 
