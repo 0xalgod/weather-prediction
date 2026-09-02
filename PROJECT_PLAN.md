@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.53.0
+**Plan versiyonu:** 0.54.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1160,6 +1160,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Güvenlik:** Browser navigation/DOM read-only; form submission, download, credential extraction, order veya persistent polling yok.
 - **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-rendered-dom.json` ve research raporu.
 
+### D-0055 — 2026-09-02 — NOAA WRH rendered DOM gate geçti, settlement gate geçmedi
+
+- **Durum:** `ACTIVE`
+- **Ölçüm:** İki bounded render 13:47:49Z ve 13:49:37Z'de exact O'Hare title, aynı normalize 21 kolon ve 85/85 timestamp+numeric °F row verdi; duplicate timestamp 0, body-text SHA-256 aynı.
+- **Trigger diagnostic:** Sep 2 local date minimum timestamp iki renderda da `00:51`, sıcaklık `81°F`. Bu seçim trigger saatinden sonra yapıldığı için historical freeze snapshot değildir.
+- **Gate:** Ön-kayıtlı eşikler post-hoc değişiklik olmadan geçti: `BROWSER_RENDERED_DIAGNOSTIC_PASS`.
+- **Sınır:** Satırda explicit UTC offset/yıl yok; local timezone KORD/`(L)` semantiğinden, yıl page/chart context'inden türetiliyor. Preliminary/QC revision uyarısı var. Automated API, historical freeze-as-of ve prospective trigger capture unresolved.
+- **Güvenlik:** Yalnız read-only navigation/DOM; credential, cookie, local storage, network token, raw DOM veya screenshot kaydı yok.
+- **Karar:** Chicago exact-temperature hattı `NO_GO` yapılmadı; yalnız tek-event prospective bounded browser capture araştırmasına conditional olarak açık. Phase 5 `IN_PROGRESS`, training/backtest/live sermaye kapalı.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1172,7 +1182,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı iki bounded NOAA WRH KORD browser render/reload diagnostic'ini çalıştırıp DOM schema/rows/trigger sonucunu artifact'a kaydetmek.
+**Tek sonraki adım:** Outcome görülmeden en erken observed-future NOAA-primary KORD event'ini kilitleyen tek-event prospective capture deneyini ön-kaydet; trigger anında bounded browser snapshot, append-only provenance ve settlement sonrası reconciliation şartlarını tanımla. Persistent collector başlatma.
 
 Beklenen artifact'lar:
 

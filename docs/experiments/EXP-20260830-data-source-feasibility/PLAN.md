@@ -869,9 +869,11 @@ Current read-only discovery returned `NOT_AVAILABLE` for the preregistered Wunde
 
 The NOAA WRH official-origin source-surface gate then `FAILED`: two static page requests were byte-identical and stable, but carried no observation payload. The first-party client loads timestamped data from third-party `api.synopticdata.com` with a client credential helper. No official-origin machine endpoint or selectable following-date trigger was found; no credential value was recorded or used.
 
+The separately preregistered browser-rendered diagnostic `PASSED`: two bounded renders exposed exact O'Hare identity, the same normalized 21-column schema, 85/85 timestamped numeric Fahrenheit rows and zero duplicate timestamps. The Sep 1→2 diagnostic selected Sep 2 00:51 local / 81°F in both renders. This is parser feasibility only; it was observed after the trigger and does not establish historical freeze state, an automated API, or a settlement label.
+
 #### Next action
 
-Pre-register and run one bounded browser-rendered NOAA WRH KORD DOM test without extracting credentials. Require exact identity, timestamp, unit, hourly rows and following-date trigger; otherwise mark the current exact-temperature pipeline `NO_GO`.
+Pre-register one outcome-unobserved, single-event prospective NOAA-primary KORD capture. Lock the rule and market identities first; require a bounded trigger-time browser snapshot, append-only provenance and post-settlement reconciliation. Do not launch a persistent collector.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1597,6 +1599,15 @@ These inferences must be verified in Phases 3 and 4.
 - Browser state secrets/network credentials are out of scope; only rendered DOM and visible text may be read.
 - Next action: Execute two bounded renders and apply the registered gate without changing thresholds.
 
+### 2026-09-02 — NOAA WRH browser-rendered DOM diagnostic passed
+
+- Phase status remains `IN_PROGRESS`; decision is `BROWSER_RENDERED_DIAGNOSTIC_PASS`.
+- Two renders produced exact O'Hare identity, matching normalized 21-column schemas, 85/85 timestamped numeric °F rows and zero duplicates; body-text checksums were identical.
+- The fixed Sep 1→2 trigger algorithm selected Sep 2 00:51 local / 81°F in both renders.
+- This was a late parser diagnostic, not a trigger-time freeze capture. Automated API access, historical freeze-as-of and settlement-label eligibility remain unresolved.
+- No browser secrets, credential values, network tokens, raw DOM or screenshots were captured.
+- Next action: Pre-register one prospective, outcome-unobserved KORD event capture with bounded browser execution and append-only evidence.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1908,6 +1919,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Treat a late rendered table as the freeze snapshot; rejected because revision timing is unknown. Skip the rendered surface; rejected because it is the exact URL market participants are instructed to use.
 - Consequence: A pass preserves Chicago for bounded browser-based prospective research only; a failure yields exact-temperature `NO_GO` for the current regime.
 - Revisit condition: A prospective event is captured at its actual following-date trigger and later reconciled with terminal settlement.
+
+### ED-0045 — 2026-09-02 — Keep Chicago conditional after rendered-DOM pass
+
+- Decision: Preserve the current NOAA-primary Chicago regime only for a single-event prospective bounded-browser experiment; do not admit rendered rows into training, backtest or settlement labels yet.
+- Evidence available at decision time: Two bounded renders passed identity/schema/row/duplicate gates and selected Sep 2 00:51 / 81°F deterministically, but collection occurred after the trigger and the page declares preliminary/revisable data.
+- Alternatives considered: Mark the full observation pipeline passed; rejected because API, revision and trigger-time provenance remain unresolved. Mark immediate `NO_GO`; rejected because declared-source parser feasibility passed the registered gate.
+- Consequence: Phase 5 remains `IN_PROGRESS`; next evidence must be prospectively captured before outcome observation and reconciled after settlement.
+- Revisit condition: One preregistered event completes trigger-time append-only capture and terminal reconciliation, or the bounded browser capture fails.
 
 ## 20. Decision Log — append only
 

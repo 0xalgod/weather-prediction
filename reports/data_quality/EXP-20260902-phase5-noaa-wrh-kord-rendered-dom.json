@@ -1,0 +1,100 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260830-data-source-feasibility",
+  "run_id": "EXP-20260902-phase5-noaa-wrh-kord-rendered-dom",
+  "observed_cutoff_utc": "2026-09-02T13:49:37.197Z",
+  "decision": "BROWSER_RENDERED_DIAGNOSTIC_PASS",
+  "declared_url": "https://www.weather.gov/wrh/timeseries?site=kord&hours=72&units=english_k&hourly=true",
+  "station": {
+    "id": "KORD",
+    "rendered_title": "Chicago, Chicago-O'Hare International Airport",
+    "timezone": "America/Chicago",
+    "timezone_evidence": "KORD registry plus the page's Date/Time (L) local-time header; displayed rows omit timezone offset",
+    "temperature_unit": "degF"
+  },
+  "cohort": {
+    "render_count": 2,
+    "bounded_load_timeout_seconds": 30,
+    "target_local_date": "2026-09-01",
+    "following_local_date": "2026-09-02",
+    "purpose": "parser and trigger diagnostic only"
+  },
+  "normalized_table_schema": [
+    "Date/Time (L)",
+    "Temp. (°F)",
+    "Dew Point (°F)",
+    "Relative Humidity (%)",
+    "Heat Index (°F)",
+    "Wind Direction",
+    "Wind Speed (kts)",
+    "Visibility (miles)",
+    "Weather",
+    "Clouds (x100 ft)",
+    "Sea Level Pressure (mb)",
+    "Station Pressure (in Hg)",
+    "Altimeter Setting (in Hg)",
+    "1 Hour Precip (in)",
+    "3 Hour Precip (in)",
+    "6 Hour Precip (in)",
+    "24 Hour Precip (in)",
+    "6 Hr Max (°F)",
+    "6 Hr Min (°F)",
+    "24 Hr Max (°F)",
+    "24 Hr Min (°F)"
+  ],
+  "renders": [
+    {
+      "observed_at_utc": "2026-09-02T13:47:49.244Z",
+      "row_count": 85,
+      "timestamp_non_null_count": 85,
+      "numeric_temperature_count": 85,
+      "duplicate_timestamp_count": 0,
+      "local_date_counts": {"2026-08-30": 16, "2026-08-31": 37, "2026-09-01": 24, "2026-09-02": 8},
+      "newest_row": {"local_timestamp": "2026-09-02 07:51", "temperature_f": 80},
+      "oldest_row": {"local_timestamp": "2026-08-30 08:51", "temperature_f": 70},
+      "body_text_sha256": "2f61cdf5edcbfdd216df50d3c058e47b10cc8e3754dfef08eceb5bbe2f43e6b1"
+    },
+    {
+      "observed_at_utc": "2026-09-02T13:49:37.197Z",
+      "row_count": 85,
+      "timestamp_non_null_count": 85,
+      "numeric_temperature_count": 85,
+      "duplicate_timestamp_count": 0,
+      "local_date_counts": {"2026-08-30": 16, "2026-08-31": 37, "2026-09-01": 24, "2026-09-02": 8},
+      "newest_row": {"local_timestamp": "2026-09-02 07:51", "temperature_f": 80},
+      "oldest_row": {"local_timestamp": "2026-08-30 08:51", "temperature_f": 70},
+      "body_text_sha256": "2f61cdf5edcbfdd216df50d3c058e47b10cc8e3754dfef08eceb5bbe2f43e6b1"
+    }
+  ],
+  "trigger_diagnostic": {
+    "algorithm": "select the minimum rendered local timestamp on the following local date",
+    "selected_local_timestamp": "2026-09-02 00:51",
+    "selected_temperature_f": 81,
+    "deterministic_across_renders": true,
+    "captured_at_trigger_time": false,
+    "eligible_as_settlement_freeze_evidence": false
+  },
+  "quality_checks": {
+    "exact_station_identity_both_renders": true,
+    "fahrenheit_header_both_renders": true,
+    "minimum_24_timestamped_non_null_rows_both_renders": true,
+    "zero_duplicate_timestamps_both_renders": true,
+    "same_normalized_column_schema": true,
+    "same_body_text_checksum": true,
+    "preliminary_quality_control_warning_visible": true,
+    "download_unavailable_warning_visible_in_rendered_body": false
+  },
+  "limitations": [
+    "Rendered timestamps contain month, day and local clock time but no explicit year or UTC offset; year 2026 is fixed by the observed page/chart context and America/Chicago by KORD plus the local-time header.",
+    "The page states observations are preliminary and subject to quality-control adjustment.",
+    "This late diagnostic cannot reconstruct the page state at the 2026-09-02 00:51 local trigger.",
+    "No official-origin machine endpoint was established; browser rendering remains operationally fragile and is not an API substitute.",
+    "No credentials, cookies, local storage, network tokens, raw DOM or screenshot were captured."
+  ],
+  "unresolved": [
+    "AUTOMATED_API_ACCESS",
+    "HISTORICAL_FREEZE_AS_OF",
+    "PROSPECTIVE_TRIGGER_TIME_CAPTURE",
+    "POST_SETTLEMENT_RECONCILIATION"
+  ]
+}
