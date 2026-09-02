@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.48.0
+**Plan versiyonu:** 0.49.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1103,6 +1103,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Fixture synthetic; live Wunderground davranışı, uptime veya geçmiş settlement kanıtı değildir. Persistent collector başlatılmadı.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; storage contract hazır, ilk uygun canlı KORD event/capture cohort'u seçilmedi.
 
+### D-0050 — 2026-09-02 — Upcoming exact-rule KORD event discovery ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Public Gamma `highest-temperature`, `closed=false` keyset inventory'sinde observed-at anından sonra biten, active/not-closed, Chicago title'lı ve exact Wunderground `/KORD` next-day-first-datapoint rule taşıyan en az bir event bulunabilir.
+- **Universe:** Tek complete keyset traversal; raw response envelope'ları checksum ve requested/received timestamp ile immutable local raw run'da saklanacak. Broad weather tag veya closed inventory outcome-seçimli ikame değildir.
+- **Candidate gate:** Event title exact Chicago family; `active=true`, `closed=false`, endDate ≥ discovery observed-at; resolution/rule text Wunderground KORD station/source ve following-date first datapoint freeze semantiği içermeli; event ID, endDate ve tüm nested bucketlarda market/condition/two CLOB token identity complete olmalı.
+- **Selection:** Birden çok qualified event varsa en erken endDate, sonra numeric event ID; sonuçlara bakarak seçim yok. Hiç yoksa `NOT_AVAILABLE`, gate başarısız sayılmaz ve başka şehir sessizce ikame edilmez.
+- **Metrikler:** Page/source/duplicate/event/city sayıları; Chicago raw, temporally relevant, exact-rule ve fully qualified sayıları; exclusion reasons; selected event/rule hash/date/tokens.
+- **Güvenlik:** Public GET dışında çağrı yok; wallet/credential/order yok. Bu adım collector başlatmaz.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json`, research raporu ve ignored immutable raw run.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1115,7 +1126,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Read-only Polymarket inventory discovery ile exact Wunderground/KORD rule'a sahip upcoming tek event adayı bulmak; varsa bounded prospective capture cohort'unu ön-kaydetmek, yoksa `NOT_AVAILABLE` raporlamak.
+**Tek sonraki adım:** Ön-kayıtlı complete Gamma keyset traversal'ı çalıştırıp exact-rule KORD candidate sonucunu artifact'a kaydetmek.
 
 Beklenen artifact'lar:
 

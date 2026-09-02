@@ -900,6 +900,16 @@ Run read-only inventory discovery for one upcoming event with an exact Wundergro
 - **Boundary:** This tests the storage/evidence contract, not live page behavior or collector uptime. Do not launch a persistent process in this step.
 - **Artifacts:** `reports/data_quality/EXP-20260902-phase5-wunderground-freeze-snapshot-contract.json` and research report.
 
+#### Pre-registration — 2026-09-02 — Upcoming exact-rule KORD event discovery
+
+- **Hypothesis:** One complete public Gamma `highest-temperature`, `closed=false` keyset traversal contains at least one observed-future, active/not-closed Chicago event with an exact Wunderground `/KORD` next-day-first-datapoint rule and complete nested market/token identities.
+- **Universe:** One checksum/timestamp-preserved traversal. Do not substitute broad-weather or closed events if the cohort is empty.
+- **Eligibility:** Exact Chicago title family; active true, closed false, endDate at/after discovery observed-at; Wunderground KORD station/source and following-date first-datapoint freeze semantics in the rule; event/end and every bucket's market, condition and two-token identity complete.
+- **Selection:** Earliest endDate, then numeric event ID. Zero candidates yields `NOT_AVAILABLE`, not a fabricated pass or outcome-selected city replacement.
+- **Metrics:** Page/source/duplicate/event/city counts; Chicago raw, future, exact-rule and qualified counts; reason codes; selected event/date/rule hash and token identities.
+- **Safety:** Public GET only; no wallet, credential, order or background collector.
+- **Artifacts:** `reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json`, research report and ignored immutable raw envelopes.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1519,6 +1529,13 @@ These inferences must be verified in Phases 3 and 4.
 - Boundary: Synthetic fixture only; no live Wunderground behavior, uptime or historical settlement reconstruction claim. No persistent collector was started.
 - Next action: Read-only discovery of one exact-rule upcoming KORD event, followed by a separately preregistered bounded live cohort if available.
 
+### 2026-09-02 — Upcoming exact-rule KORD discovery pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- Complete public Gamma keyset universe, exact candidate gate, deterministic selection and `NOT_AVAILABLE` behavior were locked before retrieval.
+- No broad-tag/city substitution, order action or background collector is permitted.
+- Next action: Execute one read-only traversal and preserve the raw envelopes plus candidate audit.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1790,6 +1807,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Treat contract tests as Phase 5 completion; rejected because they validate software behavior rather than data availability. Start an indefinite collector immediately; rejected because no event cohort or bounded runtime is registered.
 - Consequence: Phase 5 remains in progress and next work is read-only event discovery plus bounded cohort registration.
 - Revisit condition: At least one real event completes the registered prospective capture and later reconciles with terminal settlement.
+
+### ED-0040 — 2026-09-02 — Select live KORD cohorts before observing their outcomes
+
+- Decision: A prospective capture cohort must come from a complete current inventory and a deterministic earliest-end selection rule; absence is recorded without city substitution.
+- Evidence available at decision time: Historical settlement mismatches make outcome-aware event replacement a material label-bias risk, while the snapshot contract itself does not select live events.
+- Alternatives considered: Manually choose any convenient Chicago page; rejected because it may not correspond to a current market/rule. Switch cities if Chicago is absent; rejected because that expands scope after seeing availability.
+- Consequence: The discovery result can be empty and still remain a valid feasibility finding.
+- Revisit condition: A separately preregistered multi-city prospective cohort is approved.
 
 ## 20. Decision Log — append only
 
