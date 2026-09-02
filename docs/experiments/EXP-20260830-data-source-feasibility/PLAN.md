@@ -887,6 +887,17 @@ Pre-register and implement an append-only prospective KORD Wunderground next-day
 - **Interpretation:** Passing means only `FINAL_ARCHIVE_COVERAGE_PASS`. It does not establish historical decision-time availability, Wunderground equivalence or freeze-time reconstruction. Failure weakens LCDv2 even for final research labels.
 - **Artifacts:** `reports/data_quality/EXP-20260831-phase5-kord-lcdv2-lag-safe-coverage.json` and research report.
 
+#### Pre-registration — 2026-09-02 — Prospective Wunderground freeze snapshot contract
+
+- **Hypothesis:** A single capture containing the KORD target-date page and a non-empty following-date page can preserve replayable evidence that collection happened after the rule's next-day trigger, while immutable content addressing prevents silent revision overwrite.
+- **Fixture scope:** Synthetic KORD target `2026-09-01`, following date `2026-09-02`, `America/Chicago`, whole °F, event ID and rule hash. Fixture success is not live settlement evidence.
+- **Qualification:** Both raw responses present; exact station/name/timezone/page-date identity; target high and F unit; following page has ≥1 observation; capture at/after following local midnight; raw SHA-256 and rule hash present. Any failure yields `NOT_FREEZE_ELIGIBLE`.
+- **Append-only record:** Content-addressed raw target/trigger files plus canonical snapshot manifest containing event/date/rule/parser versions, requested/received times, parsed values, checks and checksums. Existing different bytes cannot be overwritten.
+- **Idempotency/revisions:** Identical canonical payload returns the same snapshot without adding a manifest. Changed content for the same event/date appends a new revision and preserves earlier evidence.
+- **Acceptance:** Valid fixture qualifies; pre-midnight, empty trigger, identity/date/unit/rule mismatch fail closed; tamper verification fails; replay is deterministic; duplicate and changed-content behavior passes. Ruff and full tests pass.
+- **Boundary:** This tests the storage/evidence contract, not live page behavior or collector uptime. Do not launch a persistent process in this step.
+- **Artifacts:** `reports/data_quality/EXP-20260902-phase5-wunderground-freeze-snapshot-contract.json` and research report.
+
 ### Phase 6 — End-to-end join, city scoring and cost model
 
 **Status:** `NOT_STARTED`
@@ -1490,6 +1501,13 @@ These inferences must be verified in Phases 3 and 4.
 - Evidence: JSON artifact, research report and local immutable raw run; 69 tests and Ruff passed.
 - Next action: Build and test an append-only prospective KORD Wunderground freeze snapshot contract without launching a persistent collector.
 
+### 2026-09-02 — Prospective Wunderground freeze snapshot contract pre-registered
+
+- Phase status remains `IN_PROGRESS`.
+- The exact qualification checks, immutable raw/manifest schema, idempotency and changed-content revision behavior were locked before implementation.
+- The test cohort is synthetic KORD fixture data; no claim about live settlement reconstruction or uptime is authorized.
+- Next action: Implement the smallest writer/verifier/replay module and exercise all fail-closed cases.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1745,6 +1763,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Promote LCDv2 to historical settlement truth; rejected because the declared source is Wunderground and freeze-time versions are unavailable. Discard LCDv2 entirely; rejected because complete final observations remain useful for independent diagnostics and forecast verification.
 - Consequence: Future datasets must distinguish `final_observation_available` from `available_at_decision_time` and `settlement_source_snapshot_available`.
 - Revisit condition: Prospective append-only captures or authoritative version history resolve the missing point-in-time evidence.
+
+### ED-0038 — 2026-09-02 — Require a two-page trigger/target evidence bundle
+
+- Decision: A prospective freeze snapshot is eligible only when it preserves both the target-date value page and evidence that the following date has at least one observation; capture timestamp alone is insufficient.
+- Evidence available at decision time: The KORD rule freezes revisions at the first following-date datapoint, not mechanically at midnight, while current historical pages can later diverge from settlement.
+- Alternatives considered: Snapshot target page exactly at midnight; rejected because the trigger datapoint may not yet exist. Store only parsed temperature; rejected because parser changes and source disputes require original bytes.
+- Consequence: Snapshot records are larger but independently replayable and fail closed when trigger evidence is absent.
+- Revisit condition: The declared market rule changes or Wunderground exposes an authoritative version/freeze identifier.
 
 ## 20. Decision Log — append only
 

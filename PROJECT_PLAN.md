@@ -1,8 +1,8 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.46.0
-**Son güncelleme:** 2026-08-31
+**Plan versiyonu:** 0.47.0
+**Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
@@ -1081,6 +1081,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Kalite:** 69 test ve Ruff geçti; artifact ile local immutable raw `run=20260831T-phase5-kord-lcdv2-lag-safe-v1` saklandı.
 - **Sonuç:** Phase 5 `IN_PROGRESS`; third-city final observation coverage var, prospective freeze snapshot contract'ı yok.
 
+### D-0048 — 2026-09-02 — Prospective Wunderground freeze snapshot contract ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** KORD için target-date sayfası ve following-date sayfasının ilk non-empty observation durumu aynı capture içinde saklanırsa, freeze eligibility sonradan deterministik replay edilebilir; duplicate capture overwrite yaratmaz ve değişmiş içerik yeni immutable version olur.
+- **Fixture scope:** Sentetik KORD target `2026-09-01`, following date `2026-09-02`, `America/Chicago`, whole °F ve versioned rule/event kimliği. Bu fixture gerçek settlement kanıtı değildir.
+- **Qualification:** Target ve trigger HTTP 200/raw mevcut; iki sayfada KORD/name/timezone/date identity exact; target daily high + expected F unit mevcut; following page observation count ≥1; capture zamanı following local midnight'dan önce değil; raw SHA-256 ve rule hash mevcut. Herhangi biri yoksa fail closed `NOT_FREEZE_ELIGIBLE`.
+- **Append-only contract:** Raw target/trigger bytes content-addressed saklanacak; manifest canonical capture ID, requested/received timestamps, event/date/rule version, parser version, checks, parsed values ve iki checksum taşıyacak. Mevcut dosya farklı byte ile overwrite edilemez.
+- **Idempotency/revision:** Aynı canonical payload ikinci kez yazıldığında yeni kayıt üretmeden aynı snapshot kimliği dönmeli. Farklı checksum aynı event/date için yeni revision olarak eklenmeli; önceki revision silinmemeli.
+- **Test gate:** Valid fixture qualify; pre-midnight, missing trigger observation, identity/date/unit/rule-hash mismatch fail closed; byte tamper checksum verification'ı bozmalı; replay aynı normalized manifest'i üretmeli; duplicate idempotent ve changed-content append testleri geçmeli. Ruff + tüm test suite zorunlu.
+- **Sınır:** Fixture gate'i collector uptime veya canlı Wunderground davranışını kanıtlamaz. Persistent collector bu adımda başlatılmayacak.
+- **Artifact hedefi:** `reports/data_quality/EXP-20260902-phase5-wunderground-freeze-snapshot-contract.json` ve research raporu.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1093,7 +1105,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Wunderground KORD için append-only prospective next-day-first-datapoint freeze snapshot contract'ını ön-kayıt altına alıp fixture/replay/idempotency testleriyle uygulamak; uzun süreli collector'ı ayrıca başlatmamak.
+**Tek sonraki adım:** Ön-kayıtlı Wunderground freeze snapshot writer/replay sözleşmesini fixture ve fail-closed/idempotency testleriyle uygulamak; persistent collector başlatmamak.
 
 Beklenen artifact'lar:
 
