@@ -867,9 +867,11 @@ The prospective two-page freeze snapshot fixture contract `PASSED` 12/12 qualifi
 
 Current read-only discovery returned `NOT_AVAILABLE` for the preregistered Wunderground-primary KORD cohort: 0/3 Chicago events used Wunderground as primary. Two events were observed-future and identity-complete, but all current Chicago rules named NOAA WRH KORD as primary and Wunderground only as fallback, establishing a provider-regime boundary.
 
+The NOAA WRH official-origin source-surface gate then `FAILED`: two static page requests were byte-identical and stable, but carried no observation payload. The first-party client loads timestamped data from third-party `api.synopticdata.com` with a client credential helper. No official-origin machine endpoint or selectable following-date trigger was found; no credential value was recorded or used.
+
 #### Next action
 
-Inspect the current NOAA WRH KORD primary surface read-only and preregister its timestamp/timezone/unit, hourly-row, next-day-trigger and revision gate before any prospective capture.
+Pre-register and run one bounded browser-rendered NOAA WRH KORD DOM test without extracting credentials. Require exact identity, timestamp, unit, hourly rows and following-date trigger; otherwise mark the current exact-temperature pipeline `NO_GO`.
 
 #### Pre-registration — 2026-08-31 — KORD/NOAA LCDv2 365-day observation package
 
@@ -1567,6 +1569,16 @@ These inferences must be verified in Phases 3 and 4.
 - No polling, credentials, orders or third-party weather substitution are permitted.
 - Next action: Retrieve the declared page twice, identify first-party data calls and apply the registered semantic gate.
 
+### 2026-09-02 — NOAA WRH official-origin machine source gate failed
+
+- Phase status remains `IN_PROGRESS`.
+- Stability passed: two HTTP 200 responses had identical content type, byte count and SHA-256; static HTML contained no observations.
+- Dependency finding: The first-party client expresses KORD/Fahrenheit/local-time request semantics but fetches actual timeseries rows from third-party Synoptic Data using a client credential helper.
+- Registered result: `FAILED_NOT_MACHINE_RECONCILABLE_WITHIN_OFFICIAL_ORIGIN_SCOPE`; official endpoint, exact machine payload, timestamped rows and trigger selection failed.
+- Revision/access: The page labels data preliminary/adjustable and states download is unavailable. Historical freeze-as-of remains unresolved.
+- Safety: No third-party data call, credential persistence/output or polling. 81 tests and scoped Ruff passed.
+- Next action: Separately preregister a bounded browser-rendered declared-page DOM test with no credential extraction.
+
 ### ED-0006 — 2026-08-30 — Separate historical identity from current book eligibility
 
 - Decision: Historical outcome-token normalization depends on identifier integrity, not whether an event is currently eligible for book collection.
@@ -1862,6 +1874,14 @@ These inferences must be verified in Phases 3 and 4.
 - Alternatives considered: Use retrieval time as the trigger; rejected because a page may load before a following-date observation exists. Use only the final daily maximum; rejected because it omits the freeze event.
 - Consequence: Source discovery can pass basic access yet remain conditional or fail trigger reconciliation.
 - Revisit condition: NOAA exposes an authoritative explicit freeze/publication marker tied to the event rule.
+
+### ED-0043 — 2026-09-02 — Do not extract the NOAA page's client credential
+
+- Decision: Do not copy, persist or directly use the credential exposed through the WRH client helper; machine-source feasibility is evaluated within official origin, with a separate rendered-page test allowed because that is the declared user-facing source.
+- Evidence available at decision time: Static NOAA HTML had no observations, while its client script delegated the timeseries request to `api.synopticdata.com` and referenced a credential helper.
+- Alternatives considered: Call the third-party endpoint with the embedded value; rejected due to credential handling, access-right and provenance uncertainty. Pretend the static HTML contains data; rejected because two inspected responses did not.
+- Consequence: Official-origin machine gate fails. Browser-rendered evidence is the final bounded feasibility test before a Chicago exact-temperature `NO_GO` decision.
+- Revisit condition: NOAA publishes a documented first-party data endpoint or explicit reusable access terms for the underlying service are independently verified.
 
 ## 20. Decision Log — append only
 

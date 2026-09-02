@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.51.0
+**Plan versiyonu:** 0.52.0
 **Son güncelleme:** 2026-09-02
 **Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
 **Genel durum:** `IN_PROGRESS`  
@@ -1137,6 +1137,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Stability:** Aynı endpoint iki bounded ardışık retrieval'da HTTP/schema/identity açısından tutarlı olmalı; dynamic record/checksum farkı hata değildir ve timestamp ile saklanır. Persistent polling yok.
 - **Gate sonucu:** `PASSED`, `CONDITIONAL_PASS` veya `FAILED`; sonuçtan sonra alan/eşik değiştirilmeyecek. Artifact hedefi `reports/data_quality/EXP-20260902-phase5-noaa-wrh-kord-source-discovery.json` ve research raporu.
 
+### D-0053 — 2026-09-02 — NOAA WRH official-origin machine reconciliation başarısız
+
+- **Durum:** `ACTIVE`
+- **Stability:** İki page retrieval HTTP 200, content type aynı, 64.758 byte ve SHA-256 aynı; static page observation payload içermiyor.
+- **Dependency:** First-party `obs.js`, `STID`, °F ve `obtimezone=local` semantiğini kuruyor fakat actual timeseries origin `api.synopticdata.com`; credential helper referansı var. Credential değeri persist/output edilmedi.
+- **Gate:** Official-origin machine endpoint 0; exact KORD payload, timestamped temperature rows ve following-local-date trigger selection `FAILED`. Karar `FAILED_NOT_MACHINE_RECONCILABLE_WITHIN_OFFICIAL_ORIGIN_SCOPE`.
+- **Revision:** Sayfa veriyi preliminary/QC adjustment'a açık tanımlıyor; download feature unavailable. `HISTORICAL_FREEZE_AS_OF_UNRESOLVED`.
+- **Güvenlik:** Third-party endpoint çağrılmadı; token değeri raw/log/artifact/repository'ye yazılmadı; polling yok.
+- **Kalite:** 81 test ve scoped Ruff geçti. Artifact, rapor ve ignored raw page/client script run'ı kaydedildi.
+- **Sonuç:** Phase 5 `IN_PROGRESS`; Chicago NOAA-primary automated exact-temperature source gate başarısız, browser-rendered declared-source evidence son sınırlı seçenek.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1149,7 +1160,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı NOAA WRH KORD source-surface discovery'yi iki bounded retrieval ile çalıştırıp endpoint/schema/semantic sonucu artifact'a kaydetmek.
+**Tek sonraki adım:** Credential çıkarmadan NOAA WRH KORD browser-rendered DOM snapshot'ının exact identity/timestamp/unit/hourly rows ve following-date trigger açısından deterministik parse edilmesini ön-kayıt altına alıp bounded test etmek.
 
 Beklenen artifact'lar:
 
