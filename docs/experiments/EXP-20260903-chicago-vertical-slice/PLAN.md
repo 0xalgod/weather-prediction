@@ -118,6 +118,14 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - Cohort, acquisition ordering, Gaussian baseline, executable pricing, cost boundaries, metrics and gate fixed before retrieving experiment-specific forecast or price values.
 - Next action: implement/test the pure bucket-probability and depth-VWAP core, then run one immutable live slice.
 
+### 2026-09-03 — Probability and executable-price core passed
+
+- Status remains `IN_PROGRESS`; component decision `VERTICAL_SLICE_CORE_PASS`.
+- Focused 10/10, full suite 104/104 and scoped Ruff passed.
+- Half-degree Gaussian bucket probability, sum-to-one, partition rejection, best-first ask VWAP, multi-level slippage and insufficient-depth behavior are now deterministic and tested.
+- No live forecast/price/outcome was used in this component result.
+- Next action: execute one immutable read-only NBM→event 946566→YES-book run under the pre-registered temporal and coverage gates.
+
 ## Decision log
 
 ### VSD-0001 — 2026-09-03 — Start quant mechanics before settlement sample matures

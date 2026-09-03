@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.58.0
+**Plan versiyonu:** 0.59.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1208,6 +1208,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Cost:** Verified primary fee formula varsa net EV; yoksa fee/net EV `UNKNOWN`. Gross edge ve 1pp/2pp resolution-risk sensitivity ayrı.
 - **Gate:** Exact identity, 11 exhaustive/non-overlap bucket, probability sum 1±1e-9, immutable provenance, temporal skew ve coverage koşulları birlikte `VERTICAL_SLICE_MECHANICS_PASS` için zorunlu.
 - **Sınır:** Tek event edge/calibration/P&L kanıtı değildir; paper/live signal ve outcome lookup yasak.
+
+### D-0060 — 2026-09-03 — Vertical slice quant core gate geçti
+
+- **Durum:** `ACTIVE`
+- **Sonuç:** `VERTICAL_SLICE_CORE_PASS`; focused 10/10, full suite 104/104, scoped Ruff 0.
+- **Probability:** Gaussian CDF, half-degree bucket mass, exhaustive probability sum ve partition gap/overlap fail-closed test edildi.
+- **Execution:** Fixed-$ ask-depth VWAP best-first; single/multi-level fill, explicit insufficient depth ve invalid price/size rejection test edildi. Midpoint girdisi yok.
+- **Sınır:** Live NBM/event/book/fee, calibration, settlement ve P&L henüz ölçülmedi.
+- **Karar:** Pure core hazır; aynı preregistration altında tek immutable live read-only slice çalıştırılabilir.
 
 ## 13. Open Questions
 

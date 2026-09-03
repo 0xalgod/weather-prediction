@@ -1,0 +1,33 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-vertical-slice",
+  "run_component": "probability_and_execution_core",
+  "observed_at_utc": "2026-09-03T09:08:46Z",
+  "decision": "VERTICAL_SLICE_CORE_PASS",
+  "focused_test_cases_passed": 10,
+  "focused_test_cases_failed": 0,
+  "full_test_suite_passed": 104,
+  "full_test_suite_failed": 0,
+  "scoped_ruff_errors": 0,
+  "validated": [
+    "Gaussian CDF input guards",
+    "half-degree inclusive bucket boundaries",
+    "exhaustive probability sum",
+    "partition gap/overlap rejection",
+    "single-level executable ask VWAP",
+    "multi-level best-first depth walking",
+    "explicit insufficient-depth result without imputed VWAP",
+    "invalid price and size rejection"
+  ],
+  "not_validated": [
+    "live NBM retrieval",
+    "live event bucket identity",
+    "live CLOB depth",
+    "fee formula",
+    "forecast calibration",
+    "settlement or profitability"
+  ],
+  "implementation": "src/weather_quant/market_model/vertical_slice.py",
+  "tests": "tests/test_vertical_slice.py",
+  "next_action": "Run one immutable read-only event 946566 NBM-to-CLOB vertical slice."
+}
