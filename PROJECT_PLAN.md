@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.62.0
+**Plan versiyonu:** 0.63.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1252,6 +1252,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Kalite:** Full 105/105 ve scoped Ruff pass.
 - **Karar:** Attempt 2 yeni immutable path ile çalıştırılabilir.
 
+### D-0065 — 2026-09-03 — İlk live quant vertical slice mechanics gate geçti
+
+- **Durum:** `ACTIVE`
+- **Karar:** `VERTICAL_SLICE_MECHANICS_PASS`; exact identity, 11 bucket, probability sum 1.0, NBM-before-book, 1.413s skew, 11/11 $10 ask-depth, fee 11/11 ve 0 error.
+- **Forecast:** NBM 07Z KORD f17; mean/sd 90/4°F, reported quantiles 86/87/89/94/95°F.
+- **Market disagreement:** En yüksek diagnostic net edge/share `88-89°F` +10.68pp; `94-95°F` −39.63pp. 2pp haircut sonrası 5/11 pozitif.
+- **Model risk:** Gaussian implied quantiles yaklaşık 84.87/87.30/90.00/92.70/95.13°F ve NBM reported quantiles ile uyuşmuyor. Tail/dollar EV güvenilir calibration değildir.
+- **Sınır:** Tek event, yakın-resolution snapshot, outcome yok. Signal/paper/live trade yok; pozitif edge iddiası yapılmaz.
+- **Sonuç:** Quant mechanics artık çalışıyor; Phase 6 conditional `IN_PROGRESS`. Sonraki kanıt fixed-lead prospective paper cohort olmalı.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1264,7 +1274,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** EXP-20260903 Chicago vertical slice için pure bucket-probability + ask-depth VWAP çekirdeğini fixture/testlerle uygula; sonra latest NBM ve contemporaneous event 946566 YES books ile tek immutable read-only run çalıştır. Sep 4 settlement capture paralelde kalır.
+**Tek sonraki adım:** Chicago için fixed lead-time, outcome-independent prospective paper cohort'u ön-kaydet: günlük snapshot zamanı, minimum örnek, calibration/EV metrikleri ve stop/go gate. Gaussian baseline'a ek olarak NBM quantile-preserving baseline'ı outcome görülmeden tanımla. Sep 4 settlement capture paralelde kalır.
 
 Beklenen artifact'lar:
 

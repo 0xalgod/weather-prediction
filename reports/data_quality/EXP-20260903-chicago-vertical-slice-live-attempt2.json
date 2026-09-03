@@ -1,0 +1,74 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-vertical-slice",
+  "attempt": 2,
+  "run_path": "data/processed/chicago_vertical_slice/run=20260903T091642Z-v2/result.json",
+  "run_result_sha256": "4fcc0016405ca5893b2b8873160be82c0719891170af654903c9fa3af9a575ad",
+  "generated_at_utc": "2026-09-03T09:17:28.684796Z",
+  "decision": "VERTICAL_SLICE_MECHANICS_PASS",
+  "forecast": {
+    "model_run_time_utc": "2026-09-03T07:00:00Z",
+    "valid_time_utc": "2026-09-04T00:00:00Z",
+    "forecast_hour": 17,
+    "station_code": "KORD",
+    "nbm_version": "5.0",
+    "mean_f": 90,
+    "standard_deviation_f": 4,
+    "p10_f": 86,
+    "p25_f": 87,
+    "p50_f": 89,
+    "p75_f": 94,
+    "p90_f": 95,
+    "raw_sha256": "82041aaf16f2e5991a3dafaec53af65f626b6de89d1fc436956bf8a4436ec91f"
+  },
+  "metrics": {
+    "bucket_count": 11,
+    "probability_sum": 1.0,
+    "executable_10usd_bucket_count": 11,
+    "forecast_to_last_book_seconds": 1.413344,
+    "request_error_count": 0,
+    "fee_curve_reconciled_count": 11,
+    "two_sided_book_count": 7,
+    "one_sided_book_count": 4,
+    "positive_net_edge_bucket_count": 7,
+    "positive_net_edge_after_2pp_bucket_count": 5
+  },
+  "checks": {
+    "event_rule_identity": true,
+    "bucket_count": true,
+    "probability_sum": true,
+    "target_nbm_record": true,
+    "forecast_precedes_books": true,
+    "temporal_skew": true,
+    "executable_coverage": true,
+    "fee_rate_reconciled": true,
+    "request_errors": true
+  },
+  "fee": {
+    "curve_rate": 0.05,
+    "curve_exponent": 1,
+    "taker_only": true,
+    "formula": "shares * rate * price * (1-price)",
+    "clob_v2_gamma_match": "11/11"
+  },
+  "diagnostic_rows": [
+    {"bucket": "79°F or below", "q": 0.004332, "vwap": 0.001789, "net_edge_per_share": 0.002455, "net_after_2pp": -0.017545},
+    {"bucket": "80-81°F", "q": 0.012461, "vwap": 0.001671, "net_edge_per_share": 0.010707, "net_after_2pp": -0.009293},
+    {"bucket": "82-83°F", "q": 0.035288, "vwap": 0.010233, "net_edge_per_share": 0.024561, "net_after_2pp": 0.004561},
+    {"bucket": "84-85°F", "q": 0.078213, "vwap": 0.017394, "net_edge_per_share": 0.060011, "net_after_2pp": 0.040011},
+    {"bucket": "86-87°F", "q": 0.135691, "vwap": 0.048479, "net_edge_per_share": 0.084909, "net_after_2pp": 0.064909},
+    {"bucket": "88-89°F", "q": 0.184276, "vwap": 0.074046, "net_edge_per_share": 0.106847, "net_after_2pp": 0.086847},
+    {"bucket": "90-91°F", "q": 0.195908, "vwap": 0.107843, "net_edge_per_share": 0.083255, "net_after_2pp": 0.063255},
+    {"bucket": "92-93°F", "q": 0.163043, "vwap": 0.265866, "net_edge_per_share": -0.112580, "net_after_2pp": -0.132580},
+    {"bucket": "94-95°F", "q": 0.106221, "vwap": 0.490000, "net_edge_per_share": -0.396274, "net_after_2pp": -0.416274},
+    {"bucket": "96-97°F", "q": 0.054169, "vwap": 0.181749, "net_edge_per_share": -0.135015, "net_after_2pp": -0.155015},
+    {"bucket": "98°F or higher", "q": 0.030396, "vwap": 0.062235, "net_edge_per_share": -0.034744, "net_after_2pp": -0.054744}
+  ],
+  "model_risk": {
+    "nbm_quantiles_not_equal_to_gaussian_implied_quantiles": true,
+    "observed_quantiles_f": [86, 87, 89, 94, 95],
+    "gaussian_implied_quantiles_f_approx": [84.87, 87.30, 90.00, 92.70, 95.13],
+    "warning": "Large apparent edges, especially cheap tail buckets, may be artifacts of the uncalibrated Gaussian assumption and cannot be traded from this result."
+  },
+  "interpretation": "Mechanics pass only. Zero capital authorization; no paper/live signal."
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-`IN_PROGRESS` — pre-registered, no model/book values observed under this experiment yet.
+`PASSED` — mechanics gate passed; no calibration, edge or trade claim.
 
 ## Research question
 
@@ -154,6 +154,20 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - Every non-fee model, execution and acceptance setting is unchanged.
 - Full suite passed 105/105 and scoped Ruff passed.
 - Next action: run immutable attempt 2 and accept its preregistered result without threshold edits.
+
+### 2026-09-03 — Live attempt 2 passed the mechanics gate
+
+- All nine registered checks passed: identity, bucket count, probability sum, target NBM record, ordering, ≤15-minute skew, ≥9/11 executable coverage, fee reconciliation and zero request errors.
+- Actual coverage was 11/11, skew 1.413 seconds and CLOB V2/Gamma fee agreement 11/11.
+- The uncalibrated Gaussian baseline strongly disagreed with the market; 5/11 buckets remained positive after a fixed 2pp sensitivity haircut.
+- NBM reported quantiles disagree with Gaussian-implied quantiles, so the apparent edge is model-risk evidence, not a signal.
+- Experiment mechanics status is `PASSED`. Next action: preregister a fixed-lead prospective paper cohort and a quantile-preserving baseline before observing outcomes.
+
+### VSD-0004 — 2026-09-03 — Do not promote one-event apparent edge to a signal
+
+- Decision: Record the full cost-adjusted table but emit no paper/live recommendation.
+- Evidence: Mechanics passed and several rows showed large positive diagnostic edge, but the Gaussian approximation disagrees materially with NBM's own quantiles and only one near-resolution event exists.
+- Consequence: Model calibration and fixed-time prospective sampling precede any paper-trade decision rule.
 
 ## Decision log
 
