@@ -148,6 +148,13 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - Apply `C×r×p×(1-p)` only when the fee curve reconciles; never treat legacy `base_fee` or `tbf` as `fd.r`.
 - Preserve every CLOB market-info response and leave all other slice thresholds unchanged.
 
+### 2026-09-03 — V2 fee corrective implemented
+
+- Runner now validates CLOB V2 `fd.r/e/to`, YES-token membership and Gamma schedule equality per condition; `tbf` is provenance only.
+- Every non-fee model, execution and acceptance setting is unchanged.
+- Full suite passed 105/105 and scoped Ruff passed.
+- Next action: run immutable attempt 2 and accept its preregistered result without threshold edits.
+
 ## Decision log
 
 ### VSD-0001 — 2026-09-03 — Start quant mechanics before settlement sample matures

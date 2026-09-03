@@ -13,7 +13,6 @@ from pathlib import Path
 from time import monotonic
 from typing import Any
 from urllib.error import HTTPError
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from weather_quant.ingestion.noaa_nbm import parse_station_maxt, probabilistic_text_url
@@ -59,10 +58,10 @@ def fetch_json_envelope(url: str, source: str, timeout: float = 30.0) -> dict[st
     }
 
 
-def fetch_fee_envelope(token_id: str) -> dict[str, Any]:
-    url = "https://clob.polymarket.com/fee-rate?" + urlencode({"token_id": token_id})
-    envelope = fetch_json_envelope(url, "polymarket_clob_fee_rate")
-    envelope["token_id_requested"] = token_id
+def fetch_market_info_envelope(condition_id: str) -> dict[str, Any]:
+    url = f"https://clob.polymarket.com/clob-markets/{condition_id}"
+    envelope = fetch_json_envelope(url, "polymarket_clob_market_info")
+    envelope["condition_id_requested"] = condition_id
     return envelope
 
 
@@ -186,7 +185,10 @@ def main() -> int:
             token = bucket["yes_token_id"]
             futures[executor.submit(fetch_book_envelope, token)] = (token, "book")
             futures[executor.submit(fetch_tick_size_envelope, token)] = (token, "tick")
-            futures[executor.submit(fetch_fee_envelope, token)] = (token, "fee")
+            futures[executor.submit(fetch_market_info_envelope, bucket["condition_id"])] = (
+                token,
+                "market_info",
+            )
         for future in as_completed(futures):
             key = futures[future]
             try:
@@ -199,25 +201,28 @@ def main() -> int:
     notional = Decimal(str(config["execution"]["notional_usd_per_bucket"]))
     probability_by_token = {row["yes_token_id"]: row for row in probabilities}
     for token, probability_row in sorted(probability_by_token.items()):
-        required = [(token, kind) for kind in ("book", "tick", "fee")]
+        required = [(token, kind) for kind in ("book", "tick", "market_info")]
         if any(key not in envelopes for key in required):
             rows.append({**probability_row, "execution_status": "METADATA_UNAVAILABLE"})
             continue
         book_envelope = envelopes[(token, "book")]
         tick_envelope = envelopes[(token, "tick")]
-        fee_envelope = envelopes[(token, "fee")]
+        market_info_envelope = envelopes[(token, "market_info")]
         for kind, envelope in (
             ("book", book_envelope),
             ("tick", tick_envelope),
-            ("fee", fee_envelope),
+            ("market-info", market_info_envelope),
         ):
             write_raw_envelope(envelope, args.raw_directory / f"{token}-{kind}.json")
         book = normalize_book(book_envelope, token)
         tick = normalize_tick_size(tick_envelope)
         receipt_times.append(datetime.fromisoformat(book["received_at_utc"].replace("Z", "+00:00")))
         execution = ask_depth_vwap(book["asks"], notional)
-        base_fee_bps = Decimal(str(fee_envelope["payload"]["base_fee"]))
-        endpoint_rate = base_fee_bps / Decimal("10000")
+        market_info = market_info_envelope["payload"]
+        fee_details = market_info.get("fd") or {}
+        endpoint_rate = Decimal(str(fee_details.get("r")))
+        endpoint_exponent = int(fee_details.get("e"))
+        endpoint_taker_only = bool(fee_details.get("to"))
         gamma_market = next(
             market
             for market in event["markets"]
@@ -225,7 +230,15 @@ def main() -> int:
         )
         schedule = gamma_market.get("feeSchedule") or {}
         schedule_rate = Decimal(str(schedule.get("rate")))
-        fee_rate_match = endpoint_rate == schedule_rate
+        schedule_exponent = int(schedule.get("exponent"))
+        schedule_taker_only = bool(schedule.get("takerOnly"))
+        market_info_tokens = {str(row.get("t")) for row in market_info.get("t", [])}
+        fee_rate_match = (
+            endpoint_rate == schedule_rate
+            and endpoint_exponent == schedule_exponent == 1
+            and endpoint_taker_only is schedule_taker_only is True
+            and token in market_info_tokens
+        )
         fee_usd = (
             taker_fee_usd(execution["fills"], endpoint_rate)
             if execution["executable"] and fee_rate_match
@@ -250,7 +263,10 @@ def main() -> int:
                 "book_quality": book["quality"],
                 "book_received_at_utc": book["received_at_utc"],
                 "tick_size": str(tick),
-                "fee_base_bps": str(base_fee_bps),
+                "taker_base_fee_bps": str(market_info.get("tbf")),
+                "fee_curve_rate": str(endpoint_rate),
+                "fee_curve_exponent": endpoint_exponent,
+                "fee_curve_taker_only": endpoint_taker_only,
                 "fee_schedule_rate": str(schedule_rate),
                 "fee_rate_match": fee_rate_match,
                 "execution": execution,

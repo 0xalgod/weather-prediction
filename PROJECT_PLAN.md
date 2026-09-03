@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.61.0
+**Plan versiyonu:** 0.62.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1243,6 +1243,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Gate:** Exact condition/token identity; `fd.r=Gamma rate`, `fd.e=Gamma exponent=1`, `fd.to=Gamma takerOnly=true` for 11/11; immutable response checksum; diğer vertical-slice eşikleri değişmez.
 - **Failure:** Herhangi fee mismatch veya missing field net EV'yi tekrar `UNKNOWN` ve slice'ı `INCOMPLETE` bırakır. Legacy `base_fee/tbf` rate olarak kullanılmaz.
 - **Karar:** Runner düzeltmesi ve yeni immutable attempt; attempt 1 overwrite edilmez.
+
+### D-0064 — 2026-09-03 — V2 fee corrective implement edildi
+
+- **Durum:** `ACTIVE`
+- **Değişiklik:** Runner condition-level `/clob-markets/{condition_id}` `fd.r/e/to`, token membership ve Gamma schedule equality kullanıyor; legacy `/fee-rate` kaldırıldı, `tbf` yalnız provenance.
+- **Değişmeyenler:** Event, NBM selection, Gaussian baseline, $10 VWAP, 15-minute skew, ≥9/11 coverage ve no-signal sınırı aynı.
+- **Kalite:** Full 105/105 ve scoped Ruff pass.
+- **Karar:** Attempt 2 yeni immutable path ile çalıştırılabilir.
 
 ## 13. Open Questions
 
