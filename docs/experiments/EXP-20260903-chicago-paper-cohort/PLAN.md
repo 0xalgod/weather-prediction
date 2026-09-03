@@ -133,6 +133,13 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - Dates, models, paper rule, metrics and every acceptance/stop threshold are unchanged.
 - This is a prospective amendment, not a post-result timing selection.
 
+### 2026-09-03 — Day 1 attempt 1 rejected; corrective pre-registered
+
+- The live acquisition passed identity, probability, fee, execution, ordering, skew and request checks; exactly one target NBM record existed.
+- A local variable named `candidates` was reused for paper selection, causing the later final target-record check to read the wrong list and fail.
+- The incomplete attempt and its provisional Gaussian `NO_TRADE` / quantile `PAPER_TRADE` values are not admitted to the cohort.
+- Corrective scope is locked to a variable rename plus target-count regression test; models, data, timing and thresholds remain unchanged. Rerun must use a new path inside the original window.
+
 ### 2026-09-03 — Day 1 locked and dual-model runner ready
 
 - Target Sep 4 event 952456 and its exact rule/11-market identity were locked from the prior checksum-addressed discovery before cohort forecast or price retrieval.

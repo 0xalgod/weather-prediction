@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.67.0
+**Plan versiyonu:** 0.68.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1288,6 +1288,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Timing integrity:** Değişiklik snapshot 1 ve cohort-specific forecast/price gözleminden önce yapıldı; post-result selection değildir.
 - **Değişmeyenler:** 14 date/≥10 eligible, models, $10 VWAP, fee+2pp, minimum 3pp, metrics ve bütün gates aynı.
 - **Kural:** Cohort boyunca 11:00 UTC sabit; sonraki timing değişikliği mixed cohort değil yeni version gerektirir.
+
+### D-0070 — 2026-09-03 — Paper Day 1 attempt 1 variable-shadow gate failure
+
+- **Durum:** `ACTIVE`
+- **Observed:** 10:54–10:55Z; exact event/buckets, dual probability sum, fee, 11/11 execution, ordering/skew ve requests geçti; gerçek target NBM record count 1.
+- **Failure:** `candidates` değişkeni paper-selection aşamasında shadow edildi; final `target_nbm_record` check yanlış false oldu. Run `INCOMPLETE`, provisional decisions cohort'a alınmadı.
+- **Provisional only:** Gaussian `NO_TRADE` +2.20pp adjusted; quantile `PAPER_TRADE` +12.15pp, ikisi de 86-87°F. Order yok.
+- **Corrective pre-registration:** Yalnız değişkeni `paper_candidates` olarak ayır, target-count regression test ekle; model/data/threshold/time değişmeden aynı pencere içinde yeni immutable attempt çalıştır.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

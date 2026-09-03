@@ -119,6 +119,18 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def select_exact_target_record(
+    records: list[dict[str, Any]], target_valid_time_utc: str
+) -> dict[str, Any]:
+    """Return exactly one target record so later local variables cannot alter the gate."""
+    matches = [
+        row for row in records if row["valid_time_utc"] == target_valid_time_utc
+    ]
+    if len(matches) != 1:
+        raise ValueError(f"expected one target NBM record, found {len(matches)}")
+    return matches[0]
+
+
 def main() -> int:
     args = parse_args()
     if args.raw_directory.exists() or args.output.exists():
@@ -143,14 +155,9 @@ def main() -> int:
         config["station_code"],
         nbm_manifest["model_run_time_utc"],
     )
-    candidates = [
-        row
-        for row in parsed["records"]
-        if row["valid_time_utc"] == config["forecast"]["target_valid_time_utc"]
-    ]
-    if len(candidates) != 1:
-        raise ValueError(f"expected one target NBM record, found {len(candidates)}")
-    forecast = candidates[0]
+    forecast = select_exact_target_record(
+        parsed["records"], config["forecast"]["target_valid_time_utc"]
+    )
     if forecast["mean_f"] is None or forecast["standard_deviation_f"] is None:
         raise ValueError("target NBM mean/std is missing")
 
@@ -327,8 +334,12 @@ def main() -> int:
             ("gaussian", "gaussian_adjusted_edge"),
             ("quantile", "quantile_adjusted_edge"),
         ):
-            candidates = [row for row in rows if row.get(field) is not None]
-            selected = max(candidates, key=lambda row: Decimal(row[field])) if candidates else None
+            paper_candidates = [row for row in rows if row.get(field) is not None]
+            selected = (
+                max(paper_candidates, key=lambda row: Decimal(row[field]))
+                if paper_candidates
+                else None
+            )
             qualifies = selected is not None and Decimal(selected[field]) >= minimum_edge
             paper_decisions[model] = {
                 "decision": "PAPER_TRADE" if qualifies else "NO_TRADE",
@@ -343,7 +354,7 @@ def main() -> int:
         "bucket_count": len(buckets) == config["expected_bucket_count"],
         "probability_sum": abs(gaussian_probability_sum - 1.0) <= 1e-9
         and abs(quantile_probability_sum - 1.0) <= 1e-9,
-        "target_nbm_record": len(candidates) == 1,
+        "target_nbm_record": True,
         "forecast_precedes_books": last_book is not None and forecast_received <= last_book,
         "temporal_skew": skew is not None
         and skew <= config["execution"]["maximum_forecast_to_last_book_seconds"],

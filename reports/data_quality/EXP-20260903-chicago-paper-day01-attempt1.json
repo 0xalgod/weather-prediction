@@ -1,0 +1,22 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-paper-cohort",
+  "cohort_day": 1,
+  "attempt": 1,
+  "scheduled_at_utc": "2026-09-03T11:00:00Z",
+  "generated_at_utc": "2026-09-03T10:55:09.511736Z",
+  "run_path": "data/processed/chicago_paper_cohort/day=01/run=20260903T105416Z-v1/result.json",
+  "decision": "VERTICAL_SLICE_INCOMPLETE",
+  "passed_checks": ["event_rule_identity", "bucket_count", "probability_sum", "forecast_precedes_books", "temporal_skew", "executable_coverage", "fee_rate_reconciled", "request_errors"],
+  "failed_checks": ["target_nbm_record"],
+  "measured_target_nbm_record_count": 1,
+  "failure_cause": "The variable holding the one-record NBM candidate list was shadowed by the later paper-decision candidate list before final checks were constructed.",
+  "forecast": {"model_run_time_utc": "2026-09-03T07:00:00Z", "forecast_hour": 41, "valid_time_utc": "2026-09-05T00:00:00Z", "mean_f": 89, "standard_deviation_f": 4, "p10_f": 85, "p25_f": 86, "p50_f": 88, "p75_f": 93, "p90_f": 95},
+  "model_total_variation": 0.26723427833569946,
+  "provisional_decisions_not_admitted": {
+    "gaussian": {"decision": "NO_TRADE", "bucket": "86-87°F", "adjusted_edge_per_share": 0.022008885389425574},
+    "quantile": {"decision": "PAPER_TRADE", "bucket": "86-87°F", "adjusted_edge_per_share": 0.12146560491465994}
+  },
+  "order_sent": false,
+  "corrective": "Rename the paper candidate variable, add a regression test for target-record check preservation, and rerun to a new immutable path inside the original time window."
+}
