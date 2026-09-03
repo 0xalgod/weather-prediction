@@ -1,9 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.57.0
-**Son güncelleme:** 2026-09-02
-**Mevcut faz:** Phase 3 execution feasibility + Phase 4 forecast source feasibility + Phase 5 observation/settlement reconciliation
+**Plan versiyonu:** 0.58.0
+**Son güncelleme:** 2026-09-03
+**Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -1198,6 +1198,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Live NOAA payload, browser uptime, gerçek trigger timing ve settlement test edilmedi. Edge/P&L kanıtı değildir.
 - **Karar:** Event 946566 capture sözleşmesi uygulamaya hazır; D-0056 pencere/eşikleri değişmedi.
 
+### D-0059 — 2026-09-03 — Quant vertical slice settlement beklemeden başlatıldı
+
+- **Durum:** `ACTIVE`
+- **Kullanıcı kararı:** Uzayan fizibilite ana hattı bloke etmeyecek; Sep 4 capture paralel label-quality kontrolü olarak devam edecek.
+- **Cohort:** Event 946566 / KORD / Sep 3; locked rule/source/11 bucket identity. Experiment-specific forecast, price veya outcome değeri görülmeden yeni plan kaydedildi.
+- **Forecast:** Latest-available NOAA NBM probabilistic text, exact KORD target record; Gaussian mean/std baseline + 0.5°F integer continuity correction. Açıkça uncalibrated diagnostic.
+- **Execution:** 11 YES book; bucket başına $10 ask-depth VWAP; midpoint/imputation yok; forecast→last-book ≤15 dakika; executable coverage ≥9/11.
+- **Cost:** Verified primary fee formula varsa net EV; yoksa fee/net EV `UNKNOWN`. Gross edge ve 1pp/2pp resolution-risk sensitivity ayrı.
+- **Gate:** Exact identity, 11 exhaustive/non-overlap bucket, probability sum 1±1e-9, immutable provenance, temporal skew ve coverage koşulları birlikte `VERTICAL_SLICE_MECHANICS_PASS` için zorunlu.
+- **Sınır:** Tek event edge/calibration/P&L kanıtı değildir; paper/live signal ve outcome lookup yasak.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1210,7 +1221,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Gerçek capture için `2026-09-04T05:45Z–06:30Z` penceresini bekle; event 946566 browser payload'ını sanitize edip hazır adapter ile append-only kaydet ve replay doğrula. Pencere öncesi outcome lookup veya capture yok.
+**Tek sonraki adım:** EXP-20260903 Chicago vertical slice için pure bucket-probability + ask-depth VWAP çekirdeğini fixture/testlerle uygula; sonra latest NBM ve contemporaneous event 946566 YES books ile tek immutable read-only run çalıştır. Sep 4 settlement capture paralelde kalır.
 
 Beklenen artifact'lar:
 

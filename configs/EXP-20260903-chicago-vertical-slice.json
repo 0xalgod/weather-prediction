@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-vertical-slice",
+  "status": "PREREGISTERED",
+  "event_id": "946566",
+  "target_local_date": "2026-09-03",
+  "station_code": "KORD",
+  "timezone": "America/Chicago",
+  "resolution_source": "https://www.weather.gov/wrh/timeseries?site=kord",
+  "rule_text_sha256": "15ce309df35d3bb6f1f3eb7988adb87b3ff8d1fb831b775a3642f4cba75158ec",
+  "identity_source": "reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json",
+  "identity_source_sha256": "e003e77b7f0083e4f3d1322512f8731de1f49fc4463f843c2079348cd82c7da0",
+  "expected_bucket_count": 11,
+  "forecast": {
+    "provider": "NOAA_NBM_PROBABILISTIC_TEXT",
+    "cycle_selection": "LATEST_AVAILABLE_SEARCH_BACKWARD",
+    "maximum_cycles_checked": 6,
+    "target_valid_time_utc": "2026-09-04T00:00:00Z",
+    "probability_model": "GAUSSIAN_NBM_DIAGNOSTIC_BASELINE",
+    "integer_continuity_correction_f": 0.5
+  },
+  "execution": {
+    "side": "BUY_YES",
+    "notional_usd_per_bucket": 10.0,
+    "price_method": "ASK_DEPTH_VWAP",
+    "maximum_forecast_to_last_book_seconds": 900,
+    "minimum_executable_bucket_count": 9,
+    "midpoint_allowed": false,
+    "imputation_allowed": false
+  },
+  "costs": {
+    "fee_policy": "PRIMARY_DOCUMENTATION_OR_UNKNOWN",
+    "resolution_risk_sensitivity_probability_points": [0.01, 0.02]
+  },
+  "safety": {
+    "paper_or_live_signal": false,
+    "orders": false,
+    "wallet": false,
+    "credentials": false,
+    "outcome_lookup": false
+  }
+}
