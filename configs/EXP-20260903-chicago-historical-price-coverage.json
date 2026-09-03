@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-20260903-chicago-historical-price-coverage",
+  "data_cutoff_utc": "2026-09-03T11:30:00Z",
+  "source_inventory_run": "data/raw/polymarket_gamma/closed=true/run=20260829T215446Z",
+  "city_title_match": "chicago",
+  "sample_selection": {
+    "order": "end_date_desc_event_id_desc",
+    "maximum_events": 30,
+    "require_closed": true,
+    "require_uma_resolved": true,
+    "require_complete_binary_identity": true
+  },
+  "price_history": {
+    "endpoint": "https://clob.polymarket.com/prices-history",
+    "token_side": "YES",
+    "interval": "all",
+    "fidelity_minutes": 1,
+    "window_start": "event_created_at",
+    "window_end": "event_closed_time",
+    "request_timeout_seconds": 30
+  },
+  "acceptance_thresholds": {
+    "minimum_selected_events": 20,
+    "minimum_events_with_any_history_rate": 0.8,
+    "minimum_tokens_with_any_history_rate": 0.8,
+    "maximum_request_error_rate": 0.02,
+    "maximum_out_of_window_point_rate": 0.0,
+    "minimum_points_per_covered_token": 2
+  }
+}

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.69.0
+**Plan versiyonu:** 0.70.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1307,6 +1307,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Safety:** 90.909 hypothetical shares only; `order_sent=false`, outcome/P&L null.
 - **Boundary:** `CAPTURE_ELIGIBLE_PENDING_OUTCOME`; one day edge evidence değil, NBM valid-time→target-local-day semantic check tracked dependency.
 
+### D-0072 — 2026-09-03 — Hızlı tarihsel Chicago fiyat-kapsam deneyi ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Amaç:** Prospective cohort devam ederken beklemeden tarihsel model araştırmasını açmak; önce backtest girdisinin gerçekten mevcut olup olmadığını ölçmek.
+- **Locked sample:** Frozen corrected Gamma inventory'den deterministic latest 30 eligible closed Chicago event; minimum 20; tüm YES bucket token'ları.
+- **Primary gates:** event/token any-history ≥80%, request error ≤2%, window dışı point 0%, covered token başına ≥2 point.
+- **Endpoint:** Public CLOB `/prices-history`, explicit creation→close window, `interval=all`, 1-minute fidelity; responses append-only ve checksum'lı.
+- **Boundary:** Endpoint geçmiş L2 bid/ask/depth sağlamaz. Pass yalnız indicative-price/forecast research iznidir; executable P&L veya edge kanıtı değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1327,7 +1336,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Sep 4 trigger penceresinde event 946566 settlement-source snapshot'ını alıp Day 1'den ayrı append-only kaydet; ardından Day 1 target event 952456 outcome'u henüz oluşmadığı için P&L ekleme. Paper Day 2 event'ini forecast/price görülmeden sonraki 11:00Z penceresi için kilitle.
+**Tek sonraki adım:** Ön-kayıtlı deterministic Chicago historical CLOB price-history coverage probe'unu çalıştır; immutable raw yanıtlar ve coverage raporu üret. Prospective Sep 4 settlement/paper görevleri paralel takvim bağımlılığı olarak korunur.
 
 Beklenen artifact'lar:
 
