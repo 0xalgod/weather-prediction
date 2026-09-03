@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.72.0
+**Plan versiyonu:** 0.73.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1332,6 +1332,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** `HISTORICAL_PRICE_COVERAGE_PASS`; tarihsel indicative-price ve forecast calibration araştırması başlayabilir.
 - **Boundary:** 3–4 point/token seyrek seridir; historical bid/ask, depth, spread, side, size veya fill yok. Executable backtest/net EV/edge kanıtı sayılmaz.
 
+### D-0075 — 2026-09-03 — Chicago historical forecast/outcome join ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Identity lock:** Önceki coverage deneyinin checksum-locked aynı 30 event'i; replacement/backfill yok.
+- **Decision time:** Target−1 calendar day 11:00 UTC; NBM target−1 07Z, fallback yok; HTTP Last-Modified decision time'ı aşamaz.
+- **Forecast mapping:** KORD MaxT valid target+1 00Z; exact tek record. Mapping semantic bağımsız doğrulamaya kadar provisional.
+- **Outcome:** Frozen Gamma'da exact tek `[1,0]` YES winner ve diğer tüm bucket'larda `[0,1]`; exhaustive whole°F partition.
+- **Primary gates:** identities/winner/partition 100%; object ve final join ≥29/30; retrieved parse/target record 100%; publication leakage 0.
+- **Boundary:** Pass model dataset'i açar; trained model, executable P&L veya edge kanıtı değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1352,7 +1362,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli aynı 30 Chicago event/date için as-issued NOAA forecast ve eligible settlement-label join kapsamını sonuçları görmeden ön-kaydet ve ölç; leakage-safe ilk model tablosunun mümkün olup olmadığına karar ver. Prospective Sep 4 görevleri paralel takvim bağımlılığıdır.
+**Tek sonraki adım:** Ön-kayıtlı 30-event Chicago historical join'i çalıştır; NBM 07Z object/publication/parse/target-record ile frozen Gamma winner/partition kapsamını ölç ve ilk leakage-safe model tablosu gate'ine karar ver.
 
 Beklenen artifact'lar:
 

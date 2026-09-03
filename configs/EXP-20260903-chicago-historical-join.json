@@ -1,0 +1,38 @@
+{
+  "experiment_id": "EXP-20260903-chicago-historical-join",
+  "data_cutoff_utc": "2026-09-03T11:45:00Z",
+  "event_selection": {
+    "source": "data/raw/polymarket_price_history/run=20260903T112900Z-v2/selected-events.json",
+    "source_sha256": "0b8284f59ac47eff709f3df46ae776e44f8b0a82f4e0a6665c40ab9c7305f357",
+    "expected_event_count": 30,
+    "gamma_inventory": "data/raw/polymarket_gamma/closed=true/run=20260829T215446Z"
+  },
+  "decision_time": {
+    "timezone": "UTC",
+    "rule": "target_local_date_minus_1_at_11_00_utc"
+  },
+  "forecast": {
+    "provider": "NOAA_NBM_PROBABILISTIC_TEXT",
+    "station_code": "KORD",
+    "cycle_utc": 7,
+    "run_date_rule": "target_local_date_minus_1",
+    "target_valid_time_rule": "target_local_date_plus_1_at_00_00_utc",
+    "publication_proxy": "http_last_modified",
+    "publication_must_not_exceed_decision_time": true,
+    "fallback": null
+  },
+  "outcome": {
+    "source": "frozen_gamma_outcome_prices",
+    "winning_rule": "exactly_one_market_yes_price_equals_1_and_all_others_equal_0"
+  },
+  "acceptance_thresholds": {
+    "event_identity_match_rate": 1.0,
+    "forecast_object_rate_minimum": 0.9666666666666667,
+    "forecast_parse_rate_minimum": 1.0,
+    "forecast_publication_leakage_count_maximum": 0,
+    "exact_target_record_rate_minimum": 1.0,
+    "exact_winner_rate_minimum": 1.0,
+    "bucket_partition_rate_minimum": 1.0,
+    "joined_row_rate_minimum": 0.9666666666666667
+  }
+}
