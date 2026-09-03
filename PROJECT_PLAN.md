@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.63.0
+**Plan versiyonu:** 0.64.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1262,6 +1262,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Sınır:** Tek event, yakın-resolution snapshot, outcome yok. Signal/paper/live trade yok; pozitif edge iddiası yapılmaz.
 - **Sonuç:** Quant mechanics artık çalışıyor; Phase 6 conditional `IN_PROGRESS`. Sonraki kanıt fixed-lead prospective paper cohort olmalı.
 
+### D-0066 — 2026-09-03 — Chicago fixed-time prospective paper pilot ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Cohort:** 14 daily schedule, 2026-09-03–16 UTC at 12:00±15m; target local Sep 4–17; minimum eligible 10. Missing date substitute/backfill yok.
+- **Primary model:** Published p10/p25/p50/p75/p90 üzerinden locked piecewise-linear quantile CDF + slope-extended finite tails; outcome tuning yok. Gaussian benchmark olarak kalır.
+- **Paper rule:** Model başına günde ≤1; en yüksek `q−VWAP−fee−2pp`, minimum adjusted edge 3pp; `$10` ask-depth; yetersiz kalite/depth `NO_TRADE`. Emir yok.
+- **Pilot data gate:** ≥10/14; bucket executable ≥90%; identity/provider mix ve leakage 0; explicit rejection reasons.
+- **Continue gate:** Data pass, semantic defect yok, adjusted P&L deployed capital'ın −30%'undan iyi, tek positive-gross gün payı ≤50%, eligible settlement labels. Sonuç yalnız `CONTINUE_DATA_COLLECTION` veya `STOP_OR_REDESIGN`.
+- **Edge sınırı:** ≥30 eligible date ve future preregistered positive cluster-CI gate öncesi edge claim yok.
+- **Operasyon:** Günde bir kısa foreground run; automatic schedule/always-on collector yetkisi yok.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1274,7 +1285,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Chicago için fixed lead-time, outcome-independent prospective paper cohort'u ön-kaydet: günlük snapshot zamanı, minimum örnek, calibration/EV metrikleri ve stop/go gate. Gaussian baseline'a ek olarak NBM quantile-preserving baseline'ı outcome görülmeden tanımla. Sep 4 settlement capture paralelde kalır.
+**Tek sonraki adım:** Ön-kayıtlı NBM quantile-preserving CDF v1'i pure fixture/testlerle uygula; probability partition/sum, repeated-quantile ve tail davranışını doğrula. İlk cohort snapshot'ı 2026-09-03 12:00±15m UTC penceresinde çalıştırılabilir.
 
 Beklenen artifact'lar:
 

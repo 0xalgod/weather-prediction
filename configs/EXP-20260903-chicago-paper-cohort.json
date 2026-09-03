@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-paper-cohort",
+  "status": "PREREGISTERED",
+  "city": "Chicago",
+  "station_code": "KORD",
+  "timezone": "America/Chicago",
+  "resolution_provider": "NOAA_WRH",
+  "snapshot_dates_utc": {"start": "2026-09-03", "end": "2026-09-16"},
+  "target_dates_local": {"start": "2026-09-04", "end": "2026-09-17"},
+  "decision_time_utc": "12:00:00",
+  "decision_tolerance_minutes": 15,
+  "planned_observations": 14,
+  "minimum_eligible_observations": 10,
+  "maximum_forecast_to_last_book_seconds": 900,
+  "notional_usd_per_bucket": 10.0,
+  "primary_model": {
+    "name": "NBM_QUANTILE_PRESERVING_CDF_V1",
+    "probability_anchors": [0.1, 0.25, 0.5, 0.75, 0.9],
+    "tail_slope_extension_probability_ratio": 0.6666666666666666,
+    "minimum_tail_width_f": 1.0,
+    "continuity_correction_f": 0.5
+  },
+  "benchmark_model": "GAUSSIAN_NBM_V1",
+  "paper_rule": {
+    "maximum_positions_per_model_per_date": 1,
+    "resolution_risk_haircut_per_share": 0.02,
+    "minimum_adjusted_edge_per_share": 0.03,
+    "maker_rebate_credit": 0.0,
+    "live_orders": false
+  },
+  "data_gate": {
+    "minimum_eligible_snapshots": 10,
+    "minimum_executable_bucket_fraction": 0.9,
+    "maximum_identity_or_provider_mix_count": 0,
+    "maximum_temporal_leakage_count": 0
+  },
+  "continue_to_30_gate": {
+    "minimum_adjusted_pnl_fraction_of_deployed_capital": -0.3,
+    "maximum_single_date_positive_gross_pnl_share": 0.5,
+    "edge_claim_allowed": false
+  },
+  "safety": {
+    "wallet": false,
+    "credentials": false,
+    "orders": false,
+    "automatic_schedule_authorized": false,
+    "always_on_collector": false
+  }
+}
