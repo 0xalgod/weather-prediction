@@ -135,3 +135,17 @@ def ask_depth_vwap(
         "slippage": str(vwap - best_ask),
         "fills": fills,
     }
+
+
+def taker_fee_usd(fills: Sequence[Mapping[str, Any]], fee_rate: Decimal) -> Decimal:
+    """Apply the documented per-fill C × rate × p × (1-p) taker fee."""
+    if fee_rate < 0:
+        raise ValueError("fee rate cannot be negative")
+    fee = Decimal("0")
+    for fill in fills:
+        price = Decimal(str(fill["price"]))
+        shares = Decimal(str(fill["shares"]))
+        if not Decimal("0") < price < Decimal("1") or shares <= 0:
+            raise ValueError("fee fill price/size outside valid bounds")
+        fee += shares * fee_rate * price * (Decimal("1") - price)
+    return fee

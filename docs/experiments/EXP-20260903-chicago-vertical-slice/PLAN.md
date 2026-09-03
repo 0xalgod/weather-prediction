@@ -126,6 +126,14 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - No live forecast/price/outcome was used in this component result.
 - Next action: execute one immutable read-only NBM→event 946566→YES-book run under the pre-registered temporal and coverage gates.
 
+### 2026-09-03 — Immutable live runner implemented
+
+- Latest-available NBM availability search, exact KORD target selection, locked Gamma identity reconciliation and concurrent YES book/tick/fee retrieval are wired into one no-overwrite run.
+- The documented taker-fee formula is tested; endpoint bps and Gamma schedule rate must reconcile before net EV is emitted.
+- Full suite passed 105/105 and scoped Ruff passed.
+- No live run value is interpreted in this implementation step.
+- Next action: execute the single registered run and apply its fixed mechanics gate.
+
 ## Decision log
 
 ### VSD-0001 — 2026-09-03 — Start quant mechanics before settlement sample matures

@@ -7,6 +7,7 @@ from weather_quant.market_model.vertical_slice import (
     bucket_probability,
     gaussian_bucket_probabilities,
     normal_cdf,
+    taker_fee_usd,
 )
 
 
@@ -99,3 +100,8 @@ def test_insufficient_depth_is_explicit_and_has_no_vwap():
 def test_invalid_ask_levels_fail_closed(asks):
     with pytest.raises(ValueError, match="outside valid bounds"):
         ask_depth_vwap(asks, Decimal("10"))
+
+
+def test_documented_taker_fee_formula_is_applied_per_fill():
+    fills = [{"price": "0.25", "shares": "40"}]
+    assert taker_fee_usd(fills, Decimal("0.05")) == Decimal("0.37500")

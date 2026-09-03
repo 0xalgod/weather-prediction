@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.59.0
+**Plan versiyonu:** 0.60.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1217,6 +1217,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Execution:** Fixed-$ ask-depth VWAP best-first; single/multi-level fill, explicit insufficient depth ve invalid price/size rejection test edildi. Midpoint girdisi yok.
 - **Sınır:** Live NBM/event/book/fee, calibration, settlement ve P&L henüz ölçülmedi.
 - **Karar:** Pure core hazır; aynı preregistration altında tek immutable live read-only slice çalıştırılabilir.
+
+### D-0061 — 2026-09-03 — Immutable live vertical-slice runner hazır
+
+- **Durum:** `ACTIVE`
+- **Akış:** Availability-only latest NBM ≤6-cycle search → exact KORD target record → locked Gamma identities → 11 concurrent YES book/tick/fee public GET → probability/VWAP/fee table.
+- **Fee:** Official formula `C × rate × p × (1-p)` implement edildi; per-token `/fee-rate` bps değeri Gamma `feeSchedule.rate` ile eşleşmeden net EV üretilmiyor.
+- **Provenance:** Yeni raw run path zorunlu, overwrite yasak; NBM/Gamma/book/tick/fee checksum ve timestamps saklanıyor.
+- **Kalite:** Full suite 105/105, scoped Ruff 0. Outcome/order/wallet/credential endpoint'i yok.
+- **Karar:** Runner aynı preregistration altında tek live run için hazır.
 
 ## 13. Open Questions
 
