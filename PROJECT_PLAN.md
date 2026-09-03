@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.64.0
+**Plan versiyonu:** 0.65.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1273,6 +1273,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Edge sınırı:** ≥30 eligible date ve future preregistered positive cluster-CI gate öncesi edge claim yok.
 - **Operasyon:** Günde bir kısa foreground run; automatic schedule/always-on collector yetkisi yok.
 
+### D-0067 — 2026-09-03 — Quantile-preserving baseline contract geçti
+
+- **Durum:** `ACTIVE`
+- **Sonuç:** `QUANTILE_BASELINE_CONTRACT_PASS`; focused 17/17, full 111/111, scoped Ruff 0.
+- **Contract:** Tail slope extension, exact quantile anchors, repeated-value right-continuous jump, half-degree exhaustive mass, monotonic rejection ve aligned TV doğrulandı.
+- **Outcome-free replay:** Probability sum 1.0; Gaussian vs quantile TV `0.273812`. Model seçimi apparent edge'i materyal değiştiriyor.
+- **Karar:** Primary quantile ve Gaussian benchmark her daily record'da ayrı korunacak; outcome'a göre model seçilmeyecek. Pass doğruluk/calibration kanıtı değildir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1285,7 +1293,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı NBM quantile-preserving CDF v1'i pure fixture/testlerle uygula; probability partition/sum, repeated-quantile ve tail davranışını doğrula. İlk cohort snapshot'ı 2026-09-03 12:00±15m UTC penceresinde çalıştırılabilir.
+**Tek sonraki adım:** İlk paper cohort snapshot'ını 2026-09-03 12:00±15m UTC penceresinde target Sep 4 için çalıştır; Gaussian ve quantile modellerini aynı immutable forecast/books üzerinde ayrı kaydet, paper rule uygula fakat order gönderme.
 
 Beklenen artifact'lar:
 

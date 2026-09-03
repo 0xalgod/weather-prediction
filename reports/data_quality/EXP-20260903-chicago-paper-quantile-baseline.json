@@ -1,0 +1,40 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-paper-cohort",
+  "component": "NBM_QUANTILE_PRESERVING_CDF_V1",
+  "observed_at_utc": "2026-09-03T10:10:59Z",
+  "decision": "QUANTILE_BASELINE_CONTRACT_PASS",
+  "focused_test_cases_passed": 17,
+  "focused_test_cases_failed": 0,
+  "full_test_suite_passed": 111,
+  "full_test_suite_failed": 0,
+  "scoped_ruff_errors": 0,
+  "validated": [
+    "locked finite-tail slope extension",
+    "published quantile anchor interpolation",
+    "right-continuous repeated-quantile jump",
+    "half-degree exhaustive bucket probabilities",
+    "nonmonotonic quantile rejection",
+    "aligned total-variation comparison"
+  ],
+  "diagnostic_replay": {
+    "source_run": "data/processed/chicago_vertical_slice/run=20260903T091642Z-v2/result.json",
+    "outcome_used": false,
+    "probability_sum": 1.0,
+    "gaussian_vs_quantile_total_variation": 0.2738115114657469,
+    "bucket_probabilities": [
+      {"bucket": "79°F or below", "quantile": 0.0, "gaussian": 0.004332},
+      {"bucket": "80-81°F", "quantile": 0.0, "gaussian": 0.012461},
+      {"bucket": "82-83°F", "quantile": 0.0, "gaussian": 0.035288},
+      {"bucket": "84-85°F", "quantile": 0.05, "gaussian": 0.078213},
+      {"bucket": "86-87°F", "quantile": 0.2625, "gaussian": 0.135691},
+      {"bucket": "88-89°F", "quantile": 0.2125, "gaussian": 0.184276},
+      {"bucket": "90-91°F", "quantile": 0.1, "gaussian": 0.195908},
+      {"bucket": "92-93°F", "quantile": 0.1, "gaussian": 0.163043},
+      {"bucket": "94-95°F", "quantile": 0.225, "gaussian": 0.106221},
+      {"bucket": "96-97°F", "quantile": 0.05, "gaussian": 0.054169},
+      {"bucket": "98°F or higher", "quantile": 0.0, "gaussian": 0.030396}
+    ]
+  },
+  "interpretation": "The models materially disagree before outcomes. Both must remain separately reported; no post-hoc selection or trade signal is allowed."
+}

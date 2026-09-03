@@ -80,6 +80,123 @@ def gaussian_bucket_probabilities(
     return output
 
 
+def quantile_cdf_anchors(
+    p10_f: float,
+    p25_f: float,
+    p50_f: float,
+    p75_f: float,
+    p90_f: float,
+    minimum_tail_width_f: float = 1.0,
+) -> list[tuple[float, float]]:
+    """Build the preregistered finite-tail CDF anchors from NBM quantiles."""
+    values = [p10_f, p25_f, p50_f, p75_f, p90_f]
+    if not all(math.isfinite(value) for value in values):
+        raise ValueError("quantiles must be finite")
+    if values != sorted(values):
+        raise ValueError("quantiles must be monotonic")
+    if minimum_tail_width_f <= 0:
+        raise ValueError("minimum tail width must be positive")
+    lower_width = max(minimum_tail_width_f, (p25_f - p10_f) * (2.0 / 3.0))
+    upper_width = max(minimum_tail_width_f, (p90_f - p75_f) * (2.0 / 3.0))
+    return [
+        (0.0, p10_f - lower_width),
+        (0.10, p10_f),
+        (0.25, p25_f),
+        (0.50, p50_f),
+        (0.75, p75_f),
+        (0.90, p90_f),
+        (1.0, p90_f + upper_width),
+    ]
+
+
+def quantile_preserving_cdf(value: float, anchors: Sequence[tuple[float, float]]) -> float:
+    """Evaluate a right-continuous piecewise-linear CDF with explicit atoms."""
+    if not math.isfinite(value) or len(anchors) < 2:
+        raise ValueError("invalid CDF value or anchors")
+    probabilities = [point[0] for point in anchors]
+    temperatures = [point[1] for point in anchors]
+    if probabilities != sorted(probabilities) or temperatures != sorted(temperatures):
+        raise ValueError("CDF anchors must be monotonic")
+    if probabilities[0] != 0 or probabilities[-1] != 1:
+        raise ValueError("CDF anchors must span probabilities zero to one")
+    if value < temperatures[0]:
+        return 0.0
+    if value >= temperatures[-1]:
+        return 1.0
+
+    grouped: list[tuple[float, float, float]] = []
+    for probability, temperature in anchors:
+        if grouped and grouped[-1][0] == temperature:
+            old_temperature, low_probability, _ = grouped[-1]
+            grouped[-1] = (old_temperature, low_probability, probability)
+        else:
+            grouped.append((temperature, probability, probability))
+    for index, (temperature, _, high_probability) in enumerate(grouped):
+        if value == temperature:
+            return high_probability
+        if value < temperature:
+            left_temperature, _, left_high = grouped[index - 1]
+            right_low = grouped[index][1]
+            fraction = (value - left_temperature) / (temperature - left_temperature)
+            return left_high + fraction * (right_low - left_high)
+    return 1.0
+
+
+def quantile_bucket_probabilities(
+    buckets: Sequence[Mapping[str, Any]],
+    quantiles_f: Mapping[str, float],
+    precision_f: float = 1.0,
+    minimum_tail_width_f: float = 1.0,
+) -> list[dict[str, Any]]:
+    """Attach bucket masses from the locked NBM quantile-preserving CDF."""
+    validate_bucket_partition(buckets, precision_f)
+    anchors = quantile_cdf_anchors(
+        quantiles_f["p10_f"],
+        quantiles_f["p25_f"],
+        quantiles_f["p50_f"],
+        quantiles_f["p75_f"],
+        quantiles_f["p90_f"],
+        minimum_tail_width_f,
+    )
+    output = []
+    for bucket in buckets:
+        lower = bucket["lower_bound"]
+        upper = bucket["upper_bound"]
+        lower_probability = (
+            0.0
+            if lower is None
+            else quantile_preserving_cdf(lower - precision_f / 2, anchors)
+        )
+        upper_probability = (
+            1.0
+            if upper is None
+            else quantile_preserving_cdf(upper + precision_f / 2, anchors)
+        )
+        probability = upper_probability - lower_probability
+        if probability < 0 or probability > 1:
+            raise ValueError("quantile bucket probability outside [0, 1]")
+        output.append({**bucket, "model_probability": probability})
+    total = math.fsum(row["model_probability"] for row in output)
+    if abs(total - 1.0) > 1e-9:
+        raise ValueError(f"quantile bucket probabilities do not sum to one: {total}")
+    return output
+
+
+def total_variation_distance(
+    left: Sequence[Mapping[str, Any]], right: Sequence[Mapping[str, Any]]
+) -> float:
+    """Compare aligned categorical probability vectors."""
+    left_by_market = {str(row["market_id"]): float(row["model_probability"]) for row in left}
+    right_by_market = {
+        str(row["market_id"]): float(row["model_probability"]) for row in right
+    }
+    if left_by_market.keys() != right_by_market.keys():
+        raise ValueError("probability vectors have different market identities")
+    return 0.5 * math.fsum(
+        abs(left_by_market[key] - right_by_market[key]) for key in left_by_market
+    )
+
+
 def ask_depth_vwap(
     asks: Sequence[Mapping[str, Any]], notional_usd: Decimal
 ) -> dict[str, Any]:

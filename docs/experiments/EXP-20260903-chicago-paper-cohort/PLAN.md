@@ -118,6 +118,14 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - Cohort, fixed time, primary/benchmark models, paper decision rule, metrics and gates locked before the first scheduled snapshot.
 - Next action: implement and fixture-test the quantile-preserving CDF without retrieving an outcome.
 
+### 2026-09-03 — Quantile-preserving baseline contract passed
+
+- Component decision `QUANTILE_BASELINE_CONTRACT_PASS`; focused 17/17, full 111/111 and scoped Ruff passed.
+- Tail extension, anchor interpolation, repeated-quantile jumps, exhaustive mass, monotonic rejection and total-variation alignment are deterministic.
+- Outcome-free prior-forecast replay gave Gaussian-versus-quantile TV `0.273812`, confirming material model risk before any outcome comparison.
+- Both models remain separately tracked; neither may be selected post-hoc.
+- Next action: run scheduled snapshot 1 at 12:00 UTC ±15 minutes for target Sep 4.
+
 ## Decision log
 
 ### PCD-0001 — 2026-09-03 — Use a short fixed-time pilot before a 30-day claim sample

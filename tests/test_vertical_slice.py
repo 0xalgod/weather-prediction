@@ -7,7 +7,11 @@ from weather_quant.market_model.vertical_slice import (
     bucket_probability,
     gaussian_bucket_probabilities,
     normal_cdf,
+    quantile_bucket_probabilities,
+    quantile_cdf_anchors,
+    quantile_preserving_cdf,
     taker_fee_usd,
+    total_variation_distance,
 )
 
 
@@ -105,3 +109,48 @@ def test_invalid_ask_levels_fail_closed(asks):
 def test_documented_taker_fee_formula_is_applied_per_fill():
     fills = [{"price": "0.25", "shares": "40"}]
     assert taker_fee_usd(fills, Decimal("0.05")) == Decimal("0.37500")
+
+
+def nbm_quantiles():
+    return {"p10_f": 86, "p25_f": 87, "p50_f": 89, "p75_f": 94, "p90_f": 95}
+
+
+def test_quantile_anchors_extend_locked_tail_slopes():
+    anchors = quantile_cdf_anchors(86, 87, 89, 94, 95)
+    assert anchors[0] == (0.0, 85.0)
+    assert anchors[-1] == (1.0, 96.0)
+
+
+def test_quantile_cdf_hits_published_quantile_anchors():
+    anchors = quantile_cdf_anchors(86, 87, 89, 94, 95)
+    assert quantile_preserving_cdf(86, anchors) == pytest.approx(0.10)
+    assert quantile_preserving_cdf(89, anchors) == pytest.approx(0.50)
+    assert quantile_preserving_cdf(95, anchors) == pytest.approx(0.90)
+
+
+def test_repeated_quantiles_create_explicit_right_continuous_jump():
+    anchors = quantile_cdf_anchors(86, 86, 89, 94, 95)
+    assert quantile_preserving_cdf(85.999, anchors) < 0.11
+    assert quantile_preserving_cdf(86, anchors) == pytest.approx(0.25)
+
+
+def test_quantile_bucket_probabilities_are_exhaustive():
+    rows = quantile_bucket_probabilities(partition(), nbm_quantiles())
+    assert sum(row["model_probability"] for row in rows) == pytest.approx(1.0)
+    assert all(0 <= row["model_probability"] <= 1 for row in rows)
+
+
+def test_nonmonotonic_quantiles_fail_closed():
+    invalid = nbm_quantiles()
+    invalid["p50_f"] = 80
+    with pytest.raises(ValueError, match="monotonic"):
+        quantile_bucket_probabilities(partition(), invalid)
+
+
+def test_total_variation_requires_aligned_market_identities():
+    gaussian = gaussian_bucket_probabilities(partition(), 90, 4)
+    quantile = quantile_bucket_probabilities(partition(), nbm_quantiles())
+    assert 0 <= total_variation_distance(gaussian, quantile) <= 1
+    quantile[0]["market_id"] = "different"
+    with pytest.raises(ValueError, match="different market"):
+        total_variation_distance(gaussian, quantile)
