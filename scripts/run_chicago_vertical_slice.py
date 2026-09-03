@@ -26,7 +26,9 @@ from weather_quant.ingestion.polymarket_orderbook import (
 from weather_quant.market_model.vertical_slice import (
     ask_depth_vwap,
     gaussian_bucket_probabilities,
+    quantile_bucket_probabilities,
     taker_fee_usd,
+    total_variation_distance,
 )
 from weather_quant.normalization.resolution_rules import build_bucket_records
 
@@ -171,11 +173,12 @@ def main() -> int:
             raise ValueError("token identity differs from locked source")
     if len(buckets) != config["expected_bucket_count"]:
         raise ValueError("bucket count differs from locked config")
-    probabilities = gaussian_bucket_probabilities(
+    gaussian_probabilities = gaussian_bucket_probabilities(
         buckets,
         forecast["mean_f"],
         forecast["standard_deviation_f"],
     )
+    quantile_probabilities = quantile_bucket_probabilities(buckets, forecast)
 
     envelopes: dict[tuple[str, str], dict[str, Any]] = {}
     errors = {}
@@ -199,7 +202,10 @@ def main() -> int:
     rows = []
     receipt_times = []
     notional = Decimal(str(config["execution"]["notional_usd_per_bucket"]))
-    probability_by_token = {row["yes_token_id"]: row for row in probabilities}
+    probability_by_token = {row["yes_token_id"]: row for row in gaussian_probabilities}
+    quantile_by_token = {
+        row["yes_token_id"]: row["model_probability"] for row in quantile_probabilities
+    }
     for token, probability_row in sorted(probability_by_token.items()):
         required = [(token, kind) for kind in ("book", "tick", "market_info")]
         if any(key not in envelopes for key in required):
@@ -244,17 +250,24 @@ def main() -> int:
             if execution["executable"] and fee_rate_match
             else None
         )
-        model_probability = Decimal(str(probability_row["model_probability"]))
+        gaussian_probability = Decimal(str(probability_row["model_probability"]))
+        quantile_probability = Decimal(str(quantile_by_token[token]))
         vwap = Decimal(execution["vwap"]) if execution["vwap"] is not None else None
         fee_per_share = (
             fee_usd / Decimal(execution["filled_shares"])
             if fee_usd is not None
             else None
         )
-        gross_edge = model_probability - vwap if vwap is not None else None
-        net_edge = (
-            gross_edge - fee_per_share
-            if gross_edge is not None and fee_per_share is not None
+        gaussian_gross_edge = gaussian_probability - vwap if vwap is not None else None
+        quantile_gross_edge = quantile_probability - vwap if vwap is not None else None
+        gaussian_net_edge = (
+            gaussian_gross_edge - fee_per_share
+            if gaussian_gross_edge is not None and fee_per_share is not None
+            else None
+        )
+        quantile_net_edge = (
+            quantile_gross_edge - fee_per_share
+            if quantile_gross_edge is not None and fee_per_share is not None
             else None
         )
         rows.append(
@@ -271,13 +284,22 @@ def main() -> int:
                 "fee_rate_match": fee_rate_match,
                 "execution": execution,
                 "taker_fee_usd": str(fee_usd) if fee_usd is not None else None,
-                "gross_edge_per_share": str(gross_edge) if gross_edge is not None else None,
-                "net_edge_per_share": str(net_edge) if net_edge is not None else None,
-                "net_edge_after_1pp_haircut": str(net_edge - Decimal("0.01"))
-                if net_edge is not None
+                "gaussian_probability": str(gaussian_probability),
+                "quantile_probability": str(quantile_probability),
+                "gross_edge_per_share": str(gaussian_gross_edge)
+                if gaussian_gross_edge is not None
                 else None,
-                "net_edge_after_2pp_haircut": str(net_edge - Decimal("0.02"))
-                if net_edge is not None
+                "net_edge_per_share": str(gaussian_net_edge)
+                if gaussian_net_edge is not None
+                else None,
+                "gaussian_adjusted_edge": str(gaussian_net_edge - Decimal("0.02"))
+                if gaussian_net_edge is not None
+                else None,
+                "quantile_net_edge_per_share": str(quantile_net_edge)
+                if quantile_net_edge is not None
+                else None,
+                "quantile_adjusted_edge": str(quantile_net_edge - Decimal("0.02"))
+                if quantile_net_edge is not None
                 else None,
                 "decision": "DIAGNOSTIC_ONLY",
             }
@@ -289,12 +311,38 @@ def main() -> int:
     last_book = max(receipt_times) if receipt_times else None
     skew = (last_book - forecast_received).total_seconds() if last_book else None
     executable_count = sum(row.get("execution", {}).get("executable", False) for row in rows)
-    probability_sum = sum(row["model_probability"] for row in probabilities)
+    gaussian_probability_sum = sum(
+        row["model_probability"] for row in gaussian_probabilities
+    )
+    quantile_probability_sum = sum(
+        row["model_probability"] for row in quantile_probabilities
+    )
+    model_tv = total_variation_distance(gaussian_probabilities, quantile_probabilities)
     fee_match_all = all(row.get("fee_rate_match") is True for row in rows)
+    paper_rule = config.get("paper_rule")
+    paper_decisions = {}
+    if paper_rule:
+        minimum_edge = Decimal(str(paper_rule["minimum_adjusted_edge_per_share"]))
+        for model, field in (
+            ("gaussian", "gaussian_adjusted_edge"),
+            ("quantile", "quantile_adjusted_edge"),
+        ):
+            candidates = [row for row in rows if row.get(field) is not None]
+            selected = max(candidates, key=lambda row: Decimal(row[field])) if candidates else None
+            qualifies = selected is not None and Decimal(selected[field]) >= minimum_edge
+            paper_decisions[model] = {
+                "decision": "PAPER_TRADE" if qualifies else "NO_TRADE",
+                "selected_market_id": selected["market_id"] if selected else None,
+                "selected_bucket": selected["label"] if selected else None,
+                "adjusted_edge_per_share": selected[field] if selected else None,
+                "threshold": str(minimum_edge),
+                "order_sent": False,
+            }
     checks = {
         "event_rule_identity": True,
         "bucket_count": len(buckets) == config["expected_bucket_count"],
-        "probability_sum": abs(probability_sum - 1.0) <= 1e-9,
+        "probability_sum": abs(gaussian_probability_sum - 1.0) <= 1e-9
+        and abs(quantile_probability_sum - 1.0) <= 1e-9,
         "target_nbm_record": len(candidates) == 1,
         "forecast_precedes_books": last_book is not None and forecast_received <= last_book,
         "temporal_skew": skew is not None
@@ -313,7 +361,9 @@ def main() -> int:
         "forecast": forecast,
         "gamma_manifest": {key: gamma[key] for key in gamma if key != "payload"},
         "probability_model": config["forecast"]["probability_model"],
-        "probability_sum": probability_sum,
+        "gaussian_probability_sum": gaussian_probability_sum,
+        "quantile_probability_sum": quantile_probability_sum,
+        "model_total_variation": model_tv,
         "forecast_to_last_book_seconds": skew,
         "bucket_count": len(buckets),
         "executable_bucket_count": executable_count,
@@ -323,6 +373,7 @@ def main() -> int:
         if all(checks.values())
         else "VERTICAL_SLICE_INCOMPLETE",
         "rows": rows,
+        "paper_decisions": paper_decisions,
         "raw_directory": str(args.raw_directory),
         "generated_at_utc": utc_iso(),
     }
@@ -335,7 +386,10 @@ def main() -> int:
                 "forecast": forecast,
                 "bucket_count": len(buckets),
                 "executable_bucket_count": executable_count,
-                "probability_sum": probability_sum,
+                "gaussian_probability_sum": gaussian_probability_sum,
+                "quantile_probability_sum": quantile_probability_sum,
+                "model_total_variation": model_tv,
+                "paper_decisions": paper_decisions,
                 "forecast_to_last_book_seconds": skew,
                 "checks": checks,
                 "errors": errors,

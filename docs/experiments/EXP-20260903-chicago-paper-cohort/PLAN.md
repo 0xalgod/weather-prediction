@@ -133,6 +133,13 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - Dates, models, paper rule, metrics and every acceptance/stop threshold are unchanged.
 - This is a prospective amendment, not a post-result timing selection.
 
+### 2026-09-03 — Day 1 locked and dual-model runner ready
+
+- Target Sep 4 event 952456 and its exact rule/11-market identity were locked from the prior checksum-addressed discovery before cohort forecast or price retrieval.
+- Runner now emits Gaussian and quantile probabilities, total variation, V2 fees, `$10` VWAP and one thresholded paper decision per model from the same immutable snapshot.
+- Tests remain 111/111 and scoped Ruff passes.
+- Next action: execute only inside the 10:45–11:15 UTC eligibility window.
+
 ## Decision log
 
 ### PCD-0001 — 2026-09-03 — Use a short fixed-time pilot before a 30-day claim sample

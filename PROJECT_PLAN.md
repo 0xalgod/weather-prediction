@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.66.0
+**Plan versiyonu:** 0.67.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1288,6 +1288,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Timing integrity:** Değişiklik snapshot 1 ve cohort-specific forecast/price gözleminden önce yapıldı; post-result selection değildir.
 - **Değişmeyenler:** 14 date/≥10 eligible, models, $10 VWAP, fee+2pp, minimum 3pp, metrics ve bütün gates aynı.
 - **Kural:** Cohort boyunca 11:00 UTC sabit; sonraki timing değişikliği mixed cohort değil yeni version gerektirir.
+
+### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
+
+- **Durum:** `ACTIVE`
+- **Lock:** Day 1 target Sep 4, event 952456, rule hash `98b9…3c85`, 11 market identity önceki checksum-locked discovery'den; cohort forecast/price görülmeden config oluşturuldu.
+- **Runner:** Aynı immutable NBM/books üzerinde Gaussian + quantile probabilities, TV, V2 fee, $10 VWAP ve model-başına locked paper threshold kararı üretiyor; `order_sent=false`.
+- **Kalite:** 111/111 full tests, scoped Ruff 0; day config JSON valid.
+- **Zaman:** İlk run yalnız 2026-09-03 10:45–11:15 UTC içinde eligible.
 
 ## 13. Open Questions
 

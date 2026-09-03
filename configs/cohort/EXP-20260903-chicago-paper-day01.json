@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-paper-cohort",
+  "cohort_day": 1,
+  "scheduled_at_utc": "2026-09-03T11:00:00Z",
+  "event_id": "952456",
+  "target_local_date": "2026-09-04",
+  "station_code": "KORD",
+  "timezone": "America/Chicago",
+  "resolution_source": "https://www.weather.gov/wrh/timeseries?site=kord",
+  "rule_text_sha256": "98b9f198f7e649943e05cabb02d1219c99bb79cc33654487ffac94bac50e3c85",
+  "identity_source": "reports/data_quality/EXP-20260902-phase5-kord-upcoming-event-discovery.json",
+  "identity_source_sha256": "e003e77b7f0083e4f3d1322512f8731de1f49fc4463f843c2079348cd82c7da0",
+  "expected_bucket_count": 11,
+  "forecast": {
+    "provider": "NOAA_NBM_PROBABILISTIC_TEXT",
+    "maximum_cycles_checked": 6,
+    "target_valid_time_utc": "2026-09-05T00:00:00Z",
+    "probability_model": "DUAL_GAUSSIAN_AND_QUANTILE_V1"
+  },
+  "execution": {
+    "notional_usd_per_bucket": 10.0,
+    "maximum_forecast_to_last_book_seconds": 900,
+    "minimum_executable_bucket_count": 9
+  },
+  "paper_rule": {
+    "resolution_risk_haircut_per_share": 0.02,
+    "minimum_adjusted_edge_per_share": 0.03,
+    "maximum_positions_per_model": 1,
+    "orders": false
+  }
+}
