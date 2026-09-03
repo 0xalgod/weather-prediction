@@ -140,6 +140,15 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - The incomplete attempt and its provisional Gaussian `NO_TRADE` / quantile `PAPER_TRADE` values are not admitted to the cohort.
 - Corrective scope is locked to a variable rename plus target-count regression test; models, data, timing and thresholds remain unchanged. Rerun must use a new path inside the original window.
 
+### 2026-09-03 — Day 1 accepted pending outcome
+
+- Corrected attempt passed all mechanics checks inside the registered window: 11/11 executable buckets, fee 11/11, zero errors and 0.944-second skew.
+- Gaussian and quantile probability vectors differed by TV `0.267234`.
+- Gaussian produced `NO_TRADE` because its best adjusted edge was +2.81pp versus the locked +3pp threshold.
+- Quantile produced one hypothetical `PAPER_TRADE`: 86-87°F, q=26.25%, `$10` VWAP 11¢, fee `$0.445`, adjusted edge +12.76pp. No order was sent.
+- Record status is `CAPTURE_ELIGIBLE_PENDING_OUTCOME`; outcome and P&L remain null.
+- Next action: preserve the separate Sep 4 settlement-source capture, then lock Day 2 before its forecast/price observation.
+
 ### 2026-09-03 — Day 1 locked and dual-model runner ready
 
 - Target Sep 4 event 952456 and its exact rule/11-market identity were locked from the prior checksum-addressed discovery before cohort forecast or price retrieval.

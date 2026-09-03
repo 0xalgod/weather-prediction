@@ -1,0 +1,70 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-paper-cohort",
+  "cohort_day": 1,
+  "scheduled_at_utc": "2026-09-03T11:00:00Z",
+  "run_generated_at_utc": "2026-09-03T10:57:52.142017Z",
+  "run_path": "data/processed/chicago_paper_cohort/day=01/run=20260903T105642Z-v2/result.json",
+  "run_result_sha256": "05187e9b318111f6589ceea96669159d60eec90d1004a0f6ac3a828080b2c485",
+  "status": "CAPTURE_ELIGIBLE_PENDING_OUTCOME",
+  "mechanics_decision": "VERTICAL_SLICE_MECHANICS_PASS",
+  "event_id": "952456",
+  "target_local_date": "2026-09-04",
+  "forecast": {
+    "model_run_time_utc": "2026-09-03T07:00:00Z",
+    "valid_time_utc": "2026-09-05T00:00:00Z",
+    "forecast_hour": 41,
+    "mean_f": 89,
+    "standard_deviation_f": 4,
+    "p10_f": 85,
+    "p25_f": 86,
+    "p50_f": 88,
+    "p75_f": 93,
+    "p90_f": 95
+  },
+  "quality": {
+    "registered_window": true,
+    "all_mechanics_checks_passed": true,
+    "bucket_count": 11,
+    "executable_bucket_count": 11,
+    "two_sided_book_count": 10,
+    "one_sided_book_count": 1,
+    "forecast_to_last_book_seconds": 0.944326,
+    "request_error_count": 0,
+    "gaussian_probability_sum": 1.0,
+    "quantile_probability_sum": 1.0,
+    "model_total_variation": 0.26723427833569946
+  },
+  "paper_decisions": {
+    "gaussian": {
+      "decision": "NO_TRADE",
+      "selected_bucket_for_threshold_comparison": "86-87°F",
+      "model_probability": 0.16304328047476563,
+      "ask_vwap": 0.11,
+      "taker_fee_usd_for_10usd": 0.445,
+      "adjusted_edge_per_share": 0.02814828047476563,
+      "minimum_required": 0.03,
+      "order_sent": false
+    },
+    "quantile": {
+      "decision": "PAPER_TRADE",
+      "bucket": "86-87°F",
+      "market_id": "4115801",
+      "model_probability": 0.2625,
+      "ask_vwap": 0.11,
+      "hypothetical_shares": 90.9090909090909,
+      "hypothetical_book_cost_usd": 10.0,
+      "hypothetical_taker_fee_usd": 0.445,
+      "adjusted_edge_per_share": 0.127605,
+      "minimum_required": 0.03,
+      "order_sent": false
+    }
+  },
+  "outcome": null,
+  "paper_pnl": null,
+  "limitations": [
+    "No outcome or settlement label is admitted yet.",
+    "The NBM product-valid-time to target-local-day semantic mapping remains a tracked validation dependency.",
+    "One paper decision is not evidence of calibration or profitability."
+  ]
+}

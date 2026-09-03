@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.68.0
+**Plan versiyonu:** 0.69.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1297,6 +1297,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Provisional only:** Gaussian `NO_TRADE` +2.20pp adjusted; quantile `PAPER_TRADE` +12.15pp, ikisi de 86-87°F. Order yok.
 - **Corrective pre-registration:** Yalnız değişkeni `paper_candidates` olarak ayır, target-count regression test ekle; model/data/threshold/time değişmeden aynı pencere içinde yeni immutable attempt çalıştır.
 
+### D-0071 — 2026-09-03 — Paper Day 1 snapshot kabul edildi, outcome pending
+
+- **Durum:** `ACTIVE`
+- **Timing/quality:** Completed 10:57:52Z inside 11:00±15m; all mechanics checks pass, 11/11 executable, 10 two-sided/1 one-sided, 0 errors, skew 0.944s.
+- **Forecast:** NBM 07Z f41; mean/sd 89/4°F, quantiles 85/86/88/93/95°F; target Sep 4 contract, product valid Sep 5 00Z.
+- **Model difference:** Gaussian/quantile TV `0.267234`.
+- **Paper decisions:** Gaussian best 86-87°F adjusted +2.81pp <3pp → `NO_TRADE`; quantile 86-87°F q=26.25%, VWAP=11¢, fee $0.445/$10, adjusted +12.76pp → `PAPER_TRADE`.
+- **Safety:** 90.909 hypothetical shares only; `order_sent=false`, outcome/P&L null.
+- **Boundary:** `CAPTURE_ELIGIBLE_PENDING_OUTCOME`; one day edge evidence değil, NBM valid-time→target-local-day semantic check tracked dependency.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1317,7 +1327,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** İlk paper cohort snapshot'ını 2026-09-03 11:00±15m UTC penceresinde target Sep 4 için çalıştır; Gaussian ve quantile modellerini aynı immutable forecast/books üzerinde ayrı kaydet, paper rule uygula fakat order gönderme.
+**Tek sonraki adım:** Sep 4 trigger penceresinde event 946566 settlement-source snapshot'ını alıp Day 1'den ayrı append-only kaydet; ardından Day 1 target event 952456 outcome'u henüz oluşmadığı için P&L ekleme. Paper Day 2 event'ini forecast/price görülmeden sonraki 11:00Z penceresi için kilitle.
 
 Beklenen artifact'lar:
 
