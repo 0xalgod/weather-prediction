@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.65.0
+**Plan versiyonu:** 0.66.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1281,6 +1281,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Outcome-free replay:** Probability sum 1.0; Gaussian vs quantile TV `0.273812`. Model seçimi apparent edge'i materyal değiştiriyor.
 - **Karar:** Primary quantile ve Gaussian benchmark her daily record'da ayrı korunacak; outcome'a göre model seçilmeyecek. Pass doğruluk/calibration kanıtı değildir.
 
+### D-0068 — 2026-09-03 — Paper cohort saati pre-data 11:00 UTC'ye alındı
+
+- **Durum:** `ACTIVE`
+- **Değişiklik:** Kullanıcı kolaylığı için daily time 12:00 UTC'den 11:00 UTC / 14:00 Europe/Istanbul'a, aynı ±15m toleransla alındı.
+- **Timing integrity:** Değişiklik snapshot 1 ve cohort-specific forecast/price gözleminden önce yapıldı; post-result selection değildir.
+- **Değişmeyenler:** 14 date/≥10 eligible, models, $10 VWAP, fee+2pp, minimum 3pp, metrics ve bütün gates aynı.
+- **Kural:** Cohort boyunca 11:00 UTC sabit; sonraki timing değişikliği mixed cohort değil yeni version gerektirir.
+
 ## 13. Open Questions
 
 - Polymarket historical L2/order-book verisi ne kadar geriye ve hangi çözünürlükte erişilebilir?
@@ -1293,7 +1301,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** İlk paper cohort snapshot'ını 2026-09-03 12:00±15m UTC penceresinde target Sep 4 için çalıştır; Gaussian ve quantile modellerini aynı immutable forecast/books üzerinde ayrı kaydet, paper rule uygula fakat order gönderme.
+**Tek sonraki adım:** İlk paper cohort snapshot'ını 2026-09-03 11:00±15m UTC penceresinde target Sep 4 için çalıştır; Gaussian ve quantile modellerini aynı immutable forecast/books üzerinde ayrı kaydet, paper rule uygula fakat order gönderme.
 
 Beklenen artifact'lar:
 

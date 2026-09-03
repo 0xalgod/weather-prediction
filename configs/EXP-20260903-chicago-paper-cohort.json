@@ -8,7 +8,7 @@
   "resolution_provider": "NOAA_WRH",
   "snapshot_dates_utc": {"start": "2026-09-03", "end": "2026-09-16"},
   "target_dates_local": {"start": "2026-09-04", "end": "2026-09-17"},
-  "decision_time_utc": "12:00:00",
+  "decision_time_utc": "11:00:00",
   "decision_tolerance_minutes": 15,
   "planned_observations": 14,
   "minimum_eligible_observations": 10,

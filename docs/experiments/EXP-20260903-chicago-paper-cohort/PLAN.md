@@ -14,7 +14,7 @@ Measure whether a transparent KORD probabilistic forecast produces repeatable co
 - Market family: daily maximum temperature, NOAA WRH-primary rule only
 - Snapshot dates: 2026-09-03 through 2026-09-16 UTC
 - Target local dates: 2026-09-04 through 2026-09-17
-- Decision time: 12:00 UTC daily, tolerance ±15 minutes
+- Decision time: 11:00 UTC daily (14:00 Europe/Istanbul), tolerance ±15 minutes
 - Planned observations: 14; minimum eligible observations: 10
 - Selection: exact target-date Chicago event discovered without using forecast, price or outcome values
 - Missing day: preserve reason; never substitute another city/date or backfill with later prices
@@ -25,7 +25,7 @@ This requires one short foreground snapshot per day, not an always-on collector.
 
 For each date:
 
-1. At 12:00 UTC ±15 minutes, find the exact active Chicago target-date event and lock event/rule/market/token identities.
+1. At 11:00 UTC ±15 minutes, find the exact active Chicago target-date event and lock event/rule/market/token identities.
 2. Select the latest available NOAA NBM probabilistic-text cycle by availability-only backward search; its publication/retrieval must precede the books.
 3. Select exactly one KORD maximum record valid at the product time corresponding to the target local day; record target mapping as an explicit semantic check.
 4. Capture all YES books, CLOB V2 condition info and Gamma fee schedule immediately; forecast-to-last-book skew ≤15 minutes.
@@ -124,7 +124,14 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - Tail extension, anchor interpolation, repeated-quantile jumps, exhaustive mass, monotonic rejection and total-variation alignment are deterministic.
 - Outcome-free prior-forecast replay gave Gaussian-versus-quantile TV `0.273812`, confirming material model risk before any outcome comparison.
 - Both models remain separately tracked; neither may be selected post-hoc.
-- Next action: run scheduled snapshot 1 at 12:00 UTC ±15 minutes for target Sep 4.
+- Next action: run scheduled snapshot 1 at 11:00 UTC ±15 minutes for target Sep 4.
+
+### 2026-09-03 — Pre-data schedule amendment
+
+- User requested moving the daily decision time one hour earlier before snapshot 1 or any cohort price/forecast observation.
+- Decision time changed from 12:00 UTC to 11:00 UTC (14:00 Europe/Istanbul), retaining the same ±15-minute tolerance.
+- Dates, models, paper rule, metrics and every acceptance/stop threshold are unchanged.
+- This is a prospective amendment, not a post-result timing selection.
 
 ## Decision log
 
@@ -142,3 +149,9 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 
 - Decision: Highest adjusted edge, minimum 3pp after fee and 2pp haircut, `$10` ask-depth, at most one position.
 - Rationale: This limits multiple-testing and correlated exposure while retaining explicit no-trade observations.
+
+### PCD-0004 — 2026-09-03 — Move the fixed snapshot to 11:00 UTC before cohort start
+
+- Decision: Use 11:00 UTC ±15 minutes for every planned date.
+- Evidence at decision time: No cohort snapshot had been taken; the change was requested for operator convenience.
+- Consequence: The entire cohort uses the earlier time. A later timing change requires a new cohort version rather than mixing decision times.
