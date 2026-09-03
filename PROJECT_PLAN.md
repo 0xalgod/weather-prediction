@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.71.0
+**Plan versiyonu:** 0.72.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1323,6 +1323,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Integrity:** Run directory ve CLOB request oluşmadan durdu; price/history sonucu gözlenmedi.
 - **Corrective lock:** Yalnız 1–5 fractional digit'i 6 haneye pad et ve regression test ekle. Sample, endpoint, query windows, metrics ve thresholds değişmez; yeni immutable attempt zorunlu.
 
+### D-0074 — 2026-09-03 — Chicago historical price coverage geçti, execution kanıtı değil
+
+- **Durum:** `ACTIVE`
+- **Sample:** Latest deterministic 30 eligible event, 2026-07-30–08-28; event başına 11, toplam 330 YES token.
+- **Coverage:** event 30/30, token 330/330, request error 0, window dışı point 0; locked gate'lerin tümü geçti.
+- **Resolution:** 1,303 point; token başına min/median/max 3/4/4. Duplicate/conflict/non-strict response 0.
+- **Karar:** `HISTORICAL_PRICE_COVERAGE_PASS`; tarihsel indicative-price ve forecast calibration araştırması başlayabilir.
+- **Boundary:** 3–4 point/token seyrek seridir; historical bid/ask, depth, spread, side, size veya fill yok. Executable backtest/net EV/edge kanıtı sayılmaz.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1343,7 +1352,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı deterministic Chicago historical CLOB price-history coverage probe'unu çalıştır; immutable raw yanıtlar ve coverage raporu üret. Prospective Sep 4 settlement/paper görevleri paralel takvim bağımlılığı olarak korunur.
+**Tek sonraki adım:** Kilitli aynı 30 Chicago event/date için as-issued NOAA forecast ve eligible settlement-label join kapsamını sonuçları görmeden ön-kaydet ve ölç; leakage-safe ilk model tablosunun mümkün olup olmadığına karar ver. Prospective Sep 4 görevleri paralel takvim bağımlılığıdır.
 
 Beklenen artifact'lar:
 

@@ -1,6 +1,6 @@
 # EXP-20260903 — Chicago historical price coverage
 
-**Status:** `IN_PROGRESS`  
+**Status:** `PASSED`
 **Pre-registration time:** 2026-09-03, before experiment-specific CLOB history requests  
 **Purpose:** Determine whether existing public historical data can support a fast Chicago backtest without confusing indicative prices with executable fills.
 
@@ -55,3 +55,11 @@ If coverage passes, join selected event dates and winning buckets to as-issued N
 - The frozen Gamma inventory contained `creationDate=2026-08-23T00:57:43.55602Z`; Python 3.9 `datetime.fromisoformat` rejected its five-digit fractional seconds.
 - Failure occurred during sample expansion before run-directory creation and before any experiment-specific CLOB request or price observation.
 - Corrective scope is locked to padding 1–5 fractional-second digits to six before standard parsing and adding a regression test. Sample, endpoint, windows, metrics and thresholds are unchanged.
+
+### 2026-09-03 — Attempt 2 accepted
+
+- All locked checks passed for 30 events, 330 YES tokens and 1,303 points: event/token coverage 100%, errors 0%, out-of-window points 0% and minimum 3 points per covered token.
+- Event dates span 2026-07-30 through 2026-08-28; every event has 11 bucket markets.
+- Coverage is sparse: 17 tokens have 3 points and 313 have 4; median 4. No duplicate/conflicting timestamps or response-order defects were observed.
+- Decision: `HISTORICAL_PRICE_COVERAGE_PASS`, limited to indicative-price/forecast research. This does not pass executable historical P&L or edge gates.
+- Next: pre-register and measure an as-issued forecast + eligible outcome join on these exact event identities/dates.

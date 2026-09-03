@@ -1,0 +1,54 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-historical-price-coverage",
+  "data_cutoff_utc": "2026-09-03T11:30:00Z",
+  "generated_at_utc": "2026-09-03T11:26:21.192704Z",
+  "decision": "HISTORICAL_PRICE_COVERAGE_PASS",
+  "source_inventory_run": "data/raw/polymarket_gamma/closed=true/run=20260829T215446Z",
+  "raw_run_directory": "data/raw/polymarket_price_history/run=20260903T112900Z-v2",
+  "raw_result_sha256": "907d0ce7de59d3c70b6709b53a01c9245a4ac3c4c81579323bf80543d00b4762",
+  "event_end_date_range": {
+    "minimum": "2026-07-30T12:00:00Z",
+    "maximum": "2026-08-28T12:00:00Z"
+  },
+  "coverage": {
+    "selected_event_count": 30,
+    "markets_per_event": 11,
+    "yes_token_count": 330,
+    "events_with_any_history_rate": 1.0,
+    "tokens_with_any_history_rate": 1.0,
+    "request_error_rate": 0.0,
+    "out_of_window_point_rate": 0.0,
+    "total_point_count": 1303,
+    "points_per_token_minimum": 3,
+    "points_per_token_median": 4.0,
+    "points_per_token_mean": 3.9484848484848483,
+    "points_per_token_maximum": 4,
+    "tokens_with_3_points": 17,
+    "tokens_with_4_points": 313,
+    "duplicate_point_count": 0,
+    "conflicting_timestamp_count": 0,
+    "non_strict_response_count": 0
+  },
+  "locked_checks": {
+    "minimum_selected_events": true,
+    "minimum_events_with_any_history_rate": true,
+    "minimum_tokens_with_any_history_rate": true,
+    "maximum_request_error_rate": true,
+    "maximum_out_of_window_point_rate": true,
+    "minimum_points_per_covered_token": true
+  },
+  "interpretation": {
+    "permitted": [
+      "indicative market-probability benchmarking",
+      "forecast calibration research",
+      "time-aligned feature-table construction with explicit staleness"
+    ],
+    "not_permitted": [
+      "historical executable fill claims",
+      "historical spread or depth inference",
+      "economic edge or live-trading claims"
+    ],
+    "reason": "The endpoint returned only 3-4 timestamp-price points per token and no historical bid/ask, depth, trade side, size, or fill evidence."
+  }
+}
