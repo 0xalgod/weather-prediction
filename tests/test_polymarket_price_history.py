@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 
 from weather_quant.ingestion.polymarket_price_history import (
+    parse_utc,
     select_events,
     summarize_coverage,
     validate_history,
@@ -26,6 +27,11 @@ def event(event_id="2", end="2026-08-01T12:00:00Z"):
             }
         ],
     }
+
+
+def test_parse_utc_accepts_gamma_five_digit_fraction_on_python39():
+    parsed = parse_utc("2026-08-23T00:57:43.55602Z")
+    assert parsed.microsecond == 556020
 
 
 def test_selection_and_yes_window_are_deterministic():

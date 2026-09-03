@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import re
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime, timezone
 from typing import Any
@@ -15,7 +16,13 @@ JsonObject = dict[str, Any]
 def parse_utc(value: str) -> datetime:
     """Parse an ISO timestamp and require timezone awareness."""
 
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    normalized = value.replace("Z", "+00:00")
+    fractional = re.search(r"\.(\d+)(?=[+-]\d\d:\d\d$)", normalized)
+    if fractional and len(fractional.group(1)) < 6:
+        normalized = normalized.replace(
+            f".{fractional.group(1)}", f".{fractional.group(1).ljust(6, '0')}", 1
+        )
+    parsed = datetime.fromisoformat(normalized)
     if parsed.tzinfo is None:
         raise DiscoveryError(f"timestamp lacks timezone: {value}")
     return parsed.astimezone(timezone.utc)

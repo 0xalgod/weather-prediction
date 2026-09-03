@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.70.0
+**Plan versiyonu:** 0.71.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1315,6 +1315,13 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Primary gates:** event/token any-history ≥80%, request error ≤2%, window dışı point 0%, covered token başına ≥2 point.
 - **Endpoint:** Public CLOB `/prices-history`, explicit creation→close window, `interval=all`, 1-minute fidelity; responses append-only ve checksum'lı.
 - **Boundary:** Endpoint geçmiş L2 bid/ask/depth sağlamaz. Pass yalnız indicative-price/forecast research iznidir; executable P&L veya edge kanıtı değildir.
+
+### D-0073 — 2026-09-03 — Historical coverage attempt 1 pre-network timestamp parse failure
+
+- **Durum:** `ACTIVE`
+- **Failure:** Gamma `creationDate` içindeki 5-digit fractional seconds Python 3.9 `fromisoformat` tarafından reddedildi.
+- **Integrity:** Run directory ve CLOB request oluşmadan durdu; price/history sonucu gözlenmedi.
+- **Corrective lock:** Yalnız 1–5 fractional digit'i 6 haneye pad et ve regression test ekle. Sample, endpoint, query windows, metrics ve thresholds değişmez; yeni immutable attempt zorunlu.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

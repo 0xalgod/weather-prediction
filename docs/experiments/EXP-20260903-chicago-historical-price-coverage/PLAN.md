@@ -47,3 +47,11 @@ The documented history response contains timestamp and price, not historical bid
 ## Next step after this experiment
 
 If coverage passes, join selected event dates and winning buckets to as-issued NOAA forecast availability, then construct the first leakage-safe modeling table. If coverage fails, measure an alternative trade-history source or narrow the historical work to forecast calibration while prospective L2 collection continues.
+
+## Execution log
+
+### 2026-09-03 — Attempt 1 incomplete before network requests
+
+- The frozen Gamma inventory contained `creationDate=2026-08-23T00:57:43.55602Z`; Python 3.9 `datetime.fromisoformat` rejected its five-digit fractional seconds.
+- Failure occurred during sample expansion before run-directory creation and before any experiment-specific CLOB request or price observation.
+- Corrective scope is locked to padding 1–5 fractional-second digits to six before standard parsing and adding a regression test. Sample, endpoint, windows, metrics and thresholds are unchanged.
