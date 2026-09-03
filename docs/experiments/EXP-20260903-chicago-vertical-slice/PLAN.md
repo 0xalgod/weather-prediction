@@ -134,6 +134,20 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - No live run value is interpreted in this implementation step.
 - Next action: execute the single registered run and apply its fixed mechanics gate.
 
+### 2026-09-03 — Live attempt 1 incomplete at fee reconciliation
+
+- Event/rule, one KORD NBM record, 11 buckets, probability sum, 11/11 `$10` ask-depth coverage, zero request errors and 0.913-second temporal skew passed.
+- Fee reconciliation failed because legacy `/fee-rate base_fee=1000 bps` was incorrectly compared with Gamma curve `rate=0.05`; net EV was withheld and decision is `VERTICAL_SLICE_INCOMPLETE`.
+- Official V2 diagnosis: `/clob-markets/{condition_id}` returns both `tbf=1000` and `fd={r:0.05,e:1,to:true}`. The curve object agrees with Gamma across 11/11 conditions.
+- Gross edges are diagnostic only and no signal/outcome/order was emitted.
+- Next action: apply the separately registered condition-level V2 fee correction and create a new immutable attempt.
+
+### 2026-09-03 — V2 fee corrective pre-registered
+
+- Require exact condition/token identity and 11/11 agreement between CLOB V2 `fd.r/e/to` and Gamma `feeSchedule.rate/exponent/takerOnly`.
+- Apply `C×r×p×(1-p)` only when the fee curve reconciles; never treat legacy `base_fee` or `tbf` as `fd.r`.
+- Preserve every CLOB market-info response and leave all other slice thresholds unchanged.
+
 ## Decision log
 
 ### VSD-0001 — 2026-09-03 — Start quant mechanics before settlement sample matures
@@ -147,3 +161,9 @@ Failure produces an explicit reason and a corrective experiment; thresholds will
 - Decision: Use NBM mean/standard deviation with half-degree bucket boundaries for the first mechanics slice.
 - Alternatives: Fit a flexible distribution to five quantiles; deferred because one event cannot validate/tune it. Treat percentiles as ensemble members; rejected because they are quantiles, not exchangeable samples.
 - Consequence: Output is transparent and reproducible but explicitly uncalibrated.
+
+### VSD-0003 — 2026-09-03 — Use V2 fee curve, not legacy base fee, for fee arithmetic
+
+- Decision: Reconcile and use condition-level `fd.r/e/to`; preserve `tbf` and `/fee-rate base_fee` only as separate legacy/base parameters.
+- Evidence: All 11 conditions returned `tbf=1000` and `fd.r=0.05`; Gamma independently returned `rate=0.05`, `exponent=1`, `takerOnly=true`. Official V2 documentation identifies `fd` as fee details.
+- Consequence: Attempt 1 remains incomplete; a new immutable attempt is required rather than post-hoc editing its result.

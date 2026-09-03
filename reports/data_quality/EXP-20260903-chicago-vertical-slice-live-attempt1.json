@@ -1,0 +1,61 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-vertical-slice",
+  "attempt": 1,
+  "run_path": "data/processed/chicago_vertical_slice/run=20260903T091218Z-v1/result.json",
+  "generated_at_utc": "2026-09-03T09:13:45.983914Z",
+  "decision": "VERTICAL_SLICE_INCOMPLETE",
+  "forecast": {
+    "provider": "NOAA_NBM_PROBABILISTIC_TEXT",
+    "model_run_time_utc": "2026-09-03T07:00:00Z",
+    "source_received_at_utc": "2026-09-03T09:13:45.051054Z",
+    "valid_time_utc": "2026-09-04T00:00:00Z",
+    "station_code": "KORD",
+    "nbm_version": "5.0",
+    "forecast_hour": 17,
+    "mean_f": 90,
+    "standard_deviation_f": 4,
+    "p10_f": 86,
+    "p25_f": 87,
+    "p50_f": 89,
+    "p75_f": 94,
+    "p90_f": 95
+  },
+  "metrics": {
+    "bucket_count": 11,
+    "probability_sum": 1.0,
+    "executable_10usd_bucket_count": 11,
+    "forecast_to_last_book_seconds": 0.913075,
+    "request_error_count": 0,
+    "two_sided_book_count": 7,
+    "one_sided_book_count": 4
+  },
+  "checks": {
+    "event_rule_identity": true,
+    "bucket_count": true,
+    "probability_sum": true,
+    "target_nbm_record": true,
+    "forecast_precedes_books": true,
+    "temporal_skew": true,
+    "executable_coverage": true,
+    "request_errors": true,
+    "fee_rate_reconciled": false
+  },
+  "fee_diagnostic": {
+    "legacy_fee_rate_endpoint_base_fee_bps": 1000,
+    "gamma_fee_schedule_rate": 0.05,
+    "clob_v2_market_info_path": "/clob-markets/{condition_id}",
+    "clob_v2_market_info_tbf": 1000,
+    "clob_v2_market_info_fd": {"r": 0.05, "e": 1, "to": true},
+    "clob_v2_fd_matches_gamma_count": 11,
+    "interpretation": "tbf/base_fee is not the fd.r curve rate; attempt 1 correctly withheld net EV"
+  },
+  "gross_edge_boundary": {
+    "maximum_gross_edge_per_share": 0.08721164796114673,
+    "maximum_gross_edge_bucket": "86-87°F",
+    "minimum_gross_edge_per_share": -0.3837787694988252,
+    "minimum_gross_edge_bucket": "94-95°F",
+    "warning": "uncalibrated one-event diagnostic; not a trade signal"
+  },
+  "corrective_action": "Replace legacy per-token fee-rate reconciliation with official CLOB V2 condition-level fd fields, lock exponent/taker-only semantics, and rerun under unchanged mechanics thresholds."
+}

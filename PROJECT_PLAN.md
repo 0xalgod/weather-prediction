@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.60.0
+**Plan versiyonu:** 0.61.0
 **Son güncelleme:** 2026-09-03
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1226,6 +1226,23 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Provenance:** Yeni raw run path zorunlu, overwrite yasak; NBM/Gamma/book/tick/fee checksum ve timestamps saklanıyor.
 - **Kalite:** Full suite 105/105, scoped Ruff 0. Outcome/order/wallet/credential endpoint'i yok.
 - **Karar:** Runner aynı preregistration altında tek live run için hazır.
+
+### D-0062 — 2026-09-03 — Vertical slice attempt 1 fee gate'te fail-closed
+
+- **Durum:** `ACTIVE`
+- **Passed:** Exact event/rule, one KORD forecast, 11 bucket, probability sum 1.0, 11/11 `$10` executable ask-depth, 0 request error, forecast→last-book 0.913s.
+- **Forecast:** NBM 07Z, f17, target-valid 00Z; mean 90°F, sd 4°F; quantiles 86/87/89/94/95°F.
+- **Failed:** Legacy `/fee-rate base_fee=1000 bps` ile Gamma `feeSchedule.rate=0.05` eşit değil; net EV doğru şekilde üretilmedi. Karar `VERTICAL_SLICE_INCOMPLETE`.
+- **Diagnostic only:** Gross edge aralığı +8.72pp (`86-87°F`) ile −38.38pp (`94-95°F`); uncalibrated tek event, signal değil.
+- **Safety:** Outcome/order/wallet/credential yok; raw NBM/Gamma/11 book/tick/fee immutable ignored run'da.
+
+### D-0063 — 2026-09-03 — V2 condition-level fee corrective ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Official `/clob-markets/{condition_id}` `fd={r,e,to}` alanı Gamma `feeSchedule` ile 11/11 reconcile olur ve documented `C×r×p×(1-p)` formula net EV üretir.
+- **Gate:** Exact condition/token identity; `fd.r=Gamma rate`, `fd.e=Gamma exponent=1`, `fd.to=Gamma takerOnly=true` for 11/11; immutable response checksum; diğer vertical-slice eşikleri değişmez.
+- **Failure:** Herhangi fee mismatch veya missing field net EV'yi tekrar `UNKNOWN` ve slice'ı `INCOMPLETE` bırakır. Legacy `base_fee/tbf` rate olarak kullanılmaz.
+- **Karar:** Runner düzeltmesi ve yeni immutable attempt; attempt 1 overwrite edilmez.
 
 ## 13. Open Questions
 
