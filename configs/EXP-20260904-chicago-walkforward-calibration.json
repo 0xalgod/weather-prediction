@@ -23,6 +23,19 @@
     "publication_proxy_must_not_exceed_decision": true,
     "fallback": null
   },
+  "retrieval": {
+    "reuse_source": "data/raw/chicago_historical_join/run=20260904T095000Z-v2/result.json",
+    "reuse_source_sha256": "4002e40f849664dfcdadcaf63441d37e0454141643dcde3e027cd07b635456f3",
+    "workers": 4,
+    "timeout_seconds": 300,
+    "maximum_attempts_per_object": 3,
+    "retryable_errors": [
+      "TimeoutError",
+      "ConnectionResetError",
+      "URLError"
+    ],
+    "partial_attempt_files_are_never_accepted": true
+  },
   "walk_forward": {
     "order": "target_date_ascending",
     "initial_train_events": 60,

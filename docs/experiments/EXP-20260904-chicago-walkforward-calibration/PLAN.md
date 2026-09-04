@@ -15,6 +15,14 @@ Test whether simple, interpretable station/outcome calibration improves the fixe
 - Forecast input is prior-day 07Z KORD NBP f41, explicitly labelled `PROXY_18H_MAX`; HTTP Last-Modified must be at/before prior-day 11:00 UTC.
 - Outcomes are exact terminal winners from frozen Gamma metadata.
 
+## Locked retrieval policy
+
+- Checksum-verify and reuse the accepted 30-date join sources.
+- Download only the remaining 84 prior-day 07Z objects with four workers and 300-second request timeout.
+- Permit at most three attempts per object only for timeout, connection-reset or URL transport errors.
+- Every attempt has a distinct immutable filename. Partial attempts are retained but never accepted or parsed.
+- HTTP missing objects and semantic/parse failures are not replaced by another cycle or date.
+
 ## Walk-forward design
 
 - Sort 114 events by target date.

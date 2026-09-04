@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.79.0
+**Plan versiyonu:** 0.80.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1401,6 +1401,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Calibration:** Shift −5..+5°F step 0.5 × spread {0.75,1,1.25}; train log loss selection, deterministic raw-nearest tie-break.
 - **Gate:** Eligible ≥99%, OOS ≥53; practical improve ≥2% log loss + Brier non-worse; strong evidence paired CI upper <0.
 - **Boundary:** Forecast calibration only; market/EV/fill/order yok, one-city/season/version external-validity limiti var.
+
+### D-0083 — 2026-09-04 — Expanded dataset retrieval policy kilitlendi
+
+- **Durum:** `ACTIVE`
+- **Reuse:** Accepted 30-date join result ve her NBM source checksum doğrulanacak.
+- **Pending:** Yalnız kalan 84 prior-day 07Z object; 4 worker, 300s timeout, transport error için max 3 attempt.
+- **Integrity:** Attempt dosyaları benzersiz/immutable; partial dosya parse/kabul edilmez. HTTP missing/semantic failure için cycle/date replacement yok.
+- **Thresholds:** 114-universe, ≥99% eligible ve ≥53 OOS dahil tüm D-0082 gate'leri değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
