@@ -1,6 +1,6 @@
 # EXP-20260904 — Chicago baseline scoring
 
-**Status:** `IN_PROGRESS`
+**Status:** `PASSED`
 **Pre-registration:** 2026-09-04, before calculating model scores
 
 ## Question and hypothesis
@@ -40,3 +40,11 @@ At least 8/10 test events are required for any model-versus-market statement. If
 - Gaussian versus quantile ordering is descriptive at 30 dates; bootstrap intervals are reported but do not establish a durable edge.
 - No model-versus-market, EV or trading claim is allowed without the market coverage gate.
 - The sample is one city, one NBM version and one summer month; expansion and walk-forward training remain required.
+
+## 2026-09-04 result
+
+- Quality contract passed: 30 events, 20/10 split, all finite metrics, exact one-hot winners and maximum probability-sum error `2.22e-16`.
+- Both NBM distributions beat uniform log loss on validation and test. Test log loss: uniform `2.398`, Gaussian `1.171`, quantile `1.085`.
+- Quantile mean log loss was lower than Gaussian, but paired 95% intervals crossed zero in validation and test; no reliable model-superiority claim.
+- Indicative market coverage was 0/30 because no complete event had points at/before 11:00 UTC. Status: `INSUFFICIENT_POINT_IN_TIME_COVERAGE`; no model-vs-market or EV result.
+- Decision: `FORECAST_BASELINES_PASS_MARKET_COMPARISON_UNAVAILABLE`.

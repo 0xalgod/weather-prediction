@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.76.0
+**Plan versiyonu:** 0.77.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1368,6 +1368,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Market rule:** Her YES token için decision time'da/öncesinde latest point; future yasak, max 18h stale, all tokens, normalized cross-bucket score. Test coverage <8 ise market comparison yok.
 - **Claims:** Testte uniform'u geçen model yalnız preliminary baseline olabilir; model-vs-market/EV/trade claim ayrı coverage ve execution gate gerektirir.
 
+### D-0079 — 2026-09-04 — İlk Chicago baseline skorları geçti, market comparison unavailable
+
+- **Durum:** `ACTIVE`
+- **Quality:** 30/30 finite; 20 validation/10 test; max probability-sum error `2.22e-16`; exact winners 30/30.
+- **Log loss validation:** uniform 2.398, Gaussian 1.575, quantile 1.556.
+- **Log loss test:** uniform 2.398, Gaussian 1.171, quantile 1.085. İki NBM model de preliminary uniform baseline'ı geçti.
+- **Model uncertainty:** Gaussian−quantile paired 95% CI validation `[-0.124,+0.187]`, test `[-0.096,+0.267]`; zero içeriyor, quantile superiority claim yok.
+- **Market gate:** 0/30 complete event decision time 11:00Z öncesi historical price içeriyor; `INSUFFICIENT_POINT_IN_TIME_COVERAGE`. Future price taşınmadı; model-vs-market/EV/P&L yok.
+- **Karar:** Forecast sample genişletmeye değer; model eğitmeden önce NBM local-day semantic mapping doğrulanmalı. Execution kanıtı prospective L2'den gelecek.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1388,7 +1398,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı 20-validation/10-test Chicago baseline scoring runner'ını uygula; uniform/Gaussian/quantile metriklerini ve point-in-time indicative-market coverage gate'ini tek sefer ölç.
+**Tek sonraki adım:** NBM f41 MaxT valid target+1 00Z kaydının Chicago local target day'i temsil ettiğini resmi ürün semantiği ve deterministic tarih örnekleriyle doğrula; geçerse daha geniş tarihsel labeled sample + walk-forward calibration training planını ön-kaydet.
 
 Beklenen artifact'lar:
 

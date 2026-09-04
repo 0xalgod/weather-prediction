@@ -1,0 +1,52 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260904-chicago-baseline-scoring",
+  "decision": "FORECAST_BASELINES_PASS_MARKET_COMPARISON_UNAVAILABLE",
+  "processed_result": "data/processed/chicago_baseline_scoring/run=20260904T100500Z-v1/result.json",
+  "processed_result_sha256": "250ff8ed2c771f2e7a81d8139cd4dcb8c4d25173493ba3982f80fc4413b66824",
+  "quality": {
+    "event_count": 30,
+    "validation_event_count": 20,
+    "test_event_count": 10,
+    "finite_metric_rate": 1.0,
+    "maximum_probability_sum_error": 2.220446049250313e-16,
+    "exact_winner_vector_rate": 1.0,
+    "indicative_market_eligible_event_count": 0,
+    "indicative_market_status": "INSUFFICIENT_POINT_IN_TIME_COVERAGE",
+    "indicative_market_failure_reason": "NO_POINT_AT_OR_BEFORE_DECISION"
+  },
+  "mean_multiclass_log_loss": {
+    "validation": {
+      "uniform": 2.3978952727983707,
+      "nbm_gaussian": 1.575418476874328,
+      "nbm_quantile_preserving": 1.5555183701138513
+    },
+    "test": {
+      "uniform": 2.3978952727983707,
+      "nbm_gaussian": 1.1705979919747627,
+      "nbm_quantile_preserving": 1.0852662679480816
+    }
+  },
+  "gaussian_minus_quantile_log_loss": {
+    "validation": {
+      "mean": 0.019900106760476793,
+      "ci95": [
+        -0.12390211762871788,
+        0.18655932467797157
+      ]
+    },
+    "test": {
+      "mean": 0.08533172402668117,
+      "ci95": [
+        -0.09604869473896267,
+        0.2672804838797691
+      ]
+    }
+  },
+  "limitations": [
+    "The test set contains only ten consecutive summer dates.",
+    "Gaussian-versus-quantile paired confidence intervals include zero.",
+    "No historical market point existed at or before the locked 11:00 UTC decision time.",
+    "The result measures forecast baselines, not executable EV or profitability."
+  ]
+}
