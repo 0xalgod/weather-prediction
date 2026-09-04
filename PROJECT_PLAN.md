@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.75.0
+**Plan versiyonu:** 0.76.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1359,6 +1359,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** `HISTORICAL_JOIN_PASS`; preliminary Gaussian/quantile/indicative-market scoring dataset'i açıldı.
 - **Boundary:** 30 summer date edge/model-training için küçük; price executable değil; NBM local-day semantics provisional.
 
+### D-0078 — 2026-09-04 — Chicago baseline scoring ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Split:** Exact 30 date ascending; first 20 validation, last 10 single-use test; fitting/tuning yok.
+- **Models:** Uniform, locked NBM Gaussian, locked quantile-preserving CDF.
+- **Metrics:** Primary multiclass log loss; Brier/RPS/winner probability secondary; paired date bootstrap 10,000, seed 20260904.
+- **Market rule:** Her YES token için decision time'da/öncesinde latest point; future yasak, max 18h stale, all tokens, normalized cross-bucket score. Test coverage <8 ise market comparison yok.
+- **Claims:** Testte uniform'u geçen model yalnız preliminary baseline olabilir; model-vs-market/EV/trade claim ayrı coverage ve execution gate gerektirir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1379,7 +1388,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Aynı 30 locked date üzerinde Gaussian, quantile ve decision-time öncesi son indicative market probability karşılaştırmasının metriklerini/split'ini ön-kaydet; leakage-safe scoring table üretip baseline sonuçlarını ölç.
+**Tek sonraki adım:** Ön-kayıtlı 20-validation/10-test Chicago baseline scoring runner'ını uygula; uniform/Gaussian/quantile metriklerini ve point-in-time indicative-market coverage gate'ini tek sefer ölç.
 
 Beklenen artifact'lar:
 

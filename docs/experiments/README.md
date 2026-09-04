@@ -9,6 +9,7 @@ This index is the project-level directory of material research experiments. Deta
 | EXP-20260903-chicago-paper-cohort | Fixed-time KORD prospective paper pilot | `IN_PROGRESS` | 2026-09-03 | — | Day 1/14 captured; Gaussian no-trade, quantile paper-trade; outcome pending | [PLAN.md](EXP-20260903-chicago-paper-cohort/PLAN.md) |
 | EXP-20260903-chicago-historical-price-coverage | Deterministic closed Chicago CLOB price-history coverage | `PASSED` | 2026-09-03 | 2026-09-03 | 30/30 events and 330/330 tokens covered; sparse indicative prices only | [PLAN.md](EXP-20260903-chicago-historical-price-coverage/PLAN.md) |
 | EXP-20260903-chicago-historical-join | Locked Chicago forecast/outcome join | `PASSED` | 2026-09-03 | 2026-09-04 | 30/30 NBM/outcome joins; scoring dataset unlocked | [PLAN.md](EXP-20260903-chicago-historical-join/PLAN.md) |
+| EXP-20260904-chicago-baseline-scoring | Fixed Gaussian/quantile/uniform scoring on 30 Chicago dates | `IN_PROGRESS` | 2026-09-04 | — | 20 validation / 10 untouched test preregistered | [PLAN.md](EXP-20260904-chicago-baseline-scoring/PLAN.md) |
 
 
 ## Status policy

@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-20260904-chicago-baseline-scoring",
+  "data_cutoff_utc": "2026-09-04T10:15:00Z",
+  "join_source": "data/raw/chicago_historical_join/run=20260904T095000Z-v2/result.json",
+  "join_source_sha256": "4002e40f849664dfcdadcaf63441d37e0454141643dcde3e027cd07b635456f3",
+  "price_history_source": "data/raw/polymarket_price_history/run=20260903T112900Z-v2",
+  "models": [
+    "uniform",
+    "nbm_gaussian",
+    "nbm_quantile_preserving"
+  ],
+  "split": {
+    "order": "target_local_date_ascending",
+    "validation_event_count": 20,
+    "test_event_count": 10,
+    "fitting_or_tuning": false
+  },
+  "metrics": {
+    "primary": "multiclass_log_loss",
+    "secondary": [
+      "multiclass_brier_score",
+      "ranked_probability_score",
+      "winning_bucket_probability"
+    ],
+    "probability_floor_for_log_loss": 1e-12,
+    "paired_bootstrap_repetitions": 10000,
+    "paired_bootstrap_seed": 20260904
+  },
+  "indicative_market": {
+    "selection": "latest_point_at_or_before_decision_time_per_yes_token",
+    "maximum_staleness_seconds": 64800,
+    "require_all_event_tokens": true,
+    "normalization": "divide_positive_yes_prices_by_cross_bucket_sum",
+    "future_points_forbidden": true
+  },
+  "acceptance_thresholds": {
+    "model_probability_sum_tolerance": 1e-9,
+    "finite_metric_rate": 1.0,
+    "exact_winner_vector_rate": 1.0,
+    "test_event_count": 10,
+    "market_comparison_minimum_event_count": 8
+  }
+}
