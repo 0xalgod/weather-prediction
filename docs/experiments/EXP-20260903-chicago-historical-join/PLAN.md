@@ -1,6 +1,6 @@
 # EXP-20260903 — Chicago historical forecast/outcome join
 
-**Status:** `IN_PROGRESS`
+**Status:** `PASSED`
 **Pre-registration:** 2026-09-03, before retrieval/parsing of experiment-specific NBM forecast values
 
 ## Hypothesis
@@ -47,3 +47,10 @@ Passing creates a leakage-controlled baseline dataset, not a trained model and n
 - Seven downloads ended in five read timeouts and two connection resets. Raw partial files remain in the immutable attempt and are not accepted as source objects.
 - Observed join rate was 23/30 (76.67%), below the locked 29/30 gate; raw runner decision remains `HISTORICAL_JOIN_FAIL`.
 - Corrective experiment does not change identities, forecast cycle/mapping, values, outcomes, thresholds or gates. It checksum-verifies/reuses the 23 complete objects and retries only the seven transport failures in a new run, using two workers and a 300-second per-request timeout.
+
+### 2026-09-04 — Attempt 2 accepted
+
+- The 23 prior complete objects passed checksum verification; only the same seven transport failures were downloaded again.
+- All locked gates passed: identity, object, parse, exact f41 target, winner, partition and final join 30/30; publication-proxy leakage 0.
+- All records are NBM v5.0 with a 07Z run and f41 target. Accepted source volume is 1,041,734,375 bytes.
+- Decision: `HISTORICAL_JOIN_PASS`. Preliminary scoring may begin, subject to the existing semantic, execution and sample-size limitations.

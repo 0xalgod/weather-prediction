@@ -1,0 +1,51 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260903-chicago-historical-join",
+  "decision": "HISTORICAL_JOIN_PASS",
+  "generated_at_utc": "2026-09-04T09:46:36.631313Z",
+  "accepted_run": "data/raw/chicago_historical_join/run=20260904T095000Z-v2/result.json",
+  "accepted_run_sha256": "4002e40f849664dfcdadcaf63441d37e0454141643dcde3e027cd07b635456f3",
+  "prior_failed_run": "data/raw/chicago_historical_join/run=20260903T123424Z-v1/result.json",
+  "prior_failed_run_sha256": "72593971905f71634a10a7e0cdd07578c51c8d082dc9e00da6ec5e6b770c5593",
+  "date_range": {
+    "minimum": "2026-07-30",
+    "maximum": "2026-08-28"
+  },
+  "summary": {
+    "event_identity_match_count": 30,
+    "forecast_object_count": 30,
+    "forecast_parse_and_target_count": 30,
+    "publication_proxy_leakage_count": 0,
+    "exact_winner_count": 30,
+    "valid_bucket_partition_count": 30,
+    "joined_eligible_count": 30,
+    "joined_row_rate": 1.0,
+    "accepted_source_bytes": 1041734375,
+    "nbm_version_counts": {
+      "5.0": 30
+    },
+    "forecast_hour_counts": {
+      "41": 30
+    },
+    "forecast_mean_f_range": {
+      "minimum": 71,
+      "maximum": 86
+    }
+  },
+  "checks": {
+    "event_identity_match_rate": true,
+    "forecast_object_rate_minimum": true,
+    "forecast_parse_rate_minimum": true,
+    "forecast_publication_leakage_count_maximum": true,
+    "exact_target_record_rate_minimum": true,
+    "exact_winner_rate_minimum": true,
+    "bucket_partition_rate_minimum": true,
+    "joined_row_rate_minimum": true
+  },
+  "limitations": [
+    "HTTP Last-Modified is a retrospective publication proxy, not measured historical first-seen time.",
+    "NBM target-valid-time to Chicago local-day mapping remains provisional.",
+    "Historical CLOB prices are sparse and non-executable.",
+    "Thirty consecutive dates are sufficient for pipeline and preliminary scoring, not robust edge inference."
+  ]
+}

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.74.0
+**Plan versiyonu:** 0.75.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1350,6 +1350,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Diagnosis:** Hatalar HTTP missing değil transport exception; archive missingness kanıtı değildir. Partial raw files kabul edilmez.
 - **Corrective lock:** 23 complete file'ı checksum ile doğrula/reuse et; yalnız aynı 7 object'i yeni immutable run'da 2 worker/300s timeout ile retry et. Identity, cycle, mapping, outcome, metrics, thresholds değişmez.
 
+### D-0077 — 2026-09-04 — Chicago historical forecast/outcome join gate geçti
+
+- **Durum:** `ACTIVE`
+- **Retry integrity:** Önceki 23 complete object checksum-verified; yalnız aynı 7 transport failure yeniden indirildi.
+- **Coverage:** Identity/object/parse/exact f41 target/winner/partition/final join 30/30; publication-proxy leakage 0.
+- **Data:** 2026-07-30–08-28, NBM v5.0 07Z/f41, accepted source 1,041,734,375 byte.
+- **Karar:** `HISTORICAL_JOIN_PASS`; preliminary Gaussian/quantile/indicative-market scoring dataset'i açıldı.
+- **Boundary:** 30 summer date edge/model-training için küçük; price executable değil; NBM local-day semantics provisional.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1370,7 +1379,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Historical join attempt 1'deki 23 complete NBM object'i checksum ile reuse edip yalnız 7 transport failure'ı 2 worker/300s timeout ile yeni immutable attempt'te tekrar çek; aynı locked gate'i yeniden değerlendir.
+**Tek sonraki adım:** Aynı 30 locked date üzerinde Gaussian, quantile ve decision-time öncesi son indicative market probability karşılaştırmasının metriklerini/split'ini ön-kaydet; leakage-safe scoring table üretip baseline sonuçlarını ölç.
 
 Beklenen artifact'lar:
 
