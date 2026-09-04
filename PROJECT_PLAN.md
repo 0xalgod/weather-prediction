@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.78.0
+**Plan versiyonu:** 0.79.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1392,6 +1392,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** f41/TXN `PROXY_18H_MAX`, resolution-equivalent label değil. 30-date scoring predictive-proxy sonucu olarak kalır; exact meteorological target iddiası yok.
 - **Path:** NBM proxy outcome'a karşı walk-forward calibrate edilebilir; gerçek label frozen settlement source'dan gelir ve iki window açıkça saklanır.
 
+### D-0082 — 2026-09-04 — 114-date Chicago walk-forward calibration ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Universe:** Frozen Gamma, exact 114 resolved Chicago date, 2026-05-06–08-28, 11°F buckets, NBM v5.0 regime.
+- **Forecast:** Prior-day 07Z f41 `PROXY_18H_MAX`; publication proxy ≤11Z; fallback/replacement yok.
+- **Walk-forward:** First 60 initial train; expected next 54 OOS; expanding refit every event, future outcome yok.
+- **Calibration:** Shift −5..+5°F step 0.5 × spread {0.75,1,1.25}; train log loss selection, deterministic raw-nearest tie-break.
+- **Gate:** Eligible ≥99%, OOS ≥53; practical improve ≥2% log loss + Brier non-worse; strong evidence paired CI upper <0.
+- **Boundary:** Forecast calibration only; market/EV/fill/order yok, one-city/season/version external-validity limiti var.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1412,7 +1422,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM v5.0 tutarlı rejiminde daha geniş Chicago labeled sample ve minimum-history walk-forward probability recalibration deneyini ön-kaydet; NBM'yi `PROXY_18H_MAX` olarak, outcome'u frozen resolved bucket olarak ayrı tut.
+**Tek sonraki adım:** Ön-kayıtlı 114-date Chicago forecast dataset'ini oluştur; mevcut 30 checksum'lı NBM object'i reuse edip eksik 84 prior-day 07Z object'i immutable indir, publication/parse/winner gate'lerini ölç.
 
 Beklenen artifact'lar:
 
