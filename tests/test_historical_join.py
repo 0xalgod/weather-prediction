@@ -12,6 +12,9 @@ def sample_event():
         "title": "Highest temperature in Chicago on August 28?",
         "endDate": "2026-08-28T12:00:00Z",
         "closed": True,
+        "creationDate": "2026-08-26T10:00:00Z",
+        "closedTime": "2026-08-29T10:00:00Z",
+        "automaticallyResolved": True,
         "markets": [
             {
                 "id": "1",
@@ -20,6 +23,7 @@ def sample_event():
                 "outcomes": '["Yes","No"]',
                 "outcomePrices": '["0","1"]',
                 "clobTokenIds": '["y1","n1"]',
+                "umaResolutionStatus": "resolved",
             },
             {
                 "id": "2",
@@ -28,6 +32,7 @@ def sample_event():
                 "outcomes": '["Yes","No"]',
                 "outcomePrices": '["1","0"]',
                 "clobTokenIds": '["y2","n2"]',
+                "umaResolutionStatus": "resolved",
             },
             {
                 "id": "3",
@@ -36,6 +41,7 @@ def sample_event():
                 "outcomes": '["Yes","No"]',
                 "outcomePrices": '["0","1"]',
                 "clobTokenIds": '["y3","n3"]',
+                "umaResolutionStatus": "resolved",
             },
         ],
     }

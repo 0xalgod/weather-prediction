@@ -138,6 +138,16 @@ def select_chicago_date_range(
         title = str(event.get("title") or "")
         if "chicago" not in title.lower() or event.get("closed") is not True:
             continue
+        markets = event.get("markets")
+        if (
+            not event.get("creationDate")
+            or not event.get("closedTime")
+            or event.get("automaticallyResolved") is not True
+            or not isinstance(markets, list)
+            or not markets
+            or any(market.get("umaResolutionStatus") != "resolved" for market in markets)
+        ):
+            continue
         target_date = target_date_from_event(event)
         if not start_date <= target_date <= end_date:
             continue

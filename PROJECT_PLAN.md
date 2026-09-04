@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.80.0
+**Plan versiyonu:** 0.81.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1409,6 +1409,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Pending:** Yalnız kalan 84 prior-day 07Z object; 4 worker, 300s timeout, transport error için max 3 attempt.
 - **Integrity:** Attempt dosyaları benzersiz/immutable; partial dosya parse/kabul edilmez. HTTP missing/semantic failure için cycle/date replacement yok.
 - **Thresholds:** 114-universe, ≥99% eligible ve ≥53 OOS dahil tüm D-0082 gate'leri değişmedi.
+
+### D-0084 — 2026-09-04 — Calibration dataset attempt 1 pre-download duplicate gate düzeltmesi
+
+- **Durum:** `ACTIVE`
+- **Observed:** Selector May 19 archived duplicate event 493662'yi strict event gate öncesi aldı; record `arch-` slug ve missing `closedTime`/`automaticallyResolved` taşıyor. Canonical 503629 complete.
+- **Integrity:** Duplicate check NOAA download ve forecast value gözleminden önce durdu; run path oluşmadı.
+- **Universe clarification:** Strict eligible set 114 unique date; 2026-06-18 eksik, bu nedenle “consecutive” ifadesi kaldırıldı. Count/date bounds değişmedi.
+- **Correction:** Duplicate validation öncesi pre-registered closed + automatically-resolved + closed-time + all UMA-resolved contract uygula. Model/threshold/retrieval değişmez.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

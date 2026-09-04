@@ -10,7 +10,7 @@ Test whether simple, interpretable station/outcome calibration improves the fixe
 ## Locked universe
 
 - Frozen corrected Gamma inventory, Chicago maximum-temperature events dated 2026-05-06 through 2026-08-28 inclusive.
-- Deterministic eligibility rules produce 114 consecutive resolved events with 11 Fahrenheit buckets each.
+- Deterministic eligibility rules produce 114 resolved events with 11 Fahrenheit buckets each. The calendar range contains no eligible event on 2026-06-18; dates are ordered but not claimed continuous.
 - This window stays within NBM v5.0. Missing or invalid dates remain missing; no replacement/backfill.
 - Forecast input is prior-day 07Z KORD NBP f41, explicitly labelled `PROXY_18H_MAX`; HTTP Last-Modified must be at/before prior-day 11:00 UTC.
 - Outcomes are exact terminal winners from frozen Gamma metadata.
@@ -22,6 +22,15 @@ Test whether simple, interpretable station/outcome calibration improves the fixe
 - Permit at most three attempts per object only for timeout, connection-reset or URL transport errors.
 - Every attempt has a distinct immutable filename. Partial attempts are retained but never accepted or parsed.
 - HTTP missing objects and semantic/parse failures are not replaced by another cycle or date.
+
+## Execution log
+
+### 2026-09-04 — Dataset attempt 1 stopped before download
+
+- The initial selector admitted an archived duplicate for 2026-05-19 before applying the complete event-level eligibility contract.
+- Event `493662` has an `arch-` slug and lacks `closedTime`/`automaticallyResolved`; canonical event `503629` has both fields and remains eligible.
+- The already measured strict eligibility set contains 114 unique dates; 2026-06-18 is missing. No NOAA download or forecast value was observed in this attempt.
+- Correction applies the pre-registered closed/automatically-resolved/closed-time/all-markets-UMA-resolved gate before duplicate-date validation. Expected count, model, dates, thresholds and retrieval policy are unchanged.
 
 ## Walk-forward design
 
