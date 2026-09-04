@@ -1,0 +1,57 @@
+{
+  "experiment_id": "EXP-20260904-chicago-walkforward-calibration-v2",
+  "design_status": "POST_HOC_CORRECTIVE_BEFORE_MODEL_SCORES",
+  "source": "data/raw/chicago_calibration_dataset/run=20260904T172552Z-v2/result.json",
+  "source_sha256": "ccf6dec5b5fb4f4f2e34855deee454416dfc33b0120f0467655de9195a7b0a0d",
+  "eligibility": {
+    "target_date_minimum": "2026-05-07",
+    "source_row_eligible_must_be": true,
+    "expected_eligible_events": 112,
+    "known_missing_dates": [
+      "2026-05-08",
+      "2026-06-18"
+    ]
+  },
+  "walk_forward": {
+    "order": "target_local_date_ascending",
+    "initial_train_events": 60,
+    "expected_oos_events": 52,
+    "window": "expanding",
+    "refit_frequency_events": 1
+  },
+  "calibration_grid": {
+    "temperature_shift_f_minimum": -5.0,
+    "temperature_shift_f_maximum": 5.0,
+    "temperature_shift_f_step": 0.5,
+    "spread_scale": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "selection_metric": "train_mean_multiclass_log_loss",
+    "tie_break": "minimum_abs_shift_then_minimum_abs_scale_minus_1_then_numeric"
+  },
+  "metrics": {
+    "primary": "oos_mean_multiclass_log_loss",
+    "secondary": [
+      "multiclass_brier_score",
+      "ranked_probability_score",
+      "winning_bucket_probability"
+    ],
+    "probability_floor": 1e-12,
+    "paired_bootstrap_repetitions": 10000,
+    "paired_bootstrap_seed": 20260904
+  },
+  "acceptance_thresholds": {
+    "exact_eligible_event_count": 112,
+    "exact_oos_event_count": 52,
+    "relative_log_loss_improvement_minimum": 0.02,
+    "brier_difference_maximum": 0.0,
+    "strong_evidence_ci95_upper_below": 0.0
+  },
+  "trading": {
+    "market_comparison": false,
+    "ev": false,
+    "orders": false
+  }
+}

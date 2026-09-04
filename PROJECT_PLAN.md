@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.82.0
+**Plan versiyonu:** 0.83.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1427,6 +1427,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Integrity:** Alternate cycle/date, later source, imputation ve threshold change yok; calibration training/scoring çalıştırılmadı.
 - **Corrective path:** Yeni ve açıkça post-hoc v2 deney, v5 başlangıcını May 7'ye daraltabilir; May 8 missing kalır; 60 train + 52 OOS için yeni gate önceden yazılmalıdır.
 
+### D-0086 — 2026-09-04 — Post-hoc corrective calibration v2 ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Timing:** Dataset quality facts görüldü, fakat expanded-sample calibration fit/OOS score henüz hesaplanmadı.
+- **Sample:** Target ≥May 7 ve source eligible; exact 112. May 8 late-publication ve Jun 18 absent kalır.
+- **Walk-forward:** First 60 eligible train, next 52 OOS, expanding daily refit.
+- **Unchanged:** Gaussian/quantile dönüşümleri, −5..+5 step0.5 × {0.75,1,1.25} grid, metrics/bootstrap ve ≥2%+Brier/CI gates.
+- **Boundary:** Explicit post-hoc evidential weakness; market/EV/fill/order yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1447,7 +1456,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Explicit post-hoc v2 calibration deneyini sonuç skorları görülmeden ön-kaydet: v5-consistent universe May 7–Aug 28, May 8 leakage row missing, initial train 60, expected OOS 52; model/grid aynı kalsın.
+**Tek sonraki adım:** Kilitli v2 grid için deterministic calibration/walk-forward runner ve unit testlerini yaz; 112-count/60-train/52-OOS contract geçtikten sonra OOS skorunu tek sefer çalıştır.
 
 Beklenen artifact'lar:
 
