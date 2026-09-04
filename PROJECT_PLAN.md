@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.77.0
+**Plan versiyonu:** 0.78.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1378,6 +1378,20 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Market gate:** 0/30 complete event decision time 11:00Z öncesi historical price içeriyor; `INSUFFICIENT_POINT_IN_TIME_COVERAGE`. Future price taşınmadı; model-vs-market/EV/P&L yok.
 - **Karar:** Forecast sample genişletmeye değer; model eğitmeden önce NBM local-day semantic mapping doğrulanmalı. Execution kanıtı prospective L2'den gelecek.
 
+### D-0080 — 2026-09-04 — Paper Day 2 missed, backfill yasak
+
+- **Durum:** `ACTIVE`
+- **Observed:** İlk kontrol 17:01 UTC; locked 10:45–11:15 UTC penceresi geçmişti.
+- **Karar:** Day 2 `MISSED_NO_CAPTURE`; later snapshot/substitute/backfill yok. Schedule coverage şu an 1/2; cohort gate ≥10/14 değişmedi.
+
+### D-0081 — 2026-09-04 — NBM f41 resolution-equivalent değil, proxy feature
+
+- **Durum:** `ACTIVE`
+- **Official semantic:** NOAA NBM MaxT 12Z current→06Z next 18h window, following 00Z'de raporlanır; NBP TXNMN/TXNP aynı max convention'ı kullanır.
+- **Chicago CDT market day:** 05Z target→05Z next, 24h. NBM ile overlap 17h; market başlangıcından 7h eksik, market sonrasından 1h fazla.
+- **Karar:** f41/TXN `PROXY_18H_MAX`, resolution-equivalent label değil. 30-date scoring predictive-proxy sonucu olarak kalır; exact meteorological target iddiası yok.
+- **Path:** NBM proxy outcome'a karşı walk-forward calibrate edilebilir; gerçek label frozen settlement source'dan gelir ve iki window açıkça saklanır.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1398,7 +1412,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM f41 MaxT valid target+1 00Z kaydının Chicago local target day'i temsil ettiğini resmi ürün semantiği ve deterministic tarih örnekleriyle doğrula; geçerse daha geniş tarihsel labeled sample + walk-forward calibration training planını ön-kaydet.
+**Tek sonraki adım:** NBM v5.0 tutarlı rejiminde daha geniş Chicago labeled sample ve minimum-history walk-forward probability recalibration deneyini ön-kaydet; NBM'yi `PROXY_18H_MAX` olarak, outcome'u frozen resolved bucket olarak ayrı tut.
 
 Beklenen artifact'lar:
 

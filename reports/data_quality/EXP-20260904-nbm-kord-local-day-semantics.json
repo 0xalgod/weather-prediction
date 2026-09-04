@@ -1,0 +1,30 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260904-nbm-kord-local-day-semantics",
+  "decision": "PROXY_FEATURE_NOT_RESOLUTION_EQUIVALENT",
+  "evaluated_timezone": "America/Chicago",
+  "evaluated_regime": "CDT_UTC_MINUS_5",
+  "market_local_day_utc_window": {
+    "start_offset_from_target_00z_hours": 5,
+    "end_offset_from_target_00z_hours": 29,
+    "duration_hours": 24
+  },
+  "nbm_maximum_temperature_window_utc": {
+    "start_offset_from_target_00z_hours": 12,
+    "end_offset_from_target_00z_hours": 30,
+    "duration_hours": 18,
+    "reported_valid_offset_hours": 24
+  },
+  "comparison": {
+    "overlap_hours": 17,
+    "market_hours_missing_from_nbm_window": 7,
+    "nbm_hours_outside_market_window": 1,
+    "exact_window_equivalence": false
+  },
+  "official_sources": [
+    "https://vlab.noaa.gov/web/mdl/nbm-text-products",
+    "https://vlab.noaa.gov/web/mdl/nbm-textcard-v4.2"
+  ],
+  "allowed_use": "Predictive proxy/feature calibrated against actual Polymarket outcomes",
+  "forbidden_use": "Treating NBM TXNMN/TXNP f41 as a resolution-equivalent local-calendar-day label"
+}

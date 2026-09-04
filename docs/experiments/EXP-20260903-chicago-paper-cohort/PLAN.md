@@ -149,6 +149,12 @@ No edge claim before at least 30 eligible dates. A later preregistration must re
 - Record status is `CAPTURE_ELIGIBLE_PENDING_OUTCOME`; outcome and P&L remain null.
 - Next action: preserve the separate Sep 4 settlement-source capture, then lock Day 2 before its forecast/price observation.
 
+### 2026-09-04 — Day 2 missed, no backfill
+
+- The fixed 10:45–11:15 UTC capture window elapsed without a snapshot; the first checked time was 17:01 UTC.
+- Day 2 is recorded `MISSED_NO_CAPTURE`. No later snapshot, substitute date or retrospective price is admitted.
+- This lowers current schedule coverage to 1 captured of 2 scheduled dates; the locked minimum remains ≥10/14.
+
 ### 2026-09-03 — Day 1 locked and dual-model runner ready
 
 - Target Sep 4 event 952456 and its exact rule/11-market identity were locked from the prior checksum-addressed discovery before cohort forecast or price retrieval.
