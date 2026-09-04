@@ -1,8 +1,8 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.73.0
-**Son güncelleme:** 2026-09-03
+**Plan versiyonu:** 0.74.0
+**Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
@@ -1342,6 +1342,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Primary gates:** identities/winner/partition 100%; object ve final join ≥29/30; retrieved parse/target record 100%; publication leakage 0.
 - **Boundary:** Pass model dataset'i açar; trained model, executable P&L veya edge kanıtı değildir.
 
+### D-0076 — 2026-09-04 — Historical join attempt 1 transport nedeniyle gate fail
+
+- **Durum:** `ACTIVE`
+- **Passed components:** Identity/winner/partition 30/30; NBM download+parse+exact target 23/23; publication-proxy leakage 0.
+- **Failure:** 5 read timeout + 2 connection reset; observed object/join 23/30 = %76.67, locked ≥29/30 gate başarısız. Raw decision `HISTORICAL_JOIN_FAIL` korunur.
+- **Diagnosis:** Hatalar HTTP missing değil transport exception; archive missingness kanıtı değildir. Partial raw files kabul edilmez.
+- **Corrective lock:** 23 complete file'ı checksum ile doğrula/reuse et; yalnız aynı 7 object'i yeni immutable run'da 2 worker/300s timeout ile retry et. Identity, cycle, mapping, outcome, metrics, thresholds değişmez.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1362,7 +1370,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı 30-event Chicago historical join'i çalıştır; NBM 07Z object/publication/parse/target-record ile frozen Gamma winner/partition kapsamını ölç ve ilk leakage-safe model tablosu gate'ine karar ver.
+**Tek sonraki adım:** Historical join attempt 1'deki 23 complete NBM object'i checksum ile reuse edip yalnız 7 transport failure'ı 2 worker/300s timeout ile yeni immutable attempt'te tekrar çek; aynı locked gate'i yeniden değerlendir.
 
 Beklenen artifact'lar:
 

@@ -38,3 +38,12 @@ Decision is `HISTORICAL_JOIN_PASS`, `HISTORICAL_JOIN_FAIL` or `INCOMPLETE`.
 ## Interpretation boundary
 
 Passing creates a leakage-controlled baseline dataset, not a trained model and not an executable P&L backtest. The NBM valid-time/local-day mapping remains provisional until independently reconciled against product semantics. Historical CLOB prices remain indicative and sparse.
+
+## Execution log
+
+### 2026-09-03/04 — Attempt 1 failed the locked coverage gate due to transport
+
+- Exact event identities, winners and bucket partitions passed 30/30. Twenty-three NBM objects downloaded, parsed and matched the exact target record; publication-proxy leakage was zero.
+- Seven downloads ended in five read timeouts and two connection resets. Raw partial files remain in the immutable attempt and are not accepted as source objects.
+- Observed join rate was 23/30 (76.67%), below the locked 29/30 gate; raw runner decision remains `HISTORICAL_JOIN_FAIL`.
+- Corrective experiment does not change identities, forecast cycle/mapping, values, outcomes, thresholds or gates. It checksum-verifies/reuses the 23 complete objects and retries only the seven transport failures in a new run, using two workers and a 300-second per-request timeout.

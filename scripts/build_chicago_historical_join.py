@@ -30,6 +30,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--run-directory", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--timeout-seconds", type=float, default=120)
+    parser.add_argument("--prior-result", type=Path)
     return parser.parse_args()
 
 
@@ -37,12 +39,12 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def download_one(identity: dict[str, Any], raw_directory: Path, cycle: int):
+def download_one(identity: dict[str, Any], raw_directory: Path, cycle: int, timeout_seconds: float):
     run_date = identity["forecast_run_date"]
     destination = raw_directory / f"blend.{run_date}.t{cycle:02d}z.nbptx"
     try:
         retrieval = download_public_object(
-            probabilistic_text_url(run_date, cycle), destination, timeout=120
+            probabilistic_text_url(run_date, cycle), destination, timeout=timeout_seconds
         )
         return identity["event_id"], retrieval, None
     except Exception as exc:  # preserve per-event failure instead of dropping denominator
@@ -69,8 +71,24 @@ def main() -> int:
     raw_directory.mkdir(parents=True)
     cycle = int(config["forecast"]["cycle_utc"])
     downloads: dict[str, dict[str, Any]] = {}
+    if args.prior_result:
+        prior = json.loads(args.prior_result.read_text(encoding="utf-8"))
+        if prior.get("experiment_id") != config["experiment_id"]:
+            raise ValueError("prior result belongs to a different experiment")
+        for row in prior["rows"]:
+            retrieval = row.get("retrieval")
+            if not retrieval:
+                continue
+            prior_path = Path(retrieval["local_path"])
+            if not prior_path.is_file() or sha256_path(prior_path) != retrieval["sha256"]:
+                raise ValueError(f"prior source checksum mismatch: {prior_path}")
+            downloads[str(row["event_id"])] = {"retrieval": retrieval, "error": None}
+    pending = [item for item in identities if item["event_id"] not in downloads]
     with ThreadPoolExecutor(max_workers=args.workers) as executor:
-        futures = [executor.submit(download_one, item, raw_directory, cycle) for item in identities]
+        futures = [
+            executor.submit(download_one, item, raw_directory, cycle, args.timeout_seconds)
+            for item in pending
+        ]
         for future in as_completed(futures):
             event_id, retrieval, error = future.result()
             downloads[event_id] = {"retrieval": retrieval, "error": error}
@@ -152,6 +170,7 @@ def main() -> int:
         "schema_version": "1.0.0",
         "experiment_id": config["experiment_id"],
         "generated_at_utc": utc_now(),
+        "prior_result": str(args.prior_result) if args.prior_result else None,
         "config": config,
         "summary": summary,
         "checks": checks,
