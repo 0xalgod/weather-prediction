@@ -10,7 +10,7 @@ This index is the project-level directory of material research experiments. Deta
 | EXP-20260903-chicago-historical-price-coverage | Deterministic closed Chicago CLOB price-history coverage | `PASSED` | 2026-09-03 | 2026-09-03 | 30/30 events and 330/330 tokens covered; sparse indicative prices only | [PLAN.md](EXP-20260903-chicago-historical-price-coverage/PLAN.md) |
 | EXP-20260903-chicago-historical-join | Locked Chicago forecast/outcome join | `PASSED` | 2026-09-03 | 2026-09-04 | 30/30 NBM/outcome joins; scoring dataset unlocked | [PLAN.md](EXP-20260903-chicago-historical-join/PLAN.md) |
 | EXP-20260904-chicago-baseline-scoring | Fixed Gaussian/quantile/uniform scoring on 30 Chicago dates | `PASSED` | 2026-09-04 | 2026-09-04 | NBM beats uniform; market point-in-time coverage 0/30 | [PLAN.md](EXP-20260904-chicago-baseline-scoring/PLAN.md) |
-| EXP-20260904-chicago-walkforward-calibration | Expanding-window NBM proxy calibration on 114 Chicago dates | `IN_PROGRESS` | 2026-09-04 | — | 60 initial train / expected 54 OOS locked | [PLAN.md](EXP-20260904-chicago-walkforward-calibration/PLAN.md) |
+| EXP-20260904-chicago-walkforward-calibration | Expanding-window NBM proxy calibration on 114 Chicago dates | `FAILED` | 2026-09-04 | 2026-09-04 | 112 eligible; version/leakage gates failed; no training | [PLAN.md](EXP-20260904-chicago-walkforward-calibration/PLAN.md) |
 
 
 ## Status policy

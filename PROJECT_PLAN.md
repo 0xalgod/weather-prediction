@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.81.0
+**Plan versiyonu:** 0.82.0
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1418,6 +1418,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Universe clarification:** Strict eligible set 114 unique date; 2026-06-18 eksik, bu nedenle “consecutive” ifadesi kaldırıldı. Count/date bounds değişmedi.
 - **Correction:** Duplicate validation öncesi pre-registered closed + automatically-resolved + closed-time + all UMA-resolved contract uygula. Model/threshold/retrieval değişmez.
 
+### D-0085 — 2026-09-04 — 114-date calibration dataset gate FAILED, training yapılmadı
+
+- **Durum:** `ACTIVE`
+- **Transport:** 30 checksum reuse + 84 download = 114/114 object; terminal download failure 0; accepted 3,958,130,429 byte.
+- **Exclusions:** Target May 6 source NBM v4.3 (v5 lock mismatch); target May 8 source Last-Modified 13:16Z >11:00Z decision.
+- **Gate:** Eligible 112/114=%98.25 <99%; OOS 52 <53; publication leakage 1 >0. `CALIBRATION_DATASET_FAIL`.
+- **Integrity:** Alternate cycle/date, later source, imputation ve threshold change yok; calibration training/scoring çalıştırılmadı.
+- **Corrective path:** Yeni ve açıkça post-hoc v2 deney, v5 başlangıcını May 7'ye daraltabilir; May 8 missing kalır; 60 train + 52 OOS için yeni gate önceden yazılmalıdır.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1438,7 +1447,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön-kayıtlı 114-date Chicago forecast dataset'ini oluştur; mevcut 30 checksum'lı NBM object'i reuse edip eksik 84 prior-day 07Z object'i immutable indir, publication/parse/winner gate'lerini ölç.
+**Tek sonraki adım:** Explicit post-hoc v2 calibration deneyini sonuç skorları görülmeden ön-kaydet: v5-consistent universe May 7–Aug 28, May 8 leakage row missing, initial train 60, expected OOS 52; model/grid aynı kalsın.
 
 Beklenen artifact'lar:
 

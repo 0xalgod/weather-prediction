@@ -1,0 +1,42 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260904-chicago-walkforward-calibration",
+  "substep": "expanded_dataset_gate",
+  "decision": "CALIBRATION_DATASET_FAIL",
+  "run": "data/raw/chicago_calibration_dataset/run=20260904T172552Z-v2/result.json",
+  "run_sha256": "ccf6dec5b5fb4f4f2e34855deee454416dfc33b0120f0467655de9195a7b0a0d",
+  "summary": {
+    "universe_event_count": 114,
+    "checksum_reused_object_count": 30,
+    "downloaded_object_count": 84,
+    "failed_download_count": 0,
+    "accepted_source_bytes": 3958130429,
+    "eligible_event_count": 112,
+    "eligible_event_rate": 0.9824561403508771,
+    "available_oos_event_count": 52,
+    "publication_proxy_leakage_count": 1,
+    "nbm_version_mismatch_count": 1
+  },
+  "failed_rows": [
+    {
+      "event_id": "448456",
+      "target_local_date": "2026-05-06",
+      "reason": "NBM_VERSION_MISMATCH",
+      "observed_version": "4.3",
+      "required_version": "5.0"
+    },
+    {
+      "event_id": "453812",
+      "target_local_date": "2026-05-08",
+      "reason": "PUBLICATION_PROXY_AFTER_DECISION",
+      "decision_time_utc": "2026-05-07T11:00:00Z",
+      "http_last_modified": "2026-05-07T13:16:33Z"
+    }
+  ],
+  "failed_checks": [
+    "eligible_event_rate_minimum",
+    "oos_event_count_minimum",
+    "publication_proxy_leakage_zero"
+  ],
+  "training_performed": false
+}

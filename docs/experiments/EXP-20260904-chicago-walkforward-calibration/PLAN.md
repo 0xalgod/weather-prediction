@@ -1,6 +1,6 @@
 # EXP-20260904 — Chicago walk-forward probability calibration
 
-**Status:** `IN_PROGRESS`
+**Status:** `FAILED`
 **Pre-registration:** 2026-09-04, before retrieval/scoring of the expanded 114-date forecast sample
 
 ## Objective
@@ -31,6 +31,14 @@ Test whether simple, interpretable station/outcome calibration improves the fixe
 - Event `493662` has an `arch-` slug and lacks `closedTime`/`automaticallyResolved`; canonical event `503629` has both fields and remains eligible.
 - The already measured strict eligibility set contains 114 unique dates; 2026-06-18 is missing. No NOAA download or forecast value was observed in this attempt.
 - Correction applies the pre-registered closed/automatically-resolved/closed-time/all-markets-UMA-resolved gate before duplicate-date validation. Expected count, model, dates, thresholds and retrieval policy are unchanged.
+
+### 2026-09-04 — Expanded dataset gate failed; training not run
+
+- All 30 reused and 84 newly downloaded source objects were available; transport coverage was 114/114.
+- Target 2026-05-06 carried NBM v4.3, violating the fixed v5.0 regime. Target 2026-05-08's source Last-Modified was 13:16 UTC, after the 11:00 decision cutoff.
+- Eligible 112/114 (98.25%) failed ≥99%; available OOS 52 failed ≥53; leakage count 1 failed zero.
+- Decision: `CALIBRATION_DATASET_FAIL`. No calibration fitting or OOS scoring was performed.
+- A follow-up must be a new, explicitly post-hoc design; this experiment remains failed.
 
 ## Walk-forward design
 
