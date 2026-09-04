@@ -127,6 +127,29 @@ def index_events(
     return [found[event_id] for event_id in expected_ids]
 
 
+def select_chicago_date_range(
+    events: Iterable[Mapping[str, Any]], start_date: date, end_date: date
+) -> list[dict[str, Any]]:
+    """Select exact closed/resolved Chicago events in an inclusive date range."""
+
+    selected = []
+    seen_dates: set[date] = set()
+    for event in events:
+        title = str(event.get("title") or "")
+        if "chicago" not in title.lower() or event.get("closed") is not True:
+            continue
+        target_date = target_date_from_event(event)
+        if not start_date <= target_date <= end_date:
+            continue
+        identity = event_join_identity(event)
+        if target_date in seen_dates:
+            raise DiscoveryError(f"duplicate Chicago target date: {target_date}")
+        seen_dates.add(target_date)
+        selected.append({**dict(event), "_join_identity": identity})
+    selected.sort(key=lambda event: event["_join_identity"]["target_local_date"])
+    return selected
+
+
 def json_sha256(value: Any) -> str:
     payload = json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()

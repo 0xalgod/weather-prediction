@@ -1,6 +1,7 @@
 from weather_quant.features.historical_join import (
     event_join_identity,
     exact_target_record,
+    select_chicago_date_range,
     target_date_from_event,
 )
 
@@ -10,6 +11,7 @@ def sample_event():
         "id": "10",
         "title": "Highest temperature in Chicago on August 28?",
         "endDate": "2026-08-28T12:00:00Z",
+        "closed": True,
         "markets": [
             {
                 "id": "1",
@@ -61,3 +63,17 @@ def test_exact_target_record_rejects_missing_distribution():
         "p90_f": 84,
     }
     assert exact_target_record([complete], complete["valid_time_utc"])["mean_f"] == 80
+
+
+def test_select_chicago_date_range_orders_by_target_date():
+    later = sample_event()
+    earlier = sample_event()
+    earlier["id"] = "9"
+    earlier["title"] = "Highest temperature in Chicago on August 27?"
+    earlier["endDate"] = "2026-08-27T12:00:00Z"
+    selected = select_chicago_date_range(
+        [later, earlier],
+        target_date_from_event(earlier),
+        target_date_from_event(later),
+    )
+    assert [row["id"] for row in selected] == ["9", "10"]
