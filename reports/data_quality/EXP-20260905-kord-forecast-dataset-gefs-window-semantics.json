@@ -1,0 +1,69 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "kord_gefs_local_day_window_semantics",
+  "generated_at_utc": "2026-09-05T13:27:00Z",
+  "decision": "GEFS_TMAX_MIXED_EXACT_AND_PROXY",
+  "scope": {
+    "target_start_date": "2025-09-01",
+    "target_end_date": "2026-08-31",
+    "target_date_count": 365,
+    "timezone": "America/Chicago",
+    "run": "target_minus_1_day_00Z",
+    "canonical_windows": "consecutive six-hour TMAX blocks"
+  },
+  "regimes": [
+    {
+      "target_day_duration_hours": 24,
+      "uncovered_hours": 0,
+      "outside_local_hours": 6,
+      "selected_window_count": 5,
+      "exact_partition": false,
+      "date_count": 238,
+      "example_date": "2025-09-01"
+    },
+    {
+      "target_day_duration_hours": 25,
+      "uncovered_hours": 0,
+      "outside_local_hours": 5,
+      "selected_window_count": 5,
+      "exact_partition": false,
+      "date_count": 1,
+      "example_date": "2025-11-02"
+    },
+    {
+      "target_day_duration_hours": 24,
+      "uncovered_hours": 0,
+      "outside_local_hours": 0,
+      "selected_window_count": 4,
+      "exact_partition": true,
+      "date_count": 125,
+      "example_date": "2025-11-03"
+    },
+    {
+      "target_day_duration_hours": 23,
+      "uncovered_hours": 0,
+      "outside_local_hours": 1,
+      "selected_window_count": 4,
+      "exact_partition": false,
+      "date_count": 1,
+      "example_date": "2026-03-08"
+    }
+  ],
+  "checks": {
+    "all_365_dates_classified": true,
+    "target_window_coverage_rate": 1.0,
+    "exact_partition_date_count": 125,
+    "non_exact_partition_date_count": 240,
+    "outside_local_seconds_explicit": true
+  },
+  "feature_policy": {
+    "exact_dates": "May use the exact four-block local-day ensemble maximum.",
+    "non_exact_dates": "Store interior lower-feature, overlap upper-feature, and outside_local_seconds; do not label resolution-equivalent.",
+    "model_requirement": "Report performance by window regime and include a sensitivity test excluding non-exact dates."
+  },
+  "provenance": {
+    "window_logic": "weather_quant.ingestion.noaa_gefs.local_day_utc + window_coverage",
+    "upstream_evidence": "reports/data_quality/EXP-20260831-phase4-gefs-local-day-semantics.json"
+  }
+}

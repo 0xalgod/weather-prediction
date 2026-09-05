@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.90.0
+**Plan versiyonu:** 0.91.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1502,6 +1502,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Preliminary join:** NBM∩label 359/365=%98.356; ≥%97 overall gate provisional pass, GEFS/final join bekliyor.
 - **Boundary:** Split/model score/EV yok.
 
+### D-0094 — 2026-09-05 — KORD GEFS TMAX exact/proxy rejimleri ayrıldı
+
+- **Durum:** `ACTIVE`
+- **365-day semantics:** Target coverage %100; exact partition 125 kış-saati günü, non-exact 240 gün.
+- **Contamination:** 238 normal DST gününde 6h, DST bitişinde 5h, DST başlangıcında 1h outside-local süre.
+- **Policy update:** Exact dates dört-block local-day max; diğerleri interior-18h lower + overlap upper + explicit outside seconds. Resolution-equivalent claim yok.
+- **Robustness:** Model performansı window regime bazında ve non-exact exclusion sensitivity ile raporlanacak.
+- **Timing:** Bu semantic düzeltme GEFS bulk retrieval ve model score öncesinde yapıldı; performance-driven değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1522,7 +1531,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS 00Z control+30 perturbed member için 365 günlük full-membership ve gerekli Chicago local-day TMAX window envanterini ölç; model değerlerini/skorlarını henüz hesaplama.
+**Tek sonraki adım:** GEFS 00Z control+30 perturbed member için 365 günlük full-membership ve canonical TMAX window source envanterini ölç; exact/proxy rejim alanlarını koru, model değerlerini/skorlarını hesaplama.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

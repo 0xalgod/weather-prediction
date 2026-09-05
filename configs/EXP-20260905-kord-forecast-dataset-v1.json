@@ -33,6 +33,16 @@
       "members": "control_plus_30_perturbed",
       "required_parameter": "TMAX",
       "required_local_day_coverage": 1.0,
+      "window_semantics": {
+        "canonical_blocks": "consecutive 6-hour TMAX windows ending at f006,f012,...",
+        "exact_partition_when_available": true,
+        "non_exact_features": [
+          "interior_18h_lower_feature",
+          "overlap_upper_feature",
+          "outside_local_seconds"
+        ],
+        "resolution_equivalent_claim": false
+      },
       "publication_rule": "HTTP Last-Modified must not exceed decision_time_utc"
     },
     "calendar": [
@@ -54,6 +64,8 @@
     "joined_eligible_rate_minimum": 0.97,
     "nbm_required_field_rate_minimum": 0.99,
     "gefs_complete_member_rate_minimum": 0.97,
+    "gefs_target_window_coverage_rate_minimum": 1.0,
+    "gefs_outside_local_seconds_must_be_explicit": true,
     "label_coverage_rate_minimum": 0.99,
     "temporal_leakage_count_maximum": 0,
     "duplicate_station_date_count_maximum": 0,

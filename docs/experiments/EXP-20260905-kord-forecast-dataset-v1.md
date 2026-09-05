@@ -85,7 +85,9 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **NBM batch result (2026-09-05):** 362/362 publication-admissible gün başarıyla alındı; required fields/exact f41 %100, retrieval failure ve leakage 0.
 - NBM v4.3 246 gün, v5.0 116 gün; provider upgrade açık regime boundary olarak saklanacak.
 - NBM + mevcut label kesişimi şimdilik 359/365=%98,356; overall ≥%97 gate GEFS/final join sonuna kadar provisional.
+- **GEFS window semantics (2026-09-05):** 125/365 kış-saati günü exact local-day partition; 240 gün DST/boundary nedeniyle 1–6 saat outside-local contamination taşıyor.
+- GEFS yıl boyunca resolution-equivalent sayılmayacak; exact veya interior/overlap proxy feature ve `outside_local_seconds` olarak açıkça saklanacak.
 
 ## Sıradaki en küçük adım
 
-GEFS 00Z control+30 member için 365 günlük full-membership ve gerekli local-day TMAX window envanterini ölç; model skoru hesaplama.
+GEFS 00Z control+30 member için 365 günlük full-membership ve gerekli canonical TMAX window source envanterini ölç; exact/proxy rejim alanlarını koru ve model skoru hesaplama.
