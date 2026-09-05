@@ -307,7 +307,7 @@ Veri kapsamı belli olduktan sonra train/validation/final test tarihleri sonuçl
 
 ## Phase 4 — Station-specific calibration ve model geliştirme
 
-**Durum:** `NOT_STARTED`  
+**Durum:** `IN_PROGRESS`
 **Amaç:** Hava tahmininden kalibre edilmiş outcome dağılımına geçmek.
 
 ### Sıralı model geliştirme
@@ -1705,6 +1705,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Caveat:** Version ile mevsim/tarih confounded; diagnostic mekanizma sinyali verir, nedensellik veya yeni OOS improvement kanıtı değildir.
 - **Next design:** Raw NBM ile yalnız-v5 frozen moment calibration iki aday olarak prospektif dönemde karşılaştırılacak.
 
+### D-0115 — 2026-09-06 — EMOS-style ridge development modeli ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Mean model:** Ridge; NBM mean, GEFS−NBM disagreement, seasonal sin/cos, NBM v5, GEFS exact ve outside-hour features.
+- **Nested protocol:** Outer ilk 120 train/178 OOS; her adımda geçmişin son 30 günü inner blocked validation.
+- **Selection:** Lambda {0.1,1,10,100} × NBM spread scale {0.75,1,1.25,1.5,2}; inner log loss.
+- **Promotion:** Raw NBM'e karşı ≥%3 log-loss improvement, Brier ≤0 fark ve paired-date CI upper <0.
+- **Interpretation:** Dönem daha önce consumed olduğu için promotion yalnız prospective challenger freeze anlamına gelir; independent final-test değildir.
+- **Boundary:** Market/EV/trading yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1725,7 +1735,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Consumed v5 history'den tek seferlik bias/spread moment parametreleri üret; raw NBM ve v5-only adayı 2026-09-01 sonrası prospektif karşılaştırma için skor görmeden dondur.
+**Tek sonraki adım:** Nested walk-forward EMOS-style ridge modelini uygula; raw NBM'e karşı development promotion gate'ini ölç ve geçerse prospective challenger olarak dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

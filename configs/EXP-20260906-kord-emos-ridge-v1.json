@@ -1,0 +1,61 @@
+{
+  "experiment_id": "EXP-20260906-kord-emos-ridge-v1",
+  "design_status": "PREREGISTERED_DEVELOPMENT_MODEL_AFTER_BASELINE_REVIEW",
+  "source": "data/processed/kord_annual_forecast_dataset/run=20260905T-final-join-v1/result.json",
+  "source_file_sha256": "12da62fbfc3414de9346bd06ab8ae69893b3fe6c3ee2e0659b87429f78714963",
+  "source_rows_sha256": "45d2ab2e480a27529fbd52ba8546676bdf3bc794061cad726965a994e1bc75fd",
+  "eligibility": {
+    "development_end_date": "2026-06-30",
+    "expected_rows": 298,
+    "consumed_development_evidence": true
+  },
+  "outer_walk_forward": {
+    "initial_train_events": 120,
+    "expected_oos_events": 178,
+    "window": "expanding",
+    "refit_every_event": true
+  },
+  "inner_selection": {
+    "blocked_validation_events": 30,
+    "ridge_lambdas": [0.1, 1.0, 10.0, 100.0],
+    "nbm_spread_scales": [0.75, 1.0, 1.25, 1.5, 2.0],
+    "selection_metric": "inner_block_mean_multiclass_log_loss",
+    "tie_break": "lambda_then_abs_scale_minus_1_then_scale"
+  },
+  "mean_features": [
+    "nbm_mean_f",
+    "gefs_minus_nbm_mean_f",
+    "day_of_year_sin",
+    "day_of_year_cos",
+    "nbm_version_5_indicator",
+    "gefs_exact_partition_indicator",
+    "gefs_outside_local_hours"
+  ],
+  "feature_processing": {
+    "standardization": "outer_or_inner_train_mean_and_population_std",
+    "zero_variance_feature": "all_zero_after_centering",
+    "intercept_penalized": false
+  },
+  "distribution": {
+    "family": "Gaussian",
+    "mean": "ridge_regression_prediction",
+    "standard_deviation": "max(1F, selected_scale_times_nbm_standard_deviation_f)"
+  },
+  "outcome_bins_c": {"minimum_integer": -50, "maximum_integer": 50},
+  "metrics": {
+    "probability_floor": 1e-12,
+    "paired_date_bootstrap_repetitions": 10000,
+    "paired_date_bootstrap_seed": 20260906
+  },
+  "promotion_thresholds": {
+    "relative_log_loss_improvement_minimum": 0.03,
+    "brier_difference_maximum": 0.0,
+    "bootstrap_ci95_upper_below": 0.0,
+    "exact_oos_events": 178
+  },
+  "interpretation_policy": {
+    "promotion_means_freeze_for_prospective_challenger": true,
+    "independent_final_test_claim": false,
+    "market_or_ev_claim": false
+  }
+}
