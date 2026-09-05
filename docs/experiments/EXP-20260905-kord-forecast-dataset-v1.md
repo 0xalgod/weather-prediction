@@ -74,7 +74,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - Eksik 2026-08-29–31 günleri provider publication lag; imputation uygulanmadı.
 - Duplicate, identity ve terminal transport hatası 0.
 - Kaynak sonucu checksum-locked ve ayrıntılı artifact'a bağlandı.
+- **NBM inventory (2026-09-05):** Prior-day 07Z object availability 365/365; terminal transport error 0.
+- Üç source object 11:00 UTC kararından sonra yayımlandı; admissible 362/365=%99,178 ve bu tarihler fallback olmadan dışlanacak.
+- Tam object indirme tahmini 11,83 GiB olduğundan compact KORD extraction doğrulanmadan bulk download yapılmayacak.
 
 ## Sıradaki en küçük adım
 
-365 hedef gün için prior-day NBM 07Z source availability/publication envanterini ölç; model değerlerini veya skorlarını hesaplama.
+Bir NBM 07Z object üzerinde KORD station-block compact retrieval/extraction bütünlüğünü full-object checksum ve parse sonucu karşılaştırarak doğrula.

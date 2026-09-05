@@ -1,0 +1,57 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "nbm_07z_source_inventory",
+  "generated_at_utc": "2026-09-05T13:14:00Z",
+  "decision": "NBM_SOURCE_INVENTORY_PASS",
+  "raw_result": "data/raw/noaa_nbm/run=20260905T-kord-annual-nbm07z-inventory-v1/result.json",
+  "raw_result_sha256": "16caa8ee6902ead5aebae23ffb4b9fb7c3ffeebecd02a4b086e49c5db48b63a0",
+  "scope": {
+    "run_date_start": "2025-08-31",
+    "run_date_end": "2026-08-30",
+    "corresponding_target_date_start": "2025-09-01",
+    "corresponding_target_date_end": "2026-08-31",
+    "cycle_utc": 7,
+    "decision_time_utc": "run_date 11:00:00Z",
+    "expected_object_count": 365
+  },
+  "metrics": {
+    "available_object_count": 365,
+    "object_availability_rate": 1.0,
+    "unavailable_object_count": 0,
+    "terminal_transport_failure_count": 0,
+    "publication_after_decision_count": 3,
+    "publication_admissible_count": 362,
+    "publication_admissible_rate": 0.9917808219178083,
+    "content_length_bytes_minimum": 34712943,
+    "content_length_bytes_maximum": 34806674
+  },
+  "publication_exclusions": [
+    {
+      "run_date": "2026-01-25",
+      "target_date": "2026-01-26",
+      "last_modified_utc": "2026-01-25T17:36:55Z"
+    },
+    {
+      "run_date": "2026-02-21",
+      "target_date": "2026-02-22",
+      "last_modified_utc": "2026-02-21T14:11:30Z"
+    },
+    {
+      "run_date": "2026-05-07",
+      "target_date": "2026-05-08",
+      "last_modified_utc": "2026-05-07T13:16:33Z"
+    }
+  ],
+  "checks": {
+    "source_availability_rate_minimum_0_99": true,
+    "publication_admissible_rate_minimum_0_99": true,
+    "terminal_transport_failure_count_maximum_0": true
+  },
+  "interpretation": {
+    "inventory_gate_component": "PASS",
+    "required_field_validation": "PENDING_COMPACT_INGESTION_AND_PARSE",
+    "admission_rule": "The three late-publication objects remain excluded; no fallback cycle or imputation is used.",
+    "storage_estimate_if_full_objects_downloaded_gib": 11.83
+  }
+}

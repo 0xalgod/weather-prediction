@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.86.0
+**Plan versiyonu:** 0.87.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1465,6 +1465,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Missingness:** 2026-08-29–31 source dosyasında henüz yok; publication lag olarak işaretlendi, imputation/backfill yapılmadı.
 - **Boundary:** NOAA label forecast eğitimi içindir; frozen historical Polymarket settlement-as-of kanıtı değildir.
 
+### D-0090 — 2026-09-05 — Bir yıllık NBM 07Z source inventory gate geçti
+
+- **Durum:** `ACTIVE`
+- **Availability:** Prior-day 07Z probabilistic text object 365/365 mevcut; terminal transport failure 0.
+- **Publication:** 362/365=%99.178 object 11:00 UTC decision time öncesi; Jan 25, Feb 21 ve May 7 source run'ları geç yayımlandı ve dışlanacak.
+- **Storage:** Full object bulk download yaklaşık 11.83 GiB; compact KORD extraction doğrulanmadan yapılmayacak.
+- **Pending:** Required field/station parse coverage henüz ölçülmedi; model/feature score hesaplanmadı.
+- **Integrity:** Alternatif cycle, imputation veya late object admission yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1485,7 +1494,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `EXP-20260905-kord-forecast-dataset-v1` kapsamındaki 365 hedef gün için prior-day NBM 07Z source availability ve publication-time envanterini ölç; model feature değerlerini veya skorlarını henüz hesaplama.
+**Tek sonraki adım:** Tek bir NBM 07Z object üzerinde KORD station-block compact retrieval/extraction yöntemini full-object checksum ve parse sonucu karşılaştırmasıyla doğrula; başarılıysa 362 admissible güne ölçeklemek için ingestion contract'ını kilitle.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
