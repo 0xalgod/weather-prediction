@@ -1,0 +1,64 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "annual_gefs_aggregate_features",
+  "generated_at_utc": "2026-09-05T14:20:00Z",
+  "decision": "ANNUAL_GEFS_AGGREGATE_GATE_PASS",
+  "raw_result": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-aggregate-annual-v1/result.json",
+  "raw_result_sha256": "aa6c432e4401fdce77f59066a7ded07ad043550e8f4d6867fef872286d29ddb3",
+  "metrics": {
+    "target_date_count": 365,
+    "publication_excluded_date_count": 3,
+    "admitted_target_date_count": 362,
+    "expected_message_count": 3374,
+    "successful_message_count": 3374,
+    "failed_message_count": 0,
+    "message_success_rate": 1.0,
+    "complete_day_count": 362,
+    "exact_complete_day_count": 122,
+    "proxy_complete_day_count": 240,
+    "finite_plausible": true,
+    "range_byte_count": 1600972976,
+    "range_gib": 1.490090950280428,
+    "recovered_transport_error_count": 46,
+    "terminal_transport_failure_count": 0,
+    "duplicate_target_date_count": 0
+  },
+  "feature_ranges": {
+    "gefs_overlap_mean_max_f": [0.698000000000075, 96.89000000000013],
+    "gefs_overlap_spread_at_mean_max_f": [0.576, 7.0200000000000005],
+    "gefs_interior_mean_max_f": [0.698000000000075, 96.89000000000013],
+    "gefs_interior_spread_at_mean_max_f": [0.576, 7.0200000000000005],
+    "gefs_max_block_spread_f": [0.882, 7.3260000000000005]
+  },
+  "checks": {
+    "message_success_rate_minimum_0_99": true,
+    "complete_day_rate_minimum_0_97": true,
+    "publication_leakage_count_maximum_0": true,
+    "finite_plausible": true,
+    "duplicate_target_date_count_maximum_0": true
+  },
+  "three_source_intersection": {
+    "nbm_admissible_date_count": 362,
+    "gefs_admissible_date_count": 362,
+    "label_admissible_date_count": 362,
+    "intersection_date_count": 357,
+    "intersection_rate": 0.9780821917808219,
+    "joined_eligible_rate_minimum_0_97": true,
+    "excluded_dates": [
+      "2025-12-19",
+      "2025-12-20",
+      "2026-01-26",
+      "2026-02-22",
+      "2026-05-08",
+      "2026-08-29",
+      "2026-08-30",
+      "2026-08-31"
+    ]
+  },
+  "interpretation": {
+    "gate": "PASS",
+    "retry_behavior": "All 46 transient transport errors recovered under bounded atomic retry; no partial destination was admitted.",
+    "next_action": "Build and checksum-freeze the exact 357-row NBM+GEFS+LCDv2 joined model-ready dataset before choosing temporal splits."
+  }
+}

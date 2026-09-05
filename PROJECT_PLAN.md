@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 1.2.0
+**Plan versiyonu:** 1.3.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1612,6 +1612,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Plan update:** Individual members annual alınmadığı için `raw_gefs_frequency` baseline, validated `raw_gefs_mean_spread` olarak superseded.
 - **Boundary:** Gerçek annual result implementasyon commit'i sonrası görülecek; label join/model score yok.
 
+### D-0106 — 2026-09-05 — Annual GEFS aggregate feature gate geçti
+
+- **Durum:** `ACTIVE`
+- **Coverage:** 3,374/3,374 message ve 362/362 timely gün complete; exact=122, proxy=240; finite/plausible %100.
+- **Transfer:** 1,600,972,976 byte=1.490 GiB; corrective pilot projection'ıyla uyumlu.
+- **Reliability:** 46 transient transport error bounded atomic retry ile recovered; terminal failure/partial admission 0.
+- **Features:** Overlap/interior mean-max + peak spread, max block spread, exact/proxy ve outside seconds.
+- **Three-source set:** NBM∩GEFS∩LCDv2 exact 357/365=%97.808; locked joined ≥%97 tarih-seti gate geçti, final schema join bekliyor.
+- **Integrity:** Sekiz exclusion explicit; imputation/alternate cycle yok. Model/split/score henüz yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1632,7 +1642,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Annual GEFS aggregate runner'ını exact 3,374 message üzerinde çalıştır; coverage/retry/exact-proxy/byte sonucunu immutable artifact'a kaydet.
+**Tek sonraki adım:** NBM, GEFS aggregate ve LCDv2 label kaynaklarını exact 357-row model-ready tabloda birleştir; schema/provenance/checksum ve final data-quality gate artifact'ını üret.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

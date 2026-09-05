@@ -95,7 +95,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **Annual GEFS aggregate runner (2026-09-05):** 362 timely gün ve exact 3.374 `geavg`/`gespr` message; ≥%99 message ve ≥%97 complete-day gate ile implement edildi.
 - Per-day features overlap/interior mean maximum, peak-step spread, maximum block spread, exact/proxy ve outside-local seconds alanlarını taşır.
 - Önceki `raw_gefs_frequency` baseline'ı individual üyeler annual alınmadığı için `raw_gefs_mean_spread` olarak evidence-driven güncellendi.
+- **Annual GEFS result (2026-09-05):** 3.374/3.374 message ve 362/362 gün complete; 122 exact, 240 proxy; finite/plausible %100.
+- 46 transient transport error atomic bounded retry ile düzeldi; terminal failure ve partial admission 0. Gerçek transfer 1,490 GiB.
+- NBM+GEFS+LCDv2 exact date intersection 357/365=%97,808; locked overall ≥%97 gate final join öncesi tarih-seti bazında geçti.
 
 ## Sıradaki en küçük adım
 
-Annual GEFS aggregate runner'ını 3.374 message üzerinde çalıştır; coverage, retry, exact/proxy ve byte sonucunu immutable artifact'a kaydet.
+NBM, GEFS aggregate ve LCDv2 label kaynaklarını exact 357-row model-ready tabloda birleştir; schema/provenance/checksum ve final data-quality gate'i üret.
