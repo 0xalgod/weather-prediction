@@ -5,6 +5,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from weather_quant.ingestion.noaa_gefs import (
+    aggregate_object_url,
     coordinate_delta_degrees,
     download_selected_ranges,
     fetch_index_summary,
@@ -35,6 +36,15 @@ class NoaaGefsTests(unittest.TestCase):
             "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20250830/00/atmos/"
             "pgrb2sp25/gep30.t00z.pgrb2s.0p25.f024",
         )
+
+    def test_aggregate_url_accepts_only_mean_and_spread_products(self):
+        self.assertEqual(
+            aggregate_object_url("20260114", 0, "gespr", 36),
+            "https://noaa-gefs-pds.s3.amazonaws.com/gefs.20260114/00/atmos/"
+            "pgrb2sp25/gespr.t00z.pgrb2s.0p25.f036",
+        )
+        with self.assertRaisesRegex(ValueError, "aggregate"):
+            aggregate_object_url("20260114", 0, "gep01", 36)
 
     def test_index_extracts_exact_surface_temperature_fields_and_ranges(self):
         parsed = parse_index(FIXTURE.read_text(encoding="ascii"), content_length=700)

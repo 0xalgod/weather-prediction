@@ -210,6 +210,17 @@ def object_url(run_date: str, cycle: int, member: str, step: int) -> str:
     )
 
 
+def aggregate_object_url(run_date: str, cycle: int, product: str, step: int) -> str:
+    if len(run_date) != 8 or not run_date.isdigit() or cycle not in {0, 6, 12, 18}:
+        raise ValueError("invalid GEFS run date or cycle")
+    if product not in {"geavg", "gespr"} or step < 0 or step > 240 or step % 3:
+        raise ValueError("invalid GEFS aggregate product or forecast step")
+    filename = f"{product}.t{cycle:02d}z.pgrb2s.0p25.f{step:03d}"
+    return (
+        f"{GEFS_AWS_BASE}/gefs.{run_date}/{cycle:02d}/atmos/pgrb2sp25/{filename}"
+    )
+
+
 def parse_index(text: str, content_length: int) -> dict[str, Any]:
     rows = []
     lines = [line for line in text.splitlines() if line]

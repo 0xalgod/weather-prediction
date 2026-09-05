@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.98.0
+**Plan versiyonu:** 0.99.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1576,6 +1576,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Integrity:** Üç incomplete-member cell diagnostic-only; eksik değerle primary threshold hesaplanmaz.
 - **Boundary:** Model score/calibration/market/EV yok; eşikler aggregate değer görülmeden kilitlendi.
 
+### D-0102 — 2026-09-05 — GEFS aggregate validation runner hazır
+
+- **Durum:** `ACTIVE`
+- **Contracts:** `geavg`/`gespr` object URL; exact index semantic `ens mean`/`ens std dev`; canonical 6h TMAX.
+- **Units:** Mean absolute Kelvin→°F; spread Kelvin delta→°F delta yalnız ×9/5.
+- **Comparator:** Checksum-locked pilot; empirical arithmetic mean ve population std; yalnız 6 adet 31/31 cell primary.
+- **Output:** 18 aggregate message provenance, cell errors ve annual byte/GET projection.
+- **Boundary:** Sonuç implementasyon commit'inden sonra görülecek; model loss/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1596,7 +1605,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `geavg`/`gespr` aggregate product URL/index/decode desteğini ve 18-message validation runner'ını implement et; testlerden sonra deneyi bir kez çalıştır.
+**Tek sonraki adım:** GEFS aggregate validation runner'ını exact 18 message üzerinde bir kez çalıştır; accuracy ve annual cost gate sonucunu immutable artifact'a kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

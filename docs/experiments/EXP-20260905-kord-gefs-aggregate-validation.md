@@ -36,4 +36,11 @@ Bu deney GEFS summary feature'ın veri/maliyet doğrulamasıdır. Forecast model
 
 ## Sıradaki adım
 
-Aggregate product URL/index desteğini ve decoder semantiğini implement et; testlerden sonra 18-message deneyi bir kez çalıştır.
+Testlerden geçen runner ile exact 18-message deneyi bir kez çalıştır; accuracy/cost sonucunu immutable artifact'a yaz.
+
+## Uygulama durumu
+
+- `geavg` ve `gespr` URL contract'ı eklendi.
+- Index ensemble semantiği sırasıyla exact `ens mean` ve `ens std dev` olmalıdır.
+- `gespr` Kelvin farkı Fahrenheit farkına yalnız `×9/5` ile çevrilir; absolute-temperature offset uygulanmaz.
+- Runner checksum-locked full-member pilotundan empirical mean ve `ddof=0` spread üretir; yalnız 31/31 hücreleri primary gate'e alır.
