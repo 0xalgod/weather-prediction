@@ -91,6 +91,16 @@
     "duplicate_station_date_count_maximum": 0,
     "nonfinite_feature_or_label_count_maximum": 0
   },
+  "final_join": {
+    "expected_joined_row_count": 357,
+    "join_key": ["station_id", "target_date"],
+    "join_policy": "INNER_JOIN_WITH_EXPLICIT_EXCLUSIONS_NO_IMPUTATION",
+    "output_format": "JSON",
+    "required_nbm_fields": ["mean_f", "standard_deviation_f", "p10_f", "p25_f", "p50_f", "p75_f", "p90_f"],
+    "required_gefs_fields": ["gefs_overlap_mean_max_f", "gefs_overlap_spread_at_mean_max_f", "gefs_interior_mean_max_f", "gefs_interior_spread_at_mean_max_f", "gefs_max_block_spread_f"],
+    "label_field": "daily_maximum_dry_bulb_f",
+    "checksum_algorithm": "sha256_canonical_json"
+  },
   "dataset_split_policy": {
     "random_split": false,
     "existing_2026_07_08_to_2026_08_28_oos": "CONSUMED_DIAGNOSTIC_NOT_REUSABLE_FOR_SELECTION",

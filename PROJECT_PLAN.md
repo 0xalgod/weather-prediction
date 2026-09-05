@@ -1622,6 +1622,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Three-source set:** NBM∩GEFS∩LCDv2 exact 357/365=%97.808; locked joined ≥%97 tarih-seti gate geçti, final schema join bekliyor.
 - **Integrity:** Sekiz exclusion explicit; imputation/alternate cycle yok. Model/split/score henüz yok.
 
+### D-0107 — 2026-09-05 — Final model-ready join sözleşmesi kilitlendi
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Exact NBM∩GEFS∩LCDv2 kesişimi 357 unique ve finite satırla, sıfır publication leakage altında dondurulabilir.
+- **Schema:** Station/date/decision timestamps, 7 NBM, 5 GEFS, GEFS window-quality, 4 calendar ve Fahrenheit label alanları.
+- **Gates:** Exact 357 satır, joined ≥%97, duplicate/nonfinite/leakage 0; inner join, imputation yok.
+- **Provenance:** Üç input result checksum'ı, canonical row checksum'ı ve explicit exclusion reasons output'ta zorunlu.
+- **Boundary:** Split veya model skoru bu join sonucu görülmeden hesaplanmayacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
