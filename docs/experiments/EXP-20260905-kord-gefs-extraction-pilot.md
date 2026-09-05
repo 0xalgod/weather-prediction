@@ -33,4 +33,10 @@ Bu pilot yalnız extraction doğruluğu ve operasyonel maliyeti ölçer. Model l
 
 ## Sıradaki adım
 
-ecCodes decoder dependency'sini ekle, nearest-grid extraction contract testlerini yaz ve pilot runner'ı implementasyon commit'inden sonra bir kez çalıştır.
+Pilot runner'ı exact 279 mesaj için implementasyon commit'inden sonra bir kez çalıştır; integrity/decode/byte projection sonucunu immutable artifact'a yaz.
+
+## Uygulama durumu
+
+- ecCodes `>=2.48,<2.49` reproducible runtime dependency olarak eklendi.
+- Nearest-grid coordinate normalization ve Kelvin→Fahrenheit dönüşüm testleri eklendi.
+- Runner her object için exact TMAX index row, canonical 6h window, publication time, HTTP 206, GRIB boundaries, single-message decode ve KORD grid mesafesini fail-closed doğruluyor.

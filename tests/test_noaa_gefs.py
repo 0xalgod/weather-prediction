@@ -4,7 +4,9 @@ from pathlib import Path
 from unittest.mock import patch
 
 from weather_quant.ingestion.noaa_gefs import (
+    coordinate_delta_degrees,
     fetch_index_summary,
+    kelvin_to_fahrenheit,
     local_day_tmax_steps,
     local_day_utc,
     member_names,
@@ -105,6 +107,14 @@ class NoaaGefsTests(unittest.TestCase):
         self.assertEqual(summer["overlap_steps"], [30, 36, 42, 48, 54])
         self.assertEqual(summer["interior_steps"], [36, 42, 48])
         self.assertEqual(summer["outside_local_seconds"], 6 * 3600)
+
+    def test_temperature_and_grid_coordinate_conversions(self):
+        self.assertAlmostEqual(kelvin_to_fahrenheit(273.15), 32.0)
+        self.assertAlmostEqual(
+            coordinate_delta_degrees(42.0, 272.0, 41.96019, -87.93162),
+            0.079124,
+            places=4,
+        )
 
 
 if __name__ == "__main__":

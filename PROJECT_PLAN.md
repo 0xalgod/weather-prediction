@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.94.0
+**Plan versiyonu:** 0.95.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1539,6 +1539,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Dependency:** Sayısal GRIB decode için ecCodes runtime reproducible dependency olarak eklenecek; mevcut environment'ta decoder yok.
 - **Boundary:** Pilot model loss/feature selection/market/EV içermez.
 
+### D-0098 — 2026-09-05 — GEFS GRIB decoder ve extraction pilot runner hazır
+
+- **Durum:** `ACTIVE`
+- **Runtime:** ecCodes `>=2.48,<2.49` project dependency; local isolated `.venv` kuruldu.
+- **Decoder:** Tek-message, 2m TMAX/Kelvin identity; nearest KORD grid coordinate/distance; Fahrenheit conversion.
+- **Runner:** Exact 279 görev; index row/canonical 6h/publication/HTTP206/GRIB/single-message/finite/range provenance fail-closed.
+- **Projection:** Pilot mean message byte × locked 52,297 annual pair; ≤25 GiB ve ≤60,000 GET gate.
+- **Boundary:** Gerçek pilot sonucu implementasyon commit'inden sonra ilk kez görülecek; model score yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1559,7 +1568,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** ecCodes dependency ve KORD nearest-grid contract testleriyle iki-rejim GEFS extraction pilot runner'ını oluştur; implementasyonu sonuçtan önce commit/push et.
+**Tek sonraki adım:** İki-rejim GEFS extraction pilotunu exact 279 mesaj üzerinde bir kez çalıştır; integrity/decode/byte projection sonucunu immutable artifact'a kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

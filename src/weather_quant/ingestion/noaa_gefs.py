@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 import time
 import xml.etree.ElementTree as ET
@@ -124,6 +125,75 @@ def local_day_tmax_steps(target_date: date, timezone_name: str) -> dict[str, Any
         "overlap_steps": [step for step, _, _ in selected],
         "interior_steps": interior_steps,
         **coverage,
+    }
+
+
+def kelvin_to_fahrenheit(value: float) -> float:
+    return (value - 273.15) * 9 / 5 + 32
+
+
+def coordinate_delta_degrees(
+    observed_latitude: float,
+    observed_longitude: float,
+    target_latitude: float,
+    target_longitude: float,
+) -> float:
+    observed_lon_signed = (
+        observed_longitude - 360 if observed_longitude > 180 else observed_longitude
+    )
+    return math.hypot(
+        observed_latitude - target_latitude,
+        observed_lon_signed - target_longitude,
+    )
+
+
+def decode_nearest_tmax(
+    path: Path, latitude: float, longitude: float
+) -> dict[str, Any]:
+    """Decode one GRIB2 TMAX message at the nearest grid point."""
+
+    from eccodes import (  # type: ignore[import-not-found]
+        codes_get,
+        codes_grib_find_nearest,
+        codes_grib_new_from_file,
+        codes_release,
+    )
+
+    with path.open("rb") as source:
+        gid = codes_grib_new_from_file(source)
+        if gid is None:
+            raise ValueError("GRIB file has no message")
+        try:
+            short_name = codes_get(gid, "shortName")
+            level = codes_get(gid, "level")
+            step_range = str(codes_get(gid, "stepRange"))
+            units = codes_get(gid, "units")
+            nearest = codes_grib_find_nearest(
+                gid, latitude, longitude, npoints=1
+            )[0]
+            if codes_grib_new_from_file(source) is not None:
+                raise ValueError("expected exactly one GRIB message")
+        finally:
+            codes_release(gid)
+    if short_name != "tmax" or units != "K" or level != 2:
+        raise ValueError("decoded message is not 2 m TMAX in Kelvin")
+    value_k = float(nearest["value"])
+    return {
+        "short_name": short_name,
+        "level_m": level,
+        "step_range": step_range,
+        "units": units,
+        "grid_latitude": float(nearest["lat"]),
+        "grid_longitude": float(nearest["lon"]),
+        "distance_km": float(nearest["distance"]),
+        "coordinate_delta_degrees": coordinate_delta_degrees(
+            float(nearest["lat"]),
+            float(nearest["lon"]),
+            latitude,
+            longitude,
+        ),
+        "temperature_k": value_k,
+        "temperature_f": kelvin_to_fahrenheit(value_k),
     }
 
 
