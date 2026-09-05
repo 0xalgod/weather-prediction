@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 1.1.0
+**Plan versiyonu:** 1.2.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1602,6 +1602,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** 31-member annual bulk yerine validated aggregate summary ingestion; individual-member frequency kaybı explicit limitation.
 - **Boundary:** Aggregate equivalence forecast skill/calibration/EV değildir; yalnız feature fidelity ve cost kanıtıdır.
 
+### D-0105 — 2026-09-05 — Annual GEFS aggregate ingestion runner hazır
+
+- **Durum:** `ACTIVE`
+- **Scope:** 362 timely date, exact 3,374 `geavg`/`gespr` message; 3 late date explicit exclusion.
+- **Gates:** Message success ≥%99, complete-day ≥%97, leakage 0, finite/plausible mean/spread.
+- **Features:** Overlap/interior mean-max ve peak spread, max block spread, exact/proxy, outside-local seconds.
+- **Reliability:** Atomic range writes + bounded retries; per-message URL/index checksum/ETag/Last-Modified/GRIB checksum.
+- **Plan update:** Individual members annual alınmadığı için `raw_gefs_frequency` baseline, validated `raw_gefs_mean_spread` olarak superseded.
+- **Boundary:** Gerçek annual result implementasyon commit'i sonrası görülecek; label join/model score yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1622,7 +1632,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 362 publication-admissible GEFS günü için annual `geavg`/`gespr` compact ingestion runner'ını exact/proxy window aggregation ve atomic retry ile oluştur; sonuçtan önce commit/push et.
+**Tek sonraki adım:** Annual GEFS aggregate runner'ını exact 3,374 message üzerinde çalıştır; coverage/retry/exact-proxy/byte sonucunu immutable artifact'a kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

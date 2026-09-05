@@ -92,7 +92,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **GEFS inventory result (2026-09-05):** 365/365 listing; 11.222/11.315=%99,178 complete+timely member-day; 52.669/52.669 data/index pair fiziksel olarak mevcut.
 - Üç target gün tüm member'larda late-publication nedeniyle dışlandı; terminal transport failure 0.
 - NBM+GEFS+label expected intersection 357/365=%97,808; overall gate extraction/final join sonuna kadar provisional pass.
+- **Annual GEFS aggregate runner (2026-09-05):** 362 timely gün ve exact 3.374 `geavg`/`gespr` message; ≥%99 message ve ≥%97 complete-day gate ile implement edildi.
+- Per-day features overlap/interior mean maximum, peak-step spread, maximum block spread, exact/proxy ve outside-local seconds alanlarını taşır.
+- Önceki `raw_gefs_frequency` baseline'ı individual üyeler annual alınmadığı için `raw_gefs_mean_spread` olarak evidence-driven güncellendi.
 
 ## Sıradaki en küçük adım
 
-Bir winter-exact ve bir summer-proxy günde 31-member canonical TMAX index/range extraction bütünlüğünü ve byte maliyetini ölç; annual bulk retrieval kararını bu artifact'tan sonra ver.
+Annual GEFS aggregate runner'ını 3.374 message üzerinde çalıştır; coverage, retry, exact/proxy ve byte sonucunu immutable artifact'a kaydet.

@@ -30,7 +30,11 @@
     "gefs": {
       "source": "NOAA GEFS operational archive",
       "cycle_utc": 0,
-      "members": "control_plus_30_perturbed",
+      "products": [
+        "geavg",
+        "gespr"
+      ],
+      "fidelity_validation": "Passed against full control_plus_30_perturbed pilot in EXP-20260905-kord-gefs-aggregate-validation",
       "required_parameter": "TMAX",
       "required_local_day_coverage": 1.0,
       "window_semantics": {
@@ -51,6 +55,22 @@
       "month",
       "dst_offset_hours"
     ]
+  },
+  "annual_gefs_aggregate_ingestion": {
+    "publication_excluded_target_dates": [
+      "2025-12-19",
+      "2025-12-20",
+      "2026-01-26"
+    ],
+    "expected_admissible_target_dates": 362,
+    "expected_message_count": 3374,
+    "message_success_rate_minimum": 0.99,
+    "complete_day_requires_all_mean_and_spread_steps": true,
+    "publication_leakage_count_maximum": 0,
+    "temperature_f_minimum": -80.0,
+    "temperature_f_maximum": 140.0,
+    "spread_f_minimum": 0.0,
+    "spread_f_maximum": 40.0
   },
   "label": {
     "primary_source": "NOAA LCDv2 DailyMaximumDryBulbTemperature",
@@ -93,7 +113,7 @@
     "initial_baselines": [
       "seasonal_climatology",
       "raw_nbm_quantiles",
-      "raw_gefs_frequency"
+      "raw_gefs_mean_spread"
     ]
   },
   "trading": {
