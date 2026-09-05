@@ -16,8 +16,9 @@ from weather_quant.backtest.scoring import (
     score_probabilities,
 )
 from weather_quant.market_model.vertical_slice import (
-    gaussian_bucket_probabilities,
-    quantile_bucket_probabilities,
+    normal_cdf,
+    quantile_cdf_anchors,
+    quantile_preserving_cdf,
 )
 
 
@@ -41,18 +42,31 @@ def integer_celsius_buckets(minimum: int, maximum: int) -> list[dict]:
 
 
 def gaussian_vector(buckets: list[dict], mean_f: float, spread_f: float) -> list[float]:
-    return [
-        row["model_probability"]
-        for row in gaussian_bucket_probabilities(buckets, mean_f, spread_f)
-    ]
+    probabilities = []
+    for row in buckets:
+        lower = 0.0 if row["lower_bound"] is None else normal_cdf(
+            row["lower_bound"], mean_f, spread_f
+        )
+        upper = 1.0 if row["upper_bound"] is None else normal_cdf(
+            row["upper_bound"], mean_f, spread_f
+        )
+        probabilities.append(upper - lower)
+    return probabilities
 
 
 def quantile_vector(buckets: list[dict], row: dict) -> list[float]:
     forecast = {key: row[f"nbm_{key}"] for key in ("p10_f", "p25_f", "p50_f", "p75_f", "p90_f")}
-    return [
-        item["model_probability"]
-        for item in quantile_bucket_probabilities(buckets, forecast)
-    ]
+    anchors = quantile_cdf_anchors(**forecast)
+    probabilities = []
+    for bucket in buckets:
+        lower = 0.0 if bucket["lower_bound"] is None else quantile_preserving_cdf(
+            bucket["lower_bound"], anchors
+        )
+        upper = 1.0 if bucket["upper_bound"] is None else quantile_preserving_cdf(
+            bucket["upper_bound"], anchors
+        )
+        probabilities.append(upper - lower)
+    return probabilities
 
 
 def circular_day_distance(left: int, right: int) -> int:

@@ -1651,6 +1651,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Outcome:** Integer Celsius bins −50…50; primary multiclass log loss, secondary Brier/RPS.
 - **Baselines:** Seasonal climatology Gaussian, raw NBM Gaussian, raw NBM quantile CDF, raw GEFS Gaussian.
 - **Gates:** OOS ≥170, finite/sum-valid probability %100; bu ilk koşu descriptive, EV/trading kararı yok.
+- **Attempt 1:** Skor oluşmadan Fahrenheit discrete-bucket validator 1°C sınıf aralığını reddetti; locked Celsius outcome değişmedi, doğrudan CDF-boundary hesabı corrective implementation olarak kullanıldı.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
