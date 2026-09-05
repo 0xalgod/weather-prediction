@@ -1,0 +1,49 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-gefs-extraction-pilot",
+  "generated_at_utc": "2026-09-05T13:41:00Z",
+  "decision": "GEFS_FULL_MEMBER_EXTRACTION_PILOT_FAIL",
+  "raw_result": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-extraction-pilot-v1/result.json",
+  "raw_result_sha256": "165e4f149f9683d0dcdaa4f672394a47f176fc7e0fc12d7a45d33201c624b20d",
+  "metrics": {
+    "expected_message_count": 279,
+    "successful_message_count": 275,
+    "failed_message_count": 4,
+    "success_rate": 0.985663082437276,
+    "nonfinite_or_implausible_count": 0,
+    "distant_gridpoint_count": 0,
+    "nearest_grid_latitude": 42.0,
+    "nearest_grid_longitude_0_360": 272.0,
+    "coordinate_delta_degrees": 0.07912433570021853,
+    "pilot_range_byte_count": 156264912,
+    "mean_range_bytes_per_successful_message": 568236.0436363636,
+    "annual_projected_range_get_count": 52297,
+    "annual_projected_range_gib": 27.279359862208363
+  },
+  "failed_messages": [
+    "2026-01-15/gep17/f054",
+    "2026-07-15/gec00/f042",
+    "2026-07-15/gep23/f042",
+    "2026-07-15/gep29/f036"
+  ],
+  "checks": {
+    "successful_index_range_decode_rate_1_0": false,
+    "publication_leakage_count_maximum_0": true,
+    "nonfinite_value_count_maximum_0": true,
+    "temperature_plausibility": true,
+    "nearest_grid_distance_maximum_0_2_degrees": true,
+    "annual_projected_range_bytes_maximum_25_gib": false,
+    "annual_projected_range_get_count_maximum_60000": true
+  },
+  "failure_diagnosis": {
+    "transport_failure_count": 4,
+    "root_cause": "A transport exception during range streaming left a partial destination file; retry then failed the immutable destination check.",
+    "data_missingness": false,
+    "cost_gate_would_still_fail_after_retry_fix": true
+  },
+  "corrective_direction": {
+    "candidate": "NOAA GEFS geavg and gespr ensemble mean/spread products",
+    "validation": "Compare official aggregate products with empirical statistics from the 275 successful full-member pilot values before annual use.",
+    "orders_or_trading": false
+  }
+}

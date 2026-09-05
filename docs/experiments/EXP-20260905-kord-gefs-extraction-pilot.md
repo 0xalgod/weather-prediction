@@ -1,6 +1,6 @@
 # EXP-20260905 — KORD GEFS extraction pilot
 
-**Durum:** `IN_PROGRESS`  
+**Durum:** `FAILED`
 **Ön kayıt tarihi:** 2026-09-05
 
 ## Hipotez
@@ -40,3 +40,11 @@ Pilot runner'ı exact 279 mesaj için implementasyon commit'inden sonra bir kez 
 - ecCodes `>=2.48,<2.49` reproducible runtime dependency olarak eklendi.
 - Nearest-grid coordinate normalization ve Kelvin→Fahrenheit dönüşüm testleri eklendi.
 - Runner her object için exact TMAX index row, canonical 6h window, publication time, HTTP 206, GRIB boundaries, single-message decode ve KORD grid mesafesini fail-closed doğruluyor.
+
+## Sonuç
+
+- 275/279=%98,57 message başarılı; locked %100 gate başarısız.
+- Finite, plausibility, grid-distance ve leakage kontrolleri geçti.
+- Dört transport hatasında partial destination retry'ı engelleyen atomic-write bug'ı bulundu.
+- Annual projected transfer 27,28 GiB; locked ≤25 GiB cost gate başarısız.
+- Full-member annual bulk retrieval reddedildi. Düzeltici deney `geavg`/`gespr` ürünlerini pilot empirical member statistics ile karşılaştıracak.

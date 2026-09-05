@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.95.0
+**Plan versiyonu:** 0.96.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1548,6 +1548,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Projection:** Pilot mean message byte × locked 52,297 annual pair; ≤25 GiB ve ≤60,000 GET gate.
 - **Boundary:** Gerçek pilot sonucu implementasyon commit'inden sonra ilk kez görülecek; model score yok.
 
+### D-0099 — 2026-09-05 — Full-member GEFS extraction pilotu maliyet ve integrity gate'inde kaldı
+
+- **Durum:** `ACTIVE`
+- **Result:** 275/279=%98.57 decode; locked %100 fail. Finite/plausibility/grid/leakage kontrolleri geçti.
+- **Bug:** 4 transport 503/reset, partial destination bıraktı; retry immutable-file check'e takıldı. Source missing değil; atomic temp write gerekli.
+- **Cost:** 156,264,912 pilot byte → annual 27.28 GiB; locked ≤25 GiB fail. GET projection 52,297 ≤60,000 geçti.
+- **Karar:** 31-member annual bulk retrieval yapılmaz; retry fix tek başına cost fail'i çözmez.
+- **Corrective hypothesis:** Resmî `geavg`/`gespr` TMAX ürünlerini 275 empirical member değeriyle karşılaştır; yeterli eşleşirse low-cost summary feature olarak kullan.
+- **Boundary:** Model score/EV/order yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1568,7 +1578,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** İki-rejim GEFS extraction pilotunu exact 279 mesaj üzerinde bir kez çalıştır; integrity/decode/byte projection sonucunu immutable artifact'a kaydet.
+**Tek sonraki adım:** GEFS range download'u atomic temp-file yapısıyla düzelt; ardından `geavg`/`gespr` TMAX değerlerini iki pilot günde empirical member mean/spread ile karşılaştıracak corrective deneyi model skorundan önce pre-register et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
