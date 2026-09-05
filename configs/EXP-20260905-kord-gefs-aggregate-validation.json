@@ -4,6 +4,13 @@
   "source_full_member_pilot": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-extraction-pilot-v1/result.json",
   "source_full_member_pilot_sha256": "165e4f149f9683d0dcdaa4f672394a47f176fc7e0fc12d7a45d33201c624b20d",
   "hypothesis": "NOAA GEFS geavg ve gespr 2m TMAX değerleri, iki pilot gündeki eksiksiz 31-member hücrelerin empirical population mean ve standard deviation değerlerini düşük hata ile yeniden üretir ve yıllık extraction maliyetini kilitli operasyon sınırının altına indirir.",
+  "station": {
+    "icao": "KORD",
+    "station_id": "USW00094846",
+    "latitude": 41.96019,
+    "longitude": -87.93162,
+    "timezone": "America/Chicago"
+  },
   "cases": [
     {
       "target_date": "2026-01-15",

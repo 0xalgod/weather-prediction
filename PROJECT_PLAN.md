@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.99.0
+**Plan versiyonu:** 1.0.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1585,6 +1585,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Output:** 18 aggregate message provenance, cell errors ve annual byte/GET projection.
 - **Boundary:** Sonuç implementasyon commit'inden sonra görülecek; model loss/EV yok.
 
+### D-0103 — 2026-09-05 — Aggregate attempt 1 veri öncesi config hatasında durdu
+
+- **Durum:** `ACTIVE`
+- **Failure:** Runner task submission öncesi machine config'te `station` bloğu olmadığı için `KeyError`; aggregate HTTP request/value 0, output directory boş.
+- **Correction:** Human planında önceden kilitli KORD identity/41.96019/−87.93162 machine config'e eklendi.
+- **Unchanged:** Dates/products/18 messages/comparator/accuracy/cost thresholds aynen korundu.
+- **Retry:** İlk gerçek veri koşusu yeni immutable `run=20260905T-gefs-aggregate-validation-v2` path'inde yapılacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1605,7 +1613,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS aggregate validation runner'ını exact 18 message üzerinde bir kez çalıştır; accuracy ve annual cost gate sonucunu immutable artifact'a kaydet.
+**Tek sonraki adım:** Düzeltilmiş config ile GEFS aggregate validation runner'ını yeni immutable v2 path'inde exact 18 message üzerinde çalıştır; accuracy ve annual cost gate sonucunu kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

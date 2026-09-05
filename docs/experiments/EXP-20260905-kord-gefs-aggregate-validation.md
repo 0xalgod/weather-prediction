@@ -44,3 +44,4 @@ Testlerden geçen runner ile exact 18-message deneyi bir kez çalıştır; accur
 - Index ensemble semantiği sırasıyla exact `ens mean` ve `ens std dev` olmalıdır.
 - `gespr` Kelvin farkı Fahrenheit farkına yalnız `×9/5` ile çevrilir; absolute-temperature offset uygulanmaz.
 - Runner checksum-locked full-member pilotundan empirical mean ve `ddof=0` spread üretir; yalnız 31/31 hücreleri primary gate'e alır.
+- Attempt 1 aggregate request göndermeden `KeyError: station` ile durdu; output directory boş ve aggregate value gözlenmedi. Human-readable planda zaten kilitli KORD koordinatları machine config'e eklendi; eşikler/tarihler değişmedi. İlk veri koşusu immutable `v2` olacaktır.

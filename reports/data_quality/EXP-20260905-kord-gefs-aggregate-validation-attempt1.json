@@ -1,0 +1,13 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-gefs-aggregate-validation",
+  "attempt": 1,
+  "decision": "PRE_EXECUTION_CONFIG_FAILURE",
+  "error": "KeyError: station",
+  "aggregate_requests_submitted": 0,
+  "aggregate_values_observed": 0,
+  "output_directory": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-aggregate-validation-v1",
+  "output_directory_state": "EMPTY",
+  "correction": "Add the already-declared KORD identity and coordinates to the machine-readable config; thresholds, cases, products and comparison policy remain unchanged.",
+  "next_attempt": "run=20260905T-gefs-aggregate-validation-v2"
+}
