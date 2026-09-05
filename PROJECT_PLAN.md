@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.93.0
+**Plan versiyonu:** 0.94.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1530,6 +1530,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Preliminary join:** NBM+GEFS+label unique exclusion 8 gün; expected 357/365=%97.808, locked ≥%97 provisional pass.
 - **Boundary:** GEFS values henüz indirilmedi; model/split/score yok.
 
+### D-0097 — 2026-09-05 — İki-rejim GEFS extraction pilotu ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Cases:** Target 2026-01-15 exact-winter (31×4=124) ve 2026-07-15 proxy-summer (31×5=155); toplam exact 279 TMAX message.
+- **Integrity gate:** 279/279 index/range HTTP206/GRIB/decode; leakage ve non-finite 0; KORD nearest-grid distance ≤0.2°; −80..140°F.
+- **Cost gate:** Ölçülen message byte'ı 52,297 annual pair'e ölçeklendiğinde ≤25 GiB; range GET ≤60,000.
+- **Dependency:** Sayısal GRIB decode için ecCodes runtime reproducible dependency olarak eklenecek; mevcut environment'ta decoder yok.
+- **Boundary:** Pilot model loss/feature selection/market/EV içermez.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1550,7 +1559,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Bir winter-exact ve bir summer-proxy günde 31-member canonical TMAX index/range extraction bütünlüğünü ve gerçek byte maliyetini ölç; annual bulk retrieval kararını bu sonuçtan sonra ver.
+**Tek sonraki adım:** ecCodes dependency ve KORD nearest-grid contract testleriyle iki-rejim GEFS extraction pilot runner'ını oluştur; implementasyonu sonuçtan önce commit/push et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

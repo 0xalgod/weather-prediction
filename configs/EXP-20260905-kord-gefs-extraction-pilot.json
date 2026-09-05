@@ -1,0 +1,60 @@
+{
+  "experiment_id": "EXP-20260905-kord-gefs-extraction-pilot",
+  "status": "PREREGISTERED",
+  "hypothesis": "Bir exact-winter ve bir proxy-summer KORD gününde tüm 31 GEFS üyesinin gerekli canonical TMAX mesajları compact range ile eksiksiz indirilebilir ve nearest-grid sıcaklıkları finite/plausible olarak çözülebilir; ölçülen maliyet yıllık ingestion için 25 GiB ve 60000 range GET sınırlarını aşmaz.",
+  "cases": [
+    {
+      "target_date": "2026-01-15",
+      "run_date": "2026-01-14",
+      "regime": "WINTER_EXACT",
+      "expected_steps": [36, 42, 48, 54],
+      "expected_member_count": 31,
+      "expected_message_count": 124
+    },
+    {
+      "target_date": "2026-07-15",
+      "run_date": "2026-07-14",
+      "regime": "SUMMER_PROXY",
+      "expected_steps": [30, 36, 42, 48, 54],
+      "expected_member_count": 31,
+      "expected_message_count": 155
+    }
+  ],
+  "station": {
+    "icao": "KORD",
+    "station_id": "USW00094846",
+    "latitude": 41.96019,
+    "longitude": -87.93162,
+    "timezone": "America/Chicago"
+  },
+  "retrieval_contract": {
+    "cycle_utc": 0,
+    "parameter": "TMAX",
+    "level": "2 m above ground",
+    "members": "gec00_plus_gep01_through_gep30",
+    "required_http_status": 206,
+    "required_grib_start": "GRIB",
+    "required_grib_end": "7777",
+    "alternate_cycle": false
+  },
+  "acceptance_thresholds": {
+    "expected_message_count_exact": 279,
+    "successful_index_range_decode_rate": 1.0,
+    "publication_leakage_count_maximum": 0,
+    "nonfinite_value_count_maximum": 0,
+    "temperature_f_minimum": -80.0,
+    "temperature_f_maximum": 140.0,
+    "nearest_grid_distance_degrees_maximum": 0.2,
+    "annual_projected_range_bytes_maximum_gib": 25.0,
+    "annual_projected_range_get_count_maximum": 60000
+  },
+  "annual_projection_basis": {
+    "admissible_data_index_pairs": 52297,
+    "scale_from_pilot_messages": 279
+  },
+  "modeling": {
+    "model_score": false,
+    "feature_selection": false,
+    "trading": false
+  }
+}
