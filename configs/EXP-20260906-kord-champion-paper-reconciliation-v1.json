@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-20260906-kord-champion-paper-reconciliation-v1",
+  "design_status": "PREREGISTERED_BEFORE_NOAA_OUTCOME_FETCH",
+  "champion": {
+    "name": "RAW_NBM_GAUSSIAN_V1",
+    "model_run_policy": "prior_day_07Z_NBM_f41_MaxT",
+    "distribution": "Gaussian(mean_f, max(standard_deviation_f, 1F))",
+    "evidence_artifact_sha256": "79e5d95f689abdaef6a9ab1e99dadb6a531cfef01cd70dd551692b51dc3ad222",
+    "development_log_loss": 2.060760717431416
+  },
+  "paper_source": "data/processed/chicago_paper_cohort/day=01/run=20260903T105642Z-v2/result.json",
+  "paper_source_sha256": "05187e9b318111f6589ceea96669159d60eec90d1004a0f6ac3a828080b2c485",
+  "event": {
+    "event_id": "952456",
+    "target_local_date": "2026-09-04",
+    "timezone": "America/Chicago",
+    "station": "KORD",
+    "gamma_url": "https://gamma-api.polymarket.com/events/952456",
+    "noaa_url": "https://api.weather.gov/stations/KORD/observations?start=2026-09-04T05:00:00Z&end=2026-09-05T05:00:00Z"
+  },
+  "settlement_contract": {
+    "temperature_conversion": "Celsius value times 9/5 plus 32",
+    "reading_precision": "round each observation to nearest whole Fahrenheit before maximum",
+    "bucket_rule": "inclusive Fahrenheit bounds from paper artifact",
+    "gamma_winner": "exactly one resolved YES outcomePrice=1"
+  },
+  "gates": {
+    "minimum_noaa_temperature_observations": 20,
+    "maximum_gamma_winner_count": 1,
+    "required_noaa_gamma_bucket_match": true
+  },
+  "trading": {"orders": false, "paper_only": true}
+}

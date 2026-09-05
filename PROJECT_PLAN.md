@@ -1726,6 +1726,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Champion:** Raw NBM Gaussian development champion olarak freeze edilecek; gerçek değer artık market executable fiyatına incremental comparison ile sınanacak.
 - **Boundary:** Forecast skill, pozitif net EV değildir.
 
+### D-0117 — 2026-09-06 — Forecast champion ve Paper Day 1 settlement ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Champion:** `RAW_NBM_GAUSSIAN_V1`; prior-day 07Z f41, Gaussian(mean, max(sd,1°F)); baseline artifact checksum-locked.
+- **Paper event:** Chicago/KORD 2026-09-04, event 952456, checksum-locked executable books/fees/decisions.
+- **Outcome sources:** Official api.weather.gov KORD local-day observations + terminal Gamma market outcomes.
+- **Gates:** NOAA obs ≥20, exactly one Gamma YES winner, NOAA max bucket = Gamma winner.
+- **P&L:** Frozen decisions only; Gaussian `NO_TRADE`, quantile hypothetical fill cost+fee; outcome sonrası karar değişmez.
+- **Boundary:** Tek event edge kanıtı değildir, canlı emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
