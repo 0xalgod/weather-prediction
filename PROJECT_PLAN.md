@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.89.0
+**Plan versiyonu:** 0.90.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1492,6 +1492,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Gate:** Admissible günlerde required-field complete rate ≥%99; leakage 0. Batch sonuçları implementasyon commit'inden sonra ilk kez görülecek.
 - **Boundary:** Runner yalnız NBM forecast feature üretir; label join/model score/EV yok.
 
+### D-0093 — 2026-09-05 — Annual compact NBM feature gate geçti
+
+- **Durum:** `ACTIVE`
+- **Result:** 362/362 publication-admissible source compact retrieve+parse; required fields/exact f41 %100, retrieval failure ve leakage 0.
+- **Efficiency:** 362,000,362 network range byte; 1,363,866 station-block byte; run yaklaşık 2.1 MiB disk.
+- **Regimes:** NBM v4.3=246, v5.0=116. Upgrade model değerlendirmesinde explicit regime boundary olacak.
+- **Range integrity:** v4.3 için 246 first-range schema miss kaydedildi; locked second range 246/246 başarı. Sessiz failure yok.
+- **Preliminary join:** NBM∩label 359/365=%98.356; ≥%97 overall gate provisional pass, GEFS/final join bekliyor.
+- **Boundary:** Split/model score/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1512,7 +1522,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Annual compact NBM runner'ını checksum-locked inventory üzerinde bir kez çalıştır; 362 admissible gün için coverage/version/range-drift sonuçlarını artifact'a kaydet.
+**Tek sonraki adım:** GEFS 00Z control+30 perturbed member için 365 günlük full-membership ve gerekli Chicago local-day TMAX window envanterini ölç; model değerlerini/skorlarını henüz hesaplama.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

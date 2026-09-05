@@ -82,7 +82,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - Yıllık tahmini transfer yaklaşık 348 MiB, station-block depolama yaklaşık 1,28 MiB; batch koşusunda drift fail-closed kalacak.
 - **Batch runner (2026-09-05):** Checksum-locked inventory'den yalnız 362 publication-admissible günü seçen, iki schema-offset range'ini fail-closed deneyen ve her gün exact station/required fields/f41 kontrolü yapan runner eklendi.
 - Batch gerçek veri koşusu henüz çalıştırılmadı; implementasyon ve contract testleri sonuçtan önce commitlenecek.
+- **NBM batch result (2026-09-05):** 362/362 publication-admissible gün başarıyla alındı; required fields/exact f41 %100, retrieval failure ve leakage 0.
+- NBM v4.3 246 gün, v5.0 116 gün; provider upgrade açık regime boundary olarak saklanacak.
+- NBM + mevcut label kesişimi şimdilik 359/365=%98,356; overall ≥%97 gate GEFS/final join sonuna kadar provisional.
 
 ## Sıradaki en küçük adım
 
-362 publication-admissible NBM 07Z object için immutable batch compact extraction runner'ını oluştur; station/marker/f41/version/leakage kontrollerini her object'te fail-closed uygula.
+GEFS 00Z control+30 member için 365 günlük full-membership ve gerekli local-day TMAX window envanterini ölç; model skoru hesaplama.

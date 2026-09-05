@@ -1,0 +1,50 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "annual_nbm_compact_features",
+  "generated_at_utc": "2026-09-05T13:24:00Z",
+  "decision": "ANNUAL_NBM_FEATURE_GATE_PASS",
+  "raw_result": "data/raw/kord_annual_forecast_dataset/run=20260905T-nbm-compact-v1/result.json",
+  "raw_result_sha256": "e4722364159b542db0168cc6ce82441a851faf27ace7f597b4d1739071bc8446",
+  "metrics": {
+    "inventory_count": 365,
+    "publication_admissible_count": 362,
+    "publication_excluded_count": 3,
+    "retrieval_success_count": 362,
+    "retrieval_failure_count": 0,
+    "required_field_complete_rate": 1.0,
+    "network_range_byte_count": 362000362,
+    "station_block_byte_count": 1363866,
+    "on_disk_run_size_approx_mib": 2.1,
+    "nbm_version_counts": {
+      "4.3": 246,
+      "5.0": 116
+    },
+    "range_counts": {
+      "22500000-23500000": 246,
+      "20500000-21500000": 116
+    },
+    "schema_range_probe_miss_count": 246
+  },
+  "checks": {
+    "required_field_complete_rate_minimum_0_99": true,
+    "retrieval_failure_count_maximum_3": true,
+    "publication_leakage_count_maximum_0": true,
+    "exact_f41_record_per_admitted_day": true,
+    "non_null_required_feature_values": true
+  },
+  "preliminary_label_intersection": {
+    "nbm_admissible_dates": 362,
+    "label_admissible_dates": 362,
+    "intersection_dates": 359,
+    "intersection_rate_over_365": 0.9835616438356164,
+    "joined_eligible_rate_minimum_0_97": true,
+    "status": "PRELIMINARY_UNTIL_GEFS_AND_FINAL_JOIN"
+  },
+  "interpretation": {
+    "gate": "PASS",
+    "regime_boundary": "NBM v4.3 to v5.0 must be represented explicitly and used in temporal robustness analysis.",
+    "range_probe_misses": "Expected first-range misses for v4.3 schema; every miss resolved by the pre-registered second bounded range and was recorded.",
+    "next_action": "Verify all-31-member GEFS source completeness and local-day TMAX extraction before final join."
+  }
+}
