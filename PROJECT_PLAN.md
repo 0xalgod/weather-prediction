@@ -1,9 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 1.3.0
+**Plan versiyonu:** 1.4.0
 **Son güncelleme:** 2026-09-05
-**Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
+**Mevcut faz:** Forecast-first temporal split ve baseline model ön kaydı; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -1631,6 +1631,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Provenance:** Üç input result checksum'ı, canonical row checksum'ı ve explicit exclusion reasons output'ta zorunlu.
 - **Boundary:** Split veya model skoru bu join sonucu görülmeden hesaplanmayacak.
 
+### D-0108 — 2026-09-05 — KORD annual model-ready dataset gate geçti
+
+- **Durum:** `ACTIVE`
+- **Result:** 357/365 satır=%97.808; exact pre-registered row count ve joined ≥%97 gate geçti.
+- **Integrity:** Duplicate=0, nonfinite=0, publication leakage=0; imputation/fallback yok.
+- **Composition:** 121 exact GEFS partition, 236 proxy; NBM v4.3=244, v5.0=113.
+- **Exclusions:** GEFS-only 2, NBM-only 2, NBM+GEFS 1, label-only 3 olmak üzere sekiz gün explicit.
+- **Freeze:** Canonical row SHA-256 `45d2ab2e480a27529fbd52ba8546676bdf3bc794061cad726965a994e1bc75fd`.
+- **Decision:** Forecast dataset deneyi `PASSED`; model skoru görülmeden temporal split/baseline config kilitlenecek.
+- **Boundary:** Bu dataset market fiyatı/execution/settlement içermediğinden kârlılık veya EV kanıtı değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1651,7 +1662,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM, GEFS aggregate ve LCDv2 label kaynaklarını exact 357-row model-ready tabloda birleştir; schema/provenance/checksum ve final data-quality gate artifact'ını üret.
+**Tek sonraki adım:** Frozen 357-row dataset üzerinde sonuç görmeden temporal train/validation/test sınırlarını ve seasonal climatology/raw NBM/raw GEFS baseline yarışını pre-register et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

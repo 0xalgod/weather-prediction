@@ -1,6 +1,6 @@
 # EXP-20260905 — KORD bir yıllık forecast dataset v1
 
-**Durum:** `IN_PROGRESS`  
+**Durum:** `PASSED`
 **Ön kayıt tarihi:** 2026-09-05  
 **Amaç:** Forecast-first model araştırması için bir tam yıllık, timestamp-doğru ve yeniden üretilebilir KORD veri seti kurmak.
 
@@ -98,7 +98,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **Annual GEFS result (2026-09-05):** 3.374/3.374 message ve 362/362 gün complete; 122 exact, 240 proxy; finite/plausible %100.
 - 46 transient transport error atomic bounded retry ile düzeldi; terminal failure ve partial admission 0. Gerçek transfer 1,490 GiB.
 - NBM+GEFS+LCDv2 exact date intersection 357/365=%97,808; locked overall ≥%97 gate final join öncesi tarih-seti bazında geçti.
+- **Final join (2026-09-05):** 357/365 unique model-ready satır donduruldu; joined coverage %97,808, duplicate/nonfinite/publication leakage 0; tüm kilitli gate'ler geçti.
+- 8 exclusion imputationsız saklandı: GEFS-only 2, NBM-only 2, NBM+GEFS 1 ve label-only 3 gün. Row checksum `45d2ab2e…75fd`.
+- Dataset forecast modellemesi için hazırdır; market fiyatı, settlement, P&L veya pozitif EV kanıtı içermez.
 
 ## Sıradaki en küçük adım
 
-NBM, GEFS aggregate ve LCDv2 label kaynaklarını exact 357-row model-ready tabloda birleştir; schema/provenance/checksum ve final data-quality gate'i üret.
+Model sonucunu görmeden temporal train/validation/test sınırlarını ve ilk baseline yarışını önceden kilitle.

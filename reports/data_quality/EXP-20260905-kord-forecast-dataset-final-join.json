@@ -1,0 +1,26 @@
+{
+  "artifact": "data/processed/kord_annual_forecast_dataset/run=20260905T-final-join-v1/result.json",
+  "artifact_sha256": "12da62fbfc3414de9346bd06ab8ae69893b3fe6c3ee2e0659b87429f78714963",
+  "canonical_rows_sha256": "45d2ab2e480a27529fbd52ba8546676bdf3bc794061cad726965a994e1bc75fd",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "gates": {
+    "duplicate_station_date_count": 0,
+    "joined_eligible_rate": 0.9780821917808219,
+    "joined_row_count": 357,
+    "nonfinite_feature_or_label_count": 0,
+    "passed": true,
+    "temporal_leakage_count": 0
+  },
+  "input_sha256": {
+    "config": "6fb79610b2cd9a9b4316b139ad55f4aa5356373f98a44ca521ddd0096a320e8e",
+    "gefs": "aa6c432e4401fdce77f59066a7ded07ad043550e8f4d6867fef872286d29ddb3",
+    "lcd_result": "325c77b9068927fe84a2c9f7f10898a3f7bb9d18285ab0aeb54b278adc6aa17f",
+    "nbm": "e4722364159b542db0168cc6ce82441a851faf27ace7f597b4d1739071bc8446"
+  },
+  "quality_slices": {
+    "gefs_exact_partition_rows": 121,
+    "gefs_proxy_partition_rows": 236,
+    "nbm_version_4_3_rows": 244,
+    "nbm_version_5_0_rows": 113
+  }
+}
