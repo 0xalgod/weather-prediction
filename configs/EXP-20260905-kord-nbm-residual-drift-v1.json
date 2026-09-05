@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-20260905-kord-nbm-residual-drift-v1",
+  "design_status": "PREREGISTERED_DIAGNOSTIC_AFTER_CALIBRATION_V1",
+  "source": "data/processed/kord_annual_forecast_dataset/run=20260905T-final-join-v1/result.json",
+  "source_file_sha256": "12da62fbfc3414de9346bd06ab8ae69893b3fe6c3ee2e0659b87429f78714963",
+  "source_rows_sha256": "45d2ab2e480a27529fbd52ba8546676bdf3bc794061cad726965a994e1bc75fd",
+  "eligibility": {
+    "development_end_date": "2026-06-30",
+    "expected_development_rows": 298,
+    "consumed_for_model_selection": true
+  },
+  "residual": "daily_maximum_dry_bulb_f_minus_nbm_mean_f",
+  "groups": ["nbm_version", "month", "gefs_exact_partition"],
+  "metrics": [
+    "count",
+    "mean_residual_f",
+    "residual_standard_deviation_f",
+    "mae_f",
+    "rmse_f",
+    "standardized_residual_mean",
+    "standardized_residual_standard_deviation",
+    "central_50_coverage",
+    "central_80_coverage",
+    "central_90_coverage"
+  ],
+  "normal_interval_z": {
+    "50": 0.6744897501960817,
+    "80": 1.2815515655446004,
+    "90": 1.6448536269514722
+  },
+  "diagnostic_thresholds": {
+    "minimum_rows_per_version": 30,
+    "absolute_version_bias_difference_f": 1.0,
+    "version_residual_spread_ratio": 1.25,
+    "central_80_absolute_coverage_error": 0.1
+  },
+  "decision_policy": {
+    "shared_calibration_unsafe_if_any_version_drift_threshold_fires": true,
+    "new_model_score_or_strong_evidence_claim": false,
+    "prospective_model_must_be_frozen_separately": true
+  }
+}

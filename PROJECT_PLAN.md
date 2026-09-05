@@ -1684,6 +1684,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Learning:** Provider version/drift state'i calibration modelinde zorunlu; aynı consumed OOS üzerinde yeni strong-evidence iddiası kurulamaz.
 - **Boundary:** Pozitif EV/trading kanıtı yok.
 
+### D-0113 — 2026-09-05 — NBM residual drift diagnostic ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Hypothesis:** v4.3/v5.0 residual bias veya spread farkı ortak expanding calibration'ın failure mode'unu açıklar.
+- **Data:** 2026-06-30'a kadar 298 development row; artık consumed diagnostic, yeni strong-evidence skoru değil.
+- **Metrics:** Bias/std/MAE/RMSE, standardized residual mean/std ve nominal %50/%80/%90 coverage; version/month/exact-proxy slices.
+- **Drift flags:** Her version ≥30 row; bias farkı ≥1°F veya spread ratio ≥1.25 ortak calibration'ı unsafe işaretler.
+- **Calibration flag:** Nominal %80 coverage mutlak hatası >10 puan ise raw spread miscalibrated kabul edilir.
+- **Boundary:** Bu diagnostic yeni model başarısı değildir; prospective aday ayrı dondurulacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
