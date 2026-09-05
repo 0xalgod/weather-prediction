@@ -1,10 +1,9 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.84.0
+**Plan versiyonu:** 0.85.0
 **Son güncelleme:** 2026-09-05
-**Son güncelleme:** 2026-09-04
-**Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
+**Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
 **Canlı sermaye yetkisi:** Yok
 
@@ -64,6 +63,7 @@ Scope ancak Decision Log'a veri temelli gerekçe eklenerek değiştirilebilir.
 | H4 | Maker-first execution taker'a göre ekonomik sonucu belirgin iyileştirir | Net P&L, fill rate, adverse selection | Gerçekçi fill altında daha yüksek risk-adjusted net EV | `NOT_STARTED` |
 | H5 | Bazı şehir/lead-time segmentleri diğerlerinden kalıcı olarak daha verimlidir | Segment bazlı OOS EV ve stability | En az iki ayrı OOS dönemde aynı yönlü net sonuç | `NOT_STARTED` |
 | H6 | Bucket fiyatlarında zaman zaman cross-outcome incoherence oluşur | Executable fiyat toplamı ve eşzamanlı fill | Tüm maliyet/partial-fill stresinden sonra pozitif | `NOT_STARTED` |
+| H7 | Bir yıllık KORD as-issued NBM+GEFS verisi leakage olmadan günlük maksimum etiketiyle kurulabilir | Coverage, timestamp ve schema gate'leri | Joined ≥%97, label ≥%99, temporal leakage 0 | `IN_PROGRESS` |
 
 Hipotezler sonuç görüldükten sonra sessizce değiştirilemez. Yeni hipotez yeni ID alır.
 
@@ -1446,6 +1446,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Karar:** `NO_STRONG_CALIBRATION_EVIDENCE`; shift/spread calibrated modeller kullanılmaz. Raw quantile best tested forecast baseline olarak korunur.
 - **Boundary:** Bu weather forecast sonucu market mispricing/EV/P&L değildir; aynı 52 OOS üzerinde yeni model seçimi yapılmaz.
 
+### D-0088 — 2026-09-05 — Forecast-first bir yıllık KORD dataset fazı ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** 2025-09-01–2026-08-31 arasındaki 365 KORD hedef gününde prior-day NBM 07Z ve GEFS 00Z özellikleri NOAA yerel-gün MaxT etiketiyle joined ≥%97 ve leakage 0 olarak kurulabilir.
+- **Features:** NBM probabilistic MaxT `PROXY_18H_MAX`; GEFS control+30 member local-day TMAX; calendar/DST. Exact timestamp ve provider version saklanır.
+- **Label:** NOAA LCDv2 günlük maksimumu forecast-training outcome'dur; frozen Polymarket settlement kanıtı değildir.
+- **Gates:** NBM fields ≥%99, GEFS completeness ≥%97, label ≥%99, joined ≥%97; duplicate/non-finite/leakage 0.
+- **Evaluation firewall:** Önceki 52 OOS gün model selection için tüketildi. Yeni temporal split yalnız dataset gate sonrasında ve model skorlarından önce kilitlenecek; random split yok.
+- **Boundary:** Dataset gate geçmeden model tuning yok; bu faz market/EV/order içermez.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1466,7 +1476,9 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Paper Day 1 target Sep 4 event 952456 için frozen resolution/outcome kanıtını append-only reconcile et; quantile hypothetical position'ın realized paper P&L'ini locked fee/cost ile hesapla. Sonra sonraki uygun 14:00 snapshot'ı zamanında kilitle.
+**Tek sonraki adım:** `EXP-20260905-kord-forecast-dataset-v1` için 365 günlük NBM 07Z + GEFS 00Z/31-member + NOAA LCDv2 kaynak envanteri runner'ını ve contract testlerini oluştur; model değerlerini veya skorlarını hesaplamadan coverage artifact'ını üret.
+
+Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
 Beklenen artifact'lar:
 

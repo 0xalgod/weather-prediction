@@ -1,0 +1,92 @@
+{
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "status": "PREREGISTERED",
+  "hypothesis": "KORD için bir tam yılı kapsayan, karar-zamanı doğru NBM ve GEFS tahminlerini Chicago yerel günlük maksimum sıcaklığıyla birleştiren model-ready veri seti en az yüzde 97 kapsam ve sıfır temporal leakage ile kurulabilir.",
+  "scope": {
+    "station_code": "KORD",
+    "station_id": "USW00094846",
+    "timezone": "America/Chicago",
+    "target_start_date": "2025-09-01",
+    "target_end_date": "2026-08-31",
+    "expected_target_dates": 365,
+    "decision_time_utc": "target_date_minus_1_day_11:00:00Z"
+  },
+  "features": {
+    "nbm": {
+      "source": "NOAA NBM probabilistic text archive",
+      "cycle_utc": 7,
+      "required_fields": [
+        "mean_f",
+        "standard_deviation_f",
+        "p10_f",
+        "p25_f",
+        "p50_f",
+        "p75_f",
+        "p90_f"
+      ],
+      "semantic_role": "PROXY_18H_MAX",
+      "publication_rule": "HTTP Last-Modified must not exceed decision_time_utc"
+    },
+    "gefs": {
+      "source": "NOAA GEFS operational archive",
+      "cycle_utc": 0,
+      "members": "control_plus_30_perturbed",
+      "required_parameter": "TMAX",
+      "required_local_day_coverage": 1.0,
+      "publication_rule": "HTTP Last-Modified must not exceed decision_time_utc"
+    },
+    "calendar": [
+      "day_of_year_sin",
+      "day_of_year_cos",
+      "month",
+      "dst_offset_hours"
+    ]
+  },
+  "label": {
+    "primary_source": "NOAA LCDv2 DailyMaximumDryBulbTemperature",
+    "field": "DailyMaximumDryBulbTemperature",
+    "unit": "F",
+    "window": "America/Chicago local calendar day",
+    "role": "forecast-training outcome; not historical Polymarket settlement-as-of proof"
+  },
+  "quality_gates": {
+    "target_date_count_exact": 365,
+    "joined_eligible_rate_minimum": 0.97,
+    "nbm_required_field_rate_minimum": 0.99,
+    "gefs_complete_member_rate_minimum": 0.97,
+    "label_coverage_rate_minimum": 0.99,
+    "temporal_leakage_count_maximum": 0,
+    "duplicate_station_date_count_maximum": 0,
+    "nonfinite_feature_or_label_count_maximum": 0
+  },
+  "dataset_split_policy": {
+    "random_split": false,
+    "existing_2026_07_08_to_2026_08_28_oos": "CONSUMED_DIAGNOSTIC_NOT_REUSABLE_FOR_SELECTION",
+    "split_dates": "LOCK_ONLY_AFTER_DATA_GATE_AND_BEFORE_MODEL_RESULTS",
+    "required_evaluations": [
+      "rolling_origin_validation",
+      "untouched_future_temporal_test",
+      "later_geographic_holdout_before_generalization_claim"
+    ]
+  },
+  "modeling": {
+    "allowed_before_data_gate": false,
+    "primary_metric": "multiclass_log_loss",
+    "secondary_metrics": [
+      "brier_score",
+      "ranked_probability_score",
+      "expected_calibration_error",
+      "continuous_ranked_probability_score"
+    ],
+    "initial_baselines": [
+      "seasonal_climatology",
+      "raw_nbm_quantiles",
+      "raw_gefs_frequency"
+    ]
+  },
+  "trading": {
+    "market_price_features": false,
+    "ev_claim": false,
+    "orders": false
+  }
+}
