@@ -1,0 +1,51 @@
+{
+  "experiment_id": "EXP-20260905-kord-gefs-aggregate-validation",
+  "status": "PREREGISTERED_CORRECTIVE",
+  "source_full_member_pilot": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-extraction-pilot-v1/result.json",
+  "source_full_member_pilot_sha256": "165e4f149f9683d0dcdaa4f672394a47f176fc7e0fc12d7a45d33201c624b20d",
+  "hypothesis": "NOAA GEFS geavg ve gespr 2m TMAX değerleri, iki pilot gündeki eksiksiz 31-member hücrelerin empirical population mean ve standard deviation değerlerini düşük hata ile yeniden üretir ve yıllık extraction maliyetini kilitli operasyon sınırının altına indirir.",
+  "cases": [
+    {
+      "target_date": "2026-01-15",
+      "run_date": "2026-01-14",
+      "regime": "WINTER_EXACT",
+      "steps": [36, 42, 48, 54]
+    },
+    {
+      "target_date": "2026-07-15",
+      "run_date": "2026-07-14",
+      "regime": "SUMMER_PROXY",
+      "steps": [30, 36, 42, 48, 54]
+    }
+  ],
+  "products": {
+    "geavg": "ensemble arithmetic mean candidate",
+    "gespr": "ensemble population spread candidate"
+  },
+  "comparison": {
+    "primary_cells": "only case-step cells with all 31 decoded full members",
+    "expected_primary_cell_count": 6,
+    "incomplete_cells": "diagnostic only",
+    "empirical_spread_ddof": 0,
+    "unit": "F"
+  },
+  "acceptance_thresholds": {
+    "aggregate_message_success_rate": 1.0,
+    "publication_leakage_count_maximum": 0,
+    "primary_complete_cell_count_exact": 6,
+    "mean_absolute_error_mean_f_maximum": 0.25,
+    "maximum_absolute_error_mean_f_maximum": 0.75,
+    "mean_absolute_error_spread_f_maximum": 0.25,
+    "maximum_absolute_error_spread_f_maximum": 0.75,
+    "annual_projected_range_gib_maximum": 3.0,
+    "annual_projected_range_get_count_maximum": 4000
+  },
+  "annual_projection": {
+    "admissible_member_step_count": 52297,
+    "aggregate_to_member_product_ratio": 0.06451612903225806
+  },
+  "modeling": {
+    "loss_or_model_score": false,
+    "market_or_ev": false
+  }
+}

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.97.0
+**Plan versiyonu:** 0.98.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1566,6 +1566,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Contract test:** Forced connection reset sonrası destination yok ve temp directory boş.
 - **Boundary:** Bu fix FAILED pilot sonucunu veya 27.28 GiB cost kararını değiştirmez; full-member annual bulk hâlâ reddedildi.
 
+### D-0101 — 2026-09-05 — GEFS aggregate-product corrective deney ön-kaydı
+
+- **Durum:** `ACTIVE`
+- **Source:** Checksum-locked 275-message full-member pilot; primary comparator yalnız exact 6 adet 31/31 case-step cell.
+- **Candidates:** NOAA `geavg` TMAX vs empirical mean; `gespr` TMAX vs empirical population std (`ddof=0`). Toplam 18 aggregate message.
+- **Accuracy gates:** Her ürün için MAE ≤0.25°F ve max absolute error ≤0.75°F; aggregate retrieve/decode %100; leakage 0.
+- **Cost gates:** Annual projected transfer ≤3 GiB, range GET ≤4,000.
+- **Integrity:** Üç incomplete-member cell diagnostic-only; eksik değerle primary threshold hesaplanmaz.
+- **Boundary:** Model score/calibration/market/EV yok; eşikler aggregate değer görülmeden kilitlendi.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1586,7 +1596,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `geavg`/`gespr` TMAX değerlerini iki pilot günde empirical member mean/spread ile karşılaştıracak corrective deneyi model skorundan önce pre-register et.
+**Tek sonraki adım:** `geavg`/`gespr` aggregate product URL/index/decode desteğini ve 18-message validation runner'ını implement et; testlerden sonra deneyi bir kez çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
