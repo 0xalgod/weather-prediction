@@ -1773,6 +1773,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Execution:** $10/bucket ask-depth VWAP, live fee reconciliation, 2pp resolution haircut, adjusted edge ≥3pp.
 - **Safety:** Paper only, orders false; outcome henüz kullanılmayacak.
 
+### D-0122 — 2026-09-06 — Paper Day 2 local heartbeat önerildi
+
+- **Durum:** `ACTIVE`
+- **Schedule:** 2026-09-06 10:45 UTC / 13:45 Europe/Istanbul, single occurrence.
+- **Action:** Frozen Day 2 config ile immutable raw/processed capture, test/QC, plan/report update ve mevcut branch'e commit/push.
+- **Safety:** Gaussian-only paper decision; orders/wallet/credentials false; capture-window gate fail-closed.
+- **Host dependency:** Local execution için laptop uyku modunda olmamalı ve internet bağlantısı bulunmalı.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
