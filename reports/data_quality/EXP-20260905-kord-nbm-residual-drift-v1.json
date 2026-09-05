@@ -1,0 +1,29 @@
+{
+  "artifact": "data/processed/kord_nbm_residual_drift/run=20260905T-v1/result.json",
+  "artifact_sha256": "01998dbf53abed0775a6b4ba0f92e5151987e6d91f64361add2e075a81349a69",
+  "drift_flags": {
+    "any_version_central_80_miscalibration": true,
+    "version_bias_difference": true,
+    "version_residual_spread_ratio": true
+  },
+  "experiment_id": "EXP-20260905-kord-nbm-residual-drift-v1",
+  "shared_calibration_unsafe": true,
+  "version_comparison": {
+    "absolute_bias_difference_f": 1.9694869459623567,
+    "residual_spread_ratio": 1.8232022034813438
+  },
+  "version_metrics": {
+    "4.3": {
+      "central_80_coverage": 0.7049180327868853,
+      "count": 244,
+      "mean_residual_f": 1.0846721311475411,
+      "residual_standard_deviation_f": 3.7483543240205632
+    },
+    "5.0": {
+      "central_80_coverage": 0.9074074074074074,
+      "count": 54,
+      "mean_residual_f": -0.8848148148148156,
+      "residual_standard_deviation_f": 2.0559180527882237
+    }
+  }
+}

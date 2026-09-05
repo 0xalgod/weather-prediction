@@ -1694,6 +1694,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Calibration flag:** Nominal %80 coverage mutlak hatası >10 puan ise raw spread miscalibrated kabul edilir.
 - **Boundary:** Bu diagnostic yeni model başarısı değildir; prospective aday ayrı dondurulacak.
 
+### D-0114 — 2026-09-05 — NBM version drift tüm preregistered flag'leri tetikledi
+
+- **Durum:** `ACTIVE`
+- **Bias:** v4.3 +1.085°F, v5.0 −0.885°F residual mean; absolute fark 1.969°F ≥1°F.
+- **Spread:** v4.3/v5.0 residual std 3.748/2.056°F; ratio 1.823 ≥1.25.
+- **Coverage:** Nominal %80 interval v4.3=%70.49, v5.0=%90.74; iki rejim zıt miscalibration gösteriyor.
+- **Overall:** 298 row MAE 2.577°F, RMSE 3.657°F; nominal %50/%80/%90 coverage %51.34/%74.16/%85.23.
+- **Decision:** Ortak-version expanding calibration `UNSAFE`; üç preregistered drift flag'i de true.
+- **Caveat:** Version ile mevsim/tarih confounded; diagnostic mekanizma sinyali verir, nedensellik veya yeni OOS improvement kanıtı değildir.
+- **Next design:** Raw NBM ile yalnız-v5 frozen moment calibration iki aday olarak prospektif dönemde karşılaştırılacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1714,7 +1725,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM residual driftini zaman/provider-version bazında diagnostik et; regime-aware aday modeli development-only olarak tasarla ve prospektif testten önce dondur.
+**Tek sonraki adım:** Consumed v5 history'den tek seferlik bias/spread moment parametreleri üret; raw NBM ve v5-only adayı 2026-09-01 sonrası prospektif karşılaştırma için skor görmeden dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
