@@ -77,7 +77,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **NBM inventory (2026-09-05):** Prior-day 07Z object availability 365/365; terminal transport error 0.
 - Üç source object 11:00 UTC kararından sonra yayımlandı; admissible 362/365=%99,178 ve bu tarihler fallback olmadan dışlanacak.
 - Tam object indirme tahmini 11,83 GiB olduğundan compact KORD extraction doğrulanmadan bulk download yapılmayacak.
+- **Compact NBM validation (2026-09-05):** 1.000.001-byte range'den çıkarılan 3.684-byte KORD block, checksum-locked 34.724.473-byte full object'teki block ile exact byte match verdi.
+- NBM v5.0 block 9 MaxT record ve exact bir f41 target record ile parse edildi; validation gate geçti.
+- Yıllık tahmini transfer yaklaşık 348 MiB, station-block depolama yaklaşık 1,28 MiB; batch koşusunda drift fail-closed kalacak.
 
 ## Sıradaki en küçük adım
 
-Bir NBM 07Z object üzerinde KORD station-block compact retrieval/extraction bütünlüğünü full-object checksum ve parse sonucu karşılaştırarak doğrula.
+362 publication-admissible NBM 07Z object için immutable batch compact extraction runner'ını oluştur; station/marker/f41/version/leakage kontrollerini her object'te fail-closed uygula.

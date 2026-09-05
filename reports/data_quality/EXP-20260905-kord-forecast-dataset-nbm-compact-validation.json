@@ -1,0 +1,40 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "nbm_compact_station_retrieval_validation",
+  "generated_at_utc": "2026-09-05T13:17:43.899593Z",
+  "decision": "COMPACT_NBM_RETRIEVAL_PASS",
+  "raw_result": "data/raw/noaa_nbm/run=20260905T-kord-compact-validation-v1/result.json",
+  "raw_result_sha256": "c067d197c580bdc082ee24d3be9ddcee47b93d52e3751e7b7e004d68d937f2f2",
+  "validation_case": {
+    "run_date": "2026-07-07",
+    "cycle_utc": 7,
+    "station": "KORD",
+    "full_object_byte_count": 34724473,
+    "full_object_sha256": "05d2b774796b414f0b4fb0ad7f7f87ad71684699f555ed53c74c3a87f26d3501",
+    "requested_range": [
+      20500000,
+      21500000
+    ],
+    "range_byte_count": 1000001,
+    "station_block_byte_count": 3684,
+    "station_block_sha256": "e0636b46fbf5dc3e9bb1f1be66b41b49e76003101ebe1c4e048203e1cd1ed05a"
+  },
+  "checks": {
+    "http_partial_content_206": true,
+    "compact_vs_full_exact_byte_match": true,
+    "parsed_record_count": 9,
+    "required_f41_target_record_count": 1,
+    "nbm_version": "5.0"
+  },
+  "estimated_annual_cost": {
+    "full_object_storage_gib": 11.83,
+    "fixed_range_network_mib_for_365": 348.09,
+    "station_block_storage_mib_for_365": 1.28
+  },
+  "interpretation": {
+    "validation_gate": "PASS",
+    "scope": "One checksum-locked NBM v5.0 case; annual extraction must still fail closed on station/marker/range drift.",
+    "next_action": "Implement immutable batch extraction for the 362 publication-admissible objects with per-object parse and checksum metadata."
+  }
+}

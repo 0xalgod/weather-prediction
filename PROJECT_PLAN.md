@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.87.0
+**Plan versiyonu:** 0.88.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1474,6 +1474,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Pending:** Required field/station parse coverage henüz ölçülmedi; model/feature score hesaplanmadı.
 - **Integrity:** Alternatif cycle, imputation veya late object admission yok.
 
+### D-0091 — 2026-09-05 — Compact KORD NBM range extraction doğrulandı
+
+- **Durum:** `ACTIVE`
+- **Validation:** 2026-07-07 07Z bounded 1,000,001-byte range içinden çıkarılan KORD block, checksum-locked 34,724,473-byte full object block'uyla exact byte match.
+- **Parse:** NBM v5.0, 9 MaxT record ve exact 1 f41 target record; gate geçti.
+- **Efficiency:** Yıllık tahmin yaklaşık 348 MiB transfer + 1.28 MiB station storage; full-object storage 11.83 GiB.
+- **Boundary:** Tek v5.0 vaka; annual batch her object'te range/station/marker/f41/version drift için fail-closed olacak.
+- **Modeling:** Feature dataset/model score henüz üretilmedi.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1494,7 +1503,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Tek bir NBM 07Z object üzerinde KORD station-block compact retrieval/extraction yöntemini full-object checksum ve parse sonucu karşılaştırmasıyla doğrula; başarılıysa 362 admissible güne ölçeklemek için ingestion contract'ını kilitle.
+**Tek sonraki adım:** 362 publication-admissible NBM 07Z object için immutable batch compact extraction runner'ını ve contract testlerini oluştur; station/marker/f41/version/leakage kontrollerini her object'te fail-closed uygula.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
