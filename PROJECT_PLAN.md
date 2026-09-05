@@ -1764,6 +1764,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Expected:** Sep 6 fail-closed; Sep 7/event 968537 seçilecek.
 - **Boundary:** Geçmiş snapshot yeniden yaratılmayacak; look-ahead/execution backfill yok.
 
+### D-0121 — 2026-09-06 — Gaussian Paper Day 2 config donduruldu
+
+- **Durum:** `ACTIVE`
+- **Event:** 968537, Chicago/KORD Sep 7, 11 buckets; exact NOAA WRH rule hash ve token identity checksum.
+- **Window:** 2026-09-06 10:45–11:15 UTC; runner window dışında network/data write öncesi fail-closed.
+- **Model:** Yalnız `RAW_NBM_GAUSSIAN_V1`; quantile paper-decision kolu disabled.
+- **Execution:** $10/bucket ask-depth VWAP, live fee reconciliation, 2pp resolution haircut, adjusted edge ≥3pp.
+- **Safety:** Paper only, orders false; outcome henüz kullanılmayacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`

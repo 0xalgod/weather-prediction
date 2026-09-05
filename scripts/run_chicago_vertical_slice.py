@@ -119,6 +119,16 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def validate_capture_window(config: dict[str, Any], observed_at: datetime) -> None:
+    window = config.get("capture_window")
+    if not window:
+        return
+    not_before = datetime.fromisoformat(window["not_before_utc"].replace("Z", "+00:00"))
+    not_after = datetime.fromisoformat(window["not_after_utc"].replace("Z", "+00:00"))
+    if not not_before <= observed_at.astimezone(timezone.utc) <= not_after:
+        raise RuntimeError("outside preregistered capture window")
+
+
 def select_exact_target_record(
     records: list[dict[str, Any]], target_valid_time_utc: str
 ) -> dict[str, Any]:
@@ -136,6 +146,7 @@ def main() -> int:
     if args.raw_directory.exists() or args.output.exists():
         raise FileExistsError("run paths must be new and immutable")
     config = json.loads(args.config.read_text())
+    validate_capture_window(config, datetime.now(timezone.utc))
     identity_path = Path(config["identity_source"])
     identity_bytes = identity_path.read_bytes()
     if hashlib.sha256(identity_bytes).hexdigest() != config["identity_source_sha256"]:
@@ -330,10 +341,14 @@ def main() -> int:
     paper_decisions = {}
     if paper_rule:
         minimum_edge = Decimal(str(paper_rule["minimum_adjusted_edge_per_share"]))
-        for model, field in (
+        available_models = (
             ("gaussian", "gaussian_adjusted_edge"),
             ("quantile", "quantile_adjusted_edge"),
-        ):
+        )
+        enabled_models = set(paper_rule.get("enabled_models", ("gaussian", "quantile")))
+        for model, field in available_models:
+            if model not in enabled_models:
+                continue
             paper_candidates = [row for row in rows if row.get(field) is not None]
             selected = (
                 max(paper_candidates, key=lambda row: Decimal(row[field]))
