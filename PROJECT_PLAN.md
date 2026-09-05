@@ -272,7 +272,7 @@ Minimum mantıksal tablolar:
 
 ## Phase 3 — Baseline probabilistic forecasting
 
-**Durum:** `NOT_STARTED`  
+**Durum:** `IN_PROGRESS`
 **Amaç:** Karmaşık modele geçmeden gerçek tahmin zorluğunu ve minimum benchmark'ı ölçmek.
 
 ### Modeller
@@ -1653,6 +1653,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Gates:** OOS ≥170, finite/sum-valid probability %100; bu ilk koşu descriptive, EV/trading kararı yok.
 - **Attempt 1:** Skor oluşmadan Fahrenheit discrete-bucket validator 1°C sınıf aralığını reddetti; locked Celsius outcome değişmedi, doğrudan CDF-boundary hesabı corrective implementation olarak kullanıldı.
 
+### D-0110 — 2026-09-05 — İlk annual baseline walk-forward sonucu
+
+- **Durum:** `ACTIVE`
+- **Quality:** 298 development event, ilk 120 train, 178 one-step OOS (2026-01-01–06-30); invalid vector 0, gate geçti.
+- **Primary log loss:** NBM Gaussian 2.0608; climatology 3.4633; NBM quantile 3.9851; GEFS Gaussian 3.9866.
+- **Evidence:** NBM Gaussian eksi climatology −1.4025, date-bootstrap %95 CI [−1.5545, −1.2396].
+- **Tail failure:** NBM quantile 15 ve GEFS Gaussian 7 eventte floor-like log loss >20; sırasıyla finite-support tail ve underdispersion işareti.
+- **Regime:** NBM v5.0 döneminde Gaussian/quantile 1.701/1.750; v4.3'te 2.218/4.958. Version farkı zaman/mevsimle confounded, nedensel upgrade sonucu değildir.
+- **Decision:** Raw NBM Gaussian calibration için reference baseline; quantile tail ve GEFS spread calibration olmadan reddedilir.
+- **Boundary:** Development OOS descriptive; prospective final test, market benchmark ve EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1673,7 +1684,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 357-row dataset üzerinde sonuç görmeden temporal train/validation/test sınırlarını ve seasonal climatology/raw NBM/raw GEFS baseline yarışını pre-register et.
+**Tek sonraki adım:** NBM Gaussian için yalnız geçmiş residual kullanan walk-forward bias/spread calibration deneyini grid ve kabul eşikleriyle sonuçtan önce pre-register et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -1,0 +1,20 @@
+{
+  "artifact": "data/processed/kord_baseline_walkforward/run=20260905T-v2/result.json",
+  "artifact_sha256": "79e5d95f689abdaef6a9ab1e99dadb6a531cfef01cd70dd551692b51dc3ad222",
+  "experiment_id": "EXP-20260905-kord-baseline-walkforward-v1",
+  "quality": {
+    "development_event_count": 298,
+    "first_oos_date": "2026-01-01",
+    "initial_train_event_count": 120,
+    "invalid_probability_vector_count": 0,
+    "last_oos_date": "2026-06-30",
+    "oos_event_count": 178,
+    "passed": true
+  },
+  "tail_diagnostics": {
+    "raw_gefs_gaussian_log_loss_over_20_count": 7,
+    "raw_nbm_gaussian_log_loss_over_20_count": 0,
+    "raw_nbm_quantile_log_loss_over_20_count": 15,
+    "seasonal_climatology_gaussian_log_loss_over_20_count": 0
+  }
+}
