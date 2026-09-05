@@ -56,6 +56,12 @@ def audit_upcoming_kord_candidate(event: Mapping[str, Any], as_of: datetime) -> 
 
     source_lower = resolution_source.lower()
     description_lower = description.lower()
+    supported_primary = (
+        "wunderground.com" in source_lower and "/kord" in source_lower
+    ) or (
+        "weather.gov/wrh/timeseries" in source_lower
+        and ("site=kord" in source_lower or "site=KORD" in resolution_source)
+    )
     checks = {
         "chicago_title_family": title.startswith("Highest temperature in Chicago on ")
         and title.endswith("?"),
@@ -63,8 +69,7 @@ def audit_upcoming_kord_candidate(event: Mapping[str, Any], as_of: datetime) -> 
         "not_closed": event.get("closed") is False,
         "end_at_present": end_at is not None,
         "observed_future": end_at is not None and end_at >= as_of.astimezone(timezone.utc),
-        "primary_resolution_source_wunderground_kord": "wunderground.com" in source_lower
-        and "/kord" in source_lower,
+        "primary_resolution_source_supported_kord": supported_primary,
         "rule_names_kord": "kord" in description_lower
         or "chicago o'hare intl airport station" in description_lower,
         "rule_has_following_date_trigger": "first data point for the following date"

@@ -58,7 +58,7 @@ def main() -> None:
     artifact = {
         "schema_version": "0.1.0",
         "experiment_id": "EXP-20260830-data-source-feasibility",
-        "discovery": "upcoming-exact-wunderground-kord-event",
+        "discovery": "upcoming-supported-primary-kord-event",
         "started_at_utc": started.isoformat().replace("+00:00", "Z"),
         "completed_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "query": {"tag_slug": "highest-temperature", "closed": False},

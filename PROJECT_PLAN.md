@@ -1747,6 +1747,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** `RAW_NBM_GAUSSIAN_V1` tek forecast champion; quantile strategy `REJECTED`.
 - **Boundary:** n=1 execution observation edge/kârlılık kanıtı değildir; canlı işlem yok.
 
+### D-0119 — 2026-09-06 — Upcoming discovery source-regime düzeltmesi
+
+- **Durum:** `ACTIVE`
+- **Attempt:** 123 active event içinde Chicago Sep 6/7 bulundu fakat legacy Wunderground-only primary check ikisini yanlış dışladı.
+- **Observed source:** Exact `https://www.weather.gov/wrh/timeseries?site=kord`; Paper Day 1 settlement'ta doğrulanan NOAA WRH family.
+- **Correction:** Supported primary allowlist Wunderground KORD veya exact NOAA WRH KORD; arbitrary KORD URL fail-closed.
+- **Timing:** Sep 6 eventinin 11Z decision zamanı kaçtı; Sep 7 event 968537 bir sonraki eligible aday.
+- **Boundary:** Source kuralı sonucu etkileyen veri görülmeden yalnız observed contract'a göre düzeltildi; order yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`

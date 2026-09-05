@@ -33,14 +33,24 @@ def test_exact_future_wunderground_kord_event_qualifies() -> None:
     assert result["token_identities"][0]["token_ids"] == ["yes-token", "no-token"]
 
 
-def test_noaa_primary_with_wunderground_fallback_does_not_qualify() -> None:
+def test_validated_noaa_wrh_primary_qualifies() -> None:
     candidate = event()
     candidate["resolutionSource"] = "https://www.weather.gov/wrh/timeseries?site=kord"
     candidate["description"] += " Wunderground may be used as a fallback."
     result = audit_upcoming_kord_candidate(
         candidate, datetime(2026, 9, 2, tzinfo=timezone.utc)
     )
-    assert result["checks"]["primary_resolution_source_wunderground_kord"] is False
+    assert result["checks"]["primary_resolution_source_supported_kord"] is True
+    assert result["qualified"] is True
+
+
+def test_unrecognized_primary_does_not_qualify() -> None:
+    candidate = event()
+    candidate["resolutionSource"] = "https://example.com/KORD"
+    result = audit_upcoming_kord_candidate(
+        candidate, datetime(2026, 9, 2, tzinfo=timezone.utc)
+    )
+    assert result["checks"]["primary_resolution_source_supported_kord"] is False
     assert result["qualified"] is False
 
 
