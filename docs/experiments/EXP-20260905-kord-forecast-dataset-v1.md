@@ -105,3 +105,5 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 ## Sıradaki en küçük adım
 
 Model sonucunu görmeden temporal train/validation/test sınırlarını ve ilk baseline yarışını önceden kilitle.
+
+Bu adım `EXP-20260905-kord-baseline-walkforward-v1` olarak ön kaydedildi: ilk 120 gözlem train, 2026-06-30'a kadar expanding OOS; Temmuz–Ağustos consumed diagnostic, 2026-09-01 sonrası prospektif final testtir.

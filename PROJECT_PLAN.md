@@ -1642,6 +1642,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Forecast dataset deneyi `PASSED`; model skoru görülmeden temporal split/baseline config kilitlenecek.
 - **Boundary:** Bu dataset market fiyatı/execution/settlement içermediğinden kârlılık veya EV kanıtı değildir.
 
+### D-0109 — 2026-09-05 — Baseline walk-forward protokolü model skorlarından önce kilitlendi
+
+- **Durum:** `ACTIVE`
+- **Development:** İlk 120 eligible gün train; sonra 2026-06-30'a kadar expanding one-step-ahead OOS.
+- **Consumed period:** 2026-07-01–08-31 önceki diagnostic nedeniyle selection/final-test dışında.
+- **Final test:** 2026-09-01 sonrası henüz gözlenmemiş prospektif veri; mevcut annual setten final-test iddiası yok.
+- **Outcome:** Integer Celsius bins −50…50; primary multiclass log loss, secondary Brier/RPS.
+- **Baselines:** Seasonal climatology Gaussian, raw NBM Gaussian, raw NBM quantile CDF, raw GEFS Gaussian.
+- **Gates:** OOS ≥170, finite/sum-valid probability %100; bu ilk koşu descriptive, EV/trading kararı yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
