@@ -1,0 +1,14 @@
+{
+  "artifact": "data/processed/kord_paper_reconciliation/run=20260906T-v1/result.json",
+  "artifact_sha256": "0f477859ec1c3ad229bb87a3e012950ae896b4964805ba4bb67f84ff0f17070c",
+  "checks": {
+    "exactly_one_gamma_winner": true,
+    "minimum_noaa_observations": true,
+    "noaa_gamma_bucket_match": true
+  },
+  "decision": "SETTLEMENT_RECONCILIATION_PASS",
+  "experiment_id": "EXP-20260906-kord-champion-paper-reconciliation-v1",
+  "frozen_paper_pnl_usd": {"gaussian": 0.0, "quantile": -10.445},
+  "gamma_winner": {"label": "92-93°F", "market_id": "4115804"},
+  "noaa": {"maximum_rounded_f": 93, "observation_count": 314}
+}

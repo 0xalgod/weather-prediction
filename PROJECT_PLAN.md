@@ -1736,6 +1736,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **P&L:** Frozen decisions only; Gaussian `NO_TRADE`, quantile hypothetical fill cost+fee; outcome sonrası karar değişmez.
 - **Boundary:** Tek event edge kanıtı değildir, canlı emir yok.
 
+### D-0118 — 2026-09-06 — Paper Day 1 NOAA/Gamma settlement reconciliation geçti
+
+- **Durum:** `ACTIVE`
+- **NOAA:** KORD local-day query 314 temperature observation; rounded maximum 93°F → `92–93°F` bucket.
+- **Gamma:** Exactly one resolved YES winner, market 4115804 `92–93°F`; NOAA bucket exact match.
+- **Frozen Gaussian:** `NO_TRADE`, paper P&L $0; outcome sonrası karar değişmedi.
+- **Frozen quantile:** `86–87°F` $10 VWAP paper buy kaybetti; $0.445 fee dahil P&L −$10.445.
+- **Learning:** Finite-tail quantile'ın calibration failure'ı ekonomik zarara dönüştü; forecast calibration gate trading öncesi zorunlu.
+- **Decision:** `RAW_NBM_GAUSSIAN_V1` tek forecast champion; quantile strategy `REJECTED`.
+- **Boundary:** n=1 execution observation edge/kârlılık kanıtı değildir; canlı işlem yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1756,7 +1767,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Raw NBM Gaussian champion specification/checksum'ını dondur; Chicago market bucket'larına map edip timestamp-aligned executable Polymarket fiyatlarına karşı paper EV pipeline'ını başlat.
+**Tek sonraki adım:** Sonraki Chicago/KORD eventini discover edip `RAW_NBM_GAUSSIAN_V1` ile 11:00 UTC karar-anı executable paper snapshot config'ini dondur; quantile kolunu kaldır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

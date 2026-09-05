@@ -6,7 +6,7 @@
   "run_generated_at_utc": "2026-09-03T10:57:52.142017Z",
   "run_path": "data/processed/chicago_paper_cohort/day=01/run=20260903T105642Z-v2/result.json",
   "run_result_sha256": "05187e9b318111f6589ceea96669159d60eec90d1004a0f6ac3a828080b2c485",
-  "status": "CAPTURE_ELIGIBLE_PENDING_OUTCOME",
+  "status": "SETTLEMENT_RECONCILED",
   "mechanics_decision": "VERTICAL_SLICE_MECHANICS_PASS",
   "event_id": "952456",
   "target_local_date": "2026-09-04",
@@ -60,10 +60,19 @@
       "order_sent": false
     }
   },
-  "outcome": null,
-  "paper_pnl": null,
+  "outcome": {
+    "noaa_maximum_rounded_f": 93,
+    "winning_bucket": "92-93°F",
+    "winning_market_id": "4115804",
+    "noaa_gamma_match": true,
+    "reconciliation_artifact_sha256": "0f477859ec1c3ad229bb87a3e012950ae896b4964805ba4bb67f84ff0f17070c"
+  },
+  "paper_pnl": {
+    "gaussian_usd": 0.0,
+    "quantile_usd": -10.445
+  },
   "limitations": [
-    "No outcome or settlement label is admitted yet.",
+    "Outcome is reconciled from post-event NOAA and terminal Gamma snapshots; it was not available at decision time.",
     "The NBM product-valid-time to target-local-day semantic mapping remains a tracked validation dependency.",
     "One paper decision is not evidence of calibration or profitability."
   ]
