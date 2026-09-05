@@ -70,8 +70,11 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 
 ## Bulgular
 
-Henüz kaynak envanteri çalıştırılmadı.
+- **Label coverage (2026-09-05):** NOAA LCDv2 refresh sonucunda 362/365 gün (%99,178) non-null günlük maksimumla bulundu; ön-kayıtlı ≥%99 gate geçti.
+- Eksik 2026-08-29–31 günleri provider publication lag; imputation uygulanmadı.
+- Duplicate, identity ve terminal transport hatası 0.
+- Kaynak sonucu checksum-locked ve ayrıntılı artifact'a bağlandı.
 
 ## Sıradaki en küçük adım
 
-365 günlük kaynak envanteri runner'ını oluştur, contract testlerini yaz ve model değerlerini hesaplamadan coverage artifact'ını üret.
+365 hedef gün için prior-day NBM 07Z source availability/publication envanterini ölç; model değerlerini veya skorlarını hesaplama.

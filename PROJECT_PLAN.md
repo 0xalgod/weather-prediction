@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.85.0
+**Plan versiyonu:** 0.86.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1456,6 +1456,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Evaluation firewall:** Önceki 52 OOS gün model selection için tüketildi. Yeni temporal split yalnız dataset gate sonrasında ve model skorlarından önce kilitlenecek; random split yok.
 - **Boundary:** Dataset gate geçmeden model tuning yok; bu faz market/EV/order içermez.
 
+### D-0089 — 2026-09-05 — KORD bir yıllık label coverage gate geçti
+
+- **Durum:** `ACTIVE`
+- **Source refresh:** NOAA LCDv2 2025 ve 2026 yıllık KORD dosyaları immutable run'a yeniden indirildi; result/source checksum'ları kaydedildi.
+- **Coverage:** 2025-09-01–2026-08-31 hedefinde 362/365=%99.178 non-null günlük maksimum; locked ≥%99 gate geçti.
+- **Quality:** Duplicate 0, station identity failure 0, terminal transport failure 0.
+- **Missingness:** 2026-08-29–31 source dosyasında henüz yok; publication lag olarak işaretlendi, imputation/backfill yapılmadı.
+- **Boundary:** NOAA label forecast eğitimi içindir; frozen historical Polymarket settlement-as-of kanıtı değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1476,7 +1485,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** `EXP-20260905-kord-forecast-dataset-v1` için 365 günlük NBM 07Z + GEFS 00Z/31-member + NOAA LCDv2 kaynak envanteri runner'ını ve contract testlerini oluştur; model değerlerini veya skorlarını hesaplamadan coverage artifact'ını üret.
+**Tek sonraki adım:** `EXP-20260905-kord-forecast-dataset-v1` kapsamındaki 365 hedef gün için prior-day NBM 07Z source availability ve publication-time envanterini ölç; model feature değerlerini veya skorlarını henüz hesaplama.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

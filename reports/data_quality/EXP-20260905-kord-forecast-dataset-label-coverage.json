@@ -1,0 +1,55 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "label_source_coverage",
+  "generated_at_utc": "2026-09-05T13:12:19.882775Z",
+  "decision": "LABEL_COVERAGE_PASS_WITH_PUBLICATION_LAG",
+  "raw_result": "data/raw/noaa_lcdv2/run=20260905T-kord-annual-dataset-label-v1/result.json",
+  "raw_result_sha256": "325c77b9068927fe84a2c9f7f10898a3f7bb9d18285ab0aeb54b278adc6aa17f",
+  "scope": {
+    "station": "USW00094846",
+    "icao": "KORD",
+    "timezone": "America/Chicago",
+    "start_date": "2025-09-01",
+    "end_date": "2026-08-31",
+    "expected_date_count": 365
+  },
+  "metrics": {
+    "represented_date_count": 362,
+    "date_coverage": 0.9917808219178083,
+    "non_null_daily_maximum_date_count": 362,
+    "non_null_daily_maximum_coverage": 0.9917808219178083,
+    "missing_date_count": 3,
+    "missing_dates": [
+      "2026-08-29",
+      "2026-08-30",
+      "2026-08-31"
+    ],
+    "duplicate_date_count": 0,
+    "identity_failure_count": 0,
+    "terminal_transport_failure_count": 0
+  },
+  "checks": {
+    "label_coverage_rate_minimum_0_99": true,
+    "duplicate_station_date_count_maximum_0": true,
+    "identity_rate_required_1_0": true
+  },
+  "source_objects": [
+    {
+      "year": 2025,
+      "sha256": "beea30938e4102645a6ddccd7f7253be13dbafa1707dc7a193c5c605f1b68e34"
+    },
+    {
+      "year": 2026,
+      "sha256": "2f42e79f26ae5182e8620caa25bbe8e6576559300c2c674823ab169397346a34",
+      "http_last_modified": "Tue, 01 Sep 2026 17:07:33 GMT",
+      "last_available_sod_date": "2026-08-28"
+    }
+  ],
+  "interpretation": {
+    "dataset_gate_component": "PASS",
+    "missingness_reason": "The latest three target dates were not yet present in the annual LCDv2 file; this is provider publication lag, not imputed missingness.",
+    "admission_rule": "Only the 362 observed dates may be admitted until a new immutable source version includes later dates.",
+    "boundary": "This source is a forecast-training label and does not prove historical Polymarket settlement-as-of state."
+  }
+}
