@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from collections.abc import Mapping
-from datetime import datetime, timezone
+from datetime import datetime, time, timedelta, timezone
 from typing import Any
 
 from weather_quant.ingestion.polymarket_markets import (
@@ -21,6 +21,15 @@ def audit_upcoming_kord_candidate(event: Mapping[str, Any], as_of: datetime) -> 
     description = str(event.get("description") or "")
     resolution_source = str(event.get("resolutionSource") or "")
     end_at = parse_source_timestamp(event.get("endDate"))
+    event_date_text = str(event.get("eventDate") or "")
+    try:
+        event_date = datetime.fromisoformat(event_date_text).date()
+        decision_at = datetime.combine(
+            event_date - timedelta(days=1), time(11), timezone.utc
+        )
+    except ValueError:
+        event_date = None
+        decision_at = None
     markets = event.get("markets")
     identity_failures = []
     token_identities = []
@@ -69,6 +78,8 @@ def audit_upcoming_kord_candidate(event: Mapping[str, Any], as_of: datetime) -> 
         "not_closed": event.get("closed") is False,
         "end_at_present": end_at is not None,
         "observed_future": end_at is not None and end_at >= as_of.astimezone(timezone.utc),
+        "decision_time_future": decision_at is not None
+        and decision_at >= as_of.astimezone(timezone.utc),
         "primary_resolution_source_supported_kord": supported_primary,
         "rule_names_kord": "kord" in description_lower
         or "chicago o'hare intl airport station" in description_lower,
@@ -81,6 +92,8 @@ def audit_upcoming_kord_candidate(event: Mapping[str, Any], as_of: datetime) -> 
         "event_id": str(event.get("id") or ""),
         "title": title,
         "end_at": isoformat_utc(end_at) if end_at else None,
+        "target_local_date": event_date.isoformat() if event_date else None,
+        "decision_at": isoformat_utc(decision_at) if decision_at else None,
         "resolution_source": resolution_source or None,
         "rule_text_sha256": hashlib.sha256(description.encode("utf-8")).hexdigest(),
         "checks": checks,

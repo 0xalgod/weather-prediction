@@ -8,6 +8,7 @@ def event() -> dict:
         "id": "10",
         "title": "Highest temperature in Chicago on September 5?",
         "endDate": "2026-09-05T12:00:00Z",
+        "eventDate": "2026-09-05",
         "active": True,
         "closed": False,
         "resolutionSource": "https://www.wunderground.com/history/daily/us/il/chicago/KORD",
@@ -63,4 +64,14 @@ def test_past_or_incomplete_event_fails_closed() -> None:
     )
     assert result["checks"]["observed_future"] is False
     assert result["checks"]["nested_market_identities_complete"] is False
+    assert result["qualified"] is False
+
+
+def test_event_still_open_but_decision_time_past_fails() -> None:
+    candidate = event()
+    result = audit_upcoming_kord_candidate(
+        candidate, datetime(2026, 9, 4, 12, tzinfo=timezone.utc)
+    )
+    assert result["checks"]["observed_future"] is True
+    assert result["checks"]["decision_time_future"] is False
     assert result["qualified"] is False

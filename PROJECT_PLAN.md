@@ -1756,6 +1756,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Timing:** Sep 6 eventinin 11Z decision zamanı kaçtı; Sep 7 event 968537 bir sonraki eligible aday.
 - **Boundary:** Source kuralı sonucu etkileyen veri görülmeden yalnız observed contract'a göre düzeltildi; order yok.
 
+### D-0120 — 2026-09-06 — Discovery decision-time eligibility düzeltmesi
+
+- **Durum:** `ACTIVE`
+- **Failure:** Source-corrected run Sep 6 eventini seçti; event açık olsa da prior-day 11Z strategy decision time geçmişti.
+- **Correction:** `eventDate−1 day 11:00 UTC >= observed_at` zorunlu `decision_time_future` gate'i eklendi.
+- **Expected:** Sep 6 fail-closed; Sep 7/event 968537 seçilecek.
+- **Boundary:** Geçmiş snapshot yeniden yaratılmayacak; look-ahead/execution backfill yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
