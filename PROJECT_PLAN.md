@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 1.0.0
+**Plan versiyonu:** 1.1.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1593,6 +1593,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Unchanged:** Dates/products/18 messages/comparator/accuracy/cost thresholds aynen korundu.
 - **Retry:** İlk gerçek veri koşusu yeni immutable `run=20260905T-gefs-aggregate-validation-v2` path'inde yapılacak.
 
+### D-0104 — 2026-09-05 — GEFS aggregate mean/spread validation tüm gate'leri geçti
+
+- **Durum:** `ACTIVE`
+- **Integrity:** 18/18 `geavg`/`gespr` TMAX index-range-decode; primary exact 6 adet 31/31 cell.
+- **Accuracy:** Mean MAE/max 0.0333/0.1179°F; spread MAE/max 0.0658/0.1514°F. Locked 0.25/0.75°F gate'ler geçti.
+- **Cost:** Annual projected 1.462 GiB ve 3,374 GET; locked ≤3 GiB/≤4,000 geçti.
+- **Karar:** 31-member annual bulk yerine validated aggregate summary ingestion; individual-member frequency kaybı explicit limitation.
+- **Boundary:** Aggregate equivalence forecast skill/calibration/EV değildir; yalnız feature fidelity ve cost kanıtıdır.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1613,7 +1622,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Düzeltilmiş config ile GEFS aggregate validation runner'ını yeni immutable v2 path'inde exact 18 message üzerinde çalıştır; accuracy ve annual cost gate sonucunu kaydet.
+**Tek sonraki adım:** 362 publication-admissible GEFS günü için annual `geavg`/`gespr` compact ingestion runner'ını exact/proxy window aggregation ve atomic retry ile oluştur; sonuçtan önce commit/push et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

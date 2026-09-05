@@ -1,6 +1,6 @@
 # EXP-20260905 — GEFS aggregate-product corrective validation
 
-**Durum:** `IN_PROGRESS`  
+**Durum:** `PASSED`
 **Tasarım:** Full-member extraction pilotu sonrasında, aggregate değerler görülmeden pre-registered corrective deney.
 
 ## Hipotez
@@ -45,3 +45,15 @@ Testlerden geçen runner ile exact 18-message deneyi bir kez çalıştır; accur
 - `gespr` Kelvin farkı Fahrenheit farkına yalnız `×9/5` ile çevrilir; absolute-temperature offset uygulanmaz.
 - Runner checksum-locked full-member pilotundan empirical mean ve `ddof=0` spread üretir; yalnız 31/31 hücreleri primary gate'e alır.
 - Attempt 1 aggregate request göndermeden `KeyError: station` ile durdu; output directory boş ve aggregate value gözlenmedi. Human-readable planda zaten kilitli KORD koordinatları machine config'e eklendi; eşikler/tarihler değişmedi. İlk veri koşusu immutable `v2` olacaktır.
+
+## Sonuç
+
+- 18/18 aggregate message decode edildi.
+- `geavg`: MAE 0,0333°F, max absolute error 0,1179°F.
+- `gespr`: MAE 0,0658°F, max absolute error 0,1514°F.
+- Annual projection: 1,462 GiB ve 3.374 range GET.
+- Tüm accuracy, integrity ve cost gate'leri geçti.
+
+## Karar
+
+31-member annual bulk retrieval yerine validated `geavg`/`gespr` summary features kullanılacak. Individual-member frequency özelliği bu dataset versiyonunda yoktur; bu kayıp model raporunda açık kalır.

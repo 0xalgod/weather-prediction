@@ -1,0 +1,37 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-gefs-aggregate-validation",
+  "generated_at_utc": "2026-09-05T13:50:00Z",
+  "decision": "GEFS_AGGREGATE_VALIDATION_PASS",
+  "raw_result": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-aggregate-validation-v2/result.json",
+  "raw_result_sha256": "e6e919a300276a44504a3d3c0528a0c2f600a92c275f621bcc33b0a55a660479",
+  "metrics": {
+    "aggregate_message_count": 18,
+    "aggregate_message_success_rate": 1.0,
+    "primary_complete_cell_count": 6,
+    "mean_mae_f": 0.03328564453124727,
+    "mean_max_absolute_error_f": 0.1178627457157404,
+    "spread_mae_f": 0.06579680688679901,
+    "spread_max_absolute_error_f": 0.15136096235740482,
+    "pilot_range_byte_count": 8374084,
+    "annual_projected_range_get_count": 3374,
+    "annual_projected_range_gib": 1.461874249494738
+  },
+  "checks": {
+    "aggregate_message_success_rate_1_0": true,
+    "primary_complete_cell_count_exact_6": true,
+    "mean_mae_maximum_0_25_f": true,
+    "mean_max_absolute_error_maximum_0_75_f": true,
+    "spread_mae_maximum_0_25_f": true,
+    "spread_max_absolute_error_maximum_0_75_f": true,
+    "annual_projected_range_gib_maximum_3": true,
+    "annual_projected_range_get_count_maximum_4000": true
+  },
+  "interpretation": {
+    "gate": "PASS",
+    "geavg_role": "Validated low-cost GEFS ensemble-mean TMAX feature.",
+    "gespr_role": "Validated low-cost GEFS ensemble-population-spread TMAX feature.",
+    "limitation": "Validation covers six complete case-step cells across one winter and one summer target; it supports annual extraction, not forecast skill or calibration claims.",
+    "next_action": "Implement annual geavg/gespr compact ingestion with exact/proxy local-day aggregation and all existing timestamp gates."
+  }
+}
