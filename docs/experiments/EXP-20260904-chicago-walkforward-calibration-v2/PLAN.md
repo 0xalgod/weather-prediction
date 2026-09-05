@@ -1,6 +1,6 @@
 # EXP-20260904 — Chicago walk-forward calibration v2
 
-**Status:** `IN_PROGRESS`  
+**Status:** `FAILED`
 **Design:** `POST_HOC_CORRECTIVE_BEFORE_MODEL_SCORES`
 
 ## Why a new experiment
@@ -27,3 +27,11 @@ Practical improvement still requires at least 2% relative OOS log-loss improveme
 ## Claim boundary
 
 This post-hoc correction reduces evidential strength and will be labelled as such in all results. It can establish whether simple calibration is promising, not a trading edge. There is no market-price, EV, fill or order calculation.
+
+## 2026-09-05 result
+
+- Contract passed: 112 eligible, 60 initial train, 52 expanding-window OOS, train histories 60–111, finite scores and exact probability sums.
+- Gaussian calibration log loss improved only 0.69% (<2%) and Brier worsened `+0.0232`; paired CI crossed zero.
+- Quantile calibration log loss worsened 4.02% and Brier worsened `+0.0261`; paired CI crossed zero.
+- Neither practical nor strong-evidence gate passed. Decision: `NO_STRONG_CALIBRATION_EVIDENCE`.
+- Raw quantile remains the best tested forecast baseline. No trading/market/EV claim is made.

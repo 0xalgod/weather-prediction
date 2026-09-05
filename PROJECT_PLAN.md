@@ -1,7 +1,8 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.83.0
+**Plan versiyonu:** 0.84.0
+**Son güncelleme:** 2026-09-05
 **Son güncelleme:** 2026-09-04
 **Mevcut faz:** Phase 5 settlement reconciliation (parallel) + Phase 6 Chicago vertical slice
 **Genel durum:** `IN_PROGRESS`  
@@ -1436,6 +1437,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Unchanged:** Gaussian/quantile dönüşümleri, −5..+5 step0.5 × {0.75,1,1.25} grid, metrics/bootstrap ve ≥2%+Brier/CI gates.
 - **Boundary:** Explicit post-hoc evidential weakness; market/EV/fill/order yok.
 
+### D-0087 — 2026-09-05 — Walk-forward calibration başarısız, raw quantile korunuyor
+
+- **Durum:** `ACTIVE`
+- **Contract:** 112 eligible, first 60 train, next 52 expanding OOS; train size 60→111; finite/probability checks geçti.
+- **Gaussian:** Raw/cal log loss 1.4628/1.4528, yalnız %0.69 improve; Brier +0.0232 worse; paired CI `[-0.128,+0.125]`. Practical/strong fail.
+- **Quantile:** Raw/cal log loss 1.4102/1.4668, %4.02 worse; Brier +0.0261; CI `[-0.0469,+0.1625]`. Practical/strong fail.
+- **Karar:** `NO_STRONG_CALIBRATION_EVIDENCE`; shift/spread calibrated modeller kullanılmaz. Raw quantile best tested forecast baseline olarak korunur.
+- **Boundary:** Bu weather forecast sonucu market mispricing/EV/P&L değildir; aynı 52 OOS üzerinde yeni model seçimi yapılmaz.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1456,7 +1466,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Kilitli v2 grid için deterministic calibration/walk-forward runner ve unit testlerini yaz; 112-count/60-train/52-OOS contract geçtikten sonra OOS skorunu tek sefer çalıştır.
+**Tek sonraki adım:** Paper Day 1 target Sep 4 event 952456 için frozen resolution/outcome kanıtını append-only reconcile et; quantile hypothetical position'ın realized paper P&L'ini locked fee/cost ile hesapla. Sonra sonraki uygun 14:00 snapshot'ı zamanında kilitle.
 
 Beklenen artifact'lar:
 

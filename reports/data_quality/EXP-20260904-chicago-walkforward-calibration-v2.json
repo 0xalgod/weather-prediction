@@ -1,0 +1,59 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260904-chicago-walkforward-calibration-v2",
+  "design_status": "POST_HOC_CORRECTIVE_BEFORE_MODEL_SCORES",
+  "decision": "NO_STRONG_CALIBRATION_EVIDENCE",
+  "result": "data/processed/chicago_walkforward_calibration/run=20260905T-v1/result.json",
+  "result_sha256": "c2175f16d7e564711ecb8f0c7bdfcf8ba317ae49f2d67ff8270ade25730896e2",
+  "quality": {
+    "eligible_event_count": 112,
+    "initial_train_event_count": 60,
+    "oos_event_count": 52,
+    "first_oos_date": "2026-07-08",
+    "last_oos_date": "2026-08-28",
+    "train_event_count_range": [
+      60,
+      111
+    ],
+    "finite_metric_rate": 1.0,
+    "maximum_probability_sum_error": 0.0
+  },
+  "gaussian": {
+    "raw_oos_log_loss": 1.4628496360681746,
+    "calibrated_oos_log_loss": 1.4527510609929466,
+    "relative_log_loss_improvement": 0.006903358230563494,
+    "raw_oos_brier": 0.734255813297533,
+    "calibrated_oos_brier": 0.7574222111209882,
+    "brier_difference": 0.023166397823455198,
+    "paired_log_loss_difference_ci95": [
+      -0.1280402354781278,
+      0.12524215454917897
+    ],
+    "practical_improvement_pass": false,
+    "strong_evidence_pass": false,
+    "selected_parameter_counts": {
+      "shift=-1.0,scale=0.75": 28,
+      "shift=-0.5,scale=0.75": 24
+    }
+  },
+  "quantile": {
+    "raw_oos_log_loss": 1.4101966816465965,
+    "calibrated_oos_log_loss": 1.4668220345527736,
+    "relative_log_loss_improvement": -0.0401542236222392,
+    "raw_oos_brier": 0.7335261418269231,
+    "calibrated_oos_brier": 0.759578826121795,
+    "brier_difference": 0.026052684294871842,
+    "paired_log_loss_difference_ci95": [
+      -0.04692558996843697,
+      0.16249498172685578
+    ],
+    "practical_improvement_pass": false,
+    "strong_evidence_pass": false,
+    "selected_parameter_counts": {
+      "shift=-1.5,scale=1.0": 1,
+      "shift=-1.0,scale=1.0": 46,
+      "shift=-0.5,scale=1.0": 5
+    }
+  },
+  "trading_authorized": false
+}
