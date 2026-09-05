@@ -87,6 +87,8 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - NBM + mevcut label kesişimi şimdilik 359/365=%98,356; overall ≥%97 gate GEFS/final join sonuna kadar provisional.
 - **GEFS window semantics (2026-09-05):** 125/365 kış-saati günü exact local-day partition; 240 gün DST/boundary nedeniyle 1–6 saat outside-local contamination taşıyor.
 - GEFS yıl boyunca resolution-equivalent sayılmayacak; exact veya interior/overlap proxy feature ve `outside_local_seconds` olarak açıkça saklanacak.
+- **GEFS inventory runner (2026-09-05):** Günlük public S3 listing'lerinden 31 member × gerekli 4–5 canonical step için hem data hem index object ve publication timestamp kontrolü yapan runner eklendi.
+- Full inventory sonucu henüz görülmedi; implementasyon ve contract testleri sonuçtan önce commitlenecek.
 
 ## Sıradaki en küçük adım
 

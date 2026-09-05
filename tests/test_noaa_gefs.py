@@ -5,11 +5,13 @@ from unittest.mock import patch
 
 from weather_quant.ingestion.noaa_gefs import (
     fetch_index_summary,
+    local_day_tmax_steps,
     local_day_utc,
     member_names,
     object_url,
     parse_index,
     parse_max_window,
+    parse_s3_listing,
     summarize_index,
     window_coverage,
 )
@@ -78,6 +80,31 @@ class NoaaGefsTests(unittest.TestCase):
         self.assertEqual(result["uncovered_seconds"], 0)
         self.assertEqual(result["outside_local_seconds"], 6 * 3600)
         self.assertFalse(result["exact_partition"])
+
+    def test_s3_listing_parser_keeps_object_provenance_and_token(self):
+        payload = b"""<?xml version="1.0" encoding="UTF-8"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <IsTruncated>true</IsTruncated>
+  <NextContinuationToken>next-token</NextContinuationToken>
+  <Contents>
+    <Key>gefs.20260830/00/atmos/pgrb2sp25/gec00.t00z.pgrb2s.0p25.f036</Key>
+    <LastModified>2026-08-30T03:54:00.000Z</LastModified>
+    <ETag>&quot;abc&quot;</ETag><Size>123</Size>
+  </Contents>
+</ListBucketResult>"""
+        parsed = parse_s3_listing(payload)
+        self.assertTrue(parsed["is_truncated"])
+        self.assertEqual(parsed["next_continuation_token"], "next-token")
+        self.assertEqual(parsed["objects"][0]["size"], 123)
+
+    def test_kord_local_day_steps_distinguish_winter_and_summer(self):
+        winter = local_day_tmax_steps(date(2026, 1, 15), "America/Chicago")
+        summer = local_day_tmax_steps(date(2026, 7, 15), "America/Chicago")
+        self.assertEqual(winter["overlap_steps"], [36, 42, 48, 54])
+        self.assertTrue(winter["exact_partition"])
+        self.assertEqual(summer["overlap_steps"], [30, 36, 42, 48, 54])
+        self.assertEqual(summer["interior_steps"], [36, 42, 48])
+        self.assertEqual(summer["outside_local_seconds"], 6 * 3600)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.91.0
+**Plan versiyonu:** 0.92.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1511,6 +1511,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Robustness:** Model performansı window regime bazında ve non-exact exclusion sensitivity ile raporlanacak.
 - **Timing:** Bu semantic düzeltme GEFS bulk retrieval ve model score öncesinde yapıldı; performance-driven değildir.
 
+### D-0095 — 2026-09-05 — Annual GEFS full-member inventory runner hazır
+
+- **Durum:** `ACTIVE`
+- **Efficient inventory:** Her member/step'e ayrı HEAD yerine günlük paginated NOAA S3 listing; XML page checksum ve URL provenance saklanır.
+- **Contract:** 365 target × 31 member × rejime göre 4–5 TMAX step; data ve `.idx` object birlikte zorunlu.
+- **Timing:** Object ve index Last-Modified, run-date 11:00 UTC decision time'ı aşamaz.
+- **Gate:** Complete+publication-admissible member-day ≥%97; terminal listing failure 0.
+- **Boundary:** Inventory feature değerini indirmez ve model skoru hesaplamaz; sonuç implementasyon commit'inden sonra görülecek.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1531,7 +1540,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS 00Z control+30 perturbed member için 365 günlük full-membership ve canonical TMAX window source envanterini ölç; exact/proxy rejim alanlarını koru, model değerlerini/skorlarını hesaplama.
+**Tek sonraki adım:** Annual GEFS full-member inventory runner'ını 365 gün üzerinde bir kez çalıştır; membership/data-index/publication coverage sonucunu immutable artifact'a kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

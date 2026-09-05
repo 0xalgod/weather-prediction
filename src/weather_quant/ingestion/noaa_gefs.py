@@ -5,17 +5,20 @@ from __future__ import annotations
 import hashlib
 import re
 import time
+import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from time import monotonic
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 GEFS_AWS_BASE = "https://noaa-gefs-pds.s3.amazonaws.com"
 REQUIRED_FIELDS = ("TMP", "TMAX", "TMIN")
 MAX_WINDOW_PATTERN = re.compile(r"^(\d+)-(\d+) hour max fcst$")
+S3_XML_NAMESPACE = {"s3": "http://s3.amazonaws.com/doc/2006-03-01/"}
 
 
 def utc_iso() -> str:
@@ -24,6 +27,104 @@ def utc_iso() -> str:
 
 def member_names() -> list[str]:
     return ["gec00", *(f"gep{number:02d}" for number in range(1, 31))]
+
+
+def parse_s3_listing(payload: bytes) -> dict[str, Any]:
+    """Parse one public S3 ListObjectsV2 page with namespace enforcement."""
+
+    root = ET.fromstring(payload)
+    contents = []
+    for item in root.findall("s3:Contents", S3_XML_NAMESPACE):
+        contents.append(
+            {
+                "key": item.findtext("s3:Key", namespaces=S3_XML_NAMESPACE),
+                "last_modified": item.findtext(
+                    "s3:LastModified", namespaces=S3_XML_NAMESPACE
+                ),
+                "etag": item.findtext("s3:ETag", namespaces=S3_XML_NAMESPACE),
+                "size": int(
+                    item.findtext("s3:Size", namespaces=S3_XML_NAMESPACE) or "0"
+                ),
+            }
+        )
+    truncated = root.findtext("s3:IsTruncated", namespaces=S3_XML_NAMESPACE)
+    token = root.findtext("s3:NextContinuationToken", namespaces=S3_XML_NAMESPACE)
+    if truncated == "true" and not token:
+        raise ValueError("truncated S3 listing has no continuation token")
+    return {
+        "objects": contents,
+        "is_truncated": truncated == "true",
+        "next_continuation_token": token,
+    }
+
+
+def list_run_prefix(
+    run_date: str, cycle: int = 0, timeout: float = 60.0
+) -> dict[str, Any]:
+    """List every GEFS object under one run/product prefix with page provenance."""
+
+    if len(run_date) != 8 or not run_date.isdigit() or cycle not in {0, 6, 12, 18}:
+        raise ValueError("invalid GEFS run date or cycle")
+    prefix = f"gefs.{run_date}/{cycle:02d}/atmos/pgrb2sp25/"
+    token = None
+    objects = []
+    pages = []
+    while True:
+        query = {"list-type": "2", "prefix": prefix, "max-keys": "1000"}
+        if token:
+            query["continuation-token"] = token
+        url = f"{GEFS_AWS_BASE}/?{urlencode(query)}"
+        request = Request(url, headers={"User-Agent": "weather-quant-research/0.1"})
+        with urlopen(request, timeout=timeout) as response:
+            payload = response.read()
+            status = response.status
+        parsed = parse_s3_listing(payload)
+        pages.append(
+            {
+                "url": url,
+                "http_status": status,
+                "byte_count": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        )
+        objects.extend(parsed["objects"])
+        if not parsed["is_truncated"]:
+            break
+        token = parsed["next_continuation_token"]
+    return {"prefix": prefix, "pages": pages, "objects": objects}
+
+
+def local_day_tmax_steps(target_date: date, timezone_name: str) -> dict[str, Any]:
+    """Select canonical 6-hour GEFS TMAX steps overlapping one station-local day."""
+
+    run_time = datetime.combine(
+        target_date - timedelta(days=1), datetime.min.time(), tzinfo=timezone.utc
+    )
+    target_start, target_end = local_day_utc(target_date, timezone_name)
+    candidates = [
+        (step, run_time + timedelta(hours=step - 6), run_time + timedelta(hours=step))
+        for step in range(6, 61, 6)
+    ]
+    selected = [
+        (step, start, end)
+        for step, start, end in candidates
+        if start < target_end and end > target_start
+    ]
+    coverage = window_coverage(
+        target_start, target_end, [(start, end) for _, start, end in selected]
+    )
+    interior_steps = [
+        step
+        for step, start, end in selected
+        if start >= target_start and end <= target_end
+    ]
+    return {
+        "target_start_utc": target_start.isoformat().replace("+00:00", "Z"),
+        "target_end_utc": target_end.isoformat().replace("+00:00", "Z"),
+        "overlap_steps": [step for step, _, _ in selected],
+        "interior_steps": interior_steps,
+        **coverage,
+    }
 
 
 def object_url(run_date: str, cycle: int, member: str, step: int) -> str:
