@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import re
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from time import monotonic
 from typing import Any
@@ -121,6 +122,16 @@ def download_station_range(
         "http_etag": headers.get("ETag"),
         "local_path": str(destination),
     }
+
+
+def publication_is_admissible(last_modified: str, decision_time_utc: str) -> bool:
+    """Return whether an HTTP publication timestamp was available by decision time."""
+
+    published = parsedate_to_datetime(last_modified).astimezone(timezone.utc)
+    decision = datetime.fromisoformat(decision_time_utc.replace("Z", "+00:00"))
+    if decision.tzinfo is None:
+        raise ValueError("decision time must be timezone-aware")
+    return published <= decision.astimezone(timezone.utc)
 
 
 def inspect_probabilistic_text(path: Path, station_code: str) -> dict[str, Any]:

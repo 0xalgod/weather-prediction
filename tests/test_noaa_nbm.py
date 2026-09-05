@@ -7,6 +7,7 @@ from weather_quant.ingestion.noaa_nbm import (
     inspect_probabilistic_text,
     parse_station_maxt,
     probabilistic_text_url,
+    publication_is_admissible,
 )
 
 
@@ -80,6 +81,18 @@ class NoaaNbmTests(unittest.TestCase):
             path.write_bytes(extract_station_block(payload, "KORD"))
             with self.assertRaisesRegex(ValueError, "missing FHR"):
                 parse_station_maxt(path, "KORD", "2026-08-30T07:00:00Z")
+
+    def test_publication_admission_uses_decision_timestamp(self):
+        self.assertTrue(
+            publication_is_admissible(
+                "Sun, 30 Aug 2026 08:15:00 GMT", "2026-08-30T11:00:00Z"
+            )
+        )
+        self.assertFalse(
+            publication_is_admissible(
+                "Sun, 30 Aug 2026 11:00:01 GMT", "2026-08-30T11:00:00Z"
+            )
+        )
 
 
 if __name__ == "__main__":

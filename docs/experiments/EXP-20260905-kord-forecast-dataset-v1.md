@@ -80,6 +80,8 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - **Compact NBM validation (2026-09-05):** 1.000.001-byte range'den çıkarılan 3.684-byte KORD block, checksum-locked 34.724.473-byte full object'teki block ile exact byte match verdi.
 - NBM v5.0 block 9 MaxT record ve exact bir f41 target record ile parse edildi; validation gate geçti.
 - Yıllık tahmini transfer yaklaşık 348 MiB, station-block depolama yaklaşık 1,28 MiB; batch koşusunda drift fail-closed kalacak.
+- **Batch runner (2026-09-05):** Checksum-locked inventory'den yalnız 362 publication-admissible günü seçen, iki schema-offset range'ini fail-closed deneyen ve her gün exact station/required fields/f41 kontrolü yapan runner eklendi.
+- Batch gerçek veri koşusu henüz çalıştırılmadı; implementasyon ve contract testleri sonuçtan önce commitlenecek.
 
 ## Sıradaki en küçük adım
 
