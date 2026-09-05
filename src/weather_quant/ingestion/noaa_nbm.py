@@ -63,6 +63,66 @@ def download_public_object(url: str, destination: Path, timeout: float = 60.0) -
     }
 
 
+def extract_station_block(content: bytes, station_code: str) -> bytes:
+    """Extract one complete NBP station block from a full object or byte-range payload."""
+
+    text = content.decode("ascii", errors="strict")
+    block, _ = _station_block(text, station_code)
+    return block.encode("ascii")
+
+
+def download_station_range(
+    url: str,
+    station_code: str,
+    byte_start: int,
+    byte_end: int,
+    destination: Path,
+    timeout: float = 60.0,
+) -> dict[str, Any]:
+    """Download a bounded range and persist only one complete station block."""
+
+    if byte_start < 0 or byte_end < byte_start:
+        raise ValueError("invalid byte range")
+    if destination.exists():
+        raise FileExistsError(f"immutable destination exists: {destination}")
+    requested_at = utc_iso()
+    started = monotonic()
+    request = Request(
+        url,
+        headers={
+            "User-Agent": "weather-quant-research/0.1",
+            "Range": f"bytes={byte_start}-{byte_end}",
+        },
+    )
+    with urlopen(request, timeout=timeout) as response:
+        payload = response.read()
+        headers = dict(response.headers.items())
+        status = response.status
+    if status != 206:
+        raise ValueError(f"server did not honor byte range: HTTP {status}")
+    block = extract_station_block(payload, station_code)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(block)
+    return {
+        "source": "noaa_nbm_aws_public_range",
+        "url": url,
+        "station_code": station_code,
+        "http_status": status,
+        "requested_range": [byte_start, byte_end],
+        "content_range": headers.get("Content-Range"),
+        "requested_at_utc": requested_at,
+        "received_at_utc": utc_iso(),
+        "retrieval_seconds": monotonic() - started,
+        "range_byte_count": len(payload),
+        "range_sha256": hashlib.sha256(payload).hexdigest(),
+        "station_block_byte_count": len(block),
+        "station_block_sha256": hashlib.sha256(block).hexdigest(),
+        "http_last_modified": headers.get("Last-Modified"),
+        "http_etag": headers.get("ETag"),
+        "local_path": str(destination),
+    }
+
+
 def inspect_probabilistic_text(path: Path, station_code: str) -> dict[str, Any]:
     """Inventory station and MaxT/MinT QMD element markers without modeling values."""
 
