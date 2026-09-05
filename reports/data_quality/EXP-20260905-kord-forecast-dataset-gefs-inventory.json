@@ -1,0 +1,62 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "experiment_id": "EXP-20260905-kord-forecast-dataset-v1",
+  "substep": "annual_gefs_full_member_inventory",
+  "generated_at_utc": "2026-09-05T13:34:00Z",
+  "decision": "ANNUAL_GEFS_INVENTORY_GATE_PASS",
+  "raw_result": "data/raw/kord_annual_forecast_dataset/run=20260905T-gefs-full-inventory-v1/result.json",
+  "raw_result_sha256": "4a1f0d3d16e054a70c752f653925dafa6d6bfbfc090b140d49fa24b2837329aa",
+  "metrics": {
+    "target_date_count": 365,
+    "listing_success_count": 365,
+    "listing_failure_count": 0,
+    "listing_page_count": 2190,
+    "listed_object_count": 1951389,
+    "expected_member_day_count": 11315,
+    "complete_admissible_member_day_count": 11222,
+    "complete_admissible_member_day_rate": 0.9917808219178083,
+    "required_data_index_pair_count": 52669,
+    "complete_data_index_pair_count": 52669,
+    "publication_admissible_pair_count": 52297,
+    "incomplete_data_index_pair_count": 0,
+    "recovered_transient_error_count": 2,
+    "terminal_transport_failure_count": 0,
+    "exact_partition_date_count": 125,
+    "proxy_partition_date_count": 240
+  },
+  "publication_exclusions": [
+    {
+      "target_date": "2025-12-19",
+      "run_date": "2025-12-18",
+      "excluded_member_day_count": 31
+    },
+    {
+      "target_date": "2025-12-20",
+      "run_date": "2025-12-19",
+      "excluded_member_day_count": 31
+    },
+    {
+      "target_date": "2026-01-26",
+      "run_date": "2026-01-25",
+      "excluded_member_day_count": 31
+    }
+  ],
+  "checks": {
+    "complete_admissible_member_day_rate_minimum_0_97": true,
+    "all_required_data_index_pairs_physically_present": true,
+    "terminal_transport_failure_count_maximum_0": true,
+    "exact_proxy_regimes_preserved": true
+  },
+  "preliminary_three_source_intersection": {
+    "unique_excluded_target_date_count": 8,
+    "expected_joined_date_count": 357,
+    "expected_joined_rate": 0.9780821917808219,
+    "joined_eligible_rate_minimum_0_97": true,
+    "status": "PRELIMINARY_UNTIL_GEFS_VALUE_EXTRACTION_AND_FINAL_JOIN"
+  },
+  "interpretation": {
+    "gate": "PASS",
+    "missingness": "Three complete GEFS run dates were published after the 11:00 UTC decision time; no alternate cycle is admitted.",
+    "next_action": "Validate and measure selected TMAX index+range extraction on one exact winter day and one proxy summer day before annual bulk retrieval."
+  }
+}

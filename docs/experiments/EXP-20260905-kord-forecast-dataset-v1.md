@@ -89,7 +89,10 @@ Bu veri gate'i geçmeden feature seçimi, hyperparameter tuning veya yeni model 
 - GEFS yıl boyunca resolution-equivalent sayılmayacak; exact veya interior/overlap proxy feature ve `outside_local_seconds` olarak açıkça saklanacak.
 - **GEFS inventory runner (2026-09-05):** Günlük public S3 listing'lerinden 31 member × gerekli 4–5 canonical step için hem data hem index object ve publication timestamp kontrolü yapan runner eklendi.
 - Full inventory sonucu henüz görülmedi; implementasyon ve contract testleri sonuçtan önce commitlenecek.
+- **GEFS inventory result (2026-09-05):** 365/365 listing; 11.222/11.315=%99,178 complete+timely member-day; 52.669/52.669 data/index pair fiziksel olarak mevcut.
+- Üç target gün tüm member'larda late-publication nedeniyle dışlandı; terminal transport failure 0.
+- NBM+GEFS+label expected intersection 357/365=%97,808; overall gate extraction/final join sonuna kadar provisional pass.
 
 ## Sıradaki en küçük adım
 
-GEFS 00Z control+30 member için 365 günlük full-membership ve gerekli canonical TMAX window source envanterini ölç; exact/proxy rejim alanlarını koru ve model skoru hesaplama.
+Bir winter-exact ve bir summer-proxy günde 31-member canonical TMAX index/range extraction bütünlüğünü ve byte maliyetini ölç; annual bulk retrieval kararını bu artifact'tan sonra ver.
