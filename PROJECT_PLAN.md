@@ -1,7 +1,7 @@
 # Polymarket Weather Quant Research — Living Roadmap
 
 **Proje tipi:** Quant araştırma projesi ve küçük sermayeli niche strategy  
-**Plan versiyonu:** 0.96.0
+**Plan versiyonu:** 0.97.0
 **Son güncelleme:** 2026-09-05
 **Mevcut faz:** Forecast-first KORD annual dataset expansion; settlement reconciliation parallel/deferred
 **Genel durum:** `IN_PROGRESS`  
@@ -1558,6 +1558,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Corrective hypothesis:** Resmî `geavg`/`gespr` TMAX ürünlerini 275 empirical member değeriyle karşılaştır; yeterli eşleşirse low-cost summary feature olarak kullan.
 - **Boundary:** Model score/EV/order yok.
 
+### D-0100 — 2026-09-05 — GEFS range download atomic retry güvenliği düzeltildi
+
+- **Durum:** `ACTIVE`
+- **Fix:** Range bytes önce aynı dizinde unique `.part` dosyasına yazılır; tüm message integrity kontrolleri geçince hard-link ile immutable destination publish edilir.
+- **Failure behavior:** Transport/content/commit exception'ında temporary file `finally` ile silinir; retry önünde yarım destination kalmaz.
+- **Contract test:** Forced connection reset sonrası destination yok ve temp directory boş.
+- **Boundary:** Bu fix FAILED pilot sonucunu veya 27.28 GiB cost kararını değiştirmez; full-member annual bulk hâlâ reddedildi.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1578,7 +1586,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS range download'u atomic temp-file yapısıyla düzelt; ardından `geavg`/`gespr` TMAX değerlerini iki pilot günde empirical member mean/spread ile karşılaştıracak corrective deneyi model skorundan önce pre-register et.
+**Tek sonraki adım:** `geavg`/`gespr` TMAX değerlerini iki pilot günde empirical member mean/spread ile karşılaştıracak corrective deneyi model skorundan önce pre-register et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

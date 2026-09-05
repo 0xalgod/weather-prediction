@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import math
+import os
 import re
+import tempfile
 import time
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
@@ -433,28 +435,39 @@ def download_selected_ranges(
     statuses = []
     requested_at = utc_iso()
     started = monotonic()
-    with destination.open("xb") as output:
-        for row in inventory["inventory"]["selected_rows"]:
-            request = Request(
-                inventory["url"],
-                headers={
-                    "User-Agent": "weather-quant-research/0.1",
-                    "Range": f"bytes={row['offset']}-{row['end']}",
-                },
-            )
-            with urlopen(request, timeout=timeout) as response:
-                raw = response.read()
-                statuses.append(response.status)
-            valid = (
-                len(raw) == row["length"]
-                and raw.startswith(b"GRIB")
-                and raw.endswith(b"7777")
-            )
-            if not valid:
-                raise ValueError("GEFS range failed length or GRIB integrity contract")
-            output.write(raw)
-            digest.update(raw)
-            byte_count += len(raw)
+    descriptor, temporary_name = tempfile.mkstemp(
+        dir=destination.parent,
+        prefix=f".{destination.name}.",
+        suffix=".part",
+    )
+    os.close(descriptor)
+    temporary = Path(temporary_name)
+    try:
+        with temporary.open("wb") as output:
+            for row in inventory["inventory"]["selected_rows"]:
+                request = Request(
+                    inventory["url"],
+                    headers={
+                        "User-Agent": "weather-quant-research/0.1",
+                        "Range": f"bytes={row['offset']}-{row['end']}",
+                    },
+                )
+                with urlopen(request, timeout=timeout) as response:
+                    raw = response.read()
+                    statuses.append(response.status)
+                valid = (
+                    len(raw) == row["length"]
+                    and raw.startswith(b"GRIB")
+                    and raw.endswith(b"7777")
+                )
+                if not valid:
+                    raise ValueError("GEFS range failed length or GRIB integrity contract")
+                output.write(raw)
+                digest.update(raw)
+                byte_count += len(raw)
+        os.link(temporary, destination)
+    finally:
+        temporary.unlink(missing_ok=True)
     return {
         "url": inventory["url"],
         "requested_at_utc": requested_at,

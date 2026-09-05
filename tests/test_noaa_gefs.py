@@ -1,3 +1,4 @@
+import tempfile
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -5,6 +6,7 @@ from unittest.mock import patch
 
 from weather_quant.ingestion.noaa_gefs import (
     coordinate_delta_degrees,
+    download_selected_ranges,
     fetch_index_summary,
     kelvin_to_fahrenheit,
     local_day_tmax_steps,
@@ -115,6 +117,24 @@ class NoaaGefsTests(unittest.TestCase):
             0.079124,
             places=4,
         )
+
+    @patch(
+        "weather_quant.ingestion.noaa_gefs.urlopen",
+        side_effect=ConnectionResetError("stream reset"),
+    )
+    def test_range_download_failure_leaves_no_partial_destination(self, _urlopen):
+        inventory = {
+            "url": "https://example.test/gefs.grib2",
+            "inventory": {
+                "selected_rows": [{"offset": 0, "end": 7, "length": 8}]
+            },
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            destination = Path(directory) / "message.grib2"
+            with self.assertRaises(ConnectionResetError):
+                download_selected_ranges(inventory, destination)
+            self.assertFalse(destination.exists())
+            self.assertEqual(list(Path(directory).iterdir()), [])
 
 
 if __name__ == "__main__":
