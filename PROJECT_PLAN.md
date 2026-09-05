@@ -1673,6 +1673,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Strong gate:** Calibrated-minus-raw paired-date bootstrap %95 CI upper <0; exact OOS=178.
 - **Boundary:** Consumed Temmuz–Ağustos ve prospektif final test kapalı; market/EV/orders yok.
 
+### D-0112 — 2026-09-05 — Expanding NBM calibration gate başarısız
+
+- **Durum:** `ACTIVE`
+- **Quality:** 451 candidate, exact 178 OOS; pipeline gate geçti.
+- **Result:** Raw/calibrated log loss 2.0608/2.0893; relative improvement −%1.385; Brier farkı +0.00991.
+- **Uncertainty:** Calibrated-minus-raw %95 CI [−0.0274,+0.0840]; strong/practical gate ikisi de `FAILED`.
+- **Failure mode:** v4.3'te −0.032 log-loss farkı, v5.0'da +0.167; expanding geçmiş düzeltmesi regime upgrade sonrasında zarar verdi.
+- **Decision:** Calibration v1 reddedildi, eşikler değişmedi; raw NBM Gaussian reference baseline olarak korunuyor.
+- **Learning:** Provider version/drift state'i calibration modelinde zorunlu; aynı consumed OOS üzerinde yeni strong-evidence iddiası kurulamaz.
+- **Boundary:** Pozitif EV/trading kanıtı yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1693,7 +1704,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM Gaussian için yalnız geçmiş residual kullanan walk-forward bias/spread calibration deneyini grid ve kabul eşikleriyle sonuçtan önce pre-register et.
+**Tek sonraki adım:** NBM residual driftini zaman/provider-version bazında diagnostik et; regime-aware aday modeli development-only olarak tasarla ve prospektif testten önce dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

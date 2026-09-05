@@ -1,0 +1,23 @@
+{
+  "artifact": "data/processed/kord_nbm_calibration/run=20260905T-v1/result.json",
+  "artifact_sha256": "4fc3239df31e6b4da0f82a02a1f96ef7cb1bff644d5ac591f79b1c7f114e31a3",
+  "decision": "NO_STRONG_CALIBRATION_EVIDENCE",
+  "experiment_id": "EXP-20260905-kord-nbm-calibration-v1",
+  "metrics": {
+    "brier_difference": 0.009907811454790583,
+    "calibrated_log_loss": 2.0892965346467993,
+    "calibrated_minus_raw_ci95": [-0.02740189650141091, 0.08401103144129438],
+    "raw_log_loss": 2.060760717431416,
+    "relative_log_loss_improvement": -0.013847224946596846
+  },
+  "quality": {
+    "candidate_count": 451,
+    "oos_event_count": 178,
+    "passed": true
+  },
+  "regime_diagnostic": {
+    "nbm_4_3_calibrated_minus_raw_log_loss": -0.0319639115459065,
+    "nbm_5_0_calibrated_minus_raw_log_loss": 0.16746112029686255
+  },
+  "strong_evidence_pass": false
+}
