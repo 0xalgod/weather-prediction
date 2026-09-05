@@ -1715,6 +1715,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Interpretation:** Dönem daha önce consumed olduğu için promotion yalnız prospective challenger freeze anlamına gelir; independent final-test değildir.
 - **Boundary:** Market/EV/trading yok.
 
+### D-0116 — 2026-09-06 — EMOS-style ridge promotion gate başarısız
+
+- **Durum:** `ACTIVE`
+- **Quality:** Exact 178 nested walk-forward OOS; implementation/data gate geçti.
+- **Result:** Raw/EMOS log loss 2.0608/2.1090; relative improvement −%2.339; Brier farkı +0.01113.
+- **Uncertainty:** EMOS-minus-raw %95 CI [−0.1069,+0.2092]; promotion `FAILED`.
+- **Temporal stability:** Ocak/Şubat fark −0.222/−0.047; Mart–Haziran +0.231/+0.097/+0.152/+0.063.
+- **Decision:** Ridge v1 reddedildi; ek veri olmadan feature/model complexity artırılmayacak.
+- **Champion:** Raw NBM Gaussian development champion olarak freeze edilecek; gerçek değer artık market executable fiyatına incremental comparison ile sınanacak.
+- **Boundary:** Forecast skill, pozitif net EV değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1735,7 +1746,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Nested walk-forward EMOS-style ridge modelini uygula; raw NBM'e karşı development promotion gate'ini ölç ve geçerse prospective challenger olarak dondur.
+**Tek sonraki adım:** Raw NBM Gaussian champion specification/checksum'ını dondur; Chicago market bucket'larına map edip timestamp-aligned executable Polymarket fiyatlarına karşı paper EV pipeline'ını başlat.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

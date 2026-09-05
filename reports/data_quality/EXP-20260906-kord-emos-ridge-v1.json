@@ -1,0 +1,23 @@
+{
+  "artifact": "data/processed/kord_emos_ridge/run=20260906T-v1/result.json",
+  "artifact_sha256": "7e814ce4af7945c3529b6d9025de69dbae7f2d15d60dc6781b9ca0f9d86c4270",
+  "decision": "REJECT_MODEL_V1",
+  "experiment_id": "EXP-20260906-kord-emos-ridge-v1",
+  "metrics": {
+    "brier_difference": 0.011127137531384057,
+    "emos_log_loss": 2.1089711761606718,
+    "emos_minus_raw_ci95": [-0.10688138060632789, 0.20924738947108587],
+    "raw_log_loss": 2.060760717431416,
+    "relative_log_loss_improvement": -0.023394496178744267
+  },
+  "monthly_emos_minus_raw_log_loss": {
+    "2026-01": -0.2220,
+    "2026-02": -0.0472,
+    "2026-03": 0.2311,
+    "2026-04": 0.0966,
+    "2026-05": 0.1523,
+    "2026-06": 0.0628
+  },
+  "promotion_gate_passed": false,
+  "quality": {"oos_event_count": 178, "passed": true}
+}
