@@ -1664,6 +1664,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Raw NBM Gaussian calibration için reference baseline; quantile tail ve GEFS spread calibration olmadan reddedilir.
 - **Boundary:** Development OOS descriptive; prospective final test, market benchmark ve EV yok.
 
+### D-0111 — 2026-09-05 — NBM Gaussian calibration deneyi ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Hipotez:** Strictly-prior expanding grid calibration, raw NBM Gaussian'a karşı ≥%2 OOS log-loss iyileşmesi sağlar ve Brier'ı kötüleştirmez.
+- **Grid:** Bias −5…+5°F / 0.25°F; spread scale 0.5…3.0 / 0.25; past mean log loss selection.
+- **Protocol:** Aynı frozen development cohort, ilk 120 train ve exact 178 one-step OOS; günlük refit, deterministic tie-break.
+- **Strong gate:** Calibrated-minus-raw paired-date bootstrap %95 CI upper <0; exact OOS=178.
+- **Boundary:** Consumed Temmuz–Ağustos ve prospektif final test kapalı; market/EV/orders yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`

@@ -1,0 +1,55 @@
+{
+  "experiment_id": "EXP-20260905-kord-nbm-calibration-v1",
+  "design_status": "PREREGISTERED_BEFORE_CALIBRATED_MODEL_SCORES",
+  "source": "data/processed/kord_annual_forecast_dataset/run=20260905T-final-join-v1/result.json",
+  "source_file_sha256": "12da62fbfc3414de9346bd06ab8ae69893b3fe6c3ee2e0659b87429f78714963",
+  "source_rows_sha256": "45d2ab2e480a27529fbd52ba8546676bdf3bc794061cad726965a994e1bc75fd",
+  "eligibility": {
+    "development_end_date": "2026-06-30",
+    "consumed_diagnostic_start_date": "2026-07-01",
+    "prospective_final_test_start_date": "2026-09-01"
+  },
+  "walk_forward": {
+    "initial_train_events": 120,
+    "window": "expanding",
+    "refit_frequency_events": 1,
+    "selection_data": "strictly_prior_rows_only"
+  },
+  "outcome_bins_c": {
+    "minimum_integer": -50,
+    "maximum_integer": 50
+  },
+  "reference_model": {
+    "name": "raw_nbm_gaussian",
+    "mean_field": "nbm_mean_f",
+    "standard_deviation_field": "nbm_standard_deviation_f",
+    "standard_deviation_floor_f": 1.0
+  },
+  "calibration_grid": {
+    "temperature_shift_f_minimum": -5.0,
+    "temperature_shift_f_maximum": 5.0,
+    "temperature_shift_f_step": 0.25,
+    "spread_scale_minimum": 0.5,
+    "spread_scale_maximum": 3.0,
+    "spread_scale_step": 0.25,
+    "selection_metric": "past_mean_multiclass_log_loss",
+    "tie_break": "minimum_abs_shift_then_minimum_abs_scale_minus_1_then_numeric"
+  },
+  "metrics": {
+    "probability_floor": 1e-12,
+    "paired_date_bootstrap_repetitions": 10000,
+    "paired_date_bootstrap_seed": 20260905
+  },
+  "acceptance_thresholds": {
+    "exact_oos_event_count": 178,
+    "relative_log_loss_improvement_minimum": 0.02,
+    "brier_difference_maximum": 0.0,
+    "strong_evidence_ci95_upper_below": 0.0
+  },
+  "slices": ["nbm_version", "gefs_exact_partition", "month"],
+  "trading": {
+    "market_comparison": false,
+    "ev": false,
+    "orders": false
+  }
+}
