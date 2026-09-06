@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-20260906-multicity-gefs-extraction-pilot-v1",
+  "design_status": "PREREGISTERED_BEFORE_FORECAST_VALUE_DOWNLOAD",
+  "source_price_horizons": "data/raw/polymarket_price_history_multicity/run=20260906T-v1/event-horizon-coverage.jsonl",
+  "source_station_mapping": "data/processed/multicity_station_mapping/run=20260906T-v2/result.json",
+  "source_gefs_inventory": "data/raw/multicity_gefs_availability/run=20260906T-v1",
+  "hypothesis": "A longitude-stratified 12-event pilot can retrieve and decode every required prior-day 00Z GEFS geavg/gespr local-day-overlap TMAX message with at least 98% message success, finite plausible values, bounded grid distance, and projected 70-event transfer below 2 GiB.",
+  "cohort": {
+    "parent": "18h intersection of usable full market vector, admitted station coordinate, and publication-admissible GEFS inventory",
+    "known_parent_event_count": 70,
+    "known_parent_city_count": 44,
+    "pilot_event_count": 12,
+    "selection": "Sort parent events by longitude, latitude, target_date, event_id; select indices round(i*(N-1)/(12-1)) for i=0..11; deduplicate is forbidden.",
+    "outcome_or_forecast_values_used_for_selection": false
+  },
+  "forecast_contract": {
+    "cycle_utc": 0,
+    "run_date": "target local date minus one calendar day",
+    "products": ["geavg", "gespr"],
+    "parameter": "TMAX",
+    "level": "2 m above ground",
+    "steps": "all canonical six-hour blocks overlapping station-local target day",
+    "range_download": "Only the exact indexed 2m TMAX message byte range",
+    "mean_unit": "convert Kelvin to Fahrenheit",
+    "spread_unit": "convert Kelvin-difference to Fahrenheit-difference by multiplying 9/5"
+  },
+  "acceptance_thresholds": {
+    "exact_selected_event_count": 12,
+    "minimum_selected_city_count": 10,
+    "minimum_message_success_rate": 0.98,
+    "maximum_content_error_count": 0,
+    "maximum_coordinate_delta_degrees": 0.36,
+    "mean_temperature_f_minimum": -100,
+    "mean_temperature_f_maximum": 140,
+    "spread_f_minimum": 0,
+    "spread_f_maximum": 50,
+    "maximum_projected_parent_transfer_bytes": 2147483648,
+    "maximum_temporal_leakage_count": 0
+  },
+  "known_before_preregistration": {
+    "availability_at_18h": "92/92 mapped events",
+    "model_ready_parent_intersection": "70 events across 44 cities",
+    "kord_two-date_compact_extraction": "previously passed",
+    "global_decoded_values_or_transfer_cost": "UNKNOWN"
+  },
+  "boundary": {
+    "pilot_not_training_dataset": true,
+    "gefs_aggregate_not_full_ensemble": true,
+    "overlap_proxy_not_resolution_equivalent": true,
+    "market_outcomes_not_used": true,
+    "ev_or_pnl_claim": false,
+    "orders": false
+  }
+}

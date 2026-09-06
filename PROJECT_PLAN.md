@@ -1904,6 +1904,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Primary model-vs-market horizon 18h; 6/12/24h secondary. GEFS overlap proxy ve contamination feature birlikte tutulacak.
 - **Boundary:** Henüz forecast value indirilmedi; availability accuracy/edge/EV kanıtı değil.
 
+### D-0135 — 2026-09-06 — Multi-city GEFS extraction pilot ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Parent:** 18h usable market vector ∩ admitted station ∩ admissible GEFS = known 70 event/44 city.
+- **Pilot:** Longitude/latitude/date/event sıralamasında eşit aralıklı 12 event; outcome/price/forecast değeri selection dışı; ≥10 city.
+- **Extraction:** Prior-day 00Z `geavg`+`gespr`, local-day overlap tüm 6h TMAX block, yalnız indexed byte range, nearest grid decode.
+- **Gates:** Message success ≥%98, content/leakage 0, coordinate delta ≤0.36°, physical value ranges, projected 70-event transfer <2 GiB.
+- **Known evidence:** KORD compact extraction geçti; global değerler ve transfer maliyeti bilinmiyor.
+- **Boundary:** Pilot training set değil; aggregate/full ensemble ve overlap/resolution eşdeğer değil; outcome/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1924,7 +1934,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 18h'de hem usable market vector hem admitted station+GEFS bulunan kesişimi dondur; aggregate TMAX range-byte maliyet pilotunu ve model-ready outcome/price/forecast join gate'ini ön kayıtla.
+**Tek sonraki adım:** Ön kayıtlı 12-event global GEFS compact extraction/decode pilotunu çalıştır; başarı ve projected 70-event maliyetine göre full model-ready ingestion kararı ver.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
