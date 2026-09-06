@@ -12,9 +12,9 @@
   "hypothesis": "En az 40 şehirde, şehir başına en az 30 exactly-one-winner ve identity-complete resolved event indicative multi-city araştırmasına kabul edilebilir.",
   "normalization": {
     "city": "title prefix Highest temperature in ... on ...",
-    "target_date": "eventDate ISO date",
+    "target_date": "eventDate ISO date; if absent, endDate UTC calendar date with END_DATE_UTC_FALLBACK provenance",
     "source_domain": "event resolutionSource URL hostname",
-    "temperature_unit": "description whole/decimal degrees Fahrenheit or Celsius",
+    "temperature_unit": "unanimous degree suffix across bucket labels; description only as fallback",
     "terminal_winner": "exactly one resolved market with YES outcomePrice equal to 1",
     "bucket_identity": "market id, condition id and exactly two clob token ids"
   },

@@ -23,7 +23,18 @@ def city_from_title(title: str) -> str | None:
     return match.group(1) if match else None
 
 
-def temperature_unit(description: str) -> str | None:
+def temperature_unit(description: str, markets: list[dict] | None = None) -> str | None:
+    bucket_units = set()
+    for market in markets or []:
+        label = str(market.get("groupItemTitle") or "").upper()
+        if "°F" in label:
+            bucket_units.add("F")
+        if "°C" in label:
+            bucket_units.add("C")
+    if len(bucket_units) == 1:
+        return next(iter(bucket_units))
+    if len(bucket_units) > 1:
+        return None
     text = description.lower()
     fahrenheit = "degrees fahrenheit" in text or "°f" in text
     celsius = "degrees celsius" in text or "°c" in text
@@ -39,14 +50,24 @@ def normalize_event(event: dict, source_checksum: str) -> tuple[dict | None, lis
     if not city:
         reasons.append("UNPARSEABLE_CITY_TITLE")
     target_date = str(event.get("eventDate") or "")
+    target_date_source = "EVENT_DATE"
     try:
         date.fromisoformat(target_date)
     except ValueError:
-        reasons.append("MISSING_OR_INVALID_EVENT_DATE")
+        end_date = str(event.get("endDate") or "")[:10]
+        try:
+            date.fromisoformat(end_date)
+            target_date = end_date
+            target_date_source = "END_DATE_UTC_FALLBACK"
+        except ValueError:
+            reasons.append("MISSING_OR_INVALID_EVENT_DATE")
     source = str(event.get("resolutionSource") or "").strip()
     if not source:
         reasons.append("MISSING_RESOLUTION_SOURCE")
-    unit = temperature_unit(str(event.get("description") or ""))
+    markets = event.get("markets")
+    unit = temperature_unit(
+        str(event.get("description") or ""), markets if isinstance(markets, list) else None
+    )
     if not unit:
         reasons.append("MISSING_OR_AMBIGUOUS_UNIT")
     if event.get("closed") is not True:
@@ -54,7 +75,6 @@ def normalize_event(event: dict, source_checksum: str) -> tuple[dict | None, lis
 
     buckets = []
     winners = []
-    markets = event.get("markets")
     if not isinstance(markets, list) or not markets:
         reasons.append("MISSING_MARKETS")
         markets = []
@@ -97,6 +117,7 @@ def normalize_event(event: dict, source_checksum: str) -> tuple[dict | None, lis
         "event_id": event_id,
         "city": city,
         "target_date": target_date,
+        "target_date_source": target_date_source,
         "end_date_utc": event.get("endDate"),
         "closed_time_utc": event.get("closedTime"),
         "resolution_source": source,

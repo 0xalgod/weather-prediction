@@ -1802,6 +1802,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Output:** Immutable normalized event registry + per-city/source/unit/exclusion coverage; price/forecast join sonraki ayrı gate.
 - **Boundary:** Bu envanter EV/backtest sonucu değildir; orders false.
 
+### D-0125 — 2026-09-06 — Multi-city parser attempt 1 post-hoc düzeltmesi
+
+- **Durum:** `ACTIVE`
+- **Attempt 1:** 262/8,222 eligible; unit ambiguity 7,321 ve missing eventDate 450 nedeniyle gate fail.
+- **Root cause:** Rule text toggle talimatında hem °F hem °C geçiyor; gerçek bucket label'ları tek ve açık unit taşıyor.
+- **Correction (post-hoc):** Unanimous bucket-label unit primary; description fallback. Missing eventDate için endDate UTC calendar date explicit provenance fallback.
+- **Unchanged:** Source/winner/identity şartları ve tüm numeric gate eşikleri değişmedi.
+- **Retry:** Yeni immutable v2 output; attempt 1 overwrite edilmeyecek.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
