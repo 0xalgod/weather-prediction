@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import random
+from collections import defaultdict
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -83,4 +84,44 @@ def paired_bootstrap_mean_difference(
         "mean_difference": math.fsum(differences) / len(differences),
         "ci95_lower": percentile(0.025),
         "ci95_upper": percentile(0.975),
+    }
+
+
+def paired_cluster_bootstrap_mean_difference(
+    left: Sequence[float],
+    right: Sequence[float],
+    clusters: Sequence[str],
+    repetitions: int,
+    seed: int,
+) -> dict[str, float]:
+    """Bootstrap paired differences by resampling whole dependence clusters."""
+
+    if len(left) != len(right) or len(left) != len(clusters) or not left or repetitions < 1:
+        raise ValueError("paired cluster bootstrap inputs are invalid")
+    grouped: dict[str, list[float]] = defaultdict(list)
+    for left_value, right_value, cluster in zip(left, right, clusters):
+        grouped[str(cluster)].append(float(left_value) - float(right_value))
+    cluster_ids = sorted(grouped)
+    generator = random.Random(seed)
+    samples = []
+    for _ in range(repetitions):
+        selected = [cluster_ids[generator.randrange(len(cluster_ids))] for _ in cluster_ids]
+        differences = [value for cluster in selected for value in grouped[cluster]]
+        samples.append(math.fsum(differences) / len(differences))
+    samples.sort()
+
+    def percentile(probability: float) -> float:
+        position = probability * (len(samples) - 1)
+        lower = math.floor(position)
+        upper = math.ceil(position)
+        if lower == upper:
+            return samples[lower]
+        return samples[lower] + (samples[upper] - samples[lower]) * (position - lower)
+
+    observed = [float(a) - float(b) for a, b in zip(left, right)]
+    return {
+        "mean_difference": math.fsum(observed) / len(observed),
+        "ci95_lower": percentile(0.025),
+        "ci95_upper": percentile(0.975),
+        "cluster_count": float(len(cluster_ids)),
     }
