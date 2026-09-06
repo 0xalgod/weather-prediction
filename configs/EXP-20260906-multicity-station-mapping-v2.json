@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-20260906-multicity-station-mapping-v2",
+  "design_status": "POSTHOC_CORRECTIVE_PREREGISTERED_BEFORE_ISD_JOIN",
+  "supersedes": "EXP-20260906-multicity-station-mapping-v1",
+  "source_selected_events": "data/raw/polymarket_price_history_multicity/run=20260906T-v1/selected-events.json",
+  "station_catalog": "data/external/noaa_station_metadata/run=20260830T-station-verification-v1/isd-history.csv",
+  "known_identity_evidence": "reports/data_quality/EXP-20260830-phase2-station-timezone-evidence.json",
+  "hypothesis": "Ayni 96 eventin en az %85'i ve en az 40 city, URL ICAO kodu ile official NOAA ISD catalogdaki finite coordinate'e eslenebilir; known identity mismatch admission sifir kalir.",
+  "catalog_join": {
+    "key": "exact uppercase ICAO",
+    "multiple_record_selection": "maximum END then maximum BEGIN, deterministic",
+    "coordinate_validation": "finite LAT in [-90,90] and LON in [-180,180]",
+    "activity_rule": "BEGIN <= target date and target date minus END <= 550 days",
+    "activity_semantic": "RECENT_ACTIVITY_PROXY because the frozen catalog itself ends in 2025; not proof of target-date observation availability",
+    "known_identity_mismatch": "Exclude any ICAO marked mismatch in prior independent evidence"
+  },
+  "acceptance_thresholds": {
+    "exact_selected_event_count": 96,
+    "maximum_duplicate_event_count": 0,
+    "minimum_station_code_parse_rate": 0.95,
+    "minimum_metadata_coordinate_rate": 0.85,
+    "minimum_mapped_city_count": 40,
+    "maximum_admitted_known_identity_mismatch_count": 0
+  },
+  "known_before_preregistration": {
+    "v1_station_parse_rate": 1.0,
+    "v1_coordinate_rate": 0.22916666666666666,
+    "v1_mapped_city_count": 11,
+    "isd_catalog_size_bytes_approximately": 2800000,
+    "isd_full_sample_join_coverage": "UNKNOWN"
+  },
+  "boundary": {
+    "corrective_design": true,
+    "forecast_values_retrieved": false,
+    "recent_activity_is_not_target_date_availability": true,
+    "ev_or_pnl_claim": false,
+    "orders": false
+  }
+}

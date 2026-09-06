@@ -1863,6 +1863,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** v1 `FAILED`; eşikler değiştirilmedi. Mevcut official NOAA ISD global catalog ile corrective v2 ön kayıtlanacak.
 - **Boundary:** Forecast/model/EV yok; eksik coordinate için city centroid kullanılmadı.
 
+### D-0131 — 2026-09-06 — Station mapping corrective v2 ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Correction:** Aynı sample/eşik/parser; 12-station snapshot yerine frozen official NOAA ISD global history catalog.
+- **Join:** Exact uppercase ICAO; multiple rows için latest END/BEGIN; finite physical coordinates; centroid/fuzzy fallback yok.
+- **Activity:** BEGIN≤target ve END staleness≤550 gün, açık `RECENT_ACTIVITY_PROXY`; 2026 observation availability iddiası değil.
+- **Safety:** Önceki independent evidence'ta identity mismatch olan ICAO admission dışı; izin verilen mismatch 0.
+- **Known result:** v1 %100 parse fakat %22.92 coordinate/11 city; v2 full join coverage henüz bilinmiyor.
+- **Boundary:** Forecast/model/EV yok; orders false.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1883,7 +1893,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Aynı 96 event ve değişmeyen coverage eşikleriyle official NOAA ISD global station catalog corrective v2'yi ön kayıtla; station active-date ve identity contradiction kontrollerini ekle.
+**Tek sonraki adım:** Corrective v2 exact ICAO→ISD join'ini çalıştır; coverage geçerse admitted station regimes üzerinde GEFS as-issued availability pilotunu ön kayıtla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
