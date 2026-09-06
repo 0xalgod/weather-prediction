@@ -2,6 +2,7 @@
   "experiment_id": "EXP-20260906-multicity-gefs-availability-v1",
   "design_status": "PREREGISTERED_BEFORE_92_EVENT_GEFS_INVENTORY",
   "source_station_mapping": "data/processed/multicity_station_mapping/run=20260906T-v2/result.json",
+  "source_selected_events": "data/raw/polymarket_price_history_multicity/run=20260906T-v1/selected-events.json",
   "timezone_boundaries": "data/external/timezone-boundary-builder/version=2026c/timezones-1970.geojson.zip",
   "timezone_aliases": "data/external/timezone-boundary-builder/version=2026c/timezone-names-1970.json",
   "hypothesis": "At least 90% of admitted station-events and at least 40 cities have all prior-day 00Z GEFS geavg/gespr canonical local-day TMAX data/index objects published by the 18-hour pre-end cutoff.",

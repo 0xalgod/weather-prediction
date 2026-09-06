@@ -4,6 +4,8 @@
 
 `PREREGISTERED` — no 92-event GEFS inventory has been retrieved.
 
+Implementation provenance amendment before retrieval: the frozen selected-event manifest is an explicit input for `endDate`; no cohort rule, metric, threshold, or forecast value changed.
+
 ## Question
 
 For the 46-city station-mapped cohort, are prior-day 00Z NOAA GEFS aggregate mean and spread TMAX objects present and published early enough to construct time-correct forecast features at the market horizons?

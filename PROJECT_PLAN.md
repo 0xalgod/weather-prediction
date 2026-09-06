@@ -1892,6 +1892,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Primary gate:** 18h complete+admissible event ≥%90, city ≥40; timezone failure 0, listing error ≤%2, duplicate 0.
 - **Known evidence:** KORD representative archive continuity geçmişte geçti; multi-city step/publication coverage bilinmiyor.
 - **Boundary:** Inventory-only; değer/accuracy/model/EV yok; aggregate products full ensemble değil; orders false.
+- **Pre-data amendment:** Horizon cutoff için gereken `endDate`, frozen 96-event selected manifestten explicit dependency olarak eklendi; sample/eşik/metrik değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
