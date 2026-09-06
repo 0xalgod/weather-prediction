@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-20260907-multicity-fixed-benchmark-v1",
+  "decision": "FIXED_BLEND_REJECT",
+  "generated_at_utc": "2026-09-06T22:51:23.418746Z",
+  "quality": {
+    "event_count": 70,
+    "development_event_count": 34,
+    "validation_event_count": 16,
+    "test_event_count": 20,
+    "test_target_date_cluster_count": 8,
+    "invalid_probability_vector_count": 0
+  },
+  "test_log_loss": {
+    "uniform": 2.3978952727983707,
+    "normalized_market": 1.2566901540328301,
+    "raw_gefs_gaussian": 6.240047812805498,
+    "fixed_market_gefs_blend": 1.7167707927800873
+  },
+  "test_brier": {
+    "uniform": 0.909090909090909,
+    "normalized_market": 0.6643006027690379,
+    "raw_gefs_gaussian": 1.2319889948008393,
+    "fixed_market_gefs_blend": 0.8464247559580604
+  },
+  "test_blend_vs_market": {
+    "relative_log_loss_improvement": -0.3661050715411572,
+    "brier_difference": 0.18212415318902253,
+    "paired_cluster_log_loss_difference": 0.460080638747257,
+    "ci95_lower": 0.33206646648728433,
+    "ci95_upper": 0.6149236575126871
+  },
+  "all_period_slice_log_loss": {
+    "celsius": {"market": 1.327, "gefs": 5.079, "blend": 1.648, "events": 54},
+    "fahrenheit": {"market": 0.988, "gefs": 2.105, "blend": 1.248, "events": 16},
+    "exact_partition": {"market": 0.476, "gefs": 3.746, "blend": 0.857, "events": 5},
+    "overlap_proxy": {"market": 1.309, "gefs": 4.45, "blend": 1.61, "events": 65}
+  },
+  "interpretation": "The fixed GEFS signal is materially worse than the indicative market and contaminates a 50/50 blend. The untouched test is now consumed. No tuning on this test is permitted."
+}

@@ -1975,6 +1975,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Metrics:** Log loss floor 1e-6; Brier/RPS; 10,000 date-cluster bootstrap, seed 20260907.
 - **Boundary:** Pass yalnız research signal; small clustered sample ve indicative/non-executable price; live authorization yok.
 
+### D-0142 — 2026-09-07 — Fixed GEFS-market blend reddedildi
+
+- **Durum:** `ACTIVE`
+- **Test scores:** Market/GEFS/blend/uniform log loss 1.2567/6.2400/1.7168/2.3979; Brier 0.6643/1.2320/0.8464/0.9091.
+- **Incremental result:** Blend markete göre log loss'u %36.61 kötüleştirdi; Brier farkı +0.1821.
+- **Uncertainty:** Date-cluster paired blend−market log loss +0.4601, CI95 [+0.3321,+0.6149], 8 test date cluster.
+- **Slices:** GEFS hem °C/°F hem exact/proxy segmentlerinde marketten kötü; tek bir contamination açıklaması yeterli değil.
+- **Decision:** `FIXED_BLEND_REJECT`; normalized 18h market mevcut benchmark champion. Raw GEFS Gaussian ve 50/50 blend promote edilmez.
+- **Test policy:** Jul20+ test consumed; weight/spread tuning veya model selection için yeniden kullanılamaz.
+- **Boundary:** Historical market indicative, execution/EV yok; sonuç live trading yetkisi vermez.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1995,7 +2006,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı fixed benchmark'ı bir kez çalıştır; split/model/slice skorlarını ve clustered uncertainty'yi raporla, test sonucuna göre planı değiştir.
+**Tek sonraki adım:** GEFS mean error ve spread miscalibration'ını yalnız development+validation üzerinde tanıla; testte tuning yapma. Sonuca göre nested chronological calibration challenger veya GEFS feature'ını bırakma kararı ver.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

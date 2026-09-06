@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no benchmark probability or score has been calculated.
+`FAILED` — the fixed blend promotion gate was evaluated once and rejected on 2026-09-07.
 
 ## Question
 
@@ -34,3 +34,24 @@ The fixed blend produces a research promotion signal only if the untouched test 
 ## Boundary
 
 The sample is small, city coverage is sparse, market prices are non-executable historical indications, and no order-book fill is reconstructed. Even a pass would authorize further prospective research, not live trading.
+
+## Result
+
+All split counts and probability-vector checks passed. Untouched-test log loss was:
+
+| Model | Test log loss | Test Brier |
+|---|---:|---:|
+| Uniform | 2.3979 | 0.9091 |
+| Normalized market | 1.2567 | 0.6643 |
+| Raw GEFS Gaussian | 6.2400 | 1.2320 |
+| Fixed 50/50 blend | 1.7168 | 0.8464 |
+
+The blend's relative log-loss improvement versus market was −36.61%; it made the score worse. Paired target-date cluster-bootstrap blend-minus-market log loss was `+0.4601`, with 95% CI `[+0.3321, +0.6149]`. Brier worsened by `+0.1821`. Every promotion criterion related to incremental skill failed.
+
+The preregistered slices tell the same directional story. Market/GEFS log loss was 1.327/5.079 for Celsius events, 0.988/2.105 for Fahrenheit events, 0.476/3.746 for exact partitions, and 1.309/4.450 for overlap proxies. The poor GEFS result is therefore not explained solely by Celsius conversion or overlap contamination, though these estimates remain small-sample diagnostics.
+
+## Decision
+
+Reject the raw GEFS Gaussian and fixed blend. Keep normalized market as the current 18-hour probabilistic benchmark. The test period is consumed and must not be reused to select a blend weight or spread adjustment.
+
+The next admissible modeling work is a preregistered development-only calibration diagnostic followed by nested chronological evaluation or genuinely future data. It cannot retroactively promote a model on this consumed test.
