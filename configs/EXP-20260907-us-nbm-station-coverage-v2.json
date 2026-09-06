@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-station-coverage-v2",
+  "design_status": "PREREGISTERED_BEFORE_COMPLETE_DUPLICATE_BLOCK_COMPARISON",
+  "source_experiment": "EXP-20260907-us-nbm-station-coverage-v1",
+  "source_raw_run": "data/raw/us_nbm_station_coverage/run=20260907T-v1",
+  "hypothesis": "The two KDEN blocks in the frozen 2026-05-14 07Z NBM object are complete byte-identical duplicates; deterministic exact-duplicate canonicalization therefore recovers all 36 station-date rows without changing any forecast value or acceptance threshold.",
+  "probe": {
+    "target_dates": ["2026-01-15", "2026-05-15", "2026-08-15"],
+    "cycle_utc": 7,
+    "forecast_hour": 41,
+    "stations": ["KATL", "KAUS", "KBKF", "KDEN", "KORD", "KDAL", "KHOU", "KLAX", "KMIA", "KLGA", "KSFO", "KSEA"],
+    "required_fields": ["mean_f", "standard_deviation_f", "p10_f", "p25_f", "p50_f", "p75_f", "p90_f"]
+  },
+  "canonicalization_rule": {
+    "block_boundary": "matching station header through the byte before the next generic NBM station header, or EOF",
+    "single_occurrence": "accept unchanged",
+    "multiple_occurrences": "accept the first block only when every complete block has identical bytes and identical SHA-256",
+    "conflicting_occurrences": "hard failure",
+    "missing_occurrence": "hard failure"
+  },
+  "acceptance_thresholds": {
+    "exact_station_regime_count": 12,
+    "exact_probe_date_count": 3,
+    "minimum_station_date_block_coverage": 1.0,
+    "minimum_required_field_coverage": 1.0,
+    "maximum_conflicting_duplicate_count": 0,
+    "maximum_temporal_leakage_count": 0
+  },
+  "evaluation": {
+    "reuse_frozen_raw_objects_without_redownload": true,
+    "expected_station_date_count": 36,
+    "record_occurrence_count_offsets_lengths_and_sha256": true
+  },
+  "boundary": {
+    "station_content_corrective_probe_not_full_dataset": true,
+    "nbm_daytime_maxt_semantics_require_separate_timezone_review": true,
+    "no_model_score_ev_or_pnl_claim": true,
+    "orders": false
+  }
+}

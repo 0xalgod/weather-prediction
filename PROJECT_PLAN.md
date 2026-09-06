@@ -2028,6 +2028,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** v1 `FAILED`; threshold değişmedi. Corrective v2 yalnız complete byte-identical duplicate dedup'a izin verebilir, conflicting duplicate fail.
 - **Boundary:** Forecast score/market/EV yok.
 
+### D-0147 — 2026-09-07 — US NBM exact-duplicate corrective v2 ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hipotez:** Frozen May14 07Z objesindeki iki KDEN complete block byte-identical; deterministic canonicalization 36/36 coverage sağlar.
+- **Data:** v1'in üç immutable full object'i aynen kullanılacak; redownload yok.
+- **Rule:** Her block next generic station header/EOF sınırıyla çıkarılır; offset/length/SHA-256 kaydedilir. Multiple block yalnız tüm bytes ve hash'ler aynıysa first-copy canonical; conflict hard fail.
+- **Gates:** 12 station, 3 date, 36/36 block ve field coverage; temporal leakage=0; conflicting duplicate=0.
+- **Decision use:** Pass olursa timezone/MaxT semantics review; fail olursa KDEN/date kapsamı veriyle yeniden değerlendirilir.
+- **Boundary:** Model/accuracy/EV/P&L ve emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2048,7 +2058,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** KDEN duplicate full-block equality corrective v2'yi ön kayıtla; aynı frozen raw objelerde 36/36 strict content gate'ini tekrar değerlendir.
+**Tek sonraki adım:** Ön kayıtlı KDEN exact-duplicate corrective v2'yi frozen raw objelerde çalıştır ve 36/36 strict content gate'ini değerlendir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
