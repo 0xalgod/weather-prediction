@@ -4,6 +4,7 @@ from pathlib import Path
 
 from scripts.probe_us_nbm_station_coverage import target_date
 from weather_quant.ingestion.noaa_nbm import (
+    extract_canonical_station_block,
     extract_station_block,
     inspect_probabilistic_text,
     parse_station_maxt,
@@ -75,6 +76,25 @@ class NoaaNbmTests(unittest.TestCase):
         self.assertTrue(block.startswith(b" KORD"))
         self.assertIn(b"TXNP9", block)
         self.assertNotIn(b"KORE", block)
+
+    def test_canonicalizes_only_complete_identical_duplicate_blocks(self):
+        block = b" KDEN    NBM V5.0 NBP GUIDANCE    5/14/2026  0700 UTC\n FHR    41\n"
+        payload = block + block + b" KORD    NBM V5.0 NBP GUIDANCE\n"
+        canonical, diagnostic = extract_canonical_station_block(payload, "KDEN")
+        self.assertEqual(canonical, block)
+        self.assertEqual(diagnostic["occurrence_count"], 2)
+        self.assertTrue(diagnostic["identical_duplicate"])
+        self.assertEqual(diagnostic["blocks"][0]["sha256"], diagnostic["blocks"][1]["sha256"])
+
+    def test_rejects_conflicting_duplicate_blocks(self):
+        payload = b""" KDEN    NBM V5.0 NBP GUIDANCE
+ FHR    41
+ KDEN    NBM V5.0 NBP GUIDANCE
+ FHR    42
+ KORD    NBM V5.0 NBP GUIDANCE
+"""
+        with self.assertRaisesRegex(ValueError, "conflicting duplicate"):
+            extract_canonical_station_block(payload, "KDEN")
 
     def test_station_block_extraction_fails_when_next_header_is_not_in_range(self):
         payload = b" KORD    NBM V5.0 NBP GUIDANCE    8/30/2026  0700 UTC\n"

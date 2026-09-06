@@ -72,6 +72,55 @@ def extract_station_block(content: bytes, station_code: str) -> bytes:
     return block.encode("ascii")
 
 
+def extract_canonical_station_block(
+    content: bytes, station_code: str
+) -> tuple[bytes, dict[str, Any]]:
+    """Extract a station block, admitting only byte-identical duplicate blocks."""
+
+    text = content.decode("ascii", errors="strict")
+    generic_headers = list(re.finditer(r"(?m)^ [A-Z0-9]{4}\s+NBM V", text))
+    station_headers = list(
+        re.finditer(
+            rf"(?m)^ {re.escape(station_code)}\s+NBM V[0-9.]+ NBP GUIDANCE.*$",
+            text,
+        )
+    )
+    if not station_headers:
+        raise ValueError(f"expected at least one {station_code} NBP block, found 0")
+
+    blocks = []
+    metadata = []
+    for match in station_headers:
+        following = next(
+            (header for header in generic_headers if header.start() > match.start()), None
+        )
+        end = following.start() if following else len(text)
+        block = text[match.start() : end].encode("ascii")
+        digest = hashlib.sha256(block).hexdigest()
+        blocks.append(block)
+        metadata.append(
+            {
+                "offset": match.start(),
+                "byte_length": len(block),
+                "sha256": digest,
+            }
+        )
+
+    identical = all(block == blocks[0] for block in blocks[1:])
+    if len(blocks) > 1 and not identical:
+        raise ValueError(
+            f"conflicting duplicate {station_code} NBP blocks: "
+            f"{[row['sha256'] for row in metadata]}"
+        )
+    return blocks[0], {
+        "station_code": station_code,
+        "occurrence_count": len(blocks),
+        "identical_duplicate": len(blocks) > 1 and identical,
+        "blocks": metadata,
+        "canonical_sha256": metadata[0]["sha256"],
+    }
+
+
 def download_station_range(
     url: str,
     station_code: str,
