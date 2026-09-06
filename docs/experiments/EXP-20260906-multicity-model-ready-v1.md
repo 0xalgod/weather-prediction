@@ -4,6 +4,8 @@
 
 `PREREGISTERED` — event-level feature/outcome join has not been run.
 
+Pre-join provenance amendment: the frozen GEFS horizon artifact is an explicit source for `exact_partition`, `outside_local_seconds`, expected message count, and cutoff. No cohort, feature formula, gate, or observed value changed.
+
 ## Cohort
 
 The cohort is frozen upstream: 70 events across 44 cities at the 18-hour horizon, each with a complete and sufficiently fresh indicative Polymarket vector, an admitted station coordinate, and complete publication-admissible GEFS messages.

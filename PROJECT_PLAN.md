@@ -1954,6 +1954,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **GEFS:** Overlap-block max mean, aynı peak-step spread (tie→lowest step), max block spread; exact/outside-local metadata.
 - **Gates:** Exact 70/44, duplicate/missing/nonfinite/leakage/winner/message mismatch 0, normalization error≤1e-9.
 - **Boundary:** Fit bu gate'ten sonra; indicative market fill değil, overlap proxy resolution-equivalent değil; EV yok.
+- **Pre-data amendment:** Exact/overlap, outside-local, expected message ve cutoff için frozen GEFS horizon artifact explicit dependency eklendi; cohort/formül/eşik değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

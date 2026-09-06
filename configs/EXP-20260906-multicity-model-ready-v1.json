@@ -5,6 +5,7 @@
   "source_price_horizons": "data/raw/polymarket_price_history_multicity/run=20260906T-v1/event-horizon-coverage.jsonl",
   "source_station_mapping": "data/processed/multicity_station_mapping/run=20260906T-v2/result.json",
   "source_gefs_messages": "data/raw/multicity_gefs_extraction/run=20260906T-full-v1/messages.jsonl",
+  "source_gefs_horizons": "data/raw/multicity_gefs_availability/run=20260906T-v1/event-horizons.jsonl",
   "hypothesis": "The frozen 70-event intersection can be joined one-to-one into a complete time-correct model-ready table containing terminal winner, raw and normalized 18h market probabilities, GEFS daily aggregate features, bucket thresholds, and contamination metadata with zero leakage, duplicates, nonfinite values, or identity mismatch.",
   "join_contract": {
     "primary_key": "event_id",
