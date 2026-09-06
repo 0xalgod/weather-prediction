@@ -1,0 +1,41 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-station-coverage-v1",
+  "design_status": "PREREGISTERED_BEFORE_MULTISTATION_NBM_CONTENT_PROBE",
+  "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "source_nbm_inventory": "data/raw/noaa_nbm/run=20260905T-kord-annual-nbm07z-inventory-v1/result.json",
+  "hypothesis": "All 12 station regimes across the 1,918-event/11-city US cohort appear in NBM 07Z probabilistic text with complete MaxT mean, standard deviation, and P10/P25/P50/P75/P90 fields on three seasonally separated publication-admissible target dates.",
+  "us_cohort": {
+    "event_count": 1918,
+    "city_count": 11,
+    "station_regime_count": 12,
+    "stations": ["KATL", "KAUS", "KBKF", "KDEN", "KORD", "KDAL", "KHOU", "KLAX", "KMIA", "KLGA", "KSFO", "KSEA"],
+    "city_station_note": "Denver has KBKF and KDEN regimes; every other city has one station."
+  },
+  "probe": {
+    "target_dates": ["2026-01-15", "2026-05-15", "2026-08-15"],
+    "cycle_utc": 7,
+    "forecast_hour": 41,
+    "required_fields": ["mean_f", "standard_deviation_f", "p10_f", "p25_f", "p50_f", "p75_f", "p90_f"],
+    "selection_used_outcomes_prices_or_forecast_values": false
+  },
+  "acceptance_thresholds": {
+    "exact_station_regime_count": 12,
+    "exact_probe_date_count": 3,
+    "minimum_station_date_block_coverage": 1.0,
+    "minimum_required_field_coverage": 1.0,
+    "maximum_duplicate_station_date_count": 0,
+    "maximum_temporal_leakage_count": 0
+  },
+  "known_before_preregistration": {
+    "us_event_count": 1918,
+    "kord_annual_07z_object_availability": "365/365; 362 publication-admissible",
+    "kord_compact_station_validation": "passed",
+    "other_11_station_content_coverage": "UNKNOWN"
+  },
+  "boundary": {
+    "station_content_probe_not_full_dataset": true,
+    "nbm_daytime_maxt_semantics_require_separate_timezone_review": true,
+    "no_model_score_ev_or_pnl_claim": true,
+    "orders": false
+  }
+}

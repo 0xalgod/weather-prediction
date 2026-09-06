@@ -2007,6 +2007,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Pivot:** Global breadth yerine probabilistic station-level forecast kalitesine dön; NBM-supported US weather cohort'unu full inventory'den ölç.
 - **Boundary:** Test ≥Jul20 bu deneyde skorlanmadı; market benchmark indicative, live/EV yok.
 
+### D-0145 — 2026-09-07 — NBM-supported US cohort pivot ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Inventory:** Full normalized evrende 1,918 event/11 US city/12 station regime; Denver KBKF→KDEN, diğer şehirler tek regime.
+- **Stations:** KATL, KAUS, KBKF, KDEN, KORD, KDAL, KHOU, KLAX, KMIA, KLGA, KSFO, KSEA.
+- **Probe:** Jan15/May15/Aug15 target için prior-day 07Z NBM, exact f41 MaxT mean/sd/P10/P25/P50/P75/P90.
+- **Gates:** 36/36 station-date block ve required fields %100; duplicate/leakage 0.
+- **Known evidence:** KORD annual object 365/365 ve compact validation geçti; diğer 11 station content bilinmiyor.
+- **Decision use:** Pass olursa ≥200 event US market-price/NBM pilotu; fail olursa station/product kapsamına göre daralt.
+- **Boundary:** NBM MaxT timezone/resolution semantics ayrıca doğrulanacak; model/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2027,7 +2038,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Full 7,512-event inventory içinde NBM-supported US city/station regime cohort'unu ölç ve ≥200 eventlik point-in-time probabilistic NBM + market dataset fizibilitesini ön kayıtla; mevcut aggregate GEFS'te daha fazla tuning yapma.
+**Tek sonraki adım:** Ön kayıtlı 12-station × 3-date NBM content probe'u çalıştır; strict coverage geçerse US timezone/MaxT semantics ve ≥200-event price-history pilotuna ilerle.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
