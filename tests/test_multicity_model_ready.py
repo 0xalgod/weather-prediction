@@ -1,3 +1,4 @@
+from scripts.run_multicity_gefs_calibration import signed_interval_distance
 from weather_quant.features.multicity_model_ready import (
     aggregate_gefs_messages,
     ordered_bucket_thresholds,
@@ -28,3 +29,10 @@ def test_gefs_peak_tie_uses_lowest_step() -> None:
     assert result["gefs_overlap_peak_step"] == 6
     assert result["gefs_overlap_spread_at_mean_max_f"] == 2
     assert result["gefs_max_block_spread_f"] == 3
+
+
+def test_signed_interval_distance_is_zero_inside_and_signed_outside() -> None:
+    bucket = {"lower_threshold_f": 50.0, "upper_threshold_f": 55.0}
+    assert signed_interval_distance(52.0, bucket) == 0.0
+    assert signed_interval_distance(48.0, bucket) == -2.0
+    assert signed_interval_distance(58.0, bucket) == 3.0
