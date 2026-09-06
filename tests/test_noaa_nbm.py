@@ -2,6 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from scripts.probe_us_nbm_station_coverage import target_date
 from weather_quant.ingestion.noaa_nbm import (
     extract_station_block,
     inspect_probabilistic_text,
@@ -12,6 +13,9 @@ from weather_quant.ingestion.noaa_nbm import (
 
 
 class NoaaNbmTests(unittest.TestCase):
+    def test_probe_target_date_is_day_after_run(self):
+        self.assertEqual(target_date("20260114"), "2026-01-15")
+
     def test_probabilistic_text_url_is_run_specific(self):
         self.assertEqual(
             probabilistic_text_url("20260830", 0),
