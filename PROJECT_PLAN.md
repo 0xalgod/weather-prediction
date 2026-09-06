@@ -1945,6 +1945,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Full forecast input layer `PASSED`; event-level outcome/market join açılabilir.
 - **Boundary:** Henüz model fit veya edge/EV yok.
 
+### D-0139 — 2026-09-06 — Multi-city model-ready join ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Cohort:** Upstream frozen 18h intersection, exact 70 event/44 city; event_id one-to-one join.
+- **Market/outcome:** Exactly-one terminal winner; raw YES vector/sum korunur, positive full vector normalize edilir.
+- **Buckets:** Native integer bounds; ±0.5 native continuity correction sonra °F threshold; open tails korunur.
+- **GEFS:** Overlap-block max mean, aynı peak-step spread (tie→lowest step), max block spread; exact/outside-local metadata.
+- **Gates:** Exact 70/44, duplicate/missing/nonfinite/leakage/winner/message mismatch 0, normalization error≤1e-9.
+- **Boundary:** Fit bu gate'ten sonra; indicative market fill değil, overlap proxy resolution-equivalent değil; EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1965,7 +1975,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 70 event için terminal winner + raw/normalized 18h market vector + daily GEFS peak/spread + contamination metadata model-ready join'ini ön kayıtla ve kur; veri gate'i geçmeden fit etme.
+**Tek sonraki adım:** Ön kayıtlı 70-event model-ready join'i kur ve QC et; gate geçerse yalnız zaman-split baseline/model protokolünü ön kayıtla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
