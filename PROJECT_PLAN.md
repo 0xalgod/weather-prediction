@@ -1844,6 +1844,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Gate `PASSED`; 96-event cohort model-ready multi-city pilot join'ine alınabilir.
 - **Boundary:** Bunlar indicative price; historical spread/depth/fill veya net EV kanıtı değil. Execution doğrulaması ayrı kalacak.
 
+### D-0129 — 2026-09-06 — Multi-city station mapping ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Hypothesis:** Frozen 96 eventin ≥%85'i ve ≥40 city exact resolution station + official coordinate ile fail-closed eşlenebilir.
+- **Rules:** Wunderground final ICAO path veya NOAA WRH exact `site`; city-centroid fallback yok; station değişimi ayrı regime.
+- **Gates:** Parse ≥%95, coordinate ≥%85, mapped city ≥40, duplicate 0, admitted known identity mismatch 0.
+- **Known evidence:** Önceden 11 reviewed identity var; Karachi/OPKC rule-source contradiction known ve dışlanacak; 96-event coverage bilinmiyor.
+- **Boundary:** Forecast retrieval/model/EV yok; orders false.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1864,7 +1873,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 96-event cohort için terminal winner label + normalized indicative market vector + karar-anında erişilebilir forecast feature join'ini ön kayıtla; önce provider/station/time coverage gate'ini ölç, sonra yalnız geçen cohort üzerinde time-split model benchmark kur.
+**Tek sonraki adım:** Frozen 96-event sample için resolution URL→ICAO→official coordinate mapping coverage'ını ölç; yalnız geçen station regimes üzerinde GEFS as-issued forecast availability pilotunu ön kayıtla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
