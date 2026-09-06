@@ -1,0 +1,52 @@
+{
+  "experiment_id": "EXP-20260907-multicity-gefs-calibration-v1",
+  "design_status": "PREREGISTERED_AFTER_FIXED_BENCHMARK_TEST_CONSUMPTION",
+  "source": "data/processed/multicity_model_ready/run=20260906T-v1/result.json",
+  "source_file_sha256": "10a2ba48ae34b1a2d08527a822ef8e717da3800f137517951de7906c7e01f4b2",
+  "source_rows_sha256": "995f2a2dcb371993f290d22bd852fa33066f0370e1ba210db022e8edf19c386f",
+  "hypothesis": "A single global bias and uncertainty transformation selected only on 34 development events enables a fixed 50/50 calibrated-GEFS/market blend to improve 16-event validation log loss by at least 2% versus market without worsening Brier.",
+  "data_policy": {
+    "development_end_date": "2026-07-11",
+    "expected_development_events": 34,
+    "validation_start_date": "2026-07-12",
+    "validation_end_date": "2026-07-18",
+    "expected_validation_events": 16,
+    "consumed_test_start_date": "2026-07-20",
+    "test_rows_scored_or_used": false
+  },
+  "calibration_grid": {
+    "bias_f": [-12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12],
+    "spread_multiplier": [1, 1.5, 2, 3, 4, 6],
+    "standard_deviation_floor_f": [1, 2, 3, 4],
+    "selection_metric": "development multiclass log loss",
+    "tie_break": "lower absolute bias, then lower spread multiplier, then lower floor",
+    "probability_floor": 1e-06
+  },
+  "challenger": "0.5 * normalized market + 0.5 * development-selected calibrated GEFS; weight is not tuned",
+  "decision_gate": {
+    "exact_development_event_count": 34,
+    "exact_validation_event_count": 16,
+    "minimum_validation_date_cluster_count": 5,
+    "minimum_relative_validation_log_loss_improvement_vs_market": 0.02,
+    "maximum_validation_brier_difference_vs_market": 0,
+    "maximum_invalid_probability_vector_count": 0
+  },
+  "diagnostics": [
+    "mean inside winning bucket rate",
+    "signed distance from GEFS mean to winning bucket interval",
+    "raw and calibrated log loss",
+    "unit and exact-partition slices"
+  ],
+  "multiple_testing_disclosure": {
+    "candidate_count": 312,
+    "validation_used_once": true,
+    "no_promotion_on_consumed_test": true
+  },
+  "boundary": {
+    "development_validation_research_only": true,
+    "test_already_consumed_and_excluded": true,
+    "small_sample_no_live_promotion": true,
+    "market_prices_indicative_not_executable": true,
+    "orders": false
+  }
+}

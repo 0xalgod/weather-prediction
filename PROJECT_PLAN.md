@@ -1986,6 +1986,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Test policy:** Jul20+ test consumed; weight/spread tuning veya model selection için yeniden kullanılamaz.
 - **Boundary:** Historical market indicative, execution/EV yok; sonuç live trading yetkisi vermez.
 
+### D-0143 — 2026-09-07 — Development-only GEFS calibration ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Data:** Development ≤Jul11 n=34 ile selection; validation Jul12–18 n=16 tek evaluation; consumed test ≥Jul20 hiç skorlanmayacak.
+- **Grid:** Bias 13 × spread multiplier 6 × sd floor 4 = 312 candidate; dev log loss min, deterministic simplicity tie-break.
+- **Challenger:** Sabit 50/50 market + calibrated GEFS; blend weight tuning yok.
+- **Gate:** Validation cluster≥5, blend markete göre log loss ≥%2 iyi, Brier farkı≤0, invalid vector 0.
+- **Diagnostics:** Winner interval containment/signed distance, raw-calibrated loss, unit ve exact/proxy slice.
+- **Boundary:** Multiple testing disclosed; yalnız research signal, consumed test/live/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2006,7 +2016,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** GEFS mean error ve spread miscalibration'ını yalnız development+validation üzerinde tanıla; testte tuning yapma. Sonuca göre nested chronological calibration challenger veya GEFS feature'ını bırakma kararı ver.
+**Tek sonraki adım:** Ön kayıtlı dev-selected calibration gridini çalıştır ve validation'ı bir kez değerlendir; fail olursa aggregate GEFS kolunu mevcut dataset için bırak.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
