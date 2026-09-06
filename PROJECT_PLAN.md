@@ -1996,6 +1996,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Diagnostics:** Winner interval containment/signed distance, raw-calibrated loss, unit ve exact/proxy slice.
 - **Boundary:** Multiple testing disclosed; yalnız research signal, consumed test/live/EV yok.
 
+### D-0144 — 2026-09-07 — Aggregate GEFS calibration validation'da reddedildi
+
+- **Durum:** `ACTIVE`
+- **Selected on dev:** +2°F bias, 2× spread, 3°F floor; raw→calibrated dev log loss 3.2858→1.7510, market 1.2836.
+- **Validation:** Market/raw/calibrated/blend log loss 1.1694/4.4654/2.5415/1.4932; blend %27.70 kötü.
+- **Brier:** Market/blend 0.6127/0.7300, fark +0.1173; incremental gate fail.
+- **Diagnostics:** Raw mean winner interval containment yalnız %16; °C/°F ve exact/proxy validation slice'larının tümünde calibrated GEFS marketten kötü.
+- **Decision:** `CALIBRATED_GEFS_BLEND_REJECT`; daha geniş grid/tüketilmiş test tuning yok. Aggregate GEFS mevcut strategy branch'ten çıkarıldı.
+- **Pivot:** Global breadth yerine probabilistic station-level forecast kalitesine dön; NBM-supported US weather cohort'unu full inventory'den ölç.
+- **Boundary:** Test ≥Jul20 bu deneyde skorlanmadı; market benchmark indicative, live/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2016,7 +2027,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı dev-selected calibration gridini çalıştır ve validation'ı bir kez değerlendir; fail olursa aggregate GEFS kolunu mevcut dataset için bırak.
+**Tek sonraki adım:** Full 7,512-event inventory içinde NBM-supported US city/station regime cohort'unu ölç ve ≥200 eventlik point-in-time probabilistic NBM + market dataset fizibilitesini ön kayıtla; mevcut aggregate GEFS'te daha fazla tuning yapma.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-20260907-multicity-gefs-calibration-v1",
+  "decision": "CALIBRATED_GEFS_BLEND_REJECT",
+  "generated_at_utc": "2026-09-06T22:55:51.512892Z",
+  "selected_calibration": {
+    "bias_f": 2,
+    "spread_multiplier": 2,
+    "standard_deviation_floor_f": 3,
+    "development_log_loss": 1.7510376937220784,
+    "candidate_count": 312
+  },
+  "validation": {
+    "event_count": 16,
+    "target_date_cluster_count": 5,
+    "market_log_loss": 1.169365805157401,
+    "raw_gefs_log_loss": 4.465404124329041,
+    "calibrated_gefs_log_loss": 2.5414714091565824,
+    "fixed_blend_log_loss": 1.493231549801579,
+    "market_brier": 0.6127283335741768,
+    "fixed_blend_brier": 0.7300167163045,
+    "blend_relative_log_loss_improvement": -0.2769584532195077,
+    "blend_brier_difference": 0.11728838273032327
+  },
+  "diagnostics": {
+    "raw_mean_inside_winner_interval_rate_development_plus_validation": 0.16,
+    "raw_mean_signed_interval_distance_f": -0.8352,
+    "validation_celsius_log_loss_market_calibrated_blend": [1.2022, 2.6657, 1.5191],
+    "validation_fahrenheit_log_loss_market_calibrated_blend": [1.0272, 2.0030, 1.3810],
+    "validation_overlap_log_loss_market_calibrated_blend": [1.2183, 2.6145, 1.5382],
+    "validation_exact_log_loss_market_calibrated_blend": [0.4356, 1.4453, 0.8181]
+  },
+  "interpretation": "Global bias/spread calibration materially improves raw GEFS but remains inferior to market in every preregistered validation slice. Aggregate GEFS is dropped for this dataset; consumed test remains untouched."
+}

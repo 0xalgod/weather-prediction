@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — calibration candidates and validation metrics have not been calculated.
+`FAILED` — the development-selected calibration failed its one-time validation on 2026-09-07.
 
 ## Purpose
 
@@ -25,3 +25,24 @@ Validation must contain exactly 16 events and at least five target-date clusters
 ## Boundary
 
 The test period is excluded and already consumed. Market histories remain indicative rather than executable. With only 34 development and 16 validation events, any successful result would require new future confirmation.
+
+## Result
+
+Development selected `+2°F` bias, `2×` spread multiplier, and `3°F` standard-deviation floor from 312 candidates. This reduced development GEFS log loss from 3.2858 to 1.7510, but market remained better at 1.2836.
+
+On the one-time 16-event/five-date validation:
+
+| Model | Log loss | Brier |
+|---|---:|---:|
+| Normalized market | 1.1694 | 0.6127 |
+| Raw GEFS | 4.4654 | 1.0294 |
+| Calibrated GEFS | 2.5415 | 0.9593 |
+| Fixed calibrated blend | 1.4932 | 0.7300 |
+
+The calibrated blend worsened market log loss by 27.70% and Brier by 0.1173. Both incremental gates failed. Raw GEFS mean fell inside the winning bucket interval in only 16% of development-plus-validation events.
+
+The preregistered slices were consistently adverse. In validation, market/calibrated-GEFS/blend log loss was 1.202/2.666/1.519 for Celsius, 1.027/2.003/1.381 for Fahrenheit, 1.218/2.615/1.538 for overlap proxy, and 0.436/1.445/0.818 for the single exact event.
+
+## Decision
+
+Reject global calibration and drop aggregate GEFS from this dataset's strategy branch. Do not run a larger grid or tune the blend against the consumed test. A better-quality probabilistic forecast source or new prospective data is required.
