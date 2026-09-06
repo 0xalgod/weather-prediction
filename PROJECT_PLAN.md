@@ -1883,6 +1883,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Corrective v2 `PASSED`; 46-city/92-event cohort GEFS archive availability pilotuna alınacak.
 - **Boundary:** `RECENT_ACTIVITY_PROXY` target-date observation kanıtı değil; forecast accuracy/model/EV henüz yok.
 
+### D-0133 — 2026-09-06 — Multi-city GEFS availability ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Cohort:** Station gate'ten geçen exact 92 event/46 city; official coordinate→frozen IANA 2026c timezone.
+- **Forecast:** Target local date prior-day GEFS 00Z; local günle overlap tüm canonical 6h TMAX step; `geavg`+`gespr`, data+idx.
+- **Horizons:** Event endDate−6/12/18/24/36h; pair'in later S3 LastModified zamanı cutoff'tan önce olmalı.
+- **Primary gate:** 18h complete+admissible event ≥%90, city ≥40; timezone failure 0, listing error ≤%2, duplicate 0.
+- **Known evidence:** KORD representative archive continuity geçmişte geçti; multi-city step/publication coverage bilinmiyor.
+- **Boundary:** Inventory-only; değer/accuracy/model/EV yok; aggregate products full ensemble değil; orders false.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1903,7 +1913,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 46-city/92-event cohort için prior-day 00Z GEFS aggregate mean/spread TMAX availability ve karar-zamanı publication gate'ini ön kayıtla ve küçük tarih-stratified retrieval pilotunda ölç.
+**Tek sonraki adım:** Ön kayıtlı 92-event GEFS S3 inventory'sini çalıştır; horizon-bazlı complete/publication coverage ve local-day overlap contamination'ı raporla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

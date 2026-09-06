@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-20260906-multicity-gefs-availability-v1",
+  "design_status": "PREREGISTERED_BEFORE_92_EVENT_GEFS_INVENTORY",
+  "source_station_mapping": "data/processed/multicity_station_mapping/run=20260906T-v2/result.json",
+  "timezone_boundaries": "data/external/timezone-boundary-builder/version=2026c/timezones-1970.geojson.zip",
+  "timezone_aliases": "data/external/timezone-boundary-builder/version=2026c/timezone-names-1970.json",
+  "hypothesis": "At least 90% of admitted station-events and at least 40 cities have all prior-day 00Z GEFS geavg/gespr canonical local-day TMAX data/index objects published by the 18-hour pre-end cutoff.",
+  "forecast_contract": {
+    "provider": "NOAA GEFS AWS public archive",
+    "cycle_utc": 0,
+    "run_date": "target local date minus one calendar day",
+    "products": ["geavg", "gespr"],
+    "parameter": "TMAX",
+    "level": "2 m above ground",
+    "steps": "Every canonical six-hour TMAX window overlapping the station-local calendar day",
+    "timezone": "IANA timezone polygon containing the official station coordinate",
+    "publication_time": "S3 object LastModified for both data and .idx; the later timestamp must be <= event endDate minus horizon",
+    "horizons_hours_before_end_date": [6, 12, 18, 24, 36],
+    "inventory_only": true
+  },
+  "retrieval": {
+    "request_timeout_seconds": 90,
+    "maximum_attempts": 3,
+    "workers": 16
+  },
+  "acceptance_thresholds": {
+    "exact_admitted_event_count": 92,
+    "maximum_timezone_resolution_failure_count": 0,
+    "maximum_listing_request_error_rate": 0.02,
+    "minimum_complete_admissible_event_rate_at_18h": 0.9,
+    "minimum_complete_admissible_city_count_at_18h": 40,
+    "maximum_duplicate_event_count": 0
+  },
+  "known_before_preregistration": {
+    "kord_prior_day_00z_gefs_archive_inventory": "365/365 representative dates and 31-member coverage previously passed",
+    "station_mapping_admitted_events": 92,
+    "station_mapping_admitted_cities": 46,
+    "multicity_required_step_or_publication_coverage": "UNKNOWN"
+  },
+  "boundary": {
+    "inventory_does_not_download_forecast_values": true,
+    "aggregate_mean_spread_not_full_ensemble_distribution": true,
+    "overlap_windows_may_include_outside_local_hours": true,
+    "accuracy_ev_or_pnl_claim": false,
+    "orders": false
+  }
+}
