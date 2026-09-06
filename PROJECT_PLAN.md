@@ -2018,6 +2018,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision use:** Pass olursa ≥200 event US market-price/NBM pilotu; fail olursa station/product kapsamına göre daralt.
 - **Boundary:** NBM MaxT timezone/resolution semantics ayrıca doğrulanacak; model/EV yok.
 
+### D-0146 — 2026-09-07 — US NBM station probe v1 duplicate nedeniyle fail
+
+- **Durum:** `ACTIVE`
+- **Coverage:** 35/36=%97.22; required fields aynı; duplicate station-date/leakage 0; transfer 104,244,121 byte.
+- **Versions:** Passed rows NBM v4.3=12, v5.0=23.
+- **Failure:** KDEN/2026-05-15 dosyada iki header/block; strict single-occurrence parser reddetti.
+- **Diagnostic:** Offsets 14,960,801 ve 14,964,485; prefix'ler identical görünüyor fakat tam block equality henüz programatik kanıtlanmadı.
+- **Decision:** v1 `FAILED`; threshold değişmedi. Corrective v2 yalnız complete byte-identical duplicate dedup'a izin verebilir, conflicting duplicate fail.
+- **Boundary:** Forecast score/market/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2038,7 +2048,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 12-station × 3-date NBM content probe'u çalıştır; strict coverage geçerse US timezone/MaxT semantics ve ≥200-event price-history pilotuna ilerle.
+**Tek sonraki adım:** KDEN duplicate full-block equality corrective v2'yi ön kayıtla; aynı frozen raw objelerde 36/36 strict content gate'ini tekrar değerlendir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

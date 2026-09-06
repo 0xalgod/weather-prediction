@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — non-KORD station content has not been inspected.
+`FAILED` — strict coverage was 35/36 on 2026-09-07.
 
 ## Pivot rationale
 
@@ -17,3 +17,11 @@ Every station-date block and required field must be present, with zero duplicate
 ## Boundary
 
 This checks station/product content only. NBM daytime MaxT semantics across US timezones require a separate review before resolution equivalence is claimed. No model, accuracy, EV, P&L, or trading claim is permitted.
+
+## Result
+
+All three full NBM objects were publication-admissible and transferred 104,244,121 bytes. Thirty-five of 36 station-date rows parsed with complete fields and zero temporal leakage. Twelve passed rows were NBM v4.3 and 23 were v5.0.
+
+KDEN on 2026-05-15 failed because its v5.0 header occurs twice at byte offsets 14,960,801 and 14,964,485. Initial inspection shows identical prefixes, but v1 correctly rejected duplicate occurrence without assuming equality. The strict 100% gate failed.
+
+Thresholds will not change. A corrective v2 may admit the row only if it proves the two complete station blocks are byte-identical; conflicting duplicates remain a hard failure.

@@ -1,0 +1,24 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-station-coverage-v1",
+  "decision": "US_NBM_STATION_COVERAGE_FAIL",
+  "generated_at_utc": "2026-09-06T23:01:31.801664Z",
+  "summary": {
+    "expected_station_date_count": 36,
+    "passed_station_date_count": 35,
+    "coverage": 0.9722222222222222,
+    "duplicate_station_date_count": 0,
+    "temporal_leakage_count": 0,
+    "full_object_transfer_bytes": 104244121,
+    "nbm_version_4_3_passed_rows": 12,
+    "nbm_version_5_0_passed_rows": 23
+  },
+  "failure": {
+    "station_code": "KDEN",
+    "target_date": "2026-05-15",
+    "error": "expected one KDEN NBP block, found 2",
+    "observed_offsets": [14960801, 14964485],
+    "initial_manual_diagnostic": "The two visible block prefixes are identical; full-block equality must be verified by corrective code before admission."
+  },
+  "raw_manifest_sha256": "5b21e9b4f08b382f6dcca144d9be584405bb89fb62aaa8be839d6c3cbe48e322",
+  "decision_note": "Strict 100% gate failed. Thresholds remain unchanged; a separately preregistered corrective parser may deduplicate only byte-identical complete station blocks."
+}
