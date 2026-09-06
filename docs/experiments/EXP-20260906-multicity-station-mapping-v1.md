@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — the frozen 96-event sample has not yet been mapped.
+`FAILED` — mapping was run on 2026-09-06; metadata coverage gates failed.
 
 ## Why this gate exists
 
@@ -21,3 +21,9 @@ Eleven identity records were independently reviewed before this experiment. Kara
 ## Boundary
 
 This is an identity and coordinate coverage test. It retrieves no forecast values and makes no accuracy, EV, P&L, fill, or trading claim.
+
+## Result
+
+Resolution URL parsing succeeded for all 96 events with zero duplicates. The locked prior AviationWeather evidence snapshot supplied coordinates for only 22/96 events (22.92%) across 11 cities, below the 85% event and 40-city gates. No known identity mismatch was admitted.
+
+The failure is attributable to the intentionally small earlier metadata snapshot, not to station identifiers in the market rules. Thresholds will not be changed. A corrective v2 may use the already downloaded official NOAA ISD global station-history catalog and must remain fail-closed on identity contradictions.

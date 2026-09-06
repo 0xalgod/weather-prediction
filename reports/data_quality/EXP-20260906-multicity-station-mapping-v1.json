@@ -1,0 +1,21 @@
+{
+  "experiment_id": "EXP-20260906-multicity-station-mapping-v1",
+  "decision": "STATION_MAPPING_FAIL",
+  "generated_at_utc": "2026-09-06T19:52:31.903446Z",
+  "summary": {
+    "selected_event_count": 96,
+    "duplicate_event_count": 0,
+    "station_code_parse_count": 96,
+    "station_code_parse_rate": 1.0,
+    "metadata_coordinate_count": 22,
+    "metadata_coordinate_rate": 0.22916666666666666,
+    "mapped_city_count": 11,
+    "admitted_known_identity_mismatch_count": 0
+  },
+  "failed_gates": [
+    "minimum_metadata_coordinate_rate",
+    "minimum_mapped_city_count"
+  ],
+  "root_cause": "The prior AviationWeather evidence snapshot contains only the small manually reviewed station cohort, not the 48-city sample. URL-to-ICAO parsing itself covered 96/96 events.",
+  "corrective_action": "Run a separately preregistered v2 against the already downloaded official NOAA ISD global station history, preserving identity contradictions as exclusions."
+}

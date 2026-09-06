@@ -1853,6 +1853,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Known evidence:** Önceden 11 reviewed identity var; Karachi/OPKC rule-source contradiction known ve dışlanacak; 96-event coverage bilinmiyor.
 - **Boundary:** Forecast retrieval/model/EV yok; orders false.
 
+### D-0130 — 2026-09-06 — Station mapping v1 metadata coverage gate başarısız
+
+- **Durum:** `ACTIVE`
+- **Parse:** Resolution URL→ICAO 96/96=%100; duplicate 0.
+- **Coordinate coverage:** 22/96=%22.92 ve 11 city; locked ≥%85/≥40 gate'leri başarısız.
+- **Identity safety:** Known mismatch admitted 0.
+- **Root cause:** Önceki AviationWeather evidence snapshot yalnız küçük manual-review cohort'unu içeriyor; global 48-city metadata kataloğu değil.
+- **Decision:** v1 `FAILED`; eşikler değiştirilmedi. Mevcut official NOAA ISD global catalog ile corrective v2 ön kayıtlanacak.
+- **Boundary:** Forecast/model/EV yok; eksik coordinate için city centroid kullanılmadı.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1873,7 +1883,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 96-event sample için resolution URL→ICAO→official coordinate mapping coverage'ını ölç; yalnız geçen station regimes üzerinde GEFS as-issued forecast availability pilotunu ön kayıtla.
+**Tek sonraki adım:** Aynı 96 event ve değişmeyen coverage eşikleriyle official NOAA ISD global station catalog corrective v2'yi ön kayıtla; station active-date ve identity contradiction kontrollerini ekle.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
