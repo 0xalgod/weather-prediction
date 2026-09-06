@@ -4,9 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
-from datetime import datetime, timezone
+import math
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from weather_quant.normalization.multicity_station_mapping import station_code_from_url
@@ -14,6 +16,52 @@ from weather_quant.normalization.multicity_station_mapping import station_code_f
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def load_isd_catalog(path: Path) -> dict[str, dict]:
+    """Load the deterministic latest record for each exact ICAO."""
+
+    by_icao: dict[str, list[dict]] = {}
+    with path.open(encoding="utf-8", newline="") as source:
+        for row in csv.DictReader(source):
+            icao = str(row.get("ICAO") or "").strip().upper()
+            if len(icao) == 4:
+                by_icao.setdefault(icao, []).append(row)
+    return {
+        icao: max(rows, key=lambda row: (row["END"], row["BEGIN"]))
+        for icao, rows in by_icao.items()
+    }
+
+
+def isd_metadata(row: dict | None, target_date: str, maximum_staleness_days: int) -> dict | None:
+    """Validate coordinate and recent-activity proxy semantics."""
+
+    if not row:
+        return None
+    try:
+        latitude, longitude = float(row["LAT"]), float(row["LON"])
+        begin = date.fromisoformat(f"{row['BEGIN'][:4]}-{row['BEGIN'][4:6]}-{row['BEGIN'][6:]}")
+        end = date.fromisoformat(f"{row['END'][:4]}-{row['END'][4:6]}-{row['END'][6:]}")
+        target = date.fromisoformat(target_date)
+    except (KeyError, TypeError, ValueError):
+        return None
+    valid = (
+        math.isfinite(latitude)
+        and math.isfinite(longitude)
+        and -90 <= latitude <= 90
+        and -180 <= longitude <= 180
+        and begin <= target
+        and 0 <= (target - end).days <= maximum_staleness_days
+    )
+    return {
+        "latitude": latitude,
+        "longitude": longitude,
+        "official_station_name": row["STATION NAME"],
+        "catalog_begin": begin.isoformat(),
+        "catalog_end": end.isoformat(),
+        "catalog_end_staleness_days": (target - end).days,
+        "activity_semantic": "RECENT_ACTIVITY_PROXY",
+    } if valid else None
 
 
 def main() -> int:
@@ -25,8 +73,12 @@ def main() -> int:
         raise FileExistsError("immutable output exists")
     config = json.loads(args.config.read_text())
     selected = json.loads(Path(config["source_selected_events"]).read_text())
-    evidence = json.loads(Path(config["station_metadata_evidence"]).read_text())
+    evidence_path = Path(
+        config.get("station_metadata_evidence") or config["known_identity_evidence"]
+    )
+    evidence = json.loads(evidence_path.read_text())
     metadata = {row["station_code"]: row for row in evidence["records"]}
+    isd = load_isd_catalog(Path(config["station_catalog"])) if "station_catalog" in config else None
     known_mismatches = {
         row["station_code"]
         for row in evidence["records"]
@@ -36,6 +88,12 @@ def main() -> int:
     for event in selected:
         station = station_code_from_url(str(event["resolution_source"]))
         station_metadata = metadata.get(station) if station else None
+        if isd is not None:
+            station_metadata = isd_metadata(
+                isd.get(station) if station else None,
+                event["target_date"],
+                550,
+            )
         mismatch = station in known_mismatches
         admitted = bool(station and station_metadata and not mismatch)
         rows.append(
@@ -48,8 +106,13 @@ def main() -> int:
                 "latitude": station_metadata.get("latitude") if station_metadata else None,
                 "longitude": station_metadata.get("longitude") if station_metadata else None,
                 "identity_status": (
-                    station_metadata.get("identity_status") if station_metadata else "UNVERIFIED"
+                    "KNOWN_MATCH"
+                    if station in metadata and station not in known_mismatches
+                    else "KNOWN_MISMATCH"
+                    if mismatch
+                    else "NOT_MANUALLY_REVIEWED"
                 ),
+                "catalog_metadata": station_metadata,
                 "admitted": admitted,
                 "exclusion_reason": (
                     None
@@ -100,7 +163,10 @@ def main() -> int:
         "generated_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "config_sha256": sha256(args.config),
         "selected_events_sha256": sha256(Path(config["source_selected_events"])),
-        "station_evidence_sha256": sha256(Path(config["station_metadata_evidence"])),
+        "station_evidence_sha256": sha256(evidence_path),
+        "station_catalog_sha256": (
+            sha256(Path(config["station_catalog"])) if "station_catalog" in config else None
+        ),
         "summary": summary,
         "checks": checks,
         "decision": "STATION_MAPPING_PASS" if all(checks.values()) else "STATION_MAPPING_FAIL",
