@@ -1,0 +1,49 @@
+{
+  "experiment_id": "EXP-20260906-multicity-price-horizon-pilot-v1",
+  "design_status": "PREREGISTERED_BEFORE_PRICE_HISTORY_RETRIEVAL",
+  "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "hypothesis": "Deterministic 96-event multi-city pilotta en az bir locked horizonda eventlerin en az %20'si ve research city'lerin en az 30'u, tum bucket'larda cutoff-oncesi ve en fazla 12 saat stale indicative YES price vectorune sahiptir.",
+  "sample_selection": {
+    "research_city_definition": "source inventory research_cities keys",
+    "events_per_city": 2,
+    "method": "Sort each city's events by target_date then event_id; choose the lower-median event from the early half and lower-median event from the late half.",
+    "expected_city_count": 48,
+    "expected_event_count": 96
+  },
+  "price_history": {
+    "endpoint": "https://clob.polymarket.com/prices-history",
+    "interval": "all",
+    "fidelity_minutes": 1,
+    "request_timeout_seconds": 30,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1
+  },
+  "horizons_hours_before_end_date": [6, 12, 18, 24, 36],
+  "horizon_point_rule": "For each YES token choose the latest price timestamp <= endDate minus horizon; future points are forbidden.",
+  "full_vector_rule": {
+    "all_event_buckets_required": true,
+    "maximum_staleness_seconds": 43200,
+    "normalization": "Report raw YES-price sum and normalize positive complete vectors to sum to one only for later scoring; coverage is assessed before normalization."
+  },
+  "acceptance_thresholds": {
+    "exact_selected_city_count": 48,
+    "exact_selected_event_count": 96,
+    "maximum_request_error_rate": 0.02,
+    "minimum_full_vector_event_rate_at_any_horizon": 0.2,
+    "minimum_cities_with_full_vector_at_any_horizon": 30,
+    "maximum_duplicate_selected_event_count": 0
+  },
+  "known_before_preregistration": {
+    "inventory_event_count": 7573,
+    "research_city_count": 48,
+    "research_event_count": 7512,
+    "chicago_prior_price_history_probe": "30/30 events and 330/330 tokens had any history; multi-horizon complete-vector coverage was not measured."
+  },
+  "boundary": {
+    "indicative_prices_only": true,
+    "historical_l2_or_fill_claim": false,
+    "forecast_joined": false,
+    "ev_or_pnl_claim": false,
+    "orders": false
+  }
+}

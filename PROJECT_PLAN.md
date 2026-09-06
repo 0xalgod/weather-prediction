@@ -1823,6 +1823,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Inventory gate `PASSED`; 48-city universe multi-horizon price-series coverage'a alınacak.
 - **Boundary:** Forecast/price henüz join edilmedi; EV/P&L yok.
 
+### D-0127 — 2026-09-06 — Multi-city price-horizon pilot ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Sample:** 48 research city × 2 deterministic early/late-half event = exactly 96 unique event.
+- **Horizons:** Event end zamanından 6/12/18/24/36 saat önce; yalnız cutoff-oncesi son YES price.
+- **Usable vector:** Tüm bucket'lar mevcut ve her nokta en fazla 12 saat stale; coverage normalization öncesi ölçülür.
+- **Gates:** Request error ≤%2; en az bir horizonda full-vector event ≥%20; herhangi horizonda usable event bulunan city ≥30; duplicate 0.
+- **Known evidence:** Chicago probe 30/30 eventte any-history bulmuştu; multi-city ve horizon-complete coverage bilinmiyor.
+- **Boundary:** Price-only indicative benchmark; historical L2/fill, forecast, EV veya P&L iddiası yok; orders false.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1843,7 +1853,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 48-city/7,512-event universe üzerinde 6/12/18/24/36 saat horizonlarında historical price-series nokta coverage'ını önce stratified pilotla ölç; execution proxy eşiklerini sonuçtan önce kilitle.
+**Tek sonraki adım:** Ön kayıtlı 96-event/48-city sample için immutable price-history response'larını çek; 6/12/18/24/36 saat full-vector ve ≤12 saat staleness coverage gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
