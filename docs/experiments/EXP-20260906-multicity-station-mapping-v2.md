@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED_POSTHOC_CORRECTIVE` — designed after v1 exposed the small metadata snapshot limitation, before joining the global ISD catalog.
+`PASSED_POSTHOC_CORRECTIVE` — the locked corrective join completed on 2026-09-06.
 
 ## Correction
 
@@ -23,3 +23,15 @@ Because the frozen ISD catalog ends in 2025, this rule is explicitly `RECENT_ACT
 ## Boundary
 
 No forecast or observation values are retrieved. Passing permits a separate GEFS availability test but does not establish forecast accuracy, resolution equivalence, EV, or executable fills.
+
+## Result
+
+Exact station parsing remained 96/96. The ISD join admitted 92/96 events (95.83%) across 46 cities, passing every locked coverage gate with zero admitted known identity contradictions.
+
+Two Karachi events were excluded because the previously documented OPKC rule/source identity contradiction remains unresolved. Two Panama City events were excluded because MPMG lacked an admissible ISD catalog coordinate. Paris contains two explicit station regimes, LFPB and LFPG; these will not be silently pooled.
+
+Twenty admitted events have prior manual identity review. The remaining exact ICAO joins are adequate for a gridded-forecast availability pilot, but require stronger rule-name identity review before any live city-specific strategy is promoted.
+
+## Decision
+
+Proceed with a 46-city, 92-event GEFS as-issued archive availability pilot. Retain the activity field as `RECENT_ACTIVITY_PROXY` and do not reinterpret it as target-date observation coverage.

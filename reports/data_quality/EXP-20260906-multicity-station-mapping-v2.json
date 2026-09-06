@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-20260906-multicity-station-mapping-v2",
+  "decision": "STATION_MAPPING_PASS",
+  "generated_at_utc": "2026-09-06T19:55:17.925984Z",
+  "provenance": {
+    "config_sha256": "75391550297006566051202e07c79f20573a6f8ec1cb72d348704401759ea600",
+    "selected_events_sha256": "b5c88ce8fc3705fdb816adb98219a2c2ca4c602dcb67515579b068e327d23794",
+    "station_evidence_sha256": "0931bcae95f91ae6ee16eb59bfd1c991173a8206a0c2b43a52bed34c6abd0a4c",
+    "station_catalog_sha256": "1994747ab4af1b97e63adb434b4d0d022f2daee76f0c144ea9ab46be2d906604"
+  },
+  "summary": {
+    "selected_event_count": 96,
+    "duplicate_event_count": 0,
+    "station_code_parse_count": 96,
+    "station_code_parse_rate": 1.0,
+    "metadata_coordinate_count": 92,
+    "metadata_coordinate_rate": 0.9583333333333334,
+    "mapped_city_count": 46,
+    "admitted_known_identity_mismatch_count": 0,
+    "manually_reviewed_admitted_event_count": 20
+  },
+  "excluded": [
+    {"city": "Karachi", "event_count": 2, "station_code": "OPKC", "reason": "KNOWN_IDENTITY_MISMATCH"},
+    {"city": "Panama City", "event_count": 2, "station_code": "MPMG", "reason": "MISSING_OFFICIAL_COORDINATE_IN_ISD_CATALOG"}
+  ],
+  "station_regime_changes": [
+    {"city": "Paris", "station_codes": ["LFPB", "LFPG"]}
+  ],
+  "interpretation": "The coordinate gate passed for a 46-city GEFS availability pilot. RECENT_ACTIVITY_PROXY is coordinate evidence only and not proof of target-date station observations."
+}

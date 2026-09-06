@@ -1873,6 +1873,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Known result:** v1 %100 parse fakat %22.92 coordinate/11 city; v2 full join coverage henüz bilinmiyor.
 - **Boundary:** Forecast/model/EV yok; orders false.
 
+### D-0132 — 2026-09-06 — Station mapping corrective v2 gate geçti
+
+- **Durum:** `ACTIVE`
+- **Coverage:** ICAO parse 96/96; official ISD coordinate 92/96=%95.83; 46 mapped city; duplicate 0.
+- **Exclusions:** Karachi/OPKC 2 known identity mismatch; Panama City/MPMG 2 missing admissible ISD coordinate.
+- **Regime:** Paris sample LFPB ve LFPG içeriyor; ayrı station regimes olarak korunacak.
+- **Review depth:** 20 admitted event prior manual identity review taşıyor; diğer exact ICAO join'ler forecast availability için yeterli, live promotion için değil.
+- **Decision:** Corrective v2 `PASSED`; 46-city/92-event cohort GEFS archive availability pilotuna alınacak.
+- **Boundary:** `RECENT_ACTIVITY_PROXY` target-date observation kanıtı değil; forecast accuracy/model/EV henüz yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1893,7 +1903,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Corrective v2 exact ICAO→ISD join'ini çalıştır; coverage geçerse admitted station regimes üzerinde GEFS as-issued availability pilotunu ön kayıtla.
+**Tek sonraki adım:** 46-city/92-event cohort için prior-day 00Z GEFS aggregate mean/spread TMAX availability ve karar-zamanı publication gate'ini ön kayıtla ve küçük tarih-stratified retrieval pilotunda ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
