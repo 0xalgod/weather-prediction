@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no 92-event GEFS inventory has been retrieved.
+`PASSED` — the locked 92-event inventory completed on 2026-09-06.
 
 Implementation provenance amendment before retrieval: the frozen selected-event manifest is an explicit input for `endDate`; no cohort rule, metric, threshold, or forecast value changed.
 
@@ -25,3 +25,23 @@ Prior KORD evidence showed continuous archive availability, but multi-city local
 ## Boundary
 
 This is metadata inventory only; forecast values are not downloaded. `geavg`/`gespr` provide ensemble aggregate features, not a full member distribution. Overlapping six-hour blocks can include hours outside the local day and must retain that contamination metric. Passing does not establish forecast accuracy, market edge, executable EV, or P&L.
+
+## Result
+
+All 40 unique GEFS run-date listings succeeded, with zero timezone or duplicate-event failures. Every one of the 92 events across 46 cities had all required `geavg`/`gespr` data-index pairs.
+
+| Hours before event end | Complete and published events | Rate | Cities |
+|---:|---:|---:|---:|
+| 6 | 92/92 | 100% | 46 |
+| 12 | 92/92 | 100% | 46 |
+| 18 | 92/92 | 100% | 46 |
+| 24 | 92/92 | 100% | 46 |
+| 36 | 0/92 | 0% | 0 |
+
+The 36-hour failure is entirely publication timing: objects existed but all were published after that cutoff. The primary 18-hour gate passed at 100%.
+
+Only 6/92 events have an exact four-block local-day partition. The remaining 86 use five overlapping blocks and include six hours outside the local day. Both the overlap proxy and contamination indicator must be retained; they cannot be labeled resolution-equivalent.
+
+## Decision
+
+Use the 18-hour horizon as the primary model-vs-market pilot because both market-price and GEFS coverage exist there. Keep 6/12/24 hours as secondary horizons and exclude 36-hour GEFS from this feature contract.

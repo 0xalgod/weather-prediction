@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-20260906-multicity-gefs-availability-v1",
+  "decision": "GEFS_AVAILABILITY_PASS",
+  "generated_at_utc": "2026-09-06T20:03:15.469364Z",
+  "provenance": {
+    "config_sha256": "0ea70a081f3a6516026c4fc83dc43cb46e452581a8522e90b846c7a641959c4d",
+    "station_mapping_sha256": "54f9f8d987979b41a266a703e93894bafa5a7fc2937e6de410a47f1ed11c7c5e",
+    "selected_events_sha256": "b5c88ce8fc3705fdb816adb98219a2c2ca4c602dcb67515579b068e327d23794",
+    "raw_artifact_manifest_sha256": "872e828769cb14e2744027f2b790b478a588cb6a5d7636d70ac4c9a3c7a97ba8"
+  },
+  "quality": {
+    "event_count": 92,
+    "city_count": 46,
+    "unique_run_date_count": 40,
+    "listing_request_error_count": 0,
+    "timezone_resolution_failure_count": 0,
+    "duplicate_event_count": 0,
+    "exact_local_day_partition_event_count": 6,
+    "six_hour_outside_local_contamination_event_count": 86
+  },
+  "complete_and_publication_admissible_by_horizon": {
+    "6": {"events": 92, "rate": 1.0, "cities": 46},
+    "12": {"events": 92, "rate": 1.0, "cities": 46},
+    "18": {"events": 92, "rate": 1.0, "cities": 46},
+    "24": {"events": 92, "rate": 1.0, "cities": 46},
+    "36": {"events": 0, "rate": 0.0, "cities": 0}
+  },
+  "failure_decomposition": {
+    "missing_data_or_index_pairs": 0,
+    "publication_late_events_at_36h": 92
+  },
+  "interpretation": "Prior-day 00Z GEFS aggregate features are feasible at 6-24h but unavailable by the 36h cutoff. Most local days require five overlapping blocks and include six outside-local hours, so exact and proxy semantics must be modeled separately."
+}

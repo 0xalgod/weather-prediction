@@ -1894,6 +1894,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Inventory-only; değer/accuracy/model/EV yok; aggregate products full ensemble değil; orders false.
 - **Pre-data amendment:** Horizon cutoff için gereken `endDate`, frozen 96-event selected manifestten explicit dependency olarak eklendi; sample/eşik/metrik değişmedi.
 
+### D-0134 — 2026-09-06 — Multi-city GEFS availability gate geçti
+
+- **Durum:** `ACTIVE`
+- **Retrieval/QC:** 40 unique run-date listing başarılı; request/timezone/duplicate failure 0; required pair missing 0.
+- **Availability:** 6/12/18/24h'de 92/92 event ve 46/46 city complete+publication-admissible.
+- **36h boundary:** 0/92; tüm dosyalar var fakat cutoff sonrası yayımlanmış. Bu contractta 36h GEFS feature dışı.
+- **Local-day semantics:** 6 event exact 4-block partition; 86 event 5-block overlap ve 6 saat outside-local contamination.
+- **Decision:** Primary model-vs-market horizon 18h; 6/12/24h secondary. GEFS overlap proxy ve contamination feature birlikte tutulacak.
+- **Boundary:** Henüz forecast value indirilmedi; availability accuracy/edge/EV kanıtı değil.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1914,7 +1924,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 92-event GEFS S3 inventory'sini çalıştır; horizon-bazlı complete/publication coverage ve local-day overlap contamination'ı raporla.
+**Tek sonraki adım:** 18h'de hem usable market vector hem admitted station+GEFS bulunan kesişimi dondur; aggregate TMAX range-byte maliyet pilotunu ve model-ready outcome/price/forecast join gate'ini ön kayıtla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
