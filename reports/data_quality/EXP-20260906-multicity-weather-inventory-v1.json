@@ -1,0 +1,23 @@
+{
+  "artifact": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "artifact_sha256": "3b966399e91ec4869ed42f6b5c8bd98b5b76f10655702e875f08dcbdab77b527",
+  "decision": "MULTICITY_INVENTORY_PASS",
+  "experiment_id": "EXP-20260906-multicity-weather-inventory-v1",
+  "exclusion_reason_counts": {
+    "INCOMPLETE_BUCKET_IDENTITY": 2,
+    "MISSING_RESOLUTION_SOURCE": 639,
+    "TERMINAL_WINNER_COUNT_NOT_ONE": 10
+  },
+  "summary": {
+    "bucket_count": 82407,
+    "duplicate_event_count": 0,
+    "eligible_city_count": 52,
+    "eligible_event_count": 7573,
+    "eligible_event_rate": 0.9210654342009243,
+    "research_city_count": 48,
+    "research_event_count": 7512,
+    "source_event_count": 8222
+  },
+  "target_date_provenance": {"END_DATE_UTC_FALLBACK": 449, "EVENT_DATE": 7124},
+  "unit_counts": {"C": 5655, "F": 1918}
+}

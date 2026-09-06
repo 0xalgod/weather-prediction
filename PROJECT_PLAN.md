@@ -1811,6 +1811,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Unchanged:** Source/winner/identity şartları ve tüm numeric gate eşikleri değişmedi.
 - **Retry:** Yeni immutable v2 output; attempt 1 overwrite edilmeyecek.
 
+### D-0126 — 2026-09-06 — Multi-city normalized inventory gate geçti
+
+- **Durum:** `ACTIVE`
+- **Coverage:** 7,573/8,222=%92.107 eligible; 52 eligible city, ≥30 eventli 48 research city/7,512 event.
+- **Identity:** 82,407 bucket; duplicate event 0; exactly-one terminal winner ve full bucket identity tüm admitted rows'ta.
+- **Units:** Celsius 5,655, Fahrenheit 1,918 event.
+- **Sources:** Wunderground 7,312, NOAA weather.gov 261 admitted event.
+- **Dates:** 2025-12-30–2026-08-29; eventDate 7,124, explicit endDate fallback 449.
+- **Exclusions:** Missing source 639, winner-count anomaly 10, incomplete identity 2; reason'lar overlap olabilir.
+- **Decision:** Inventory gate `PASSED`; 48-city universe multi-horizon price-series coverage'a alınacak.
+- **Boundary:** Forecast/price henüz join edilmedi; EV/P&L yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1831,7 +1843,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 8,222 closed eventten multi-city normalized registry üret; ≥30 eligible eventli şehirleri price-series horizon coverage deneyi için dondur.
+**Tek sonraki adım:** 48-city/7,512-event universe üzerinde 6/12/18/24/36 saat horizonlarında historical price-series nokta coverage'ını önce stratified pilotla ölç; execution proxy eşiklerini sonuçtan önce kilitle.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
