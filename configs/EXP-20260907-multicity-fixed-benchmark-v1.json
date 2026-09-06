@@ -1,0 +1,59 @@
+{
+  "experiment_id": "EXP-20260907-multicity-fixed-benchmark-v1",
+  "design_status": "PREREGISTERED_BEFORE_ANY_BENCHMARK_SCORE",
+  "source": "data/processed/multicity_model_ready/run=20260906T-v1/result.json",
+  "source_file_sha256": "10a2ba48ae34b1a2d08527a822ef8e717da3800f137517951de7906c7e01f4b2",
+  "source_rows_sha256": "995f2a2dcb371993f290d22bd852fa33066f0370e1ba210db022e8edf19c386f",
+  "hypothesis": "A fixed 50/50 linear pool of normalized 18h Polymarket probability and raw GEFS Gaussian probability improves untouched-test log loss by at least 2% versus Polymarket alone, does not worsen Brier score, and has a target-date cluster-bootstrap 95% upper bound below zero for paired log-loss difference.",
+  "chronological_split": {
+    "development_end_date": "2026-07-11",
+    "validation_start_date": "2026-07-12",
+    "validation_end_date": "2026-07-18",
+    "test_start_date": "2026-07-20",
+    "expected_development_events": 34,
+    "expected_validation_events": 16,
+    "expected_test_events": 20,
+    "same_target_date_may_cross_split": false,
+    "test_used_for_selection_or_tuning": false
+  },
+  "models": {
+    "uniform": "1 / 11 for every bucket",
+    "normalized_market": "Frozen normalized 18h indicative YES vector",
+    "raw_gefs_gaussian": {
+      "mean": "gefs_overlap_mean_max_f",
+      "standard_deviation": "max(gefs_overlap_spread_at_mean_max_f, 1.0 F)",
+      "bucket_edges": "Frozen continuity-corrected Fahrenheit thresholds"
+    },
+    "fixed_market_gefs_blend": "0.5 * normalized_market + 0.5 * raw_gefs_gaussian; no fitted weight"
+  },
+  "metrics": {
+    "primary": "multiclass_log_loss",
+    "secondary": ["multiclass_brier_score", "ranked_probability_score"],
+    "probability_floor": 1e-06,
+    "cluster_bootstrap_unit": "target_date",
+    "cluster_bootstrap_repetitions": 10000,
+    "cluster_bootstrap_seed": 20260907
+  },
+  "promotion_gate": {
+    "minimum_test_event_count": 15,
+    "minimum_relative_test_log_loss_improvement_vs_market": 0.02,
+    "maximum_test_brier_difference_vs_market": 0,
+    "maximum_cluster_bootstrap_ci95_upper_log_loss_difference": 0,
+    "maximum_invalid_probability_vector_count": 0
+  },
+  "slices": ["temperature_unit", "gefs_exact_partition", "tail_winner", "city_event_count"],
+  "known_before_preregistration": {
+    "dataset_event_count": 70,
+    "dataset_city_count": 44,
+    "raw_market_sum_median": 1.033,
+    "exact_partition_event_count": 5,
+    "benchmark_scores": "UNKNOWN"
+  },
+  "boundary": {
+    "fixed_diagnostic_not_high_capacity_training": true,
+    "market_prices_indicative_not_executable": true,
+    "small_clustered_test_set": true,
+    "promotion_is_research_signal_not_live_trading_authorization": true,
+    "orders": false
+  }
+}

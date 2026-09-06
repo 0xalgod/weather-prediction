@@ -1966,6 +1966,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Dataset gate `PASSED`; ilk evaluation chronological ve düşük kapasiteli fixed baseline olmalı. City-specific/high-capacity fit yasak.
 - **Boundary:** Dataset-ready model-skill veya EV kanıtı değildir; historical prices indicative.
 
+### D-0141 — 2026-09-07 — Multi-city fixed benchmark ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Split:** Development ≤Jul11 n=34; validation Jul12–18 n=16; untouched test ≥Jul20 n=20; aynı target-date bölünmez.
+- **Models:** Uniform, normalized 18h market, raw GEFS Gaussian (spread floor 1°F), fixed 50/50 market-GEFS blend; tuning yok.
+- **Primary hypothesis:** Blend test log loss markete göre ≥%2 iyi, Brier farkı≤0 ve target-date cluster-bootstrap paired log-loss CI95 upper<0.
+- **Metrics:** Log loss floor 1e-6; Brier/RPS; 10,000 date-cluster bootstrap, seed 20260907.
+- **Boundary:** Pass yalnız research signal; small clustered sample ve indicative/non-executable price; live authorization yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1986,7 +1995,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 70-event dataset için chronological split ve fixed uniform/normalized-market/raw-GEFS Gaussian benchmark protokolünü ön kayıtla; test skorlarını model seçimi için tekrar kullanma.
+**Tek sonraki adım:** Ön kayıtlı fixed benchmark'ı bir kez çalıştır; split/model/slice skorlarını ve clustered uncertainty'yi raporla, test sonucuna göre planı değiştir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
