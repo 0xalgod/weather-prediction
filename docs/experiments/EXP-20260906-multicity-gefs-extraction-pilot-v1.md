@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no forecast value for this pilot has been downloaded.
+`PASSED` — compact extraction and decoding completed on 2026-09-06.
 
 ## Purpose
 
@@ -29,3 +29,19 @@ For every selected event, download only the indexed 2 m TMAX byte range for both
 ## Boundary
 
 This pilot is not a training dataset. Aggregate mean/spread is not a full ensemble distribution, and overlapping blocks are not resolution-equivalent daily maxima. Outcomes are not used. No EV, P&L, fill, or trading claim is permitted.
+
+## Result
+
+The deterministic pilot selected 12 distinct cities spanning longitudes from San Francisco to Wellington. All 116 required messages were retrieved and decoded. One transient transport error recovered on retry; content errors and temporal leakage were zero.
+
+- observed byte-range transfer: 44,778,354 bytes (42.70 MiB);
+- projected 690-message parent transfer: 266,354,002 bytes (254.02 MiB), well below 2 GiB;
+- maximum station-to-grid coordinate delta: 0.1669°, below 0.36°;
+- `geavg` range: 45.95°F–102.47°F, median 78.17°F;
+- `gespr` range: 0.36°F–3.06°F, median 1.08°F.
+
+All locked gates passed.
+
+## Decision
+
+Scale compact extraction to the frozen 70-event/44-city parent cohort. Do not fit a model until the joined outcome, raw/normalized market vector, GEFS features, contamination metadata, and time checks pass their own dataset gate.

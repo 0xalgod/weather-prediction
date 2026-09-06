@@ -1914,6 +1914,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Known evidence:** KORD compact extraction geçti; global değerler ve transfer maliyeti bilinmiyor.
 - **Boundary:** Pilot training set değil; aggregate/full ensemble ve overlap/resolution eşdeğer değil; outcome/EV yok.
 
+### D-0136 — 2026-09-06 — Global GEFS compact extraction pilot geçti
+
+- **Durum:** `ACTIVE`
+- **Sample:** Longitude-stratified 12 event/12 city; SF→Wellington geographic span.
+- **Retrieval:** 116/116 message success; 1 transient retry ile recovered; content error ve temporal leakage 0.
+- **Cost:** 44,778,354 byte observed; 70-event/690-message projection 266,354,002 byte (~254 MiB) <2 GiB.
+- **Spatial QC:** Max station-grid delta 0.1669° ≤0.36°.
+- **Values:** GEFS mean 45.95–102.47°F (median 78.17); spread 0.36–3.06°F (median 1.08); finite/plausible gate geçti.
+- **Decision:** Pilot `PASSED`; frozen 70-event parent için full compact ingestion ekonomik ve teknik olarak uygun.
+- **Boundary:** Outcome kullanılmadı; bu model/accuracy/EV sonucu değil.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1934,7 +1945,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 12-event global GEFS compact extraction/decode pilotunu çalıştır; başarı ve projected 70-event maliyetine göre full model-ready ingestion kararı ver.
+**Tek sonraki adım:** Frozen 70-event/44-city parent için full GEFS compact ingestion + outcome/raw-normalized market vector join dataset gate'ini ön kayıtla; veri geçmeden model fit etme.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

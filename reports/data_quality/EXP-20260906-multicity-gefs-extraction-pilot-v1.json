@@ -1,0 +1,35 @@
+{
+  "experiment_id": "EXP-20260906-multicity-gefs-extraction-pilot-v1",
+  "decision": "GEFS_EXTRACTION_PILOT_PASS",
+  "generated_at_utc": "2026-09-06T20:09:33.942729Z",
+  "provenance": {
+    "config_sha256": "98a48f509300986f7bcbff489be571a6707c05b7ed9329e0bc6c4210af6deb60",
+    "raw_file_count": 119,
+    "raw_manifest_sha256": "642e08104e5005daad551bd4e4aaeca415b094b7fd13b97a2c739226351da17c"
+  },
+  "summary": {
+    "parent_event_count": 70,
+    "parent_city_count": 44,
+    "selected_event_count": 12,
+    "selected_city_count": 12,
+    "message_count": 116,
+    "message_success_count": 116,
+    "message_success_rate": 1.0,
+    "recovered_transport_error_count": 1,
+    "content_error_count": 0,
+    "temporal_leakage_count": 0,
+    "maximum_coordinate_delta_degrees": 0.16690116836019844,
+    "observed_transfer_bytes": 44778354,
+    "parent_message_count": 690,
+    "projected_parent_transfer_bytes": 266354002.24137932
+  },
+  "decoded_value_ranges_f": {
+    "geavg": {"count": 58, "minimum": 45.95, "median": 78.17, "maximum": 102.47},
+    "gespr": {"count": 58, "minimum": 0.36, "median": 1.08, "maximum": 3.06}
+  },
+  "pilot_cities": [
+    "San Francisco", "Denver", "Houston", "Buenos Aires", "Lagos", "Cape Town",
+    "Jeddah", "Chengdu", "Shenzhen", "Qingdao", "Seoul (Incheon)", "Wellington"
+  ],
+  "interpretation": "Global compact extraction is operationally feasible. Scale to the frozen 70-event parent and build a joined dataset before any model fitting."
+}
