@@ -1925,6 +1925,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Pilot `PASSED`; frozen 70-event parent için full compact ingestion ekonomik ve teknik olarak uygun.
 - **Boundary:** Outcome kullanılmadı; bu model/accuracy/EV sonucu değil.
 
+### D-0137 — 2026-09-06 — Full 70-event GEFS ingestion ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Scope:** Frozen 18h intersection'ın tamamı, 70 event/44 city/expected 690 message; outcome/forecast-value selection yok.
+- **Contract:** Pilotla aynı prior-day 00Z aggregate TMAX indexed-range ve nearest-grid decode.
+- **Gates:** Event 70/city≥44, message success ≥%98, content/leakage 0, grid delta≤0.36°, physical ranges, transfer<2 GiB.
+- **Known pilot:** 116/116 success, 44.8 MB; projected parent 266.4 MB; max delta 0.1669°.
+- **Boundary:** Bu forecast input layer; outcome/market join ve model fit henüz yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1945,7 +1954,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 70-event/44-city parent için full GEFS compact ingestion + outcome/raw-normalized market vector join dataset gate'ini ön kayıtla; veri geçmeden model fit etme.
+**Tek sonraki adım:** Ön kayıtlı full 70-event GEFS compact ingestion'ı çalıştır; gate geçerse outcome/raw-normalized 18h market-vector join'ini ayrı deney olarak dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
