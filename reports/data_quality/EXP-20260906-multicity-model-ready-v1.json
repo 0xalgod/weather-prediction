@@ -1,0 +1,36 @@
+{
+  "experiment_id": "EXP-20260906-multicity-model-ready-v1",
+  "decision": "MODEL_READY_DATASET_PASS",
+  "generated_at_utc": "2026-09-06T20:46:23.874498Z",
+  "artifact_sha256": "10a2ba48ae34b1a2d08527a822ef8e717da3800f137517951de7906c7e01f4b2",
+  "rows_sha256": "995f2a2dcb371993f290d22bd852fa33066f0370e1ba210db022e8edf19c386f",
+  "summary": {
+    "candidate_event_count": 70,
+    "joined_event_count": 70,
+    "joined_city_count": 44,
+    "date_minimum": "2026-03-28",
+    "date_maximum": "2026-08-21",
+    "celsius_event_count": 54,
+    "fahrenheit_event_count": 16,
+    "bucket_count_per_event": 11,
+    "cities_with_one_event": 18,
+    "cities_with_two_events": 26,
+    "exact_partition_event_count": 5,
+    "overlap_proxy_event_count": 65,
+    "tail_winner_event_count": 7,
+    "raw_market_sum_minimum": 0.9615,
+    "raw_market_sum_median": 1.033,
+    "raw_market_sum_maximum": 1.113,
+    "maximum_normalization_error": 1.1102230246251565e-16
+  },
+  "quality_failures": {
+    "excluded": 0,
+    "duplicate": 0,
+    "missing_required": 0,
+    "nonfinite": 0,
+    "temporal_leakage": 0,
+    "winner_anomaly": 0,
+    "forecast_message_mismatch": 0
+  },
+  "interpretation": "The dataset is technically model-ready but statistically small and cross-city sparse. Initial work must use simple fixed baselines and strict chronological evaluation, not a high-capacity city-specific model."
+}

@@ -1956,6 +1956,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Fit bu gate'ten sonra; indicative market fill değil, overlap proxy resolution-equivalent değil; EV yok.
 - **Pre-data amendment:** Exact/overlap, outside-local, expected message ve cutoff için frozen GEFS horizon artifact explicit dependency eklendi; cohort/formül/eşik değişmedi.
 
+### D-0140 — 2026-09-06 — Multi-city model-ready dataset gate geçti
+
+- **Durum:** `ACTIVE`
+- **Join/QC:** 70/70 event, 44 city; exclusion/duplicate/missing/nonfinite/leakage/winner/message mismatch 0; normalization error max 1.11e-16.
+- **Span:** 2026-03-28–2026-08-21; 54 °C/16 °F; her event 11 bucket; 7 tail winner.
+- **Sparsity:** 26 city iki, 18 city tek event; yalnız 5 exact partition, 65 overlap proxy.
+- **Market:** Raw probability sum 0.9615–1.113, median 1.033; raw diagnostic ve normalized vector birlikte saklandı.
+- **Decision:** Dataset gate `PASSED`; ilk evaluation chronological ve düşük kapasiteli fixed baseline olmalı. City-specific/high-capacity fit yasak.
+- **Boundary:** Dataset-ready model-skill veya EV kanıtı değildir; historical prices indicative.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1976,7 +1986,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 70-event model-ready join'i kur ve QC et; gate geçerse yalnız zaman-split baseline/model protokolünü ön kayıtla.
+**Tek sonraki adım:** 70-event dataset için chronological split ve fixed uniform/normalized-market/raw-GEFS Gaussian benchmark protokolünü ön kayıtla; test skorlarını model seçimi için tekrar kullanma.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

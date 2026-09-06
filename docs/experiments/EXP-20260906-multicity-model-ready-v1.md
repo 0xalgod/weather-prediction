@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — event-level feature/outcome join has not been run.
+`PASSED` — the locked event-level join completed on 2026-09-06.
 
 Pre-join provenance amendment: the frozen GEFS horizon artifact is an explicit source for `exact_partition`, `outside_local_seconds`, expected message count, and cutoff. No cohort, feature formula, gate, or observed value changed.
 
@@ -30,3 +30,15 @@ Require exactly 70 unique events and 44 cities, complete fields, finite numeric 
 ## Boundary
 
 This dataset gate precedes all model fitting. Market prices are indicative, not fills; GEFS overlap is a proxy, not resolution-equivalent. Passing does not demonstrate forecast skill, edge, executable EV, or P&L.
+
+## Result
+
+All 70 candidate events joined successfully across 44 cities. Exclusions, duplicates, missing required fields, nonfinite values, temporal leakage, winner anomalies, and forecast message-count mismatches were all zero. Maximum market normalization error was `1.11e-16`.
+
+The dataset spans 2026-03-28 through 2026-08-21. It contains 54 Celsius and 16 Fahrenheit events; every event has 11 ordered buckets. Twenty-six cities have two events and 18 have one. Seven outcomes landed in a tail bucket. Raw market sums range from 0.9615 to 1.113, with median 1.033.
+
+Only five events are exact local-day partitions; 65 are explicitly marked overlap proxies.
+
+## Decision
+
+The data-quality gate passed. The sample is nevertheless small and sparse by city, so the first evaluation must compare fixed, transparent global baselines under a chronological split. High-capacity or city-specific training is not justified.
