@@ -1833,6 +1833,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Known evidence:** Chicago probe 30/30 eventte any-history bulmuştu; multi-city ve horizon-complete coverage bilinmiyor.
 - **Boundary:** Price-only indicative benchmark; historical L2/fill, forecast, EV veya P&L iddiası yok; orders false.
 
+### D-0128 — 2026-09-06 — Multi-city price-horizon pilot gate geçti
+
+- **Durum:** `ACTIVE`
+- **Retrieval/QC:** 1,056/1,056 token request başarılı; 4,381 point; duplicate/conflict/out-of-window/non-strict 0.
+- **Coverage:** 6h %75 (72/96), 12h %75, 18h %75, 24h %62.5 (60/96), 36h %56.25 (54/96).
+- **Breadth:** 48/48 city en az bir horizonda usable full-vector event içeriyor.
+- **Missingness:** Horizon uzadıkça incomplete vector artıyor: 6h 16 event → 36h 41 event; stale-complete kayıp 1–8 event.
+- **Market diagnostic:** Usable vector median raw YES sum 1.0305–1.0475; scoring öncesi raw sum korunup categorical normalization gerekli.
+- **Decision:** Gate `PASSED`; 96-event cohort model-ready multi-city pilot join'ine alınabilir.
+- **Boundary:** Bunlar indicative price; historical spread/depth/fill veya net EV kanıtı değil. Execution doğrulaması ayrı kalacak.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1853,7 +1864,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 96-event/48-city sample için immutable price-history response'larını çek; 6/12/18/24/36 saat full-vector ve ≤12 saat staleness coverage gate'ini ölç.
+**Tek sonraki adım:** 96-event cohort için terminal winner label + normalized indicative market vector + karar-anında erişilebilir forecast feature join'ini ön kayıtla; önce provider/station/time coverage gate'ini ölç, sonra yalnız geçen cohort üzerinde time-split model benchmark kur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-20260906-multicity-price-horizon-pilot-v1",
+  "decision": "PRICE_HORIZON_PILOT_PASS",
+  "generated_at_utc": "2026-09-06T15:11:53.473680Z",
+  "provenance": {
+    "config_sha256": "8d26a5634ba375c50125f33b71d605b4249589fb0b14971fdb79dc4faae971aa",
+    "source_inventory_sha256": "3b966399e91ec4869ed42f6b5c8bd98b5b76f10655702e875f08dcbdab77b527",
+    "response_file_count": 1056,
+    "response_manifest_sha256": "84c83c3a57c20e3c6fa383ec568b8ed2fc970710c0b3f232fe8d9e4d0c0d63e4"
+  },
+  "quality": {
+    "selected_city_count": 48,
+    "selected_event_count": 96,
+    "duplicate_selected_event_count": 0,
+    "token_request_count": 1056,
+    "request_error_count": 0,
+    "history_point_count": 4381,
+    "duplicate_point_count": 0,
+    "conflicting_timestamp_count": 0,
+    "out_of_window_point_count": 0,
+    "non_strict_history_count": 0
+  },
+  "coverage_by_horizon_hours": {
+    "6": {"usable_events": 72, "usable_rate": 0.75, "incomplete_events": 16, "stale_complete_events": 8, "cities": 47, "median_raw_sum": 1.0305},
+    "12": {"usable_events": 72, "usable_rate": 0.75, "incomplete_events": 19, "stale_complete_events": 5, "cities": 45, "median_raw_sum": 1.03125},
+    "18": {"usable_events": 72, "usable_rate": 0.75, "incomplete_events": 19, "stale_complete_events": 5, "cities": 45, "median_raw_sum": 1.03125},
+    "24": {"usable_events": 60, "usable_rate": 0.625, "incomplete_events": 35, "stale_complete_events": 1, "cities": 39, "median_raw_sum": 1.03225},
+    "36": {"usable_events": 54, "usable_rate": 0.5625, "incomplete_events": 41, "stale_complete_events": 1, "cities": 38, "median_raw_sum": 1.0475}
+  },
+  "cities_with_usable_vector_at_any_horizon": 48,
+  "interpretation": "Indicative market benchmark coverage is sufficient for a model-ready pilot. Raw cross-bucket sums frequently differ from one and must be reported then normalized for scoring. This is not historical execution evidence."
+}
