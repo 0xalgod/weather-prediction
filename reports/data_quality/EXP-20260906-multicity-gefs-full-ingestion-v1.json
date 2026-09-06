@@ -1,0 +1,31 @@
+{
+  "experiment_id": "EXP-20260906-multicity-gefs-full-ingestion-v1",
+  "decision": "GEFS_FULL_INGESTION_PASS",
+  "generated_at_utc": "2026-09-06T20:42:12.369401Z",
+  "raw_decision_label": "GEFS_EXTRACTION_PILOT_PASS",
+  "raw_decision_label_note": "Legacy runner label only; all locked full-ingestion checks passed. The immutable raw artifact is not overwritten and the runner was corrected for future full runs.",
+  "provenance": {
+    "config_sha256": "c70e476b7792921ffbb4c6599896e34ca88574bd4d09e5bde8f5a1242a986ca6",
+    "raw_file_count": 693,
+    "raw_manifest_sha256": "307f465a9e76a34ecd6f129799dd750f2b898dd9f239669d602756641c316298"
+  },
+  "summary": {
+    "event_count": 70,
+    "city_count": 44,
+    "message_count": 690,
+    "message_success_count": 690,
+    "message_success_rate": 1.0,
+    "recovered_transport_error_count": 7,
+    "content_error_count": 0,
+    "temporal_leakage_count": 0,
+    "observed_transfer_bytes": 248128443,
+    "maximum_coordinate_delta_degrees": 0.16690116836019844,
+    "events_with_8_messages": 5,
+    "events_with_10_messages": 65
+  },
+  "decoded_value_ranges_f": {
+    "geavg": {"count": 345, "minimum": 38.75, "median": 77.09, "maximum": 105.89},
+    "gespr": {"count": 345, "minimum": 0.18, "median": 1.26, "maximum": 5.22}
+  },
+  "interpretation": "The complete frozen forecast input layer passed. Next build one immutable event-level table with terminal winner, raw and normalized 18h market vector, GEFS features, and contamination metadata before fitting any model."
+}

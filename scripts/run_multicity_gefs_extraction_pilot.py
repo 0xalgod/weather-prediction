@@ -229,6 +229,11 @@ def main() -> int:
     (args.output / "messages.jsonl").write_text(
         "".join(json.dumps(row, sort_keys=True) + "\n" for row in results)
     )
+    decision_prefix = (
+        "GEFS_FULL_INGESTION"
+        if config["boundary"].get("full_forecast_ingestion_not_joined_dataset")
+        else "GEFS_EXTRACTION_PILOT"
+    )
     result = {
         "schema_version": "1.0.0",
         "experiment_id": config["experiment_id"],
@@ -236,11 +241,7 @@ def main() -> int:
         "config_sha256": sha256(args.config),
         "summary": summary,
         "checks": checks,
-        "decision": (
-            "GEFS_EXTRACTION_PILOT_PASS"
-            if all(checks.values())
-            else "GEFS_EXTRACTION_PILOT_FAIL"
-        ),
+        "decision": f"{decision_prefix}_{'PASS' if all(checks.values()) else 'FAIL'}",
         "boundary": config["boundary"],
     }
     (args.output / "result.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")

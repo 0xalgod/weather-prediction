@@ -1934,6 +1934,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Known pilot:** 116/116 success, 44.8 MB; projected parent 266.4 MB; max delta 0.1669°.
 - **Boundary:** Bu forecast input layer; outcome/market join ve model fit henüz yok.
 
+### D-0138 — 2026-09-06 — Full 70-event GEFS ingestion gate geçti
+
+- **Durum:** `ACTIVE`
+- **Coverage:** 70 event/44 city, 690/690 message success; 7 transient retry recovered; terminal content/leakage 0.
+- **Transfer:** 248,128,443 byte (~236.6 MiB), locked 2 GiB sınırının altında.
+- **Spatial/value QC:** Max grid delta 0.1669°; mean 38.75–105.89°F, spread 0.18–5.22°F; tümü finite/plausible.
+- **Semantics:** 5 event 8-message exact partition, 65 event 10-message overlap proxy.
+- **Artifact note:** Immutable raw result legacy `PILOT_PASS` label taşıyor; metrik/gate doğru, tracked karar `GEFS_FULL_INGESTION_PASS`; runner geleceğe dönük düzeltildi.
+- **Decision:** Full forecast input layer `PASSED`; event-level outcome/market join açılabilir.
+- **Boundary:** Henüz model fit veya edge/EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1954,7 +1965,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı full 70-event GEFS compact ingestion'ı çalıştır; gate geçerse outcome/raw-normalized 18h market-vector join'ini ayrı deney olarak dondur.
+**Tek sonraki adım:** 70 event için terminal winner + raw/normalized 18h market vector + daily GEFS peak/spread + contamination metadata model-ready join'ini ön kayıtla ve kur; veri gate'i geçmeden fit etme.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
