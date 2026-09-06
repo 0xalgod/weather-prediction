@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — complete duplicate-block comparison has not been run.
+`PASSED` — frozen-object corrective evaluation completed on 2026-09-07.
 
 ## Hypothesis
 
@@ -21,3 +21,9 @@ All 12 station regimes and all three locked dates must produce 36/36 complete f4
 ## Boundary
 
 This is parser/data-quality evidence only. It does not validate NBM MaxT timezone semantics, predictive accuracy, executable EV, P&L, or live trading.
+
+## Result
+
+All 36/36 station-date rows passed with 100% required-field coverage, zero temporal leakage, zero conflicting duplicates, and zero errors. The two KDEN blocks were each 3,684 bytes at offsets 14,960,801 and 14,964,485. Both had SHA-256 `9783b1bfeec618de06cd863ee94cdafff3169051a6dde083b241f0a847dcf30d`, proving exact equality before canonicalization.
+
+The station-content feasibility gate therefore passed. The next gate is city-local-day versus NBM f41 MaxT semantic alignment; no predictive or economic claim is made yet.

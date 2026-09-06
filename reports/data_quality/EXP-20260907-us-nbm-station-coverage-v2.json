@@ -1,0 +1,34 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-station-coverage-v2",
+  "status": "PASSED",
+  "decision": "US_NBM_STATION_COVERAGE_PASS",
+  "data_cutoff": "2026-08-14T08:14:46Z",
+  "frozen_source_run": "data/raw/us_nbm_station_coverage/run=20260907T-v1",
+  "processed_result": "data/processed/us_nbm_station_coverage/run=20260907T-v2/result.json",
+  "processed_result_sha256": "31b3020b358ed7c9e4559de77beb457dda158dc11aec06eaa3340a62b36f0207",
+  "station_dates_sha256": "dbe421f0d35319fbd54746a60dc519e2ad6f918ea8b6e63f43f533c07cebf65a",
+  "metrics": {
+    "station_regime_count": 12,
+    "probe_date_count": 3,
+    "passed_station_date_count": 36,
+    "expected_station_date_count": 36,
+    "station_date_block_coverage": 1.0,
+    "required_field_coverage": 1.0,
+    "source_duplicate_block_set_count": 1,
+    "conflicting_duplicate_count": 0,
+    "temporal_leakage_count": 0,
+    "error_count": 0
+  },
+  "kden_duplicate_evidence": {
+    "target_date": "2026-05-15",
+    "offsets": [14960801, 14964485],
+    "byte_lengths": [3684, 3684],
+    "sha256": [
+      "9783b1bfeec618de06cd863ee94cdafff3169051a6dde083b241f0a847dcf30d",
+      "9783b1bfeec618de06cd863ee94cdafff3169051a6dde083b241f0a847dcf30d"
+    ],
+    "byte_identical": true
+  },
+  "interpretation": "The station-content feasibility gate passed after fail-closed, exact-only source duplicate canonicalization. Predictive skill and market EV remain untested.",
+  "next_step": "Validate city-local-day versus NBM f41 MaxT semantics before constructing a US training dataset."
+}

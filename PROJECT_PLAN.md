@@ -2038,6 +2038,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision use:** Pass olursa timezone/MaxT semantics review; fail olursa KDEN/date kapsamı veriyle yeniden değerlendirilir.
 - **Boundary:** Model/accuracy/EV/P&L ve emir yok.
 
+### D-0148 — 2026-09-07 — US NBM station content gate geçti
+
+- **Durum:** `PASSED`
+- **Coverage:** 12 station × 3 locked date = 36/36; required fields %100; leakage/error/conflicting duplicate=0.
+- **KDEN evidence:** İki complete block 3,684 byte; offsets 14,960,801/14,964,485; aynı SHA-256 `9783b1...f30d`; exact-only canonicalization uygulandı.
+- **Data:** v1 frozen full objects reuse edildi; redownload ve threshold değişikliği yok.
+- **Decision:** 11-city US NBM station-content feasibility geçti.
+- **Not proven:** Local-day MaxT semantic equivalence, forecast skill, market incremental value ve executable net EV.
+- **Next:** City timezone/DST bazında f41 valid-00Z MaxT'nin Polymarket resolution gününe karşı semantiğini doğrula.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2058,7 +2068,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı KDEN exact-duplicate corrective v2'yi frozen raw objelerde çalıştır ve 36/36 strict content gate'ini değerlendir.
+**Tek sonraki adım:** 11 US city için NBM f41 valid-00Z daytime MaxT ile Polymarket city-local resolution day semantiğini timezone/DST bazında ön kayıtlı olarak doğrula.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
