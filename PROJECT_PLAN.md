@@ -1781,6 +1781,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Safety:** Gaussian-only paper decision; orders/wallet/credentials false; capture-window gate fail-closed.
 - **Host dependency:** Local execution için laptop uyku modunda olmamalı ve internet bağlantısı bulunmalı.
 
+### D-0123 — 2026-09-06 — Gaussian Paper Day 2 capture geçti ve sinyal üretti
+
+- **Durum:** `ACTIVE`
+- **Timing:** 10:49–10:50 UTC inside locked window; forecast-to-last-book skew 0.874s.
+- **Forecast:** NBM v5.0 07Z f41, mean 79°F, sd 2°F; probability sum 1.0.
+- **Execution:** 11/11 bucket $10 ask-depth executable; fee identity 11/11, request error 0.
+- **Signal:** `76–77°F`; q=0.18657, $10 VWAP=0.09, taker fee=$0.455.
+- **Edge:** Gross +9.657pp, fee sonrası +9.247pp, 2pp resolution haircut sonrası +7.247pp ≥3pp.
+- **Decision:** `PAPER_TRADE`, 111.111 hypothetical shares; `order_sent=false`.
+- **Boundary:** Outcome/P&L pending; tek açık sinyal pozitif EV veya kârlılık kanıtı değildir.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1801,7 +1812,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Sonraki Chicago/KORD eventini discover edip `RAW_NBM_GAUSSIAN_V1` ile 11:00 UTC karar-anı executable paper snapshot config'ini dondur; quantile kolunu kaldır.
+**Tek sonraki adım:** Paper Day 2 outcome kesinleşince NOAA/Gamma settlement reconciliation çalıştır; frozen 76–77°F sinyalinin fee-dahil P&L'ini append et ve sıradaki eligible KORD eventini discover et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -1,0 +1,23 @@
+{
+  "artifact": "data/processed/chicago_paper_cohort/day=02/run=20260906T110000Z-v1/result.json",
+  "artifact_sha256": "40fcc17cf06ec7d358f396e92eca3fca58a05c0a9968ee2f8e8da4fc765abf8b",
+  "checks_passed": 9,
+  "cohort_day": 2,
+  "decision": "CAPTURE_ELIGIBLE_PENDING_OUTCOME",
+  "event_id": "968537",
+  "execution": {
+    "adjusted_edge_per_share": 0.0724731955130511,
+    "best_ask": 0.09,
+    "executable_bucket_count": 11,
+    "hypothetical_shares": 111.11111111111111,
+    "model_probability": 0.1865681955130511,
+    "selected_bucket": "76-77°F",
+    "taker_fee_usd": 0.455,
+    "vwap": 0.09
+  },
+  "forecast": {"mean_f": 79, "nbm_version": "5.0", "standard_deviation_f": 2},
+  "forecast_to_last_book_seconds": 0.874195,
+  "order_sent": false,
+  "paper_decision": "PAPER_TRADE",
+  "target_local_date": "2026-09-07"
+}
