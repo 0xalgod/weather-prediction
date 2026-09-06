@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-20260906-multicity-weather-inventory-v1",
+  "design_status": "PREREGISTERED_WITH_PRIOR_GLOBAL_COUNTS_KNOWN",
+  "source_run": "data/raw/polymarket_gamma/closed=true/run=20260829T215446Z",
+  "known_prior_summary": {
+    "event_count": 8222,
+    "unique_city_count": 54,
+    "market_count": 89536,
+    "resolution_source_coverage": 0.922282,
+    "identifier_complete_market_rate": 0.999754
+  },
+  "hypothesis": "En az 40 şehirde, şehir başına en az 30 exactly-one-winner ve identity-complete resolved event indicative multi-city araştırmasına kabul edilebilir.",
+  "normalization": {
+    "city": "title prefix Highest temperature in ... on ...",
+    "target_date": "eventDate ISO date",
+    "source_domain": "event resolutionSource URL hostname",
+    "temperature_unit": "description whole/decimal degrees Fahrenheit or Celsius",
+    "terminal_winner": "exactly one resolved market with YES outcomePrice equal to 1",
+    "bucket_identity": "market id, condition id and exactly two clob token ids"
+  },
+  "eligibility": {
+    "event_closed": true,
+    "event_date_required": true,
+    "resolution_source_required": true,
+    "temperature_unit_required": true,
+    "exactly_one_terminal_winner": true,
+    "all_bucket_identities_complete": true
+  },
+  "gates": {
+    "exact_source_event_count": 8222,
+    "duplicate_event_count_maximum": 0,
+    "minimum_eligible_event_rate": 0.9,
+    "minimum_eligible_city_count": 40,
+    "minimum_events_per_research_city": 30,
+    "minimum_research_city_count": 40
+  },
+  "boundary": {
+    "price_history_not_joined": true,
+    "forecast_not_joined": true,
+    "ev_or_pnl_claim": false,
+    "orders": false
+  }
+}

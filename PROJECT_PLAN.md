@@ -1792,6 +1792,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** `PAPER_TRADE`, 111.111 hypothetical shares; `order_sent=false`.
 - **Boundary:** Outcome/P&L pending; tek açık sinyal pozitif EV veya kârlılık kanıtı değildir.
 
+### D-0124 — 2026-09-06 — Multi-city historical inventory pivot ön kaydı
+
+- **Durum:** `ACTIVE`
+- **Known source:** 8,222 closed highest-temperature event, 54 city, 89,536 bucket; prior metadata counts disclosed.
+- **Hypothesis:** ≥40 şehirde ≥30 exactly-one-winner, source/unit/date ve tüm bucket identity-complete event bulunur.
+- **Eligibility:** Closed, eventDate, resolution source, temperature unit, exactly one resolved YES winner, complete market/condition/token identities.
+- **Gates:** Duplicate 0, eligible event ≥%90, eligible city ≥40, research city ≥40.
+- **Output:** Immutable normalized event registry + per-city/source/unit/exclusion coverage; price/forecast join sonraki ayrı gate.
+- **Boundary:** Bu envanter EV/backtest sonucu değildir; orders false.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -1812,7 +1822,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Paper Day 2 outcome kesinleşince NOAA/Gamma settlement reconciliation çalıştır; frozen 76–77°F sinyalinin fee-dahil P&L'ini append et ve sıradaki eligible KORD eventini discover et.
+**Tek sonraki adım:** 8,222 closed eventten multi-city normalized registry üret; ≥30 eligible eventli şehirleri price-series horizon coverage deneyi için dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
