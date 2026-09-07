@@ -2130,6 +2130,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Duplicates:** 6 source duplicate set yalnız complete byte-identical kanıtıyla canonicalize edildi; conflict=0.
 - **Decision:** Stage 3 `NBM_FEATURE_COLLECTION_PASS`; 220-row final model-ready join açıldı.
 - **Boundary:** f41 hâlâ `PROXY_18H_MAX`; model skill/market superiority/execution/EV/P&L/emir yok.
+- **Pre-join amendment:** Station resolution URL'den exact parse; NBM key=(target_date,station), price key=event_id; raw price/sum korunur, yalnız positive complete eligible vector normalize; exactly-one winner; per-date timezone window yeniden hesaplanır; NO_TRADE satırları korunur.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

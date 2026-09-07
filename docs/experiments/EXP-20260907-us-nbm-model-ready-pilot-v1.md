@@ -45,3 +45,5 @@ Missingness was date-clustered: all 11 cities were unusable on April 1, April 8,
 All 20 prior-day 07Z objects downloaded successfully. All 240 locked station-date combinations produced complete f41 probabilistic features, with zero publication leakage and zero station errors. Six duplicate block sets were accepted only after complete byte equality. Actual transfer was 694,913,515 bytes (about 663 MiB), below the 800 MiB cap.
 
 Stage 3 passed. The next stage must preserve all 220 events, join city/station-specific NBM features and price eligibility, and retain the 33 ineligible rows as `NO_TRADE` rather than silently dropping them.
+
+Pre-join amendment: parse the exact resolution station from each event URL; join NBM on target date plus station and price eligibility on event ID. Preserve raw market values and sums; normalize only complete positive `PRICE_ELIGIBLE` vectors. Require exactly one terminal winner. Recalculate proxy-window metadata from target date and the locked city IANA timezone. Retain `NO_TRADE` rows without a normalized market vector.
