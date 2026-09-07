@@ -2101,6 +2101,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Next:** Frozen cohort'u değiştirmeden incomplete tarihleri real-time `NO_TRADE` olarak ele alan, final n≥180 ve city balance kriterli açık post-hoc corrective v2 ön kaydı.
 - **Boundary:** Indicative history; execution/EV/P&L/emir yok.
 
+### D-0154 — 2026-09-07 — Price eligibility corrective v2 ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Disclosure:** Original %90 gate %85 ile fail görüldükten sonra tasarlanmış açık `POST_HOC` corrective; D-0153'ü supersede etmez.
+- **Rule:** Frozen 220/date/event değişmez; complete ve staleness≤12h ise `PRICE_ELIGIBLE`, aksi `NO_TRADE`; threshold değişmez.
+- **Gates:** Eligible event≥180, target-date cluster≥15, city başına≥15, city=11; request/leakage/duplicate=0.
+- **Decision use:** Pass ise tüm frozen tarihler için NBM retrieval; scoring yalnız aynı observable eligibility maskesinde. Fail ise pilot durur.
+- **Boundary:** Model/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2121,7 +2130,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Price gate corrective v2'yi açıkça post-hoc ön kayıtla; cohort/date replacement yapmadan incomplete eventleri `NO_TRADE` say ve minimum final sample/city-balance kararını frozen artifact üzerinde değerlendir.
+**Tek sonraki adım:** Ön kayıtlı price eligibility corrective v2'yi frozen price artifact üzerinde çalıştır; cohort replacement olmadan sample/date/city balance gate'ini değerlendir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

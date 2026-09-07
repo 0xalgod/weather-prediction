@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP-20260907-us-pilot-price-eligibility-v2",
+  "design_status": "POST_HOC_CORRECTIVE_PREREGISTERED_BEFORE_RECLASSIFICATION",
+  "source_price_run": "data/raw/us_nbm_model_ready_pilot_prices/run=20260907T-v1",
+  "source_result_sha256": "27b9b27be34344fc727b821d02056676edb469938ff778a04c505f5cfa755ebb",
+  "hypothesis": "Without replacing any date or event, treating an incomplete or over-12-hour-stale 18-hour market vector as an observable real-time NO_TRADE condition leaves a balanced feasibility sample large enough for a bounded NBM join pilot.",
+  "disclosure": "This corrective criterion was designed after the original 90% coverage gate failed at 85%; it cannot supersede or erase that failure.",
+  "eligibility_rule": {
+    "eligible": "all bucket prices exist at or before cutoff and maximum staleness is no more than 43,200 seconds",
+    "ineligible": "NO_TRADE; retain row and reason but exclude from forecast/market scoring",
+    "date_or_event_replacement": false,
+    "threshold_or_staleness_change": false
+  },
+  "acceptance_thresholds": {
+    "minimum_eligible_event_count": 180,
+    "minimum_eligible_target_date_count": 15,
+    "minimum_eligible_event_count_per_city": 15,
+    "exact_city_count": 11,
+    "maximum_request_error_count": 0,
+    "maximum_temporal_leakage_count": 0,
+    "maximum_duplicate_event_count": 0
+  },
+  "decision_rule": {
+    "pass": "Permit NBM retrieval for all frozen dates and final scoring only on pre-decision price-eligible events; preserve NO_TRADE rows.",
+    "fail": "Stop this pilot and redesign prospective collection coverage."
+  },
+  "boundary": {
+    "original_90_percent_gate_remains_failed": true,
+    "post_hoc_corrective": true,
+    "no_model_ev_pnl_or_live_claim": true,
+    "orders": false
+  }
+}
