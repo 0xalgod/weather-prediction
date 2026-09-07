@@ -3,6 +3,7 @@
   "design_status": "PREREGISTERED_BEFORE_EVENT_SELECTION",
   "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
   "source_semantics": "reports/data_quality/EXP-20260907-us-nbm-local-day-semantics-v1.json",
+  "source_nbm_probe": "data/raw/us_nbm_station_coverage/run=20260907T-v1/result.json",
   "hypothesis": "A metadata-only selection of 20 dates shared by all 11 supported US cities can yield exactly 220 unique resolved events and a bounded, leakage-safe plan for joining 18-hour market probabilities with prior-day 07Z NBM f41 proxy features.",
   "cohort": {
     "cities": ["Atlanta", "Austin", "Chicago", "Dallas", "Denver", "Houston", "Los Angeles", "Miami", "NYC", "San Francisco", "Seattle"],
@@ -13,6 +14,10 @@
     "selection_rule": "Sort dates having exactly one eligible event for every city; choose 20 unique indices round(i*(n-1)/19), i=0..19, from the ordered eligible-date list.",
     "selection_may_use": ["city", "target_date", "event_id", "resolution_station_identity"],
     "selection_must_not_use": ["winner", "bucket", "price", "forecast_value", "model_score"]
+  },
+  "cost_estimate": {
+    "market_requests": "sum of bucket counts only after the event IDs and dates are frozen",
+    "nbm_transfer_bytes": "20 multiplied by the maximum observed full-object byte count in the locked three-date NBM probe"
   },
   "join_contract": {
     "market_horizon_hours_before_end": 18,

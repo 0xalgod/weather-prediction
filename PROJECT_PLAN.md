@@ -2077,6 +2077,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Gates:** dates=20, events=220, cities=11, duplicate=0; market≥%90, NBM≥%95, final join≥180, leakage=0, NBM transfer≤800 MiB.
 - **Stages:** Önce metadata selection/request cost; sonra price; sonra NBM; en son join. Başarısız katman düzelmeden model fit yok.
 - **Boundary:** Historical price executable fill değildir; model/EV/P&L/emir yok.
+- **Pre-data amendment:** Event ID'leri freeze edildikten sonra price request=bucket-count sum; NBM conservative cost=locked 3-date probe max object bytes ×20. Cohort/eşik değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

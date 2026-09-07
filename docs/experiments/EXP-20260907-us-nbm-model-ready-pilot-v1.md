@@ -14,6 +14,8 @@ Within 2026-01-01 through 2026-08-15, retain dates having exactly one eligible e
 
 The shared-date design gives 220 events but only 20 prior-day NBM objects. Full-object transfer is capped at 800 MiB. Market request volume is measured before collection.
 
+Pre-data amendment: after event IDs are frozen, market request count is the selected events' bucket-count sum. Conservative NBM transfer is 20 times the largest full-object byte count in the locked three-date station probe.
+
 ## Join contract and gates
 
 Use indicative market probabilities at 18 hours before market end and prior-day 07Z NBM f41 as `PROXY_18H_MAX`. Preserve raw price vectors/sums before normalization. Require 20 dates, 220 events, 11 cities, no duplicate city-date, market-vector coverage at least 90%, NBM coverage at least 95%, final join at least 180, zero leakage, and NBM transfer no more than 800 MiB.
