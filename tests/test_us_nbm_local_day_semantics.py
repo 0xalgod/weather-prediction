@@ -11,6 +11,10 @@ def test_station_from_resolution_url():
         )
         == "KORD"
     )
+    assert (
+        station_from_resolution_url("https://www.weather.gov/wrh/timeseries?site=katl")
+        == "KATL"
+    )
 
 
 def test_eastern_daylight_window_has_sixteen_hour_overlap():

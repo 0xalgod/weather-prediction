@@ -8,7 +8,7 @@ import hashlib
 import json
 from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
@@ -17,7 +17,9 @@ def sha256(path: Path) -> str:
 
 
 def station_from_resolution_url(url: str) -> str:
-    station = Path(urlparse(url).path).name.upper()
+    parsed = urlparse(url)
+    query_station = parse_qs(parsed.query).get("site", [None])[0]
+    station = (query_station or Path(parsed.path).name).upper()
     if len(station) != 4 or not station.isalnum():
         raise ValueError(f"invalid resolution station in URL: {url}")
     return station
