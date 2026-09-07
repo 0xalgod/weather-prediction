@@ -2068,6 +2068,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Next:** Bounded ve city-stratified US market/outcome/NBM pilot dataset; full ingestion öncesi forecast skill ve incremental market value ölçümü.
 - **Boundary:** Henüz forecast skill, market üstünlüğü, execution veya EV kanıtı yok.
 
+### D-0151 — 2026-09-07 — 220-event US NBM model-ready pilot ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hipotez:** Outcome/price/forecast-blind 20 shared-date seçimi, 11 şehirde exact 220 event ve bounded leakage-safe join planı üretir.
+- **Selection:** Jan1–Aug15 eligible full-city dates sıralı; `round(i*(n-1)/19)` ile 20 evenly-spaced tarih; her tarihte 11 şehir.
+- **Inputs:** 18h indicative market vector, prior-day 07Z f41 `PROXY_18H_MAX`, terminal winner; raw price sum korunur.
+- **Gates:** dates=20, events=220, cities=11, duplicate=0; market≥%90, NBM≥%95, final join≥180, leakage=0, NBM transfer≤800 MiB.
+- **Stages:** Önce metadata selection/request cost; sonra price; sonra NBM; en son join. Başarısız katman düzelmeden model fit yok.
+- **Boundary:** Historical price executable fill değildir; model/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2088,7 +2098,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 11 şehri kapsayan bounded/stratified US market-outcome-NBM pilot datasetini ön kayıtla; full ingestion öncesi coverage, maliyet ve model-ready join gate'ini ölç.
+**Tek sonraki adım:** Ön kayıtlı 20 shared-date/220-event cohort'u yalnız identity metadata ile seç; price-token request ve NBM transfer hacmini analizden önce ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
