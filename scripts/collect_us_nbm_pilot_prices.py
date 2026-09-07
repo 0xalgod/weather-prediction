@@ -44,7 +44,7 @@ def main() -> int:
     for event in selected:
         raw = raw_lookup[str(event["event_id"])]
         start_ts = int(parse_utc(str(raw["creationDate"])).timestamp())
-        end_ts = int(parse_utc(str(raw["closedTime"])).timestamp())
+        end_ts = int(parse_utc(str(event["closed_time_utc"])).timestamp())
         for bucket in event["buckets"]:
             tokens.append(
                 {
