@@ -2079,6 +2079,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Historical price executable fill değildir; model/EV/P&L/emir yok.
 - **Pre-data amendment:** Event ID'leri freeze edildikten sonra price request=bucket-count sum; NBM conservative cost=locked 3-date probe max object bytes ×20. Cohort/eşik değişmedi.
 
+### D-0152 — 2026-09-07 — US pilot cohort selection gate geçti
+
+- **Durum:** `PASSED`
+- **Selection:** 138 eligible shared-date içinden locked evenly-spaced rule ile Mar24–Aug15 arası 20 tarih.
+- **Cohort:** Exact 220 event, 11 city, her şehir 20 event; duplicate city-date=0.
+- **Cost:** 2,420 YES-token price request; 20 NBM object conservative 696,133,480 byte (~664 MiB), 800 MiB cap altında.
+- **Leakage control:** Seçim yalnız city/date/event/resolution identity kullandı; outcome/price/forecast/model score kullanılmadı.
+- **Decision:** Stage 1 `COHORT_SELECTION_PASS`; frozen cohort üzerinde 18h price collection açıldı.
+- **Boundary:** Model/market üstünlüğü/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2099,7 +2109,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 20 shared-date/220-event cohort'u yalnız identity metadata ile seç; price-token request ve NBM transfer hacmini analizden önce ölç.
+**Tek sonraki adım:** Frozen 220-event cohort'un 2,420 YES token'ı için immutable 18h price-history collection çalıştır; complete-vector coverage≥%90 gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

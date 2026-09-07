@@ -1,0 +1,22 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-model-ready-pilot-v1",
+  "stage": "metadata_selection_and_cost",
+  "status": "PASSED",
+  "decision": "COHORT_SELECTION_PASS",
+  "result_path": "data/interim/us_nbm_model_ready_pilot/run=20260907T-selection-v1/result.json",
+  "result_sha256": "681f59c96fffc3b310f67e978b722bd6cbbf24e1ead89611ae17bf9f96c952d1",
+  "selected_events_sha256": "d0d352cf441b63ef0c7cf1cba00ef7f4e9a22e768e645569fb745c8c64820a8e",
+  "metrics": {
+    "eligible_shared_date_count": 138,
+    "selected_date_count": 20,
+    "selected_event_count": 220,
+    "city_count": 11,
+    "events_per_city": 20,
+    "duplicate_city_date_count": 0,
+    "market_token_request_count": 2420,
+    "nbm_full_object_count": 20,
+    "conservative_nbm_transfer_bytes": 696133480
+  },
+  "selection_period": ["2026-03-24", "2026-08-15"],
+  "next_step": "Collect immutable 18-hour market price histories for the frozen 2,420 YES tokens."
+}

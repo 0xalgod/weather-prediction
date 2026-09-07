@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — metadata-only cohort selection has not been run.
+`IN_PROGRESS` — metadata selection passed; market/NBM collection and join remain.
 
 ## Hypothesis
 
@@ -23,3 +23,9 @@ Use indicative market probabilities at 18 hours before market end and prior-day 
 ## Boundary
 
 This is a staged dataset feasibility experiment. No model is fit until the join gate passes. Historical prices are not executable fills; passing cannot establish positive EV or authorize trading.
+
+## Stage 1 result — selection and cost
+
+The frozen metadata-only rule found 138 full-city dates and selected 20 dates spanning 2026-03-24 through 2026-08-15. The cohort contains exactly 220 unique events, 20 per city, with zero duplicate city-date rows.
+
+The next stage requires 2,420 YES-token price-history requests. Twenty NBM objects have a conservative projected transfer of 696,133,480 bytes (about 664 MiB), below the locked 800 MiB ceiling. Stage 1 passed; no forecast or price value was used in selection.
