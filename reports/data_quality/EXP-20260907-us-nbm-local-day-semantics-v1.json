@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-local-day-semantics-v1",
+  "status": "PASSED",
+  "decision": "PROXY_18H_MAX_PASS",
+  "data_cutoff": "2026-09-07",
+  "processed_result": "data/processed/us_nbm_local_day_semantics/run=20260907T-v1/result.json",
+  "processed_result_sha256": "e4224d69ac90d216dc9885ded2981fefb8a42ab779d2ca7d2917a9b481266c0b",
+  "metrics": {
+    "city_count": 11,
+    "city_date_count": 44,
+    "minimum_overlap_hours": 16.0,
+    "maximum_overlap_hours": 18.0,
+    "maximum_market_hours_missing_from_nbm": 8.0,
+    "maximum_nbm_hours_outside_market_window": 2.0,
+    "timezone_conversion_error_count": 0,
+    "station_resolution_mismatch_count": 0,
+    "exact_window_equivalence_count": 0
+  },
+  "interpretation": "The locked f41 MaxT window is usable only as a predictive proxy. It is never a resolution-equivalent local-day outcome label in the evaluated US cohort.",
+  "allowed_use": "PROXY_18H_MAX feature with per-row overlap, omitted-hour, outside-hour, timezone, and DST metadata",
+  "forbidden_use": "Treat f41 TXNMN/TXNP as the actual local-calendar-day maximum temperature",
+  "next_step": "Build a bounded stratified US event/price/NBM pilot dataset and measure proxy forecast skill before full-scale ingestion."
+}

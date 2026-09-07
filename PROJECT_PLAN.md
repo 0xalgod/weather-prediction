@@ -2030,7 +2030,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0147 — 2026-09-07 — US NBM exact-duplicate corrective v2 ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hipotez:** Frozen May14 07Z objesindeki iki KDEN complete block byte-identical; deterministic canonicalization 36/36 coverage sağlar.
 - **Data:** v1'in üç immutable full object'i aynen kullanılacak; redownload yok.
 - **Rule:** Her block next generic station header/EOF sınırıyla çıkarılır; offset/length/SHA-256 kaydedilir. Multiple block yalnız tüm bytes ve hash'ler aynıysa first-copy canonical; conflict hard fail.
@@ -2050,13 +2050,23 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0149 — 2026-09-07 — US NBM local-day semantics ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hipotez:** 11 şehirde f41 MaxT exact local-day equivalent değildir; dört timezone/DST rejim tarihinde overlap≥16h ve outside≤2h ise yalnız `PROXY_18H_MAX` olarak korunabilir.
 - **Data:** Frozen 1,918-event US inventory, resolution URL station identity ve mevcut official-product KORD window evidence.
 - **Probe:** Jan15 standard, Mar8 spring DST, May15 daylight, Nov1 fall DST; 11 city × 4 date = 44 row.
 - **Gates:** City=11, rows=44, timezone/station mismatch=0, min overlap≥16h, max outside≤2h, exact equivalence=0.
 - **Decision use:** Pass yalnız proxy dataset genişlemesini açar; fail farklı cycle/fhr veya sub-daily reconstruction gerektirir.
 - **Boundary:** Outcome/price/forecast value/model/EV/P&L/emir yok.
+
+### D-0150 — 2026-09-07 — US NBM f41 yalnız proxy olarak kabul edildi
+
+- **Durum:** `PASSED`
+- **Coverage:** 11 city × 4 timezone/DST regime date = 44/44; identity/timezone error=0.
+- **Windows:** Overlap 16–18h; marketten eksik 5–8h; NBM outside 0–2h; exact equivalence 0/44.
+- **DST:** Spring/fall transition market günleri 23/25h olarak hesaplandı.
+- **Decision:** f41 yalnız `PROXY_18H_MAX`; timezone/DST/overlap/missing/outside metadata zorunlu. Outcome label olarak kullanımı yasak.
+- **Next:** Bounded ve city-stratified US market/outcome/NBM pilot dataset; full ingestion öncesi forecast skill ve incremental market value ölçümü.
+- **Boundary:** Henüz forecast skill, market üstünlüğü, execution veya EV kanıtı yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2078,7 +2088,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 11-city × 4-regime NBM/local-day window hesabını çalıştır; exact-equivalence değil proxy-use gate'ini değerlendir.
+**Tek sonraki adım:** 11 şehri kapsayan bounded/stratified US market-outcome-NBM pilot datasetini ön kayıtla; full ingestion öncesi coverage, maliyet ve model-ready join gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

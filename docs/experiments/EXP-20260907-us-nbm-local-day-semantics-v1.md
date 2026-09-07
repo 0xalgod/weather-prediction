@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — multicity timezone/DST calculation has not been run.
+`PASSED` — 44 locked city-date windows evaluated on 2026-09-07.
 
 ## Hypothesis
 
@@ -19,3 +19,9 @@ Require exactly 11 cities and 44 city-date rows; no timezone or station-resoluti
 ## Boundary
 
 No outcome, price, forecast value, model score, EV, P&L, or order is used. Passing does not mean that NBM directly predicts the resolution label; forecast skill must be measured later against actual outcomes.
+
+## Result
+
+All 11 cities and 44 city-date rows passed identity and timezone checks. The NBM window overlapped 16–18 hours of the market-local day, omitted at most eight market hours, and extended at most two hours outside it. Spring/fall DST days were correctly represented as 23/25-hour market days. No window was exactly equivalent.
+
+Decision: retain f41 only as `PROXY_18H_MAX`, with timezone, DST, overlap, missing-hour, and outside-hour metadata. It must not be used as the outcome label. A bounded, stratified US dataset pilot may now measure whether the proxy adds predictive value against actual resolved outcomes and market probabilities.
