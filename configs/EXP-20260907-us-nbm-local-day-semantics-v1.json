@@ -1,0 +1,46 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-local-day-semantics-v1",
+  "design_status": "PREREGISTERED_BEFORE_MULTICITY_WINDOW_CALCULATION",
+  "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "source_kord_semantics": "reports/data_quality/EXP-20260904-nbm-kord-local-day-semantics.json",
+  "hypothesis": "For all 11 US cities, prior-day 07Z NBM f41 probabilistic MaxT is not exactly equivalent to the Polymarket resolution city's local calendar day, but its documented 18-hour daytime window overlaps at least 16 hours of each tested local day and can therefore be retained only as an explicitly labelled predictive proxy.",
+  "cities": {
+    "Atlanta": {"station": "KATL", "timezone": "America/New_York"},
+    "Austin": {"station": "KAUS", "timezone": "America/Chicago"},
+    "Chicago": {"station": "KORD", "timezone": "America/Chicago"},
+    "Dallas": {"station": "KDAL", "timezone": "America/Chicago"},
+    "Denver": {"stations": ["KBKF", "KDEN"], "timezone": "America/Denver"},
+    "Houston": {"station": "KHOU", "timezone": "America/Chicago"},
+    "Los Angeles": {"station": "KLAX", "timezone": "America/Los_Angeles"},
+    "Miami": {"station": "KMIA", "timezone": "America/New_York"},
+    "NYC": {"station": "KLGA", "timezone": "America/New_York"},
+    "San Francisco": {"station": "KSFO", "timezone": "America/Los_Angeles"},
+    "Seattle": {"station": "KSEA", "timezone": "America/Los_Angeles"}
+  },
+  "probe": {
+    "target_dates": ["2026-01-15", "2026-03-08", "2026-05-15", "2026-11-01"],
+    "date_rationale": "standard time, DST spring transition, daylight time, DST fall transition",
+    "market_window": "city-local midnight inclusive to next city-local midnight exclusive",
+    "nbm_window_offsets_from_target_00z_utc_hours": [12, 30],
+    "nbm_reported_valid_offset_hours": 24,
+    "selection_used_outcomes_prices_or_forecast_values": false
+  },
+  "acceptance_thresholds": {
+    "exact_city_count": 11,
+    "exact_city_date_count": 44,
+    "minimum_overlap_hours": 16,
+    "maximum_nbm_hours_outside_market_window": 2,
+    "maximum_timezone_conversion_error_count": 0,
+    "maximum_station_resolution_mismatch_count": 0,
+    "expected_exact_window_equivalence_count": 0
+  },
+  "decision_rule": {
+    "pass": "Retain f41 MaxT only as PROXY_18H_MAX with overlap/missing/outside-window metadata.",
+    "fail": "Do not expand the f41 feature until a different NBM cycle/forecast-hour or sub-daily reconstruction is evaluated."
+  },
+  "boundary": {
+    "no_resolution_equivalence_claim": true,
+    "no_forecast_skill_ev_or_pnl_claim": true,
+    "orders": false
+  }
+}
