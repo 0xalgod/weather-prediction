@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP-20260907-us-pilot-price-eligibility-v2",
+  "status": "PASSED",
+  "decision": "PRICE_ELIGIBILITY_PASS",
+  "post_hoc_corrective": true,
+  "original_90_percent_gate_remains_failed": true,
+  "result_path": "data/processed/us_pilot_price_eligibility/run=20260907T-v2/result.json",
+  "result_sha256": "0fb023589b8c0f91b0b4267c5bec4e12ecfa540e639900ecea5a98724f8dfa58",
+  "classified_events_sha256": "2009a8e58f28db8f17844d55587b48ff67571f695d04da3b0622d7938b8459cd",
+  "metrics": {
+    "source_event_count": 220,
+    "price_eligible_event_count": 187,
+    "no_trade_incomplete_count": 32,
+    "no_trade_stale_count": 1,
+    "eligible_target_date_count": 17,
+    "city_count": 11,
+    "eligible_events_per_city": 17,
+    "request_error_count": 0,
+    "temporal_leakage_count": 0,
+    "duplicate_event_count": 0
+  },
+  "next_step": "Retrieve prior-day 07Z NBM for the 20 frozen dates; preserve all 220 rows and score later only where PRICE_ELIGIBLE."
+}

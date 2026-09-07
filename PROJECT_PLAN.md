@@ -2103,12 +2103,22 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0154 — 2026-09-07 — Price eligibility corrective v2 ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Disclosure:** Original %90 gate %85 ile fail görüldükten sonra tasarlanmış açık `POST_HOC` corrective; D-0153'ü supersede etmez.
 - **Rule:** Frozen 220/date/event değişmez; complete ve staleness≤12h ise `PRICE_ELIGIBLE`, aksi `NO_TRADE`; threshold değişmez.
 - **Gates:** Eligible event≥180, target-date cluster≥15, city başına≥15, city=11; request/leakage/duplicate=0.
 - **Decision use:** Pass ise tüm frozen tarihler için NBM retrieval; scoring yalnız aynı observable eligibility maskesinde. Fail ise pilot durur.
 - **Boundary:** Model/EV/P&L/emir yok.
+
+### D-0155 — 2026-09-07 — Frozen price eligibility corrective geçti
+
+- **Durum:** `PASSED`
+- **Eligible:** 187/220; 17 target-date cluster; 11 şehir × exact 17 event.
+- **NO_TRADE:** 32 incomplete vector + 1 >12h stale vector; event/date replacement yok.
+- **QC:** Request error=0, temporal leakage=0, duplicate event=0; tüm corrective gate'ler geçti.
+- **Decision:** Frozen 20 tarih için NBM retrieval açıldı; dataset 220 row'u koruyacak, scoring yalnız observable `PRICE_ELIGIBLE` 187 row'da.
+- **Disclosure:** Original preregistered %90 price coverage gate hâlâ `FAILED`; bu açık post-hoc corrective onu silmez.
+- **Boundary:** Forecast skill/market superiority/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2130,7 +2140,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı price eligibility corrective v2'yi frozen price artifact üzerinde çalıştır; cohort replacement olmadan sample/date/city balance gate'ini değerlendir.
+**Tek sonraki adım:** Frozen 20 target date için prior-day 07Z NBM full objects'i 800 MiB cap altında indir; 12 station/f41 required-field coverage≥%95 ve leakage=0 gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
