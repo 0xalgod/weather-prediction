@@ -2088,6 +2088,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Leakage control:** Seçim yalnız city/date/event/resolution identity kullandı; outcome/price/forecast/model score kullanılmadı.
 - **Decision:** Stage 1 `COHORT_SELECTION_PASS`; frozen cohort üzerinde 18h price collection açıldı.
 - **Boundary:** Model/market üstünlüğü/execution/EV/P&L/emir yok.
+- **Pre-retrieval amendment:** CLOB `prices-history`, interval=all/fidelity=1m, timeout=30s, max 3 attempt; exact 18h cutoff ve latest-before-cutoff, post-cutoff forbidden, max staleness=12h. Coverage eşiği değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 

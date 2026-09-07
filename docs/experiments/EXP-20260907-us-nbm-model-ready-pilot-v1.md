@@ -16,6 +16,8 @@ The shared-date design gives 220 events but only 20 prior-day NBM objects. Full-
 
 Pre-data amendment: after event IDs are frozen, market request count is the selected events' bucket-count sum. Conservative NBM transfer is 20 times the largest full-object byte count in the locked three-date station probe.
 
+Pre-retrieval amendment: query the Polymarket CLOB `prices-history` endpoint with `interval=all`, one-minute fidelity, 30-second timeout, at most three attempts, and linear one-second retry backoff. At the locked 18-hour cutoff, select only the latest point at or before cutoff and require maximum staleness of 12 hours for a usable full vector.
+
 ## Join contract and gates
 
 Use indicative market probabilities at 18 hours before market end and prior-day 07Z NBM f41 as `PROXY_18H_MAX`. Preserve raw price vectors/sums before normalization. Require 20 dates, 220 events, 11 cities, no duplicate city-date, market-vector coverage at least 90%, NBM coverage at least 95%, final join at least 180, zero leakage, and NBM transfer no more than 800 MiB.

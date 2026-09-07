@@ -29,6 +29,16 @@
     "outcome": "exactly one terminal winning Polymarket bucket",
     "market_vector": "complete positive YES vector normalized only after preserving raw values and raw sum"
   },
+  "price_history": {
+    "endpoint": "https://clob.polymarket.com/prices-history",
+    "interval": "all",
+    "fidelity_minutes": 1,
+    "request_timeout_seconds": 30,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1,
+    "maximum_staleness_seconds": 43200,
+    "point_rule": "latest valid point at or before end_date_utc minus 18 hours; post-cutoff points forbidden"
+  },
   "acceptance_thresholds": {
     "exact_selected_date_count": 20,
     "exact_selected_event_count": 220,
