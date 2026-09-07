@@ -1,0 +1,29 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-model-ready-pilot-v1",
+  "stage": "market_price_collection",
+  "status": "FAILED",
+  "decision": "MARKET_PRICE_COLLECTION_FAIL",
+  "result_path": "data/raw/us_nbm_model_ready_pilot_prices/run=20260907T-v1/result.json",
+  "result_sha256": "27b9b27be34344fc727b821d02056676edb469938ff778a04c505f5cfa755ebb",
+  "event_horizon_coverage_sha256": "2c7fd37e99fdb50ed4eb76f3fe3977bd86082db6a8db0674518b0591c2033b7d",
+  "token_diagnostics_sha256": "4dd424a44c2b1b7c61d53cc3d1e3e99dd65483aabf504b9bf89b7e8b6c290b31",
+  "metrics": {
+    "event_count": 220,
+    "token_request_count": 2420,
+    "request_error_count": 0,
+    "temporal_leakage_count": 0,
+    "complete_vector_event_count": 188,
+    "usable_full_vector_event_count": 187,
+    "usable_full_vector_event_rate": 0.85,
+    "required_rate": 0.9,
+    "cities_with_usable_vector": 11
+  },
+  "diagnostic": {
+    "zero_usable_dates": ["2026-04-01", "2026-04-08", "2026-04-18"],
+    "fully_usable_dates": 17,
+    "usable_events_per_city": 17,
+    "stale_only_event_count": 1,
+    "incomplete_vector_event_count": 32
+  },
+  "interpretation": "The preregistered 90% rate gate failed. Missingness is concentrated in three complete date clusters rather than cities or transport errors. Threshold remains unchanged."
+}

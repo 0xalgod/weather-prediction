@@ -2090,6 +2090,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Model/market üstünlüğü/execution/EV/P&L/emir yok.
 - **Pre-retrieval amendment:** CLOB `prices-history`, interval=all/fidelity=1m, timeout=30s, max 3 attempt; exact 18h cutoff ve latest-before-cutoff, post-cutoff forbidden, max staleness=12h. Coverage eşiği değişmedi.
 
+### D-0153 — 2026-09-07 — US pilot 18h price coverage gate fail
+
+- **Durum:** `FAILED`
+- **Retrieval:** 2,420/2,420 HTTP/parse success; request error=0; temporal leakage=0.
+- **Coverage:** Complete 188/220; usable≤12h stale 187/220=%85; preregistered minimum %90 sağlanmadı.
+- **Concentration:** Apr1/Apr8/Apr18 tarihlerinde 11/11 şehir unusable; diğer 17 tarih 11/11 usable. Her şehir exact 17 usable event.
+- **Failure type:** 32 incomplete vector; Apr8 Dallas complete fakat 237,597s stale. Transport/city-specific problem değil, üç date cluster.
+- **Decision:** Stage 2 `FAILED`; %90 threshold değişmedi. NBM collection/model fit kapalı.
+- **Next:** Frozen cohort'u değiştirmeden incomplete tarihleri real-time `NO_TRADE` olarak ele alan, final n≥180 ve city balance kriterli açık post-hoc corrective v2 ön kaydı.
+- **Boundary:** Indicative history; execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2110,7 +2121,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 220-event cohort'un 2,420 YES token'ı için immutable 18h price-history collection çalıştır; complete-vector coverage≥%90 gate'ini ölç.
+**Tek sonraki adım:** Price gate corrective v2'yi açıkça post-hoc ön kayıtla; cohort/date replacement yapmadan incomplete eventleri `NO_TRADE` say ve minimum final sample/city-balance kararını frozen artifact üzerinde değerlendir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

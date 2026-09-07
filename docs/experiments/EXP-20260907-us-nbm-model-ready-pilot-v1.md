@@ -31,3 +31,9 @@ This is a staged dataset feasibility experiment. No model is fit until the join 
 The frozen metadata-only rule found 138 full-city dates and selected 20 dates spanning 2026-03-24 through 2026-08-15. The cohort contains exactly 220 unique events, 20 per city, with zero duplicate city-date rows.
 
 The next stage requires 2,420 YES-token price-history requests. Twenty NBM objects have a conservative projected transfer of 696,133,480 bytes (about 664 MiB), below the locked 800 MiB ceiling. Stage 1 passed; no forecast or price value was used in selection.
+
+## Stage 2 result — market prices
+
+The collector completed all 2,420 requests with zero request errors and zero post-cutoff leakage. However, only 187/220 events (85%) had a complete vector within the locked 12-hour staleness limit, below the preregistered 90% threshold. Stage 2 therefore failed; the threshold was not relaxed.
+
+Missingness was date-clustered: all 11 cities were unusable on April 1, April 8, and April 18, while the other 17 dates were fully usable. Every city retained exactly 17 usable events. One April 8 Dallas vector was complete but stale; the other 32 failures were incomplete. No NBM download or model fitting may proceed until a corrective experiment explicitly handles this gate.
