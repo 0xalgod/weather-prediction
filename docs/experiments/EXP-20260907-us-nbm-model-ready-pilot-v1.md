@@ -47,3 +47,9 @@ All 20 prior-day 07Z objects downloaded successfully. All 240 locked station-dat
 Stage 3 passed. The next stage must preserve all 220 events, join city/station-specific NBM features and price eligibility, and retain the 33 ineligible rows as `NO_TRADE` rather than silently dropping them.
 
 Pre-join amendment: parse the exact resolution station from each event URL; join NBM on target date plus station and price eligibility on event ID. Preserve raw market values and sums; normalize only complete positive `PRICE_ELIGIBLE` vectors. Require exactly one terminal winner. Recalculate proxy-window metadata from target date and the locked city IANA timezone. Retain `NO_TRADE` rows without a normalized market vector.
+
+## Stage 4 result — model-ready join
+
+The join retained all 220 frozen events: 187 `PRICE_ELIGIBLE` rows and 33 preserved `NO_TRADE` rows. All 11 cities and 20 target dates remained. Join errors, missing NBM features, duplicate events, and normalized vectors on no-trade rows were zero. Maximum eligible-vector normalization error was `4.44e-16`.
+
+The dataset feasibility experiment passed. Model work may begin only under a new chronological evaluation preregistration. The original 90% market coverage failure and the post-hoc eligibility correction remain visible limitations.

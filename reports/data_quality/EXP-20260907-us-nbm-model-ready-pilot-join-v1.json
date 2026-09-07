@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-model-ready-pilot-v1",
+  "stage": "model_ready_join",
+  "status": "PASSED",
+  "decision": "MODEL_READY_JOIN_PASS",
+  "result_path": "data/processed/us_nbm_model_ready_pilot/run=20260907T-v1/result.json",
+  "result_sha256": "e7c33e5f161fe91c8bb298317fc275f6b6f82c94816ae1cf6cf144cf40134eae",
+  "rows_sha256": "c48709bf887e7e6e8ee0f6c55bee6bdb3435475a938a8c0f2e823b061ccc273a",
+  "metrics": {
+    "source_event_count": 220,
+    "retained_event_count": 220,
+    "price_eligible_join_count": 187,
+    "no_trade_retained_count": 33,
+    "city_count": 11,
+    "target_date_count": 20,
+    "join_error_count": 0,
+    "nbm_missing_count": 0,
+    "duplicate_event_count": 0,
+    "no_trade_with_normalized_vector_count": 0,
+    "maximum_probability_normalization_error": 4.440892098500626e-16
+  },
+  "next_step": "Preregister a chronological benchmark using only the 187 PRICE_ELIGIBLE rows; compare market, NBM quantile distribution, and a fixed blend without tuning on test."
+}

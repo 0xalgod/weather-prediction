@@ -2070,7 +2070,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0151 — 2026-09-07 — 220-event US NBM model-ready pilot ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hipotez:** Outcome/price/forecast-blind 20 shared-date seçimi, 11 şehirde exact 220 event ve bounded leakage-safe join planı üretir.
 - **Selection:** Jan1–Aug15 eligible full-city dates sıralı; `round(i*(n-1)/19)` ile 20 evenly-spaced tarih; her tarihte 11 şehir.
 - **Inputs:** 18h indicative market vector, prior-day 07Z f41 `PROXY_18H_MAX`, terminal winner; raw price sum korunur.
@@ -2132,6 +2132,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** f41 hâlâ `PROXY_18H_MAX`; model skill/market superiority/execution/EV/P&L/emir yok.
 - **Pre-join amendment:** Station resolution URL'den exact parse; NBM key=(target_date,station), price key=event_id; raw price/sum korunur, yalnız positive complete eligible vector normalize; exactly-one winner; per-date timezone window yeniden hesaplanır; NO_TRADE satırları korunur.
 
+### D-0157 — 2026-09-07 — US NBM model-ready pilot dataset geçti
+
+- **Durum:** `PASSED`
+- **Retention:** 220/220 frozen event; 187 `PRICE_ELIGIBLE`, 33 retained `NO_TRADE`; 11 city/20 target date.
+- **Join QC:** Error/NBM missing/duplicate=0; NO_TRADE normalized vector=0; max probability normalization error 4.44e-16.
+- **Dataset:** Event/bucket/winner + 18h raw/normalized market + price eligibility + exact station f41 quantiles + timezone/DST proxy-window metadata.
+- **Decision:** Dataset feasibility tamamlandı; yeni temporal evaluation ön kaydı altında model benchmark açıldı.
+- **Limitations:** Original %90 coverage fail ve post-hoc eligibility correction görünür; indicative price executable fill değildir; f41 resolution-equivalent değil.
+- **Boundary:** Henüz model skill, market superiority, execution veya net EV yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2152,7 +2162,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 220 event'i price eligibility/vector, terminal winner, city-specific NBM f41 ve proxy-window metadata ile join et; all-row retention ve final eligible join≥180 gate'ini ölç.
+**Tek sonraki adım:** 187 PRICE_ELIGIBLE row için chronological date split'li market vs NBM-quantile vs fixed-blend benchmark'ını ön kayıtla; test tuning yasak ve date-cluster belirsizlik zorunlu.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
