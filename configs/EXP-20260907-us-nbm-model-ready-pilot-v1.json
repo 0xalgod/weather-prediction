@@ -25,6 +25,8 @@
     "full_object_once_per_selected_date": true,
     "worker_count": 4,
     "request_timeout_seconds": 90,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1,
     "station_duplicate_rule": "canonicalize only complete byte-identical duplicates; conflicting duplicates fail",
     "source_last_modified_must_not_exceed_decision_time": true
   },

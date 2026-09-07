@@ -2119,7 +2119,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Frozen 20 tarih için NBM retrieval açıldı; dataset 220 row'u koruyacak, scoring yalnız observable `PRICE_ELIGIBLE` 187 row'da.
 - **Disclosure:** Original preregistered %90 price coverage gate hâlâ `FAILED`; bu açık post-hoc corrective onu silmez.
 - **Boundary:** Forecast skill/market superiority/execution/EV/P&L/emir yok.
-- **Pre-NBM amendment:** URL'ler checksum-tracked annual 07Z inventory'den; Last-Modified≤run-date 11Z; 4 worker/90s; full object tarih başına bir kez; yalnız exact-identical duplicate canonicalization. 800 MiB/%95 gate değişmedi.
+- **Pre-NBM amendment:** URL'ler checksum-tracked annual 07Z inventory'den; Last-Modified≤run-date 11Z; 4 worker/90s/max 3 attempt/1s linear backoff; full object tarih başına bir kez; yalnız exact-identical duplicate canonicalization. 800 MiB/%95 gate değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
