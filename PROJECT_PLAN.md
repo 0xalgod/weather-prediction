@@ -2121,6 +2121,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Forecast skill/market superiority/execution/EV/P&L/emir yok.
 - **Pre-NBM amendment:** URL'ler checksum-tracked annual 07Z inventory'den; Last-Modified≤run-date 11Z; 4 worker/90s/max 3 attempt/1s linear backoff; full object tarih başına bir kez; yalnız exact-identical duplicate canonicalization. 800 MiB/%95 gate değişmedi.
 
+### D-0156 — 2026-09-07 — US pilot NBM feature gate geçti
+
+- **Durum:** `PASSED`
+- **Retrieval:** 20/20 prior-day 07Z full object; failure=0; actual 694,913,515 byte (~663 MiB), 800 MiB cap altında.
+- **Features:** 20 date ×12 station=240/240 f41 required fields; coverage=%100; station error=0.
+- **Temporal QC:** Publication leakage=0.
+- **Duplicates:** 6 source duplicate set yalnız complete byte-identical kanıtıyla canonicalize edildi; conflict=0.
+- **Decision:** Stage 3 `NBM_FEATURE_COLLECTION_PASS`; 220-row final model-ready join açıldı.
+- **Boundary:** f41 hâlâ `PROXY_18H_MAX`; model skill/market superiority/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2141,7 +2151,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 20 target date için prior-day 07Z NBM full objects'i 800 MiB cap altında indir; 12 station/f41 required-field coverage≥%95 ve leakage=0 gate'ini ölç.
+**Tek sonraki adım:** Frozen 220 event'i price eligibility/vector, terminal winner, city-specific NBM f41 ve proxy-window metadata ile join et; all-row retention ve final eligible join≥180 gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

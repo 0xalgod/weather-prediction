@@ -39,3 +39,9 @@ The next stage requires 2,420 YES-token price-history requests. Twenty NBM objec
 The collector completed all 2,420 requests with zero request errors and zero post-cutoff leakage. However, only 187/220 events (85%) had a complete vector within the locked 12-hour staleness limit, below the preregistered 90% threshold. Stage 2 therefore failed; the threshold was not relaxed.
 
 Missingness was date-clustered: all 11 cities were unusable on April 1, April 8, and April 18, while the other 17 dates were fully usable. Every city retained exactly 17 usable events. One April 8 Dallas vector was complete but stale; the other 32 failures were incomplete. No NBM download or model fitting may proceed until a corrective experiment explicitly handles this gate.
+
+## Stage 3 result — NBM features
+
+All 20 prior-day 07Z objects downloaded successfully. All 240 locked station-date combinations produced complete f41 probabilistic features, with zero publication leakage and zero station errors. Six duplicate block sets were accepted only after complete byte equality. Actual transfer was 694,913,515 bytes (about 663 MiB), below the 800 MiB cap.
+
+Stage 3 passed. The next stage must preserve all 220 events, join city/station-specific NBM features and price eligibility, and retain the 33 ineligible rows as `NO_TRADE` rather than silently dropping them.

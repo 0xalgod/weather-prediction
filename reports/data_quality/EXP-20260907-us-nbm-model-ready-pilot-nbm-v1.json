@@ -1,0 +1,23 @@
+{
+  "experiment_id": "EXP-20260907-us-nbm-model-ready-pilot-v1",
+  "stage": "nbm_feature_collection",
+  "status": "PASSED",
+  "decision": "NBM_FEATURE_COLLECTION_PASS",
+  "result_path": "data/raw/us_nbm_model_ready_pilot_nbm/run=20260907T-v1/result.json",
+  "result_sha256": "9b8287a62ac28f66523e1afcd7aa1a677cd1c262c517e42536ffc8a4a1368226",
+  "station_dates_sha256": "f307e0f651df4bd4491ba3936ee1fd748804e15ca3bddbe51bf18f6877d29de6",
+  "metrics": {
+    "target_date_count": 20,
+    "station_count": 12,
+    "expected_station_date_count": 240,
+    "passed_station_date_count": 240,
+    "nbm_feature_rate": 1.0,
+    "full_object_success_count": 20,
+    "full_object_failure_count": 0,
+    "full_object_transfer_bytes": 694913515,
+    "temporal_leakage_count": 0,
+    "station_error_count": 0,
+    "identical_duplicate_set_count": 6
+  },
+  "next_step": "Join all 220 frozen events with price eligibility, 18-hour market vectors, station-specific NBM features, winners, and proxy-window metadata."
+}
