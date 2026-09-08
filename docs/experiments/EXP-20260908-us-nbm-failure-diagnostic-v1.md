@@ -8,6 +8,8 @@
 
 Does the rejected NBM blend have a stable, actionable city-bias mechanism, or is its underperformance diffuse? Use only the 99 development and 44 validation events. The final four test dates remain unread and unscored. Reuse the locked -1°F/1.5× calibration; fit no new parameter.
 
+The exact development and validation date lists are copied unchanged from the parent experiment config into the machine-readable diagnostic config before calculation; no dynamic split inference is allowed.
+
 ## Diagnostics
 
 For each city and split, measure the signed distance from calibrated NBM median to the winning bucket interval, winner-interval containment, raw/calibrated NBM losses, forecast spread, and challenger-minus-market loss. Also report loss by 16/17/18-hour proxy overlap.

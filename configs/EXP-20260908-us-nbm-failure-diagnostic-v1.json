@@ -9,6 +9,8 @@
   "data_policy": {
     "included": "PRICE_ELIGIBLE development and validation dates from EXP-20260908-us-nbm-quantile-calibration-v1",
     "excluded": "all four untouched test dates",
+    "development_dates": ["2026-03-24", "2026-04-25", "2026-05-02", "2026-05-09", "2026-05-17", "2026-05-26", "2026-06-02", "2026-06-09", "2026-06-16"],
+    "validation_dates": ["2026-06-25", "2026-07-02", "2026-07-10", "2026-07-17"],
     "locked_calibration": {"shift_f": -1.0, "spread_scale": 1.5},
     "no_parameter_fit_or_model_selection": true
   },

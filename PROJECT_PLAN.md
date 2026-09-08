@@ -2173,6 +2173,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Concentration:** Validation'da top-3 positive city excess-loss / total positive city excess-loss.
 - **GO:** Stable city≥6 VE concentration≥%50; ancak o zaman tek low-capacity city-offset challenger ön kaydı. Aksi NBM branch `NO_GO`.
 - **Boundary:** Exploratory/multiple slices; test untouched; execution/EV/P&L/emir yok.
+- **Pre-run clarification:** Dev/validation exact date list parent config'den diagnostic config'e aynen kopyalandı; dynamic split inference yok, eşikler değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
