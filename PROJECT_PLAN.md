@@ -2144,13 +2144,25 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0158 — 2026-09-08 — US NBM quantile calibration benchmark ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Data/split:** Yalnız 187 eligible; chronological 9 date/99 dev, 4/44 validation, 4/44 untouched test; random split yok.
 - **Training:** City-agnostic 78 grid: shift -6..+6°F step1 × spread {0.5,0.75,1,1.25,1.5,2}; dev log loss selection, simplicity tie-break.
 - **Models:** Uniform, 18h market, raw NBM quantile, calibrated NBM quantile; challenger=fixed %50 market+%50 calibrated.
 - **Validation gate:** Cluster=4, log loss improvement≥%2, Brier farkı≤0, invalid vector=0. Fail ise test tüketilmez.
 - **Test:** Validation pass ise bir kez; aynı point gates. Date-cluster bootstrap 10k/seed20260908 raporlanır, 4 cluster nedeniyle CI exclusion gate değil.
 - **Boundary:** Indicative price, post-hoc eligibility ve proxy forecast limitleri; execution/net EV/P&L/emir yok.
+
+### D-0159 — 2026-09-08 — US NBM calibrated blend validation'da reddedildi
+
+- **Durum:** `FAILED`
+- **Fit:** Dev 99 event'te selected shift=-1°F, spread=1.5×; raw→calibrated NBM log loss 1.9764→1.5036; market=1.2600.
+- **Validation:** 44 event/4 date; market/calibrated/blend log loss 1.5341/2.1663/1.6224.
+- **Incremental:** Blend marketten %5.76 kötü; Brier farkı +0.00569; iki preregistered point gate fail.
+- **Uncertainty:** Date-cluster blend−market log loss +0.0883, CI95 [+0.0631,+0.1153]; invalid vector=0.
+- **Test policy:** Son 44 event hiç skorlanmadı; test untouched.
+- **Decision:** City-agnostic NBM quantile calibration ve fixed %50 blend reddedildi; daha geniş grid veya test tuning yok.
+- **Next:** Yalnız dev+validation üzerinde city bias, proxy-window mismatch, winner distance ve distribution-shape diagnostic; yüksek kapasite model ancak mekanizma kanıtıyla.
+- **Boundary:** Indicative price/execution yok; pozitif EV veya live yetki yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2172,7 +2184,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı US NBM quantile calibration'ı development'ta fit et; validation gate'i çalıştır ve yalnız geçerse untouched test'i bir kez skorla.
+**Tek sonraki adım:** Untouched test'e dokunmadan dev+validation NBM failure diagnostic'ini ön kayıtla; city bias/window mismatch/winner-distance mekanizmasını ölç ve yeni model için go/no-go ver.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no model probabilities or scores have been computed.
+`FAILED` — validation rejected the challenger; test remains untouched.
 
 ## Hypothesis and split
 
@@ -23,3 +23,11 @@ Validation must have four date clusters, at least 2% challenger log-loss improve
 ## Boundary
 
 Prices are indicative rather than fills, price eligibility came from a disclosed post-hoc corrective, and NBM f41 is a proxy rather than the resolution label. Passing would establish only a research signal, not executable EV or trading authorization.
+
+## Result
+
+Development selected a common -1°F shift and 1.5× spread. This reduced development raw-NBM log loss from 1.9764 to 1.5036, but the market remained better at 1.2600; the fixed blend scored 1.2753.
+
+On validation, market/calibrated-NBM/blend log loss was 1.5341/2.1663/1.6224. The blend was 5.76% worse than market and worsened Brier by 0.00569. Paired date-cluster bootstrap blend-minus-market log loss was +0.0883 with CI95 [+0.0631, +0.1153]. Both economic point gates failed, with zero invalid vectors.
+
+Per policy, the final 44-event test set was not scored. The model is rejected. Before increasing model capacity, diagnostics must determine whether failure is associated with city bias, proxy-window mismatch, forecast distribution shape, or broad lack of incremental information.

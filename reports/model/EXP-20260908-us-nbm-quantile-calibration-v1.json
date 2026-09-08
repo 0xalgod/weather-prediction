@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-20260908-us-nbm-quantile-calibration-v1",
+  "status": "FAILED",
+  "decision": "VALIDATION_REJECT_TEST_UNTOUCHED",
+  "result_path": "data/processed/us_nbm_quantile_calibration/run=20260908T-v1/result.json",
+  "result_sha256": "b6c798e05bca6ba085994a402937cde940a0d7fd07dfb585b153bd7a9da50ad9",
+  "validation_scores_sha256": "0067470fb2c2146cf837650431e673fca2e31150afcf8da720732695f00d37f4",
+  "split_counts": {"development": 99, "validation": 44, "test": 44},
+  "selected_calibration": {"shift_f": -1.0, "spread_scale": 1.5},
+  "development_log_loss": {
+    "market": 1.2599685577800885,
+    "raw_nbm_quantile": 1.976367381065835,
+    "calibrated_nbm_quantile": 1.5035640268327497,
+    "challenger": 1.2752749483359747
+  },
+  "validation": {
+    "date_cluster_count": 4,
+    "market_log_loss": 1.5341243955449877,
+    "raw_nbm_quantile_log_loss": 2.3698990145427232,
+    "calibrated_nbm_quantile_log_loss": 2.16633730727396,
+    "challenger_log_loss": 1.6224305416480218,
+    "challenger_improvement_fraction": -0.05756126840787505,
+    "challenger_minus_market_brier": 0.005687702544170059,
+    "challenger_minus_market_log_loss_ci95": [0.06306505514013694, 0.11530758770393588],
+    "invalid_probability_vector_count": 0
+  },
+  "test_consumed": false,
+  "interpretation": "The calibrated NBM proxy improved raw NBM but did not add value to the market. The fixed blend failed both preregistered validation point-metric gates, so test remained untouched.",
+  "next_step": "Run a preregistered development/validation diagnostic of NBM residuals by city, forecast-window mismatch, and winner distance before proposing any higher-capacity model."
+}
