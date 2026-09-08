@@ -2142,6 +2142,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Limitations:** Original %90 coverage fail ve post-hoc eligibility correction görünür; indicative price executable fill değildir; f41 resolution-equivalent değil.
 - **Boundary:** Henüz model skill, market superiority, execution veya net EV yok.
 
+### D-0158 — 2026-09-08 — US NBM quantile calibration benchmark ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Data/split:** Yalnız 187 eligible; chronological 9 date/99 dev, 4/44 validation, 4/44 untouched test; random split yok.
+- **Training:** City-agnostic 78 grid: shift -6..+6°F step1 × spread {0.5,0.75,1,1.25,1.5,2}; dev log loss selection, simplicity tie-break.
+- **Models:** Uniform, 18h market, raw NBM quantile, calibrated NBM quantile; challenger=fixed %50 market+%50 calibrated.
+- **Validation gate:** Cluster=4, log loss improvement≥%2, Brier farkı≤0, invalid vector=0. Fail ise test tüketilmez.
+- **Test:** Validation pass ise bir kez; aynı point gates. Date-cluster bootstrap 10k/seed20260908 raporlanır, 4 cluster nedeniyle CI exclusion gate değil.
+- **Boundary:** Indicative price, post-hoc eligibility ve proxy forecast limitleri; execution/net EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2162,7 +2172,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** 187 PRICE_ELIGIBLE row için chronological date split'li market vs NBM-quantile vs fixed-blend benchmark'ını ön kayıtla; test tuning yasak ve date-cluster belirsizlik zorunlu.
+**Tek sonraki adım:** Ön kayıtlı US NBM quantile calibration'ı development'ta fit et; validation gate'i çalıştır ve yalnız geçerse untouched test'i bir kez skorla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

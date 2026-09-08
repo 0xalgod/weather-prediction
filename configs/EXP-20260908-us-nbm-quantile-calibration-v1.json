@@ -1,0 +1,59 @@
+{
+  "experiment_id": "EXP-20260908-us-nbm-quantile-calibration-v1",
+  "design_status": "PREREGISTERED_BEFORE_MODEL_SCORING",
+  "source_dataset": "data/processed/us_nbm_model_ready_pilot/run=20260907T-v1/rows.jsonl",
+  "source_dataset_sha256": "c48709bf887e7e6e8ee0f6c55bee6bdb3435475a938a8c0f2e823b061ccc273a",
+  "hypothesis": "A city-agnostic development-fitted shift/spread calibration of NBM quantiles, blended 50/50 with 18-hour market probabilities, improves validation log loss by at least 2% versus the market alone without worsening Brier score; only then may it be evaluated once on the untouched test dates.",
+  "eligibility": {
+    "required_price_status": "PRICE_ELIGIBLE",
+    "expected_event_count": 187,
+    "expected_date_cluster_count": 17
+  },
+  "temporal_split": {
+    "development_dates": ["2026-03-24", "2026-04-25", "2026-05-02", "2026-05-09", "2026-05-17", "2026-05-26", "2026-06-02", "2026-06-09", "2026-06-16"],
+    "validation_dates": ["2026-06-25", "2026-07-02", "2026-07-10", "2026-07-17"],
+    "test_dates": ["2026-07-24", "2026-08-01", "2026-08-08", "2026-08-15"],
+    "expected_counts": {"development": 99, "validation": 44, "test": 44},
+    "random_split": false
+  },
+  "models": {
+    "market": "normalized indicative 18-hour YES vector",
+    "uniform": "equal probability across native buckets",
+    "raw_nbm_quantile": "piecewise-linear quantile-preserving CDF; 1F precision; 1F minimum tail width",
+    "calibrated_nbm_quantile": "development-selected common shift and spread scale applied around NBM median",
+    "challenger": "fixed 0.50 market plus 0.50 calibrated NBM quantile"
+  },
+  "calibration_grid": {
+    "shift_f": {"minimum": -6, "maximum": 6, "step": 1},
+    "spread_scale": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0],
+    "candidate_count": 78,
+    "selection_metric": "development mean multiclass log loss",
+    "tie_break": "minimum absolute shift, then scale nearest 1.0, then lower shift/scale",
+    "city_specific_parameters": false
+  },
+  "metrics": {
+    "probability_floor": 0.000001,
+    "primary": "multiclass_log_loss",
+    "secondary": ["multiclass_brier_score", "ranked_probability_score"],
+    "uncertainty": "paired target-date cluster bootstrap, 10000 repetitions, seed 20260908"
+  },
+  "validation_gate": {
+    "minimum_date_clusters": 4,
+    "minimum_challenger_log_loss_improvement_fraction": 0.02,
+    "maximum_challenger_minus_market_brier": 0.0,
+    "maximum_invalid_probability_vector_count": 0
+  },
+  "test_policy": {
+    "consume_only_if_validation_gate_passes": true,
+    "success_requires_same_point_metric_gates": true,
+    "confidence_interval_reported_but_not_required_to_exclude_zero_due_four_clusters": true,
+    "no_test_tuning_or_model_reselection": true
+  },
+  "boundary": {
+    "historical_market_prices_are_indicative_not_executable": true,
+    "price_eligibility_was_post_hoc_corrective": true,
+    "nbm_feature_is_proxy_18h_max_not_resolution_equivalent": true,
+    "no_execution_ev_pnl_or_live_claim": true,
+    "orders": false
+  }
+}
