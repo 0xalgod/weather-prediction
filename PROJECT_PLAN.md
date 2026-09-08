@@ -2164,6 +2164,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Next:** Yalnız dev+validation üzerinde city bias, proxy-window mismatch, winner distance ve distribution-shape diagnostic; yüksek kapasite model ancak mekanizma kanıtıyla.
 - **Boundary:** Indicative price/execution yok; pozitif EV veya live yetki yok.
 
+### D-0160 — 2026-09-08 — NBM failure mechanism diagnostic ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Data:** Yalnız 99 dev+44 validation; 44 test event/date okunmaz ve skorlanmaz; locked -1°F/1.5×, yeni fit yok.
+- **Measures:** City/split signed calibrated-median→winner-interval distance, containment, raw/calibrated loss, spread, challenger−market loss; overlap 16/17/18h slices.
+- **Stable bias:** Dev/validation mean signed distance aynı nonzero yön, |dev mean|≥1°F; her city dev≥9/val≥4.
+- **Concentration:** Validation'da top-3 positive city excess-loss / total positive city excess-loss.
+- **GO:** Stable city≥6 VE concentration≥%50; ancak o zaman tek low-capacity city-offset challenger ön kaydı. Aksi NBM branch `NO_GO`.
+- **Boundary:** Exploratory/multiple slices; test untouched; execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2184,7 +2194,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Untouched test'e dokunmadan dev+validation NBM failure diagnostic'ini ön kayıtla; city bias/window mismatch/winner-distance mekanizmasını ölç ve yeni model için go/no-go ver.
+**Tek sonraki adım:** Ön kayıtlı dev+validation failure diagnostic'ini çalıştır; stable city bias ve loss concentration eşiklerinden city-offset model için GO/NO_GO kararı ver.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

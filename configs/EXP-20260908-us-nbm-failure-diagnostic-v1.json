@@ -1,0 +1,39 @@
+{
+  "experiment_id": "EXP-20260908-us-nbm-failure-diagnostic-v1",
+  "design_status": "PREREGISTERED_BEFORE_DIAGNOSTIC_CALCULATION",
+  "source_dataset": "data/processed/us_nbm_model_ready_pilot/run=20260907T-v1/rows.jsonl",
+  "source_dataset_sha256": "c48709bf887e7e6e8ee0f6c55bee6bdb3435475a938a8c0f2e823b061ccc273a",
+  "source_model_result": "data/processed/us_nbm_quantile_calibration/run=20260908T-v1/result.json",
+  "source_model_result_sha256": "b6c798e05bca6ba085994a402937cde940a0d7fd07dfb585b153bd7a9da50ad9",
+  "hypothesis": "The failed aggregate NBM blend has an actionable, temporally stable city-bias mechanism rather than diffuse incremental underperformance: at least six cities have same-direction material median-to-winner residuals in development and validation, and the three worst validation cities account for at least 50% of positive challenger excess log loss.",
+  "data_policy": {
+    "included": "PRICE_ELIGIBLE development and validation dates from EXP-20260908-us-nbm-quantile-calibration-v1",
+    "excluded": "all four untouched test dates",
+    "locked_calibration": {"shift_f": -1.0, "spread_scale": 1.5},
+    "no_parameter_fit_or_model_selection": true
+  },
+  "diagnostics": {
+    "signed_median_to_winner_interval_distance_f": "zero inside winning bucket; negative below its finite lower bound; positive above its finite upper bound; zero when forecast lies in the open direction of a tail",
+    "material_city_bias_threshold_f": 1.0,
+    "stable_city_bias": "development and validation mean signed distances have the same nonzero sign and development absolute mean is at least 1F",
+    "excess_loss": "challenger multiclass log loss minus market multiclass log loss",
+    "concentration": "three largest positive city validation excess-loss totals divided by total positive city excess-loss",
+    "window_slices": [16.0, 17.0, 18.0],
+    "distribution_shape": ["winner interval containment", "raw and calibrated NBM loss", "forecast spread"]
+  },
+  "go_no_go": {
+    "minimum_stable_material_bias_city_count": 6,
+    "minimum_top3_positive_excess_loss_concentration": 0.5,
+    "minimum_development_events_per_city": 9,
+    "minimum_validation_events_per_city": 4,
+    "go_requires_all_thresholds": true,
+    "go": "Permit one low-capacity city-offset challenger preregistered before touching test.",
+    "no_go": "Do not build city-specific NBM model; keep test untouched and pivot away from this NBM branch."
+  },
+  "boundary": {
+    "diagnostic_not_confirmatory_model_test": true,
+    "multiple_city_slices_disclosed": true,
+    "test_untouched": true,
+    "no_execution_ev_pnl_or_orders": true
+  }
+}
