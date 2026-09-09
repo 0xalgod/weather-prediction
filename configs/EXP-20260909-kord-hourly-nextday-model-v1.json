@@ -1,0 +1,30 @@
+{
+  "experiment_id": "EXP-20260909-kord-hourly-nextday-model-v1",
+  "design_status": "PREREGISTERED_BEFORE_FEATURE_BUILD_FIT_OR_SCORE",
+  "source_hourly": "data/processed/kord_hourly_two_year/run=20260909T-v1/hourly.jsonl",
+  "source_hourly_sha256": "649dae17faee433f352fc5ac4611445de208c951bf1163b79785d9c1fb835a74",
+  "source_labels": "data/processed/kord_hourly_two_year/run=20260909T-v1/labels.jsonl",
+  "source_labels_sha256": "a6b3f906582a1d81667666a951ccb0ec26bc55faf033729c627a8f82b9d266c9",
+   "target": "KORD SOD DailyMaximumDryBulbTemperature in Celsius",
+  "information_cutoff": "18:00 local standard time on target date minus one day",
+  "temporal_split": {
+    "train": ["2024-08-01", "2025-07-31"],
+    "validation": ["2025-08-01", "2026-01-31"],
+    "test": ["2026-02-01", "2026-07-31"],
+    "expected_counts": {"train": 365, "validation": 184, "test": 181}
+  },
+  "features": {
+    "calendar": ["sin_doy", "cos_doy"],
+    "prior_day_hourly_through_18_lst": ["temperature hour means 00..18", "temperature min/max/mean/std/latest/slope", "dew point mean/latest", "relative humidity mean/latest", "wind mean/max/gust", "pressure mean/latest/change", "visibility mean", "precipitation sum", "observation counts and missing indicators"],
+    "lagged_labels_available_before_cutoff": ["SOD max lags 2, 3, 7", "rolling mean/std over 3, 7, 14 days ending target minus 2"],
+    "forbidden": ["target-day observations", "target label", "target-minus-1 SOD label", "validation/test statistics"]
+  },
+  "models": {
+    "baselines": ["prior-day observed max through 18:00", "train-fitted harmonic climatology"],
+    "candidates": {"ridge_alpha": [0.1, 1.0, 10.0, 100.0], "hist_gradient_boosting": {"max_leaf_nodes": [7, 15], "l2_regularization": [1.0, 10.0], "learning_rate": 0.05, "max_iter": 300, "min_samples_leaf": 20}},
+    "selection": "lowest mean MAE in five expanding TimeSeriesSplit folds inside train only"
+  },
+  "validation_gates": {"minimum_mae_improvement_vs_persistence": 0.05, "minimum_mae_improvement_vs_harmonic_climatology": 0.05, "maximum_absolute_bias_c": 1.0},
+  "test_policy": "Consume once only if every validation gate passes; apply identical gates and report MAE, RMSE, bias, within-1C and within-2C.",
+  "boundary": {"weather_forecasting_only": true, "polymarket_excluded": true, "no_trading_claim": true}
+}

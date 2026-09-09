@@ -2337,6 +2337,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Leakage-safe lag feature + chronological regression benchmark açılır; Polymarket scope dışı.
 - **Boundary:** Weather data only; model score/execution/EV/P&L/emir yok.
 
+### D-0178 — 2026-09-09 — KORD hourly next-day max model ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Split:** Train 365 gün, validation 184 gün, protected test 181 gün; tamamen chronological.
+- **Cutoff:** Target-1 gün 18:00 LST; target-day ve target-1 SOD label yasak, label lag≥2.
+- **Models:** Persistence, harmonic climatology, Ridge ve HistGradientBoosting; seçim yalnız train içi 5-fold expanding CV MAE.
+- **Validation gates:** Champion MAE improvement persistence ve climatology karşısında ayrı ayrı≥%5; |bias|≤1°C. Tümü pass ise test bir kez açılır.
+- **Boundary:** Weather-only; Polymarket/trading yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2357,7 +2366,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Leakage-safe lag/rolling feature contract'ı, chronological train/validation/test split'i ve climatology/persistence/linear/gradient-boosting benchmark gate'lerini fit öncesi dondur.
+**Tek sonraki adım:** Frozen KORD hourly feature pipeline'ı kur, train-only walk-forward CV ile Ridge/HGB champion seç, validation gate'ini ve koşullu untouched test'i çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
