@@ -3,6 +3,7 @@
   "design_status": "PREREGISTERED_BEFORE_FRESH_COHORT_SELECTION",
   "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
   "source_13z_probe": "reports/data_quality/EXP-20260909-us-nbm-13z-coverage-v1.json",
+  "source_07z_probe_result": "data/raw/us_nbm_station_coverage/run=20260907T-v1/result.json",
   "hypothesis": "After excluding every date used by the prior pilot/model and 13Z content probe, ten metadata-only shared US dates can provide exactly 110 balanced events within a bounded two-cycle NBM and market-history acquisition budget.",
   "cohort": {
     "cities": ["Atlanta", "Austin", "Chicago", "Dallas", "Denver", "Houston", "Los Angeles", "Miami", "NYC", "San Francisco", "Seattle"],
