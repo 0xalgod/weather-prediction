@@ -2300,6 +2300,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Dataset frozen (`b5850b…e49b`); chronological development/validation model experiment açılır.
 - **Boundary:** Join/QC only; execution/EV/P&L/emir yok.
 
+### D-0174 — 2026-09-09 — 13Z incremental model ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Split:** Chronological dev=ilk 5 date/55 event; validation=son 3 date/33 event; confirmatory test yok.
+- **Fit:** 07Z ve 13Z için ortak low-capacity shift[-4,+4]/spread[.75,1,1.25,1.5]; market blend weight [0,.25,.5,.75,1] yalnız dev'de seçilir.
+- **Gates:** Validation 13Z-vs-07Z log-loss gain≥%2; challenger-vs-market gain≥%2; Brier delta≤0; invalid vector=0; cluster=3.
+- **Decision:** Fail branch'i kapatır ve validation tuning yasaktır; pass yalnız yeni disjoint confirmation cohort'a izin verir.
+- **Boundary:** 3 cluster/indicative price; test/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2320,7 +2329,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** İlk 5 tarihi development, son 3 tarihi validation olarak freeze et; low-capacity 13Z calibration ve market-incremental challenger modelini fit/score öncesi ön kaydet.
+**Tek sonraki adım:** Ön kayıtlı grid'i yalnız 55 development event'te fit et ve 33 validation event'te 13Z-vs-07Z-vs-market gate'lerini bir kez skorla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

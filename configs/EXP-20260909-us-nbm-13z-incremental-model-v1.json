@@ -1,0 +1,12 @@
+{
+  "experiment_id":"EXP-20260909-us-nbm-13z-incremental-model-v1",
+  "design_status":"PREREGISTERED_BEFORE_FIT_OR_SCORE",
+  "source_dataset":"data/processed/us_nbm_two_cycle/run=20260909T-v1/rows.jsonl",
+  "source_dataset_sha256":"b5850b0e86a5a08998dc9e309764edd386719765b0abe59c0802a4ce4b44e49b",
+  "hypothesis":"A development-calibrated 13Z forecast both improves validation log loss by at least 2% versus calibrated 07Z and, when combined at a development-selected fixed weight with the market, improves market log loss by at least 2% without worsening Brier score.",
+  "temporal_split":{"development_dates":["2026-03-25","2026-04-27","2026-05-12","2026-05-29","2026-06-13"],"validation_dates":["2026-06-29","2026-07-15","2026-08-14"],"expected_development_count":55,"expected_validation_count":33,"test":"none; a later disjoint cohort is required after validation pass"},
+  "calibration_grid":{"shift_f":{"minimum":-4,"maximum":4,"step":1},"spread_scale":[0.75,1.0,1.25,1.5],"blend_13z_weight":[0.0,0.25,0.5,0.75,1.0],"selection_metric":"development multiclass log loss","probability_floor":0.000001},
+  "validation_gates":{"minimum_13z_vs_07z_log_loss_improvement":0.02,"minimum_challenger_vs_market_log_loss_improvement":0.02,"maximum_challenger_minus_market_brier":0.0,"maximum_invalid_probability_vector_count":0,"exact_validation_date_count":3},
+  "decision_rule":{"pass":"Permit selection of a new disjoint confirmatory cohort; do not call this tradable edge.","fail":"Reject this low-capacity 13Z incremental branch; do not tune on validation."},
+  "boundary":{"small_validation_three_date_clusters":true,"indicative_prices_not_executable":true,"no_test_execution_ev_pnl_or_orders":true}
+}
