@@ -1,0 +1,22 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-13z-coverage-v1",
+  "status": "PASSED",
+  "decision": "NBM_13Z_COVERAGE_PASS",
+  "result_path": "data/raw/us_nbm_13z_coverage/run=20260909T-v1/result.json",
+  "result_sha256": "6f9e5afd783d0a7bbc2af34cb29dc9f10b50e2f062b73fa1da76e6b75e91306d",
+  "station_dates_sha256": "f0f6f03872d67e98d2f5a8cb1b364f5239e2303c846365f5deb3238ad27aac18",
+  "metrics": {
+    "target_date_count": 3,
+    "station_count": 12,
+    "expected_station_date_count": 36,
+    "passed_station_date_count": 36,
+    "station_date_feature_rate": 1.0,
+    "publication_after_cutoff_count": 0,
+    "conflicting_duplicate_count": 0,
+    "full_object_transfer_bytes": 104224895,
+    "retrieval_failure_count": 0,
+    "station_error_count": 0
+  },
+  "interpretation": "Prior-day 13Z f35 is publication-admissible at the 18-hour cutoff and content-complete in the locked probe. It is a feasible six-hour fresher candidate, not yet evidence of predictive or economic advantage.",
+  "next_step": "Select a new date cohort disjoint from every prior development, validation, and test date before comparing 13Z f35, 07Z f41, and market probabilities."
+}

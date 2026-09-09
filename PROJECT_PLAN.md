@@ -2207,12 +2207,21 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0164 — 2026-09-09 — Prior-day 13Z NBM f35 coverage ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hypothesis:** 13Z f35, 18h cutoff prior-day18Z öncesi yayımlanır ve 12 station ×3 seasonal date'te complete probabilistic MaxT verir; 07Z f41'den 6h fresh.
 - **Probe:** Jan15/May15/Aug15 target; prior-day 13Z; f35; 12 station; mean/sd/P10/25/50/75/90.
 - **Gates:** 36/36=%100 feature; publication-after-cutoff=0; conflicting duplicate=0; transfer≤120 MiB.
 - **Decision:** Pass yalnız prior validation/test'ten disjoint cohort'ta 13Z-vs-07Z-vs-market pilot açar; eski test yeniden skorlanmaz.
 - **Boundary:** Content/timing only; model edge/execution/EV/P&L/emir yok.
+
+### D-0165 — 2026-09-09 — 13Z f35 timing/content feasibility geçti
+
+- **Durum:** `PASSED`
+- **Coverage:** 3 target ×12 station=36/36; required field %100; retrieval/station/conflicting duplicate=0.
+- **Timing:** NBM Last-Modified after 18h cutoff count=0; prior-day 13Z usable ve 07Z f41'den 6h fresh.
+- **Cost:** 104,224,895 byte (~99.4 MiB), locked 120 MiB cap altında.
+- **Decision:** 13Z f35 candidate feasible; predictive comparison için önceki dev/validation/test tarihlerinden tamamen disjoint cohort zorunlu.
+- **Boundary:** Model score/edge/execution/net EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2234,7 +2243,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 13Z f35 probe'u üç locked tarihte çalıştır; 36/36 content, publication ve 120 MiB transfer gate'ini ölç.
+**Tek sonraki adım:** Önceki 17 model tarihi ve üç probe tarihinden disjoint, outcome/price/forecast-blind yeni shared-date cohort seçimini ön kayıtla; 13Z-vs-07Z evaluation için fresh development/validation tasarla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
