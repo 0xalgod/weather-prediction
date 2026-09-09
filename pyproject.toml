@@ -14,6 +14,7 @@ authors = [
 dependencies = [
   "eccodes>=2.48,<2.49",
   "ecmwf-opendata>=0.3.20,<0.4",
+  "scikit-learn>=1.5,<1.7",
   "websockets>=12,<16",
 ]
 
