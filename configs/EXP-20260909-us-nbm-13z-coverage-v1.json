@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-13z-coverage-v1",
+  "design_status": "PREREGISTERED_BEFORE_13Z_NETWORK_RETRIEVAL",
+  "hypothesis": "Prior-day 13Z NBM is published before the 18-hour market cutoff and contains complete f35 probabilistic MaxT fields for all 12 US station regimes on three seasonally separated dates, providing a six-hour fresher forecast candidate than 07Z f41.",
+  "probe": {
+    "target_dates": ["2026-01-15", "2026-05-15", "2026-08-15"],
+    "run_date": "target_date minus one calendar day",
+    "cycle_utc": 13,
+    "forecast_hour": 35,
+    "valid_time": "target date plus one day at 00Z",
+    "decision_cutoff": "target date minus one day at 18:00Z",
+    "stations": ["KATL", "KAUS", "KBKF", "KDEN", "KORD", "KDAL", "KHOU", "KLAX", "KMIA", "KLGA", "KSFO", "KSEA"],
+    "required_fields": ["mean_f", "standard_deviation_f", "p10_f", "p25_f", "p50_f", "p75_f", "p90_f"],
+    "station_duplicate_rule": "only complete byte-identical duplicates may be canonicalized"
+  },
+  "transport": {
+    "source": "NOAA NBM public AWS",
+    "full_object_once_per_date": true,
+    "workers": 3,
+    "timeout_seconds": 90,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1,
+    "maximum_transfer_bytes": 125829120
+  },
+  "acceptance_thresholds": {
+    "exact_target_date_count": 3,
+    "exact_station_count": 12,
+    "minimum_station_date_feature_rate": 1.0,
+    "maximum_publication_after_cutoff_count": 0,
+    "maximum_conflicting_duplicate_count": 0,
+    "maximum_transfer_bytes": 125829120
+  },
+  "decision_rule": {
+    "pass": "Permit a new disjoint-date pilot comparing 13Z f35 against 07Z f41 and market; do not rescore prior validation/test.",
+    "fail": "Reject 13Z as a scalable candidate and do not download a larger cohort."
+  },
+  "boundary": {
+    "content_and_timing_probe_only": true,
+    "previous_validation_and_test_not_scored": true,
+    "no_model_edge_execution_ev_pnl_or_orders": true
+  }
+}

@@ -2205,6 +2205,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Pivot:** 18h cutoff öncesinde yayımlanan daha taze prior-day 13Z NBM'nin availability/content feasibility'sini küçük locked probe ile ölç; yeni model evaluation için ayrık tarihler gerekecek.
 - **Boundary:** Model/market edge/execution/EV/P&L/emir yok.
 
+### D-0164 — 2026-09-09 — Prior-day 13Z NBM f35 coverage ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hypothesis:** 13Z f35, 18h cutoff prior-day18Z öncesi yayımlanır ve 12 station ×3 seasonal date'te complete probabilistic MaxT verir; 07Z f41'den 6h fresh.
+- **Probe:** Jan15/May15/Aug15 target; prior-day 13Z; f35; 12 station; mean/sd/P10/25/50/75/90.
+- **Gates:** 36/36=%100 feature; publication-after-cutoff=0; conflicting duplicate=0; transfer≤120 MiB.
+- **Decision:** Pass yalnız prior validation/test'ten disjoint cohort'ta 13Z-vs-07Z-vs-market pilot açar; eski test yeniden skorlanmaz.
+- **Boundary:** Content/timing only; model edge/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2225,7 +2234,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Prior-day 13Z NBM'nin 18h cutoff'a publication-admissible olup olmadığını ve 12 station f35 MaxT content coverage'ını üç locked tarihte ön kayıtlı probe ile ölç.
+**Tek sonraki adım:** Ön kayıtlı 13Z f35 probe'u üç locked tarihte çalıştır; 36/36 content, publication ve 120 MiB transfer gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
