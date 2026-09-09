@@ -1,0 +1,12 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-two-cycle-join-v1",
+  "design_status": "PREREGISTERED_BEFORE_JOIN",
+  "source_events": "data/interim/us_nbm_fresh_cohort/run=20260909T-v1/selected-events.json",
+  "source_prices": "data/raw/us_nbm_fresh_cohort_prices/run=20260909T-v1/event-horizon-coverage.jsonl",
+  "source_nbm": "data/raw/us_nbm_two_cycle/run=20260909T-v1/station-cycle-dates.jsonl",
+  "hypothesis": "All 88 price-usable frozen events join one terminal outcome, one normalized 18-hour market vector, and exactly one publication-admissible 07Z and 13Z NBM feature for the event resolution station.",
+  "cycles": {"07Z": {"cycle_utc": 7, "forecast_hour": 41}, "13Z": {"cycle_utc": 13, "forecast_hour": 35}},
+  "acceptance_thresholds": {"exact_join_count": 88, "exact_date_count": 8, "exact_city_count": 11, "exact_events_per_city": 8, "maximum_join_error_count": 0, "maximum_duplicate_event_count": 0, "maximum_probability_normalization_error": 1e-9, "maximum_missing_outcome_count": 0, "maximum_missing_cycle_feature_count": 0},
+  "decision_rule": {"pass": "Freeze model-ready rows and preregister a chronological development/validation comparison.", "fail": "Do not fit or score models; repair only the join contract or provenance error."},
+  "boundary": {"join_and_quality_only": true, "no_model_score_execution_ev_pnl_or_orders": true}
+}
