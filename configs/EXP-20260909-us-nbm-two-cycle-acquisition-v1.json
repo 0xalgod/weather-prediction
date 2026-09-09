@@ -1,0 +1,47 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-two-cycle-acquisition-v1",
+  "design_status": "PREREGISTERED_BEFORE_NBM_NETWORK_RETRIEVAL",
+  "source_selection": "data/interim/us_nbm_fresh_cohort/run=20260909T-v1/selected-events.json",
+  "source_price_coverage": "data/raw/us_nbm_fresh_cohort_prices/run=20260909T-v1/event-horizon-coverage.jsonl",
+  "hypothesis": "Both prior-day 07Z f41 and 13Z f35 NBM probabilistic MaxT products are publication-admissible and feature-complete for every station regime on the eight frozen price-usable dates.",
+  "cohort": {
+    "target_dates": ["2026-03-25", "2026-04-27", "2026-05-12", "2026-05-29", "2026-06-13", "2026-06-29", "2026-07-15", "2026-08-14"],
+    "date_rule": "exact dates with 11/11 usable price vectors in the preregistered price-coverage result",
+    "stations": ["KATL", "KAUS", "KBKF", "KDEN", "KORD", "KDAL", "KHOU", "KLAX", "KMIA", "KLGA", "KSFO", "KSEA"],
+    "decision_cutoff_utc": "prior day 18:00Z",
+    "cycles": [
+      {"cycle_utc": 7, "forecast_hour": 41},
+      {"cycle_utc": 13, "forecast_hour": 35}
+    ],
+    "required_fields": ["mean_f", "standard_deviation_f", "p10_f", "p25_f", "p50_f", "p75_f", "p90_f"]
+  },
+  "transport": {
+    "source": "NOAA NBM public AWS",
+    "full_object_once_per_date_cycle": true,
+    "workers": 4,
+    "timeout_seconds": 90,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1
+  },
+  "acceptance_thresholds": {
+    "exact_target_date_count": 8,
+    "exact_cycle_count": 2,
+    "exact_station_count": 12,
+    "exact_full_object_count": 16,
+    "minimum_station_cycle_date_feature_rate": 1.0,
+    "maximum_retrieval_failure_count": 0,
+    "maximum_station_error_count": 0,
+    "maximum_publication_after_cutoff_count": 0,
+    "maximum_conflicting_duplicate_count": 0,
+    "maximum_transfer_bytes": 629145600
+  },
+  "decision_rule": {
+    "pass": "Freeze extracted two-cycle features and separately preregister the temporal comparison and model gates.",
+    "fail": "Do not fit or score a model; diagnose acquisition, publication, or schema failure without changing these thresholds post hoc."
+  },
+  "boundary": {
+    "content_timing_and_transfer_only": true,
+    "no_forecast_or_market_score": true,
+    "no_execution_ev_pnl_or_orders": true
+  }
+}
