@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — the frozen histories have not been replayed at 24 hours.
+`FAILED` — only 35% of events were eligible at 24 hours.
 
 ## Hypothesis and method
 
@@ -15,3 +15,9 @@ For every frozen event and bucket, select the latest valid price point at or bef
 From all 220 events, require at least 165 eligible events (75%), 15 target-date clusters, 15 eligible events per city, all 11 cities, and zero price leakage, late NBM publication, or duplicate events. These thresholds ensure a balanced sample comparable in minimum size to the 18-hour pilot while recognizing earlier-horizon liquidity risk.
 
 Passing permits only a new preregistered 24-hour model benchmark. This is a disclosed additional-horizon hypothesis; it does not rescue the failed 18-hour model or establish executable EV.
+
+## Result
+
+Only 77/220 events (35%) were eligible, versus the required 165/75%. The sample retained seven target-date clusters and seven events per city, versus the required 15 each. All 11 cities remained represented, with zero duplicate events, post-cutoff price leakage, or NBM publications after cutoff.
+
+The failure is early market-vector availability, not forecast publication. The 24-hour modeling path is rejected. Additional arbitrary price horizons will not be searched on this cohort.

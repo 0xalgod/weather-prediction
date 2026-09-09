@@ -2188,12 +2188,22 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0162 — 2026-09-09 — No-redownload 24h price coverage ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Hypothesis:** Frozen 220 event/2,420 history replay'de 24h cutoff ve publication-admissible 07Z NBM, balanced model-feasible sample bırakır.
 - **Rule:** Latest price≤cutoff, all buckets, staleness≤12h; NBM Last-Modified≤aynı cutoff; yeni network yok; ineligible=`NO_TRADE` retained.
 - **Gates:** Eligible≥165 ve ≥%75; date≥15; city başına≥15; city=11; price leakage/NBM late/duplicate=0.
 - **Disclosure:** Ek horizon araştırması; 18h failure'ı kurtarmaz. 24h model için ayrıca split/evaluation ön kaydı gerekir.
 - **Boundary:** Coverage only; indicative price; execution/EV/P&L/emir yok.
+
+### D-0163 — 2026-09-09 — 24h market horizon coverage reddedildi
+
+- **Durum:** `FAILED`
+- **Coverage:** Eligible 77/220=%35; required ≥165/%75. Date cluster=7 ve city başına=7; required ≥15/15.
+- **Temporal:** Price leakage=0; NBM publication-after-cutoff=0; city=11, duplicate=0.
+- **Cause:** Forecast zamanında mevcut fakat 24h cutoff'ta complete/non-stale market vectors yetersiz.
+- **Decision:** 24h model yok; aynı cohort üzerinde arbitrary horizon search yapılmayacak.
+- **Pivot:** 18h cutoff öncesinde yayımlanan daha taze prior-day 13Z NBM'nin availability/content feasibility'sini küçük locked probe ile ölç; yeni model evaluation için ayrık tarihler gerekecek.
+- **Boundary:** Model/market edge/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2215,7 +2225,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 24h replay'i frozen histories/NBM provenance üzerinde çalıştır; balanced eligibility ve publication gate'ini ölç.
+**Tek sonraki adım:** Prior-day 13Z NBM'nin 18h cutoff'a publication-admissible olup olmadığını ve 12 station f35 MaxT content coverage'ını üç locked tarihte ön kayıtlı probe ile ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

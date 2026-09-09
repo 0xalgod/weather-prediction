@@ -1,0 +1,24 @@
+{
+  "experiment_id": "EXP-20260909-us-24h-price-coverage-v1",
+  "status": "FAILED",
+  "decision": "PRICE_24H_COVERAGE_FAIL",
+  "result_path": "data/processed/us_24h_price_coverage/run=20260909T-v1/result.json",
+  "result_sha256": "68070ff8803b09986aed4bd0ce3a15c8b11866209eac3169e083e99767c5f8bb",
+  "event_coverage_sha256": "b48b2ee6b868862cfca0f4d7849cda19f3d47bf1522b98fd3953e802a6717851",
+  "metrics": {
+    "source_event_count": 220,
+    "eligible_event_count": 77,
+    "eligible_event_rate": 0.35,
+    "required_event_count": 165,
+    "required_event_rate": 0.75,
+    "eligible_target_date_count": 7,
+    "required_target_date_count": 15,
+    "eligible_events_per_city": 7,
+    "required_events_per_city": 15,
+    "city_count": 11,
+    "temporal_leakage_count": 0,
+    "nbm_publication_after_cutoff_count": 0
+  },
+  "interpretation": "NBM was available in time, but complete non-stale market vectors were too sparse at 24 hours. A 24-hour model is not justified.",
+  "next_step": "Probe whether the fresher prior-day 13Z NBM cycle is publication-admissible and content-complete at the 18-hour cutoff, before any new model design."
+}
