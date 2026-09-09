@@ -2223,6 +2223,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** 13Z f35 candidate feasible; predictive comparison için önceki dev/validation/test tarihlerinden tamamen disjoint cohort zorunlu.
 - **Boundary:** Model score/edge/execution/net EV/P&L/emir yok.
 
+### D-0166 — 2026-09-09 — Disjoint 13Z-vs-07Z cohort selection ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Exclusions:** Önceki 20 selected date + Jan15/May15/Aug15 probe union=22 unique date config'de frozen.
+- **Selection:** Jan1–Aug15 remaining full-11-city dates; ascending `round(i*(n-1)/9)` ile 10 tarih; yalnız identity metadata.
+- **Expected:** 10 date, 110 event, 11 city ×10; excluded overlap/duplicate=0.
+- **Cost:** 10×07Z +10×13Z full object; conservative cap 750 MiB. Price request bucket sum IDs freeze sonrası.
+- **Decision:** Pass yalnız cohort/request freeze; price/NBM collection ve model evaluation ayrı ön kayıt gerektirir.
+- **Boundary:** Selection/cost only; model score/edge/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2243,7 +2253,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Önceki 17 model tarihi ve üç probe tarihinden disjoint, outcome/price/forecast-blind yeni shared-date cohort seçimini ön kayıtla; 13Z-vs-07Z evaluation için fresh development/validation tasarla.
+**Tek sonraki adım:** Ön kayıtlı disjoint cohort selection'ı çalıştır; exact 10 date/110 event balance, excluded overlap ve two-cycle NBM cost cap gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

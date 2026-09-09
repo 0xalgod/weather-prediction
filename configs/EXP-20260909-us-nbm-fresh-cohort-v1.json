@@ -1,0 +1,43 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-fresh-cohort-v1",
+  "design_status": "PREREGISTERED_BEFORE_FRESH_COHORT_SELECTION",
+  "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "source_13z_probe": "reports/data_quality/EXP-20260909-us-nbm-13z-coverage-v1.json",
+  "hypothesis": "After excluding every date used by the prior pilot/model and 13Z content probe, ten metadata-only shared US dates can provide exactly 110 balanced events within a bounded two-cycle NBM and market-history acquisition budget.",
+  "cohort": {
+    "cities": ["Atlanta", "Austin", "Chicago", "Dallas", "Denver", "Houston", "Los Angeles", "Miami", "NYC", "San Francisco", "Seattle"],
+    "minimum_target_date": "2026-01-01",
+    "maximum_target_date": "2026-08-15",
+    "excluded_dates": ["2026-01-15", "2026-03-24", "2026-04-01", "2026-04-08", "2026-04-18", "2026-04-25", "2026-05-02", "2026-05-09", "2026-05-15", "2026-05-17", "2026-05-26", "2026-06-02", "2026-06-09", "2026-06-16", "2026-06-25", "2026-07-02", "2026-07-10", "2026-07-17", "2026-07-24", "2026-08-01", "2026-08-08", "2026-08-15"],
+    "excluded_date_rationale": "union of all 20 prior selected dates and the three 13Z probe dates, deduplicated",
+    "selected_date_count": 10,
+    "selection_rule": "Among remaining dates with exactly one event for every city, sort ascending and choose unique indices round(i*(n-1)/9), i=0..9.",
+    "selection_may_use": ["city", "target_date", "event_id", "resolution_source"],
+    "selection_must_not_use": ["bucket", "winner", "price", "forecast_value", "model_score"]
+  },
+  "planned_inputs": {
+    "market_horizon_hours": 18,
+    "nbm_candidates": ["prior-day 07Z f41", "prior-day 13Z f35"],
+    "full_nbm_object_count": 20,
+    "conservative_nbm_transfer": "20 times the maximum object byte count observed in locked 07Z/13Z probes",
+    "market_requests": "sum selected bucket counts only after event IDs freeze"
+  },
+  "acceptance_thresholds": {
+    "exact_selected_date_count": 10,
+    "exact_selected_event_count": 110,
+    "exact_city_count": 11,
+    "exact_events_per_city": 10,
+    "maximum_excluded_date_overlap_count": 0,
+    "maximum_duplicate_city_date_count": 0,
+    "maximum_conservative_nbm_transfer_bytes": 786432000
+  },
+  "decision_rule": {
+    "pass": "Freeze IDs and request volumes, then separately preregister price and two-cycle NBM collection gates.",
+    "fail": "Do not acquire new price or NBM data; redesign sample size or obtain prospective observations."
+  },
+  "boundary": {
+    "selection_and_cost_only": true,
+    "disjointness_does_not_itself_create_confirmatory_test": true,
+    "no_model_score_execution_ev_pnl_or_orders": true
+  }
+}
