@@ -1,0 +1,42 @@
+{
+  "experiment_id": "EXP-20260909-us-nbm-fresh-price-coverage-v1",
+  "design_status": "PREREGISTERED_BEFORE_NETWORK_RETRIEVAL",
+  "source_inventory": "data/processed/multicity_weather_inventory/run=20260906T-v2/result.json",
+  "source_selection": "data/interim/us_nbm_fresh_cohort/run=20260909T-v1",
+  "hypothesis": "The frozen disjoint 110-event cohort retains enough complete and non-stale 18-hour Polymarket probability vectors for a balanced temporal 07Z-versus-13Z comparison.",
+  "join_contract": {
+    "market_horizon_hours_before_end": 18,
+    "market_vector": "latest valid point at or before cutoff for every YES bucket; preserve raw values and normalize only downstream"
+  },
+  "price_history": {
+    "endpoint": "https://clob.polymarket.com/prices-history",
+    "interval": "all",
+    "fidelity_minutes": 1,
+    "request_timeout_seconds": 30,
+    "maximum_attempts": 3,
+    "retry_backoff_seconds": 1,
+    "maximum_staleness_seconds": 43200,
+    "point_rule": "latest valid point at or before end_date_utc minus 18 hours; post-cutoff points forbidden"
+  },
+  "acceptance_thresholds": {
+    "exact_selected_event_count": 110,
+    "exact_token_request_count": 1210,
+    "minimum_usable_full_vector_event_count": 88,
+    "minimum_complete_market_vector_rate": 0.8,
+    "minimum_usable_date_count": 8,
+    "exact_city_count_with_usable_vector": 11,
+    "minimum_usable_events_per_city": 8,
+    "maximum_request_error_count": 0,
+    "maximum_temporal_leakage_count": 0
+  },
+  "decision_rule": {
+    "pass": "Freeze immutable price responses and separately preregister two-cycle NBM collection.",
+    "fail": "Do not download the 20 NBM objects or fit a model; diagnose whether history retention or cohort balance is the limiting factor without changing this cohort's gates post hoc."
+  },
+  "boundary": {
+    "availability_and_temporal_integrity_only": true,
+    "historical_prices_are_indicative_not_executable_fills": true,
+    "forecast_values_and_outcomes_not_used_for_gate": true,
+    "no_model_score_execution_ev_pnl_or_orders": true
+  }
+}

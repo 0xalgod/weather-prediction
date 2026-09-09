@@ -2247,6 +2247,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Kimlikler frozen. Sonraki gate, forecast/outcome görmeden yalnız 18h market-vector availability ve temporal leakage ölçer.
 - **Boundary:** Selection/cost only; model score/edge/execution/EV/P&L/emir yok.
 
+### D-0168 — 2026-09-09 — Fresh cohort 18h price coverage ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hypothesis:** Frozen 110 event, 18h cutoff'ta balanced 07Z-vs-13Z temporal comparison için yeterli complete/non-stale market vector bırakır.
+- **Data:** Frozen 1,210 YES token; fidelity=1m, latest point≤cutoff, maximum staleness=12h; forecast value ve outcome gate'e yasak.
+- **Gates:** Exact event=110/request=1,210; usable≥88/%80; usable date≥8; city=11 ve city başına usable≥8; terminal request error=0; leakage=0.
+- **Decision:** Pass yalnız immutable price freeze ve ayrı two-cycle NBM collection ön kaydına izin verir. Fail ise 20 NBM object indirilmez/model fit edilmez.
+- **Boundary:** Availability/timing only; indicative price, execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2267,7 +2276,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen 110 event için outcome/forecast kullanmadan 18h historical market-vector collection deneyini ön kaydet; complete/non-stale coverage, date/city balance, request error ve temporal leakage gate'lerini çalıştır.
+**Tek sonraki adım:** Ön kayıtlı fresh-cohort 18h historical market-vector collector'ını date/city balance ve request-integrity metrikleriyle çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
