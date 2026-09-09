@@ -2268,12 +2268,21 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0170 — 2026-09-09 — Fresh cohort two-cycle NBM acquisition ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Cohort:** Price-balanced 8 exact date; 12 station regime; prior-day 07Z f41 ve 13Z f35; cutoff prior-day18Z.
 - **Fields:** mean/sd/P10/P25/P50/P75/P90; exact expected row=8×2×12=192 ve full object=16.
 - **Gates:** Feature=%100; retrieval/station error/publication-after-cutoff/conflicting duplicate=0; transfer≤600 MiB.
 - **Decision:** Pass yalnız frozen two-cycle feature set ve ayrı temporal model ön kaydına izin verir; fail ise fit/score yok.
 - **Boundary:** Content/timing/transfer only; forecast/market score, execution/EV/P&L/emir yok.
+
+### D-0171 — 2026-09-09 — Two-cycle NBM acquisition geçti
+
+- **Durum:** `PASSED`
+- **Result:** 16/16 object ve 192/192 station-cycle-date required feature; feature rate=%100.
+- **Integrity:** Retrieval/station error/late publication/conflicting duplicate=0.
+- **Cost:** 555,793,550 byte; 600 MiB cap altında.
+- **Decision:** 07Z f41 ve 13Z f35 inputs frozen; sırada outcome+market join ve temporal 07Z-vs-13Z-vs-market scoring ön kaydı var.
+- **Boundary:** Acquisition only; model edge/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2295,7 +2304,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 16 NBM full object'i indir; 192 station-cycle-date feature, publication cutoff, duplicate ve transfer gate'lerini ölç.
+**Tek sonraki adım:** Sekiz tarih için frozen market/outcome ile 07Z ve 13Z feature join'ini kur; fit/score öncesi temporal split, baselines ve incremental-market kabul eşiklerini ön kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
