@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -123,6 +124,10 @@ def main() -> int:
         for row in horizon_rows
         for point in row["points"]
     )
+    usable_rows = [row for row in horizon_rows if row["usable_full_vector"]]
+    usable_by_city = Counter(str(row["city"]) for row in usable_rows)
+    usable_dates = {str(row["target_date"]) for row in usable_rows}
+    minimum_usable_events_per_city = min(usable_by_city.values(), default=0)
     summary = {
         "selected_event_count": len(selected),
         "token_request_count": len(tokens),
@@ -138,12 +143,29 @@ def main() -> int:
         "city_count_with_usable_vector": horizon_summary["by_horizon"][horizon][
             "city_count_with_usable_vector"
         ],
+        "usable_date_count": len(usable_dates),
+        "minimum_usable_events_per_city": minimum_usable_events_per_city,
+        "usable_event_count_by_city": dict(sorted(usable_by_city.items())),
         "temporal_leakage_count": leakage_count,
     }
     gates = config["acceptance_thresholds"]
     checks = {
+        "exact_selected_event_count": len(selected)
+        == gates.get("exact_selected_event_count", len(selected)),
+        "exact_token_request_count": len(tokens)
+        == gates.get("exact_token_request_count", len(tokens)),
+        "minimum_usable_full_vector_event_count": len(usable_rows)
+        >= gates.get("minimum_usable_full_vector_event_count", 0),
         "minimum_complete_market_vector_rate": usable_rate
         >= gates["minimum_complete_market_vector_rate"],
+        "minimum_usable_date_count": len(usable_dates)
+        >= gates.get("minimum_usable_date_count", 0),
+        "exact_city_count_with_usable_vector": len(usable_by_city)
+        == gates.get("exact_city_count_with_usable_vector", len(usable_by_city)),
+        "minimum_usable_events_per_city": minimum_usable_events_per_city
+        >= gates.get("minimum_usable_events_per_city", 0),
+        "maximum_request_error_count": request_errors
+        <= gates.get("maximum_request_error_count", request_errors),
         "maximum_temporal_leakage_count": leakage_count
         <= gates["maximum_temporal_leakage_count"],
     }
