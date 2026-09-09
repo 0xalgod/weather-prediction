@@ -2318,6 +2318,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** Freshness mekanizması doğrulandı fakat 18h market zaten bilgiyi daha iyi fiyatlıyor; bu low-capacity NBM blend branch kapandı, validation tuning/test yok.
 - **Boundary:** Yalnız 3 date cluster ve indicative history; tradable edge/execution/EV/P&L/emir kanıtı yok.
 
+### D-0176 — 2026-09-09 — Weather-only hourly forecasting pivot
+
+- **Durum:** `IN_PROGRESS`
+- **Scope:** Polymarket geçici olarak target/model evaluation dışında; ilk pilot KORD two-year hourly→next-day official SOD maximum.
+- **Window:** 2024-08-01–2026-07-31, exact 730 target day; input cutoff previous-day 18:00 LST.
+- **Data:** NOAA LCDv2 hourly temp/dew point/RH/wind/pressure/visibility/precipitation ve SOD max label. NOAA timestamp=LST, DST adjustment yok.
+- **Gates:** Label≥%99; günlerin≥%95'inde ≥18 distinct temperature hour; identity/duplicate SOD/out-of-range temp=0.
+- **Decision:** Pass sonrası temporal features/model split ayrı ön kayıt; bu adımda fit/score yok.
+- **Boundary:** Weather forecasting only; Polymarket/execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2338,7 +2348,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** NBM directional blend'i bırak; mevcut immutable price histories üzerinde market-microstructure hipotezlerini (overround, stale bucket, cross-bucket coherence) outcome kullanmadan tanımlayıp hangisinin executable L2 veri gerektirdiğini ölç.
+**Tek sonraki adım:** KORD için iki yıllık NOAA LCDv2 hourly panel ve SOD next-day-max label coverage dataset'ini indir, parse et ve frozen gate'leri çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

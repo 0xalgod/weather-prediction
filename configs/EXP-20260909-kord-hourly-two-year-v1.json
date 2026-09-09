@@ -1,0 +1,12 @@
+{
+  "experiment_id": "EXP-20260909-kord-hourly-two-year-v1",
+  "design_status": "PREREGISTERED_BEFORE_2024_NETWORK_RETRIEVAL_AND_HOURLY_PARSE",
+  "hypothesis": "NOAA LCDv2 supplies a leakage-safe two-year KORD hourly weather panel with sufficiently complete predictors and official SOD next-day maximum-temperature labels for time-series modeling.",
+  "station": {"ghcn_id": "USW00094846", "icao": "KORD", "name": "CHICAGO OHARE INTERNATIONAL AIRPORT, IL US", "latitude": 41.96019, "longitude": -87.93162},
+  "window": {"start_date": "2024-08-01", "end_date": "2026-07-31", "exact_day_count": 730, "timestamp_semantics": "NOAA LCDv2 local standard time; no DST adjustment", "decision_cutoff": "18:00 local standard time on day before target", "target": "target-date SOD DailyMaximumDryBulbTemperature"},
+  "source": {"base_url": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access", "years": [2024, 2025, 2026], "documentation": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/doc/lcdv2_DOCUMENTATION.pdf"},
+  "hourly_fields": ["HourlyDryBulbTemperature", "HourlyDewPointTemperature", "HourlyRelativeHumidity", "HourlyWindSpeed", "HourlyWindGustSpeed", "HourlySeaLevelPressure", "HourlyStationPressure", "HourlyVisibility", "HourlyPrecipitation"],
+  "acceptance_thresholds": {"exact_target_day_count": 730, "minimum_label_coverage": 0.99, "minimum_days_with_18_temperature_hours_rate": 0.95, "maximum_identity_error_count": 0, "maximum_duplicate_sod_date_count": 0, "maximum_out_of_range_temperature_count": 0},
+  "decision_rule": {"pass": "Freeze hourly panel and labels, then preregister feature windows, chronological splits, and model benchmarks.", "fail": "Do not train; repair source, timestamp, or missingness contract without post-hoc threshold changes."},
+  "boundary": {"weather_forecasting_only": true, "polymarket_excluded": true, "no_model_fit_or_score": true}
+}
