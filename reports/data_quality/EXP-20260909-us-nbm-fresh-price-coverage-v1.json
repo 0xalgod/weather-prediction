@@ -1,0 +1,42 @@
+{
+  "artifact_type": "market_price_coverage_report",
+  "experiment_id": "EXP-20260909-us-nbm-fresh-price-coverage-v1",
+  "generated_at_utc": "2026-09-09T13:09:20.114655Z",
+  "decision": "MARKET_PRICE_COLLECTION_PASS",
+  "metrics": {
+    "selected_event_count": 110,
+    "token_request_count": 1210,
+    "request_error_count": 0,
+    "complete_vector_event_count": 99,
+    "usable_full_vector_event_count": 88,
+    "usable_full_vector_event_rate": 0.8,
+    "usable_date_count": 8,
+    "city_count_with_usable_vector": 11,
+    "minimum_usable_events_per_city": 8,
+    "maximum_usable_events_per_city": 8,
+    "temporal_leakage_count": 0
+  },
+  "date_diagnostic": {
+    "2026-04-10": "All 11 vectors complete but exceed the preregistered 12-hour staleness ceiling; maximum staleness 64,780 seconds.",
+    "2026-07-30": "No event has a complete vector at the cutoff.",
+    "other_eight_dates": "All 11 cities usable on each date."
+  },
+  "checks": {
+    "exact_event_and_request_count": true,
+    "minimum_88_usable_events": true,
+    "minimum_80_percent_usable_rate": true,
+    "minimum_8_dates": true,
+    "all_11_cities_and_minimum_8_each": true,
+    "zero_request_errors": true,
+    "zero_temporal_leakage": true
+  },
+  "provenance": {
+    "config_sha256": "cdbe46ee6d299dc5037f384649eec6ed75cc052dd37d2684bd9974709baca1c2",
+    "selected_events_sha256": "350e84ba0ec76ce59ac1c6e9d4dbc33b5d12bc99b84d5936f1cf09334bedac57",
+    "raw_result_sha256": "ef1143bf416b5744aa541a37655f7931e4572fe39479cad8214428ef3ad82eed",
+    "event_horizon_coverage_sha256": "a3fabaa47ef76f99469244490ab00c26a1924658672faba0c4fce4bd5a860659",
+    "token_diagnostics_sha256": "286925f9e59c1d4b1ade6e10d3236febdbc536a986d6920c7ad2293d885e4895"
+  },
+  "interpretation": "The gate passes exactly at its lower balance boundary. This supports bounded forecast acquisition but is weak evidence and does not justify relaxing subsequent model gates.",
+  "boundary": "Indicative historical price availability only; no model skill, executable fill, edge, EV, P&L, or orders."
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no network retrieval has run under this experiment.
+`PASSED` — immutable retrieval completed and every preregistered gate passed.
 
 ## Hypothesis
 
@@ -21,3 +21,9 @@ The 80% balance gate is fixed before retrieval. It is slightly below the earlier
 ## Boundary
 
 Historical prices are indicative snapshots, not executable fills. This experiment cannot establish model skill, edge, net EV, P&L, or permission to send orders.
+
+## Result
+
+The collection returned all 1,210 requests without a terminal error and used no post-cutoff observation. Of 110 events, 99 have complete vectors and 88 are also within the 12-hour staleness bound. The usable rate is exactly 80%: 8 dates, all 11 cities, and exactly 8 usable events per city.
+
+The pass is boundary-tight. On April 10 all 11 event vectors are complete but stale (maximum 64,780 seconds); on July 30 no city has a complete vector. Every city is usable on each of the other eight dates. Therefore the next NBM acquisition is allowed, but downstream evidence must not be described as broad or high-powered.

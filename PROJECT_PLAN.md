@@ -2249,12 +2249,22 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0168 — 2026-09-09 — Fresh cohort 18h price coverage ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hypothesis:** Frozen 110 event, 18h cutoff'ta balanced 07Z-vs-13Z temporal comparison için yeterli complete/non-stale market vector bırakır.
 - **Data:** Frozen 1,210 YES token; fidelity=1m, latest point≤cutoff, maximum staleness=12h; forecast value ve outcome gate'e yasak.
 - **Gates:** Exact event=110/request=1,210; usable≥88/%80; usable date≥8; city=11 ve city başına usable≥8; terminal request error=0; leakage=0.
 - **Decision:** Pass yalnız immutable price freeze ve ayrı two-cycle NBM collection ön kaydına izin verir. Fail ise 20 NBM object indirilmez/model fit edilmez.
 - **Boundary:** Availability/timing only; indicative price, execution/EV/P&L/emir yok.
+
+### D-0169 — 2026-09-09 — Fresh cohort 18h price coverage sınırda geçti
+
+- **Durum:** `PASSED`
+- **Coverage:** Usable 88/110=%80; gate ≥88/%80. Complete=99/110; usable date=8; her 11 city için usable=8.
+- **Integrity:** 1,210/1,210 terminal request success; temporal leakage=0.
+- **Missingness:** Apr10'da 11/11 vector complete fakat 12h staleness sınırını aşıyor (max 64,780s); Jul30'da 0/11 complete. Diğer 8 tarihte 11/11 usable.
+- **Interpretation:** Gate tam alt sınırda geçti; güçlü/broad evidence değildir ve sonraki model eşiklerini gevşetmez.
+- **Decision:** Yalnız bu 8 usable date için 07Z f41 ve 13Z f35 NBM acquisition ön kaydı açılabilir; forecast/model score henüz yok.
+- **Boundary:** Indicative market availability; execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2276,7 +2286,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı fresh-cohort 18h historical market-vector collector'ını date/city balance ve request-integrity metrikleriyle çalıştır.
+**Tek sonraki adım:** Sekiz usable date × iki cycle için NBM 07Z f41 ve 13Z f35 acquisition/extraction deneyini exact publication, feature-completeness ve transfer cap gate'leriyle ön kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
