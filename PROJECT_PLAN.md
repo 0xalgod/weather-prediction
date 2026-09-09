@@ -2320,13 +2320,22 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0176 — 2026-09-09 — Weather-only hourly forecasting pivot
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Scope:** Polymarket geçici olarak target/model evaluation dışında; ilk pilot KORD two-year hourly→next-day official SOD maximum.
 - **Window:** 2024-08-01–2026-07-31, exact 730 target day; input cutoff previous-day 18:00 LST.
 - **Data:** NOAA LCDv2 hourly temp/dew point/RH/wind/pressure/visibility/precipitation ve SOD max label. NOAA timestamp=LST, DST adjustment yok.
 - **Gates:** Label≥%99; günlerin≥%95'inde ≥18 distinct temperature hour; identity/duplicate SOD/out-of-range temp=0.
 - **Decision:** Pass sonrası temporal features/model split ayrı ön kayıt; bu adımda fit/score yok.
 - **Boundary:** Weather forecasting only; Polymarket/execution/EV/P&L/emir yok.
+
+### D-0177 — 2026-09-09 — KORD two-year hourly dataset geçti
+
+- **Durum:** `PASSED`
+- **Dataset:** 31,579 hourly row ve 730/730 official SOD max label; target 2024-08-01–2026-07-31.
+- **Coverage:** 724/730=%99.18 predictor day en az 18 distinct temperature hour; required≥%95.
+- **QC:** Station identity error/duplicate SOD/out-of-range temperature=0; timestamp LST ve DST uygulanmadı.
+- **Decision:** Leakage-safe lag feature + chronological regression benchmark açılır; Polymarket scope dışı.
+- **Boundary:** Weather data only; model score/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2348,7 +2357,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** KORD için iki yıllık NOAA LCDv2 hourly panel ve SOD next-day-max label coverage dataset'ini indir, parse et ve frozen gate'leri çalıştır.
+**Tek sonraki adım:** Leakage-safe lag/rolling feature contract'ı, chronological train/validation/test split'i ve climatology/persistence/linear/gradient-boosting benchmark gate'lerini fit öncesi dondur.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — 2024 retrieval and hourly parsing have not run.
+`PASSED` — the immutable two-year hourly panel and labels passed every gate.
 
 ## Purpose
 
@@ -13,3 +13,7 @@ NOAA documents hourly time as local standard time with no DST adjustment. The pa
 ## Gates
 
 Require exactly 730 target days, at least 99% non-null SOD maximum labels, at least 95% of input days with 18 distinct temperature-observation hours, exact station identity, no duplicate SOD date, and no hourly dry-bulb value outside -60°C to 60°C. Passing permits feature/model preregistration, not fitting in this experiment.
+
+## Result
+
+The panel contains 31,579 hourly observation rows from 2024-07-31 through 2026-07-30 LST and 730/730 non-null target-day maximum labels. Of 730 predictor days, 724 (99.18%) contain at least 18 distinct temperature hours. Station identity errors, duplicate SOD dates, and out-of-range temperatures are zero.

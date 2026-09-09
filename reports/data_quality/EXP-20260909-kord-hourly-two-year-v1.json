@@ -1,0 +1,25 @@
+{
+  "experiment_id": "EXP-20260909-kord-hourly-two-year-v1",
+  "decision": "KORD_HOURLY_DATASET_PASS",
+  "metrics": {
+    "target_days": 730,
+    "hourly_rows": 31579,
+    "labels": 730,
+    "label_coverage": 1.0,
+    "days_with_18_temperature_hours": 724,
+    "days_with_18_temperature_hours_rate": 0.9917808219178083,
+    "identity_errors": 0,
+    "duplicate_sod_dates": 0,
+    "out_of_range_temperatures": 0
+  },
+  "window": {
+    "first_input_timestamp_lst": "2024-07-31T00:00:00",
+    "last_input_timestamp_lst": "2026-07-30T23:59:00"
+  },
+  "provenance": {
+    "result_sha256": "6d44466b0a58d6bab1c4d92bb7f9c55a9e96d371f0fd5487bd25ba660a5f20b5",
+    "hourly_sha256": "649dae17faee433f352fc5ac4611445de208c951bf1163b79785d9c1fb835a74",
+    "labels_sha256": "a6b3f906582a1d81667666a951ccb0ec26bc55faf033729c627a8f82b9d266c9"
+  },
+  "boundary": "Weather-only dataset; no model or trading result."
+}
