@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-20260909-us-24h-price-coverage-v1",
+  "design_status": "PREREGISTERED_BEFORE_24H_REPLAY",
+  "source_selected_events": "data/interim/us_nbm_model_ready_pilot/run=20260907T-selection-v1/selected-events.json",
+  "source_selected_events_sha256": "d0d352cf441b63ef0c7cf1cba00ef7f4e9a22e768e645569fb745c8c64820a8e",
+  "source_price_run": "data/raw/us_nbm_model_ready_pilot_prices/run=20260907T-v1",
+  "source_nbm_run": "data/raw/us_nbm_model_ready_pilot_nbm/run=20260907T-v1",
+  "hypothesis": "Replaying the frozen histories at 24 hours before market end, after requiring prior-day 07Z NBM publication by cutoff, leaves a balanced sample large enough for a separate earlier-horizon model experiment without any new download.",
+  "replay_contract": {
+    "horizon_hours_before_end": 24,
+    "latest_price_point_at_or_before_cutoff": true,
+    "maximum_staleness_seconds": 43200,
+    "all_bucket_prices_required": true,
+    "nbm_http_last_modified_must_be_at_or_before_cutoff": true,
+    "reuse_frozen_response_bodies": true,
+    "new_network_requests": false,
+    "retain_ineligible_as_no_trade": true
+  },
+  "acceptance_thresholds": {
+    "exact_source_event_count": 220,
+    "minimum_eligible_event_count": 165,
+    "minimum_eligible_event_rate": 0.75,
+    "minimum_eligible_target_date_count": 15,
+    "minimum_eligible_event_count_per_city": 15,
+    "exact_city_count": 11,
+    "maximum_temporal_leakage_count": 0,
+    "maximum_nbm_publication_after_cutoff_count": 0,
+    "maximum_duplicate_event_count": 0
+  },
+  "decision_rule": {
+    "pass": "Permit a separately preregistered 24-hour NBM-versus-market benchmark; do not reuse the untouched 18-hour test as a 24-hour test without a new split policy.",
+    "fail": "Do not model the 24-hour horizon; pivot to prospective data or another forecast source."
+  },
+  "boundary": {
+    "coverage_only_no_model_score": true,
+    "historical_prices_indicative_not_executable": true,
+    "multiple_horizon_research_disclosed": true,
+    "no_execution_ev_pnl_or_orders": true
+  }
+}

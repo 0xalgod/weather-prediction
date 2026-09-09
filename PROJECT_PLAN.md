@@ -2186,6 +2186,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Pivot:** Yeni download yapmadan, prior-day 07Z NBM'nin yayınlandığı daha erken 24h market horizon'ında önce price coverage ölç.
 - **Boundary:** Exploratory diagnostic; execution/EV/P&L/emir yok.
 
+### D-0162 — 2026-09-09 — No-redownload 24h price coverage ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hypothesis:** Frozen 220 event/2,420 history replay'de 24h cutoff ve publication-admissible 07Z NBM, balanced model-feasible sample bırakır.
+- **Rule:** Latest price≤cutoff, all buckets, staleness≤12h; NBM Last-Modified≤aynı cutoff; yeni network yok; ineligible=`NO_TRADE` retained.
+- **Gates:** Eligible≥165 ve ≥%75; date≥15; city başına≥15; city=11; price leakage/NBM late/duplicate=0.
+- **Disclosure:** Ek horizon araştırması; 18h failure'ı kurtarmaz. 24h model için ayrıca split/evaluation ön kaydı gerekir.
+- **Boundary:** Coverage only; indicative price; execution/EV/P&L/emir yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`
@@ -2206,7 +2215,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen raw price histories üzerinde no-redownload 24h horizon coverage deneyini ön kayıtla; NBM publication admissibility ve balanced eligible sample gate'ini ölç.
+**Tek sonraki adım:** Ön kayıtlı 24h replay'i frozen histories/NBM provenance üzerinde çalıştır; balanced eligibility ve publication gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
