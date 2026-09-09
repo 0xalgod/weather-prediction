@@ -2232,6 +2232,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Cost:** 10×07Z +10×13Z full object; conservative cap 750 MiB. Price request bucket sum IDs freeze sonrası.
 - **Decision:** Pass yalnız cohort/request freeze; price/NBM collection ve model evaluation ayrı ön kayıt gerektirir.
 - **Boundary:** Selection/cost only; model score/edge/execution/EV/P&L/emir yok.
+- **Pre-run clarification:** Conservative object size, tracked 07Z ve 13Z probe result'larının max byte'ı; cohort/eşik değişmedi.
 - **Pre-run clarification:** Conservative cost=max observed object bytes across tracked 07Z/13Z probe results ×20; selection/eşik değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır

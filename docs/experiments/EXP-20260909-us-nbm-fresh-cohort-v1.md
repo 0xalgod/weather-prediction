@@ -14,6 +14,8 @@ Within January 1 through August 15, 2026, retain remaining dates with exactly on
 
 Require ten dates, 110 events, 11 cities, ten events per city, zero overlap with excluded dates, and zero duplicate city-date. Planned acquisition is 1,210-ish bucket requests measured exactly after freezing IDs and 20 full NBM objects—07Z and 13Z for ten dates. Conservative NBM transfer must remain within 750 MiB.
 
+Pre-run clarification: the conservative object-size estimate uses the maximum byte count across the checksum-tracked 07Z and 13Z three-date probe results. No cohort or threshold changed.
+
 Passing freezes a fresh research cohort but is not automatically a confirmatory test. Price/NBM collection and temporal model evaluation require separate preregistered gates.
 
 Pre-run clarification: conservative transfer uses the larger per-object byte count observed across the checksum-tracked 07Z and 13Z probe results, multiplied by 20. Selection and thresholds are unchanged.
