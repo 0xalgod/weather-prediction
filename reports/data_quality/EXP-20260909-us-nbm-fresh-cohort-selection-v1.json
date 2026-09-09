@@ -1,0 +1,45 @@
+{
+  "artifact_type": "fresh_cohort_selection_report",
+  "experiment_id": "EXP-20260909-us-nbm-fresh-cohort-v1",
+  "generated_at_utc": "2026-09-09T13:03:42.603172Z",
+  "decision": "FRESH_COHORT_SELECTION_PASS",
+  "selected_dates": [
+    "2026-03-25",
+    "2026-04-10",
+    "2026-04-27",
+    "2026-05-12",
+    "2026-05-29",
+    "2026-06-13",
+    "2026-06-29",
+    "2026-07-15",
+    "2026-07-30",
+    "2026-08-14"
+  ],
+  "metrics": {
+    "selected_date_count": 10,
+    "selected_event_count": 110,
+    "city_count": 11,
+    "minimum_events_per_city": 10,
+    "maximum_events_per_city": 10,
+    "excluded_date_overlap_count": 0,
+    "duplicate_city_date_count": 0,
+    "remaining_eligible_shared_date_count": 118,
+    "market_token_request_count": 1210,
+    "planned_full_nbm_object_count": 20,
+    "conservative_nbm_transfer_bytes": 696133480,
+    "maximum_conservative_nbm_transfer_bytes": 786432000
+  },
+  "checks": {
+    "exact_balance": true,
+    "disjoint_from_prior_dates": true,
+    "no_duplicate_city_date": true,
+    "within_transfer_cap": true
+  },
+  "provenance": {
+    "config_sha256": "43b1e89d0e4138b976d16d69e046cf688417fc48cbe1eef782f605b7d5f37f58",
+    "result_sha256": "872f279a90968dec2a1773bbdacd1c40dbd656ddc587a1239c12e1f0d5c1fd42",
+    "selected_events_sha256": "350e84ba0ec76ce59ac1c6e9d4dbc33b5d12bc99b84d5936f1cf09334bedac57"
+  },
+  "known_issue": "The frozen config text repeats source_07z_probe_result with the same value. JSON consumers retain the identical last value, so selection semantics are unchanged; the frozen file is preserved to keep its recorded checksum valid.",
+  "boundary": "Cohort identity and acquisition cost only; this is not model, EV, execution, P&L, or order evidence."
+}

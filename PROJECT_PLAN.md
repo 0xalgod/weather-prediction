@@ -2225,7 +2225,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0166 — 2026-09-09 — Disjoint 13Z-vs-07Z cohort selection ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Exclusions:** Önceki 20 selected date + Jan15/May15/Aug15 probe union=22 unique date config'de frozen.
 - **Selection:** Jan1–Aug15 remaining full-11-city dates; ascending `round(i*(n-1)/9)` ile 10 tarih; yalnız identity metadata.
 - **Expected:** 10 date, 110 event, 11 city ×10; excluded overlap/duplicate=0.
@@ -2234,6 +2234,18 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Selection/cost only; model score/edge/execution/EV/P&L/emir yok.
 - **Pre-run clarification:** Conservative object size, tracked 07Z ve 13Z probe result'larının max byte'ı; cohort/eşik değişmedi.
 - **Pre-run clarification:** Conservative cost=max observed object bytes across tracked 07Z/13Z probe results ×20; selection/eşik değişmedi.
+
+### D-0167 — 2026-09-09 — Disjoint 13Z-vs-07Z cohort seçimi geçti
+
+- **Durum:** `PASSED`
+- **Cohort:** 10 tarih, 110 event, 11 city ve city başına tam 10 event; önceki 22 excluded date ile overlap=0, duplicate city-date=0.
+- **Frozen dates:** Mar25, Apr10, Apr27, May12, May29, Jun13, Jun29, Jul15, Jul30, Aug14 (2026).
+- **Request volume:** 1,210 market token history request; 20 full NBM object.
+- **Cost:** Conservative NBM transfer=696,133,480 byte; cap=786,432,000 byte, pass.
+- **Provenance:** Selection result ve selected-event artifact checksum'ları tracked data-quality raporunda kilitlendi.
+- **Known issue:** Frozen config aynı değerli `source_07z_probe_result` anahtarını iki kez içeriyor; semantics değişmiyor, prereg checksum korunmak için dosya değiştirilmedi.
+- **Decision:** Kimlikler frozen. Sonraki gate, forecast/outcome görmeden yalnız 18h market-vector availability ve temporal leakage ölçer.
+- **Boundary:** Selection/cost only; model score/edge/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2255,7 +2267,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı disjoint cohort selection'ı çalıştır; exact 10 date/110 event balance, excluded overlap ve two-cycle NBM cost cap gate'ini ölç.
+**Tek sonraki adım:** Frozen 110 event için outcome/forecast kullanmadan 18h historical market-vector collection deneyini ön kaydet; complete/non-stale coverage, date/city balance, request error ve temporal leakage gate'lerini çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
