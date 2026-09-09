@@ -194,8 +194,12 @@ def main() -> int:
         raise ValueError("source checksum mismatch")
     names, rows = build_features(read_jsonl(hp), read_jsonl(lp))
     split = config["temporal_split"]
+    minimum_hours = config.get("eligibility", {}).get(
+        "minimum_distinct_temperature_hours_through_18_lst", 0
+    )
+    eligible_rows = [r for r in rows if r["features"]["hour_count"] >= minimum_hours]
     groups = {
-        name: [r for r in rows if bounds[0] <= r["target_date"] <= bounds[1]]
+        name: [r for r in eligible_rows if bounds[0] <= r["target_date"] <= bounds[1]]
         for name, bounds in ((n, split[n]) for n in ("train", "validation", "test"))
     }
     if any(len(groups[n]) != split["expected_counts"][n] for n in groups):
@@ -268,6 +272,7 @@ def main() -> int:
         "config_sha256": sha256_path(args.config),
         "feature_names": names,
         "feature_count": len(names),
+        "ineligible_no_predict_count": len(rows) - len(eligible_rows),
         "split_counts": {k: len(v) for k, v in groups.items()},
         "train_cv": cv,
         "selected": selected,

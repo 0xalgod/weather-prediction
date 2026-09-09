@@ -2347,6 +2347,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Boundary:** Weather-only; Polymarket/trading yok.
 - **Pre-run correction:** İlk execution score üretmeden missing persistence'ta durdu; 3 missing baseline prediction için train-fitted harmonic fallback ve Ridge LSQR kullanılır. Split/gate/test değişmedi.
 
+### D-0179 — 2026-09-09 — Hourly model V1 technical invalidation ve V2 ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **V1 invalid:** Coverage tüm günü sayarken model cutoff 18:00 idi; cutoff-incomplete günlerde `hour_count=0` extrapolation 74°C prediction üretti. V1 karar kanıtı değil, test açılmadı.
+- **V2 eligibility:** Prior-day 00–18 LST distinct temperature hour≥18; outcome-independent NO_PREDICT. Train/validation/test=365/176/178.
+- **Lock:** Aynı feature/model/train-CV/gates; validation outcome ile tuning yok.
+- **Boundary:** Weather-only; Polymarket/trading yok.
+
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
 - **Durum:** `ACTIVE`

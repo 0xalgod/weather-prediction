@@ -1,0 +1,16 @@
+{
+  "experiment_id":"EXP-20260909-kord-hourly-nextday-model-v2",
+  "design_status":"CORRECTIVE_PREREGISTERED_AFTER_V1_TECHNICAL_INVALIDATION_BEFORE_V2_FIT",
+  "parent":"EXP-20260909-kord-hourly-nextday-model-v1",
+  "correction":"Exclude target dates whose prior-day 00:00-18:00 LST window has fewer than 18 distinct temperature hours. V1 scores are invalid.",
+  "source_hourly":"data/processed/kord_hourly_two_year/run=20260909T-v1/hourly.jsonl",
+  "source_hourly_sha256":"649dae17faee433f352fc5ac4611445de208c951bf1163b79785d9c1fb835a74",
+  "source_labels":"data/processed/kord_hourly_two_year/run=20260909T-v1/labels.jsonl",
+  "source_labels_sha256":"a6b3f906582a1d81667666a951ccb0ec26bc55faf033729c627a8f82b9d266c9",
+  "temporal_split":{"train":["2024-08-01","2025-07-31"],"validation":["2025-08-01","2026-01-31"],"test":["2026-02-01","2026-07-31"],"expected_counts":{"train":365,"validation":176,"test":178}},
+  "eligibility":{"minimum_distinct_temperature_hours_through_18_lst":18,"excluded_count":11},
+  "models":{"candidates":{"ridge_alpha":[0.1,1.0,10.0,100.0]},"selection":"same V1 five expanding train-only CV; same Ridge/HGB grid"},
+  "validation_gates":{"minimum_mae_improvement_vs_persistence":0.05,"minimum_mae_improvement_vs_harmonic_climatology":0.05,"maximum_absolute_bias_c":1.0},
+  "test_policy":"Consume once only if every validation gate passes.",
+  "boundary":{"weather_forecasting_only":true,"polymarket_excluded":true,"v1_scores_invalid":true}
+}
