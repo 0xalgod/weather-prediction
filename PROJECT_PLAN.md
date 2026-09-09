@@ -2302,12 +2302,21 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0174 — 2026-09-09 — 13Z incremental model ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Split:** Chronological dev=ilk 5 date/55 event; validation=son 3 date/33 event; confirmatory test yok.
 - **Fit:** 07Z ve 13Z için ortak low-capacity shift[-4,+4]/spread[.75,1,1.25,1.5]; market blend weight [0,.25,.5,.75,1] yalnız dev'de seçilir.
 - **Gates:** Validation 13Z-vs-07Z log-loss gain≥%2; challenger-vs-market gain≥%2; Brier delta≤0; invalid vector=0; cluster=3.
 - **Decision:** Fail branch'i kapatır ve validation tuning yasaktır; pass yalnız yeni disjoint confirmation cohort'a izin verir.
 - **Boundary:** 3 cluster/indicative price; test/execution/EV/P&L/emir yok.
+
+### D-0175 — 2026-09-09 — 13Z freshness çalışıyor, market-incremental model reddedildi
+
+- **Durum:** `FAILED`
+- **Fit:** Dev selected 07Z=-2°F/1.25×, 13Z=-2°F/1.5×; blend weight=%0 NBM/%100 market.
+- **Validation:** Market/07Z/13Z log loss=1.3399/2.6563/2.0404; 13Z, 07Z'den %23.19 iyi.
+- **Incremental gate:** Challenger market-only olduğu için market gain=%0, required≥%2 fail; Brier delta=0 ve vector QC pass.
+- **Decision:** Freshness mekanizması doğrulandı fakat 18h market zaten bilgiyi daha iyi fiyatlıyor; bu low-capacity NBM blend branch kapandı, validation tuning/test yok.
+- **Boundary:** Yalnız 3 date cluster ve indicative history; tradable edge/execution/EV/P&L/emir kanıtı yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2329,7 +2338,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı grid'i yalnız 55 development event'te fit et ve 33 validation event'te 13Z-vs-07Z-vs-market gate'lerini bir kez skorla.
+**Tek sonraki adım:** NBM directional blend'i bırak; mevcut immutable price histories üzerinde market-microstructure hipotezlerini (overround, stale bucket, cross-bucket coherence) outcome kullanmadan tanımlayıp hangisinin executable L2 veri gerektirdiğini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
