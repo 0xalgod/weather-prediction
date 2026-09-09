@@ -2286,11 +2286,19 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0172 — 2026-09-09 — Two-cycle model-ready join ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hypothesis:** 88/88 usable event; tek outcome, normalized 18h market vector ve resolution station için exact 07Z+13Z feature ile joins.
 - **Gates:** Row=88, date=8, city=11, city başına=8; join/duplicate/missing outcome/missing cycle=0; normalization error≤1e-9.
 - **Decision:** Pass sonrası chronological model experiment ayrıca ön kaydedilir; fail ise fit/score yok.
 - **Boundary:** Join/QC only; model score/execution/EV/P&L/emir yok.
+
+### D-0173 — 2026-09-09 — Two-cycle model-ready join geçti
+
+- **Durum:** `PASSED`
+- **Result:** 88 row, 8 date, 11 city, city başına exact 8; join error/duplicate/missing outcome/missing cycle=0.
+- **Probability QC:** Max normalized-vector sum error=6.67e-16.
+- **Decision:** Dataset frozen (`b5850b…e49b`); chronological development/validation model experiment açılır.
+- **Boundary:** Join/QC only; execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2312,7 +2320,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı 88-event two-cycle model-ready join'i çalıştır ve provenance/QC artifact'ını dondur.
+**Tek sonraki adım:** İlk 5 tarihi development, son 3 tarihi validation olarak freeze et; low-capacity 13Z calibration ve market-incremental challenger modelini fit/score öncesi ön kaydet.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
