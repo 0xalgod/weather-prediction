@@ -11,3 +11,5 @@ Predict KORD's target-day NOAA SOD maximum temperature using only information av
 Features include calendar harmonics, hourly weather aggregates and hour-of-day temperatures through the cutoff, and SOD label lags starting at two days. Target-day data and the preceding day's incomplete SOD label are forbidden. Missing values are imputed from train-fold medians with missing indicators.
 
 Compare persistence and train-fitted harmonic climatology against Ridge and histogram gradient boosting. Hyperparameters and the champion are selected using five expanding time-series folds inside train only. Validation passes only if the champion improves MAE by at least 5% against both baselines and absolute bias is at most 1°C. Test is opened once only after a full validation pass and uses identical gates.
+
+Pre-run corrective clarification: the first execution stopped before producing scores because three days have no finite prior-day temperature maximum. For only those persistence predictions, use the train-fitted harmonic climatology fallback. Ridge uses the numerically stable LSQR solver. Split, features, candidates, thresholds, and protected test remain unchanged.

@@ -158,7 +158,10 @@ def metrics(y: np.ndarray, prediction: np.ndarray) -> dict:
 def model(spec: dict) -> Pipeline:
     if spec["family"] == "ridge":
         estimator = Pipeline(
-            [("scale", StandardScaler()), ("regressor", Ridge(alpha=spec["alpha"]))]
+            [
+                ("scale", StandardScaler()),
+                ("regressor", Ridge(alpha=spec["alpha"], solver="lsqr")),
+            ]
         )
     else:
         estimator = HistGradientBoostingRegressor(
@@ -224,8 +227,9 @@ def main() -> int:
 
     def evaluate(name):
         x, y = xy(groups[name])
-        persistence = np.array([r["features"]["temp_max"] for r in groups[name]])
+        persistence = np.array([r["features"]["temp_max"] for r in groups[name]], dtype=float)
         climate = harmonic.predict(x[:, :2])
+        persistence = np.where(np.isfinite(persistence), persistence, climate)
         pred = champion.predict(x)
         m = {
             "persistence": metrics(y, persistence),

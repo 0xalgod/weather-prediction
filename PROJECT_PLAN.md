@@ -2345,6 +2345,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Models:** Persistence, harmonic climatology, Ridge ve HistGradientBoosting; seçim yalnız train içi 5-fold expanding CV MAE.
 - **Validation gates:** Champion MAE improvement persistence ve climatology karşısında ayrı ayrı≥%5; |bias|≤1°C. Tümü pass ise test bir kez açılır.
 - **Boundary:** Weather-only; Polymarket/trading yok.
+- **Pre-run correction:** İlk execution score üretmeden missing persistence'ta durdu; 3 missing baseline prediction için train-fitted harmonic fallback ve Ridge LSQR kullanılır. Split/gate/test değişmedi.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
