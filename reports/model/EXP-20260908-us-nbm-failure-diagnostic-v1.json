@@ -1,0 +1,22 @@
+{
+  "experiment_id": "EXP-20260908-us-nbm-failure-diagnostic-v1",
+  "status": "FAILED",
+  "decision": "NBM_BRANCH_NO_GO",
+  "result_path": "data/processed/us_nbm_failure_diagnostic/run=20260908T-v1/result.json",
+  "result_sha256": "c94c5a5bc1295406c4428c3ef6dfed2ef02bef9a07e81c378a699edd5d457f5a",
+  "diagnostic_events_sha256": "0605d2be0e2362438ed19474bea5d41cf19eecb79b2db51f63311625d04902e4",
+  "metrics": {
+    "development_event_count": 99,
+    "validation_event_count": 44,
+    "test_event_count_scored": 0,
+    "stable_material_bias_city_count": 0,
+    "required_stable_material_bias_city_count": 6,
+    "top3_positive_excess_loss_concentration": 0.42260116513743773,
+    "required_top3_concentration": 0.5,
+    "minimum_development_events_per_city": 9,
+    "minimum_validation_events_per_city": 4
+  },
+  "top3_positive_excess_loss_cities": ["Los Angeles", "Dallas", "San Francisco"],
+  "interpretation": "Neither stable city bias nor sufficient loss concentration was found. Proxy-overlap slices also lacked a clean monotonic failure mechanism. A city-offset model is not justified.",
+  "next_step": "Close the 18-hour city-offset branch. Preregister a no-redownload 24-hour market-horizon coverage probe, where prior-day 07Z NBM is publication-admissible."
+}

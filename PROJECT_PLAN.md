@@ -2166,7 +2166,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0160 — 2026-09-08 — NBM failure mechanism diagnostic ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Data:** Yalnız 99 dev+44 validation; 44 test event/date okunmaz ve skorlanmaz; locked -1°F/1.5×, yeni fit yok.
 - **Measures:** City/split signed calibrated-median→winner-interval distance, containment, raw/calibrated loss, spread, challenger−market loss; overlap 16/17/18h slices.
 - **Stable bias:** Dev/validation mean signed distance aynı nonzero yön, |dev mean|≥1°F; her city dev≥9/val≥4.
@@ -2174,6 +2174,17 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **GO:** Stable city≥6 VE concentration≥%50; ancak o zaman tek low-capacity city-offset challenger ön kaydı. Aksi NBM branch `NO_GO`.
 - **Boundary:** Exploratory/multiple slices; test untouched; execution/EV/P&L/emir yok.
 - **Pre-run clarification:** Dev/validation exact date list parent config'den diagnostic config'e aynen kopyalandı; dynamic split inference yok, eşikler değişmedi.
+
+### D-0161 — 2026-09-08 — 18h NBM city-offset branch NO_GO
+
+- **Durum:** `FAILED`
+- **Stable bias:** 0/11 city; preregistered minimum 6. LA dahil bias yönleri dev→validation kararlı değil.
+- **Concentration:** Validation top-3 positive excess-loss city LA/Dallas/SF; pay %42.26, required %50 altında.
+- **Window:** 16/17/18h overlap slice'larında temiz monoton failure mekanizması yok.
+- **Sample QC:** Her city dev=9/validation=4; test score count=0, untouched.
+- **Decision:** City-specific offset modeli yasak; 18h NBM calibrated-blend branch kapatıldı.
+- **Pivot:** Yeni download yapmadan, prior-day 07Z NBM'nin yayınlandığı daha erken 24h market horizon'ında önce price coverage ölç.
+- **Boundary:** Exploratory diagnostic; execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2195,7 +2206,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Ön kayıtlı dev+validation failure diagnostic'ini çalıştır; stable city bias ve loss concentration eşiklerinden city-offset model için GO/NO_GO kararı ver.
+**Tek sonraki adım:** Frozen raw price histories üzerinde no-redownload 24h horizon coverage deneyini ön kayıtla; NBM publication admissibility ve balanced eligible sample gate'ini ölç.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
