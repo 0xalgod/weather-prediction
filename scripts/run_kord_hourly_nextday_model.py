@@ -261,6 +261,22 @@ def main() -> int:
     }
     passed = all(checks.values())
     test, test_pred = evaluate("test") if passed else (None, None)
+    test_checks = None
+    if test is not None:
+        test_checks = {
+            "minimum_mae_improvement_vs_persistence": (
+                test["persistence"]["mae_c"] - test["champion"]["mae_c"]
+            )
+            / test["persistence"]["mae_c"]
+            >= gates["minimum_mae_improvement_vs_persistence"],
+            "minimum_mae_improvement_vs_harmonic_climatology": (
+                test["harmonic_climatology"]["mae_c"] - test["champion"]["mae_c"]
+            )
+            / test["harmonic_climatology"]["mae_c"]
+            >= gates["minimum_mae_improvement_vs_harmonic_climatology"],
+            "maximum_absolute_bias_c": abs(test["champion"]["bias_c"])
+            <= gates["maximum_absolute_bias_c"],
+        }
     args.output.mkdir(parents=True)
     feature_path = args.output / "features.jsonl"
     feature_path.write_text(
@@ -277,8 +293,14 @@ def main() -> int:
         "train_cv": cv,
         "selected": selected,
         "validation": {"metrics": validation, "checks": checks},
-        "test": {"consumed": passed, "metrics": test},
-        "decision": "TEST_EVALUATED" if passed else "VALIDATION_REJECT_TEST_UNTOUCHED",
+        "test": {"consumed": passed, "metrics": test, "checks": test_checks},
+        "decision": (
+            "TEST_PASS"
+            if test_checks is not None and all(test_checks.values())
+            else "TEST_REJECT"
+            if test_checks is not None
+            else "VALIDATION_REJECT_TEST_UNTOUCHED"
+        ),
         "boundary": config["boundary"],
     }
     (args.output / "result.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")

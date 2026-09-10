@@ -2349,11 +2349,21 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0179 — 2026-09-09 — Hourly model V1 technical invalidation ve V2 ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **V1 invalid:** Coverage tüm günü sayarken model cutoff 18:00 idi; cutoff-incomplete günlerde `hour_count=0` extrapolation 74°C prediction üretti. V1 karar kanıtı değil, test açılmadı.
 - **V2 eligibility:** Prior-day 00–18 LST distinct temperature hour≥18; outcome-independent NO_PREDICT. Train/validation/test=365/176/178.
 - **Lock:** Aynı feature/model/train-CV/gates; validation outcome ile tuning yok.
 - **Boundary:** Weather-only; Polymarket/trading yok.
+
+### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
+
+- **Durum:** `FAILED`
+- **Selection:** Train-only 5-fold expanding CV champion=Ridge alpha100; mean fold MAE=3.833°C.
+- **Validation:** N=176; model/persistence/climatology MAE=2.798/3.317/4.967°C; gains=%15.64/%43.66; bias=+0.483°C. Tüm gate'ler pass ve test bir kez açıldı.
+- **Test:** N=178; model/persistence/climatology MAE=3.921/4.329/5.186°C; gains=%9.43/%24.39; bias=-2.169°C.
+- **Decision:** Test MAE skill var fakat locked |bias|≤1°C gate fail; `TEST_REJECT`. Test üzerinde recalibration/tuning yasak.
+- **Interpretation:** Hourly local history persistence'tan daha fazla signal taşıyor, fakat sonraki dönem regime/season calibration drift'i var.
+- **Boundary:** Weather-only point forecast; Polymarket/execution/EV/P&L/emir yok.
 
 ### D-0069 — 2026-09-03 — Paper day 1 identity ve dual-model runner hazır
 
@@ -2375,7 +2385,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen KORD hourly feature pipeline'ı kur, train-only walk-forward CV ile Ridge/HGB champion seç, validation gate'ini ve koşullu untouched test'i çalıştır.
+**Tek sonraki adım:** Test üzerinde fit yapmadan aylık/seasonal residual ve feature-drift diagnostic'i üret; -2.169°C bias'ın sabit-train regime drift kaynaklı olup olmadığını ölç ve yalnız ardından expanding-retrain challenger'ı yeni deney olarak tanımla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

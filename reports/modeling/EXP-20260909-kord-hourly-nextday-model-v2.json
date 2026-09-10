@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-20260909-kord-hourly-nextday-model-v2",
+  "decision": "TEST_REJECT",
+  "selected_model": {"family": "ridge", "alpha": 100.0, "train_cv_mae_c": 3.8332119212362263},
+  "validation": {
+    "events": 176,
+    "champion_mae_c": 2.7981767699041353,
+    "persistence_mae_c": 3.3170454545454544,
+    "climatology_mae_c": 4.9667316731863,
+    "improvement_vs_persistence": 0.1564246751961819,
+    "improvement_vs_climatology": 0.4365400381959116,
+    "bias_c": 0.4834431739655502,
+    "all_gates_pass": true
+  },
+  "test": {
+    "events": 178,
+    "champion_mae_c": 3.92084736564046,
+    "persistence_mae_c": 4.3292134831460665,
+    "climatology_mae_c": 5.185794562282655,
+    "improvement_vs_persistence": 0.09432915262115427,
+    "improvement_vs_climatology": 0.24315028457711026,
+    "bias_c": -2.169207861157436,
+    "mae_gates_pass": true,
+    "bias_gate_pass": false
+  },
+  "provenance": {
+    "model_result_sha256": "ceb604a66888752c248271d54b233a984e7b6334f96a8a4b2f0327f77aec9b96",
+    "features_sha256": "c55ce2874cfa0683c53a2569ae204adcdcd39bf0decc41d4bc077530025f9c66"
+  },
+  "interpretation": "Hourly Ridge improves MAE out of sample but has material negative test-period bias.",
+  "boundary": "Weather-only point forecast; no Polymarket or trading claim."
+}
