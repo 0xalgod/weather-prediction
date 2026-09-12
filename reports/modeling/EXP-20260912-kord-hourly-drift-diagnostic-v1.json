@@ -1,0 +1,32 @@
+{
+  "experiment_id": "EXP-20260912-kord-hourly-drift-diagnostic-v1",
+  "decision": "PERSISTENT_REGIME_DRIFT_CONFIRMED",
+  "test_months": 6,
+  "test_months_with_bias_at_or_below_minus_1c": [
+    "2026-03",
+    "2026-04",
+    "2026-05",
+    "2026-06",
+    "2026-07"
+  ],
+  "negative_bias_month_count": 5,
+  "minimum_30day_rolling_bias_c": -3.697161441902497,
+  "maximum_30day_rolling_bias_c": -0.38116039173499855,
+  "material_feature_shift_count": 7,
+  "largest_feature_shifts_standard_deviations": {
+    "observation_count": 2.3668631814079255,
+    "sin_doy": 0.7738088095322196,
+    "hour_count": -0.6999362519348717,
+    "dew_latest": -0.6567535643550715,
+    "temp_latest": -0.6181763846369049,
+    "precip_sum": 0.6069033221606459,
+    "label_roll14_std": 0.5129435518320287
+  },
+  "provenance": {
+    "source_model_result_sha256": "ceb604a66888752c248271d54b233a984e7b6334f96a8a4b2f0327f77aec9b96",
+    "diagnostic_result_sha256": "75a469e11a2ab045d588f9649493bd17f8087f4130c50fa5ec9023ec1ff6f6de",
+    "residuals_sha256": "f6870ff028084191efc11fe3a55004cd562af905b209b27a719f51087435d0d2"
+  },
+  "interpretation": "The locked static Ridge model's negative bias is persistent across five of six test months, not an isolated set of extreme days. An expanding-window retrain is justified as a post-test exploratory challenger.",
+  "boundary": "Consumed-test diagnostic only; no new validation evidence, Polymarket claim, execution claim, EV claim, P&L claim, or order."
+}

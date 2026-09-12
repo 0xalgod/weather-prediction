@@ -2357,12 +2357,21 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0181 — 2026-09-12 — KORD hourly test drift diagnostic ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Hypothesis:** Test aggregate negative bias birkaç outlier değil persistent regime drift; en az 3 test calendar month bias≤-1°C.
 - **Measures:** Monthly MAE/RMSE/bias, 30-day rolling bias, target/prediction mean ve train→test standardized feature mean shift.
 - **Lock:** Ridge alpha100 ve V2 features/splits aynen reproduce; hyperparameter/feature tuning yok.
-- **Decision:** Drift confirmed yalnız exploratory expanding-retrain tasarımına izin verir; consumed test yeni kanıt sayılmaz.
+- **Result:** 6 test ayının 5'inde bias≤-1°C (Mar–Jul 2026); worst 30-day rolling bias=-3.697°C. Yedi feature train ortalamasından≥0.5 SD kaydı; en büyüğü `observation_count`=+2.367 SD.
+- **Decision:** `PERSISTENT_REGIME_DRIFT_CONFIRMED`; exploratory expanding-retrain tasarımına izin verildi. Consumed test yeni kanıt sayılmaz.
 - **Boundary:** Post-failure diagnostic, weather-only.
+
+### D-0182 — 2026-09-12 — Persistent drift sonrası expanding retrain kararı
+
+- **Durum:** `IN_PROGRESS`
+- **Evidence:** Static Ridge testte MAE skill korurken bias gate fail etti; aylık diagnostic hatanın kalıcı olduğunu doğruladı.
+- **Hypothesis:** Her tahmin gününde yalnız geçmiş eligible günlerle yeniden fit edilen locked Ridge alpha100, 2025-08-01–2026-07-31 döneminde |bias|≤1°C tutarken persistence MAE'yi≥%5 yener.
+- **Protocol:** İlk 365 günlük history sonrası daily expanding walk-forward; aynı 48 feature, aynı eligibility, target-date veya gelecek veri yok, tuning/model seçimi yok.
+- **Boundary:** Eski validation ve test outcome'ları artık bilindiği için tamamen exploratory/post-test; başarı yeni disjoint confirmation dönemi gerektirir.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2394,7 +2403,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Test üzerinde fit yapmadan aylık/seasonal residual ve feature-drift diagnostic'i üret; -2.169°C bias'ın sabit-train regime drift kaynaklı olup olmadığını ölç ve yalnız ardından expanding-retrain challenger'ı yeni deney olarak tanımla.
+**Tek sonraki adım:** Daily expanding-window Ridge alpha100 challenger'ını ön-kayıtlı exploratory walk-forward protokolüyle çalıştır; full evaluation ile eski validation/test yarılarında bias ve persistence'a karşı MAE gain'i ayrı raporla.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
