@@ -1,0 +1,145 @@
+{
+  "experiment_id": "EXP-20260912-multicity-probabilistic-v1",
+  "design_status": "PREREGISTERED_BEFORE_PROTECTED_STATION_OUTCOME_RETRIEVAL",
+  "research_question": "Can confirmed next-day point forecasts be converted into calibrated daily-maximum temperature distributions that beat honest probabilistic persistence and climatology baselines on wholly unseen stations?",
+  "development_sources": [
+    {
+      "role": "point-model development city",
+      "station": "KORD",
+      "predictions": "data/processed/kord_hourly_expanding_walkforward/run=20260912T-v1/predictions.jsonl",
+      "predictions_sha256": "0ea3b046b1f68ed426d503ce14e867bbc697cdd41d8bab06fd2a026d9d350421"
+    },
+    {
+      "role": "point-model spatial-confirmation cities, now consumed for probability development",
+      "stations": [
+        "KJFK",
+        "KLAX",
+        "KDFW",
+        "KMIA",
+        "KSEA"
+      ],
+      "predictions": "data/processed/multicity_hourly_confirmation_scores/run=20260912T-v2/predictions.jsonl",
+      "predictions_sha256": "fb0d8858d5207e49b1d7d33198b97f1d55fb8b113d3257db9762c572a5a4cbf1"
+    }
+  ],
+  "protected_test_stations": [
+    {
+      "ghcn_id": "USW00014739",
+      "icao": "KBOS",
+      "city": "Boston",
+      "selection_reason": "cold humid coastal Northeast"
+    },
+    {
+      "ghcn_id": "USW00023183",
+      "icao": "KPHX",
+      "city": "Phoenix",
+      "selection_reason": "hot arid desert"
+    },
+    {
+      "ghcn_id": "USW00003017",
+      "icao": "KDEN",
+      "city": "Denver",
+      "selection_reason": "high-elevation continental interior"
+    }
+  ],
+  "station_policy": "Protected stations are fixed before retrieval for climate diversity. None may be removed after outcome retrieval. Technical identifier replacement is allowed only before any protected station is scored and must be recorded as a protocol deviation.",
+  "window": {
+    "start_date": "2024-08-01",
+    "end_date": "2026-07-31",
+    "initial_point_training": [
+      "2024-08-01",
+      "2025-07-31"
+    ],
+    "protected_probability_test": [
+      "2025-08-01",
+      "2026-07-31"
+    ],
+    "timestamp_semantics": "NOAA LCDv2 local standard time; no DST adjustment",
+    "weather_cutoff": "18:00 local standard time on target-minus-one day"
+  },
+  "protected_data_quality": {
+    "minimum_label_coverage": 0.99,
+    "minimum_cutoff_window_coverage": 0.95,
+    "maximum_station_identity_errors": 0,
+    "maximum_duplicate_sod_dates": 0,
+    "invalid_temperature_policy": "Apply the frozen multicity V2 null-temperature/dependent-RH transform; correction fraction must be no more than 0.01% per station."
+  },
+  "point_forecast": {
+    "procedure": "Frozen station-specific daily expanding Ridge alpha 100 with the same 48 features and eligibility contract.",
+    "selection_or_tuning": false
+  },
+  "outcome_and_buckets": {
+    "outcome": "NOAA SOD daily maximum dry-bulb temperature",
+    "unit_for_scoring": "degrees Fahrenheit",
+    "conversion": "Celsius value converted by F=C*9/5+32; distribution scoring uses continuous F without rounding.",
+    "categorical_log_loss_bins": "Two-degree-Fahrenheit bins with edges at every even integer from 20F through 120F, plus underflow and overflow bins.",
+    "probability_floor_for_log_loss": 0.000001
+  },
+  "candidate_distributions": [
+    {
+      "name": "gaussian_residual",
+      "definition": "Point mean plus development-residual mean and standard deviation; parameters fit without protected outcomes."
+    },
+    {
+      "name": "student_t_residual",
+      "definition": "Point mean plus development-residual Student-t location/scale; degrees of freedom selected only by leave-one-development-station-out CRPS from [3, 5, 8, 15, 30]."
+    },
+    {
+      "name": "empirical_residual",
+      "definition": "Point mean plus equally weighted development residual empirical distribution with fixed Gaussian jitter bandwidth selected only in development from [0.25, 0.5, 1.0, 1.5]F."
+    },
+    {
+      "name": "quantile_gbt_residual",
+      "definition": "Pooled development-only gradient-boosted residual quantiles at [0.05, 0.10, 0.25, 0.50, 0.75, 0.90, 0.95], using point prediction, sin/cos day-of-year and station one-hot; quantile crossing fixed by monotonic rearrangement and piecewise-linear CDF tails. Hyperparameters selected only by leave-one-development-station-out CRPS."
+    }
+  ],
+  "development_selection": {
+    "outer_unit": "leave one development station out",
+    "primary_metric": "mean CRPS",
+    "tie_breakers": [
+      "two-degree-Fahrenheit categorical log loss",
+      "absolute 80% interval coverage error",
+      "simpler model in listed candidate order"
+    ],
+    "protected_station_outcomes_forbidden": true
+  },
+  "probabilistic_baselines": [
+    "Persistence-centered Gaussian with scale calibrated only on development persistence residuals",
+    "Day-of-year climatological empirical distribution calibrated only on development outcomes"
+  ],
+  "protected_metrics": [
+    "CRPS",
+    "two-degree-Fahrenheit categorical log loss",
+    "mean multiclass Brier score",
+    "80% and 90% interval coverage and mean width",
+    "PIT histogram and ECE",
+    "station and pooled metrics",
+    "target-date-cluster bootstrap confidence interval for paired CRPS reduction"
+  ],
+  "protected_gates": {
+    "minimum_pooled_crps_improvement_vs_best_baseline": 0.05,
+    "minimum_pooled_log_loss_improvement_vs_best_baseline": 0.02,
+    "minimum_target_date_cluster_bootstrap_95pct_lower_bound_crps_reduction_f": 0.0,
+    "minimum_80pct_interval_coverage": 0.75,
+    "maximum_80pct_interval_coverage": 0.85,
+    "minimum_90pct_interval_coverage": 0.86,
+    "maximum_90pct_interval_coverage": 0.94,
+    "minimum_protected_stations_with_positive_crps_improvement": 2
+  },
+  "bootstrap": {
+    "unit": "target_date across all protected stations",
+    "resamples": 5000,
+    "seed": 20260912
+  },
+  "decision_rule": {
+    "data_fail": "Do not fit or score probabilistic models.",
+    "development": "Select exactly one frozen candidate without protected outcomes.",
+    "protected_pass": "Accept weather-probability model for later market-incremental evaluation; this is not a trading edge claim.",
+    "protected_fail": "Reject the probabilistic branch and do not tune on protected outcomes."
+  },
+  "boundary": {
+    "weather_probability_research_only": true,
+    "protected_test_single_use": true,
+    "polymarket_prices_execution_ev_pnl_orders_excluded": true
+  }
+}

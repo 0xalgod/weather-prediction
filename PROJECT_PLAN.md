@@ -2414,8 +2414,11 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 - **Durum:** `IN_PROGRESS`
 - **Evidence:** Frozen expanding Ridge, KORD development ve beş unseen station confirmation'da persistence'ı yendi; fakat MAE skill bucket probability/calibration değildir.
-- **Next hypothesis:** Walk-forward residual dağılımı station/season/lead-context ile kalibre edilerek daily max için reliable CDF/bucket probabilities üretilebilir ve climatology/persistence-derived probability benchmark'larını log loss, Brier ve calibration'da yenebilir.
-- **Required design:** Model geliştirme ve calibration için yeni temporal split; confirmation sonuçlarında tuning yok. Gaussian homoskedastic, empirical rolling residual, quantile/GBT gibi adaylar yalnız development içinde karşılaştırılır; final probabilistic test yeniden korunur.
+- **Hypothesis:** Confirmed point prediction residual'larından reliable CDF/bucket probabilities üretilir ve protected cities'te best probabilistic baseline'a karşı CRPS≥%5, categorical log loss≥%2 iyileşir.
+- **Development:** Consumed KORD+KJFK/KLAX/KDFW/KMIA/KSEA; Gaussian, Student-t, empirical residual ve quantile GBT yalnız leave-one-development-station-out CRPS ile seçilir.
+- **Protected spatial test:** KBOS/Boston, KPHX/Phoenix, KDEN/Denver; outcome retrieval öncesi kilitli. 2024-08-01–2025-07-31 point history, 2025-08-01–2026-07-31 single-use probability test.
+- **Probability gates:** Best baseline'a karşı pooled CRPS gain≥%5, 2°F-bin log-loss gain≥%2, date-cluster bootstrap CRPS-reduction 95% lower>0, 80% coverage %75–85, 90% coverage %86–94, ≥2/3 station positive CRPS skill.
+- **Guardrail:** Protected data önce yalnız QC/point-prediction artifact; distribution candidate development şehirlerinde seçilip frozen olmadan protected probability score açılmaz.
 - **Boundary:** Önce weather probability quality; Polymarket fiyat/EV entegrasyonu ancak calibration gate sonrası.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
@@ -2448,7 +2451,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Multi-city point predictions üzerinden probabilistic experiment tasarımını ön-kayıt et: target bucket şeması, leakage-safe residual calibration, chronological development/calibration/protected-test split, Gaussian/rolling-empirical/quantile-GBT benchmark'ları ve log-loss/Brier/ECE gate'leri sonuç görülmeden kilitlensin.
+**Tek sonraki adım:** KBOS/KPHX/KDEN için immutable NOAA LCDv2 cohort'unu indir; frozen correction ve data-quality gate'lerini uygula, fakat development-only probability candidate seçilip freeze edilene kadar protected outcomes'u probability scoring'de açma.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
