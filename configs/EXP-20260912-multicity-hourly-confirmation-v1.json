@@ -1,0 +1,115 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-confirmation-v1",
+  "design_status": "CONFIRMATORY_PREREGISTERED_BEFORE_MULTICITY_OUTCOME_RETRIEVAL",
+  "parent_candidate": "EXP-20260912-kord-hourly-expanding-walkforward-v1",
+  "hypothesis": "The frozen daily expanding Ridge alpha-100 procedure generalizes beyond Chicago: across five prespecified unseen stations it improves pooled MAE versus persistence by at least 5%, maintains pooled absolute bias at or below 1C, and has a positive date-cluster-bootstrap lower confidence bound for paired MAE reduction.",
+  "stations": [
+    {
+      "ghcn_id": "USW00094789",
+      "icao": "KJFK",
+      "city": "New York",
+      "selection_reason": "humid continental/coastal Northeast"
+    },
+    {
+      "ghcn_id": "USW00023174",
+      "icao": "KLAX",
+      "city": "Los Angeles",
+      "selection_reason": "Mediterranean marine West Coast"
+    },
+    {
+      "ghcn_id": "USW00003927",
+      "icao": "KDFW",
+      "city": "Dallas",
+      "selection_reason": "hot continental/subtropical interior"
+    },
+    {
+      "ghcn_id": "USW00012839",
+      "icao": "KMIA",
+      "city": "Miami",
+      "selection_reason": "tropical maritime"
+    },
+    {
+      "ghcn_id": "USW00024233",
+      "icao": "KSEA",
+      "city": "Seattle",
+      "selection_reason": "cool marine West Coast"
+    }
+  ],
+  "station_selection_policy": "The five stations are fixed for climate diversity and major-airport continuity before their hourly values or target outcomes are downloaded. No station may be removed based on results. A technically unavailable identifier may be replaced only before any other station is scored, with the replacement and reason recorded as a protocol deviation.",
+  "window": {
+    "start_date": "2024-08-01",
+    "end_date": "2026-07-31",
+    "exact_days_per_station": 730,
+    "initial_training_period": [
+      "2024-08-01",
+      "2025-07-31"
+    ],
+    "evaluation_period": [
+      "2025-08-01",
+      "2026-07-31"
+    ],
+    "timestamp_semantics": "NOAA LCDv2 local standard time; no DST adjustment",
+    "decision_cutoff": "18:00 local standard time on the calendar day before the target"
+  },
+  "source": {
+    "base_url": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access",
+    "years": [
+      2024,
+      2025,
+      2026
+    ],
+    "documentation": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/doc/lcdv2_DOCUMENTATION.pdf"
+  },
+  "data_quality_gates_per_station": {
+    "minimum_label_coverage": 0.99,
+    "minimum_days_with_18_temperature_hours_through_cutoff_rate": 0.95,
+    "maximum_station_identity_error_count": 0,
+    "maximum_duplicate_sod_date_count": 0,
+    "maximum_out_of_range_temperature_count": 0
+  },
+  "frozen_forecasting_procedure": {
+    "features": "Same 48 KORD V2 features",
+    "eligibility": "At least 18 distinct temperature hours from 00:00 through 18:00 LST on target-minus-one day",
+    "model": {
+      "family": "ridge",
+      "alpha": 100.0,
+      "training_window": "station-specific daily expanding",
+      "selection_or_tuning": false
+    },
+    "baselines": [
+      "prior-day observed maximum through 18:00 LST",
+      "station-specific expanding harmonic day-of-year regression"
+    ]
+  },
+  "confirmatory_metrics": [
+    "station and pooled MAE",
+    "station and pooled RMSE",
+    "station and pooled bias",
+    "station and pooled within-1C/2C rate",
+    "paired absolute-error reduction versus persistence",
+    "95% date-cluster-bootstrap confidence interval with 5000 resamples"
+  ],
+  "confirmation_gates": {
+    "minimum_pooled_mae_improvement_vs_persistence": 0.05,
+    "maximum_pooled_absolute_bias_c": 1.0,
+    "minimum_date_cluster_bootstrap_95pct_lower_bound_mae_reduction_c": 0.0,
+    "minimum_stations_with_positive_mae_improvement": 4,
+    "minimum_stations_meeting_5pct_skill_and_1c_bias": 3
+  },
+  "bootstrap": {
+    "unit": "target_date across all stations present on that date",
+    "resamples": 5000,
+    "seed": 20260912
+  },
+  "decision_rule": {
+    "all_data_quality_gates_pass": "Run the frozen station-specific expanding walk-forward once and evaluate every confirmation gate.",
+    "any_data_quality_gate_fails": "Do not score any station; report the preregistered cohort as blocked or failed without station substitution based on outcomes.",
+    "all_confirmation_gates_pass": "Accept cross-city generalization for the weather-only point-forecast stage and proceed to probabilistic modeling on a separately designed split.",
+    "any_confirmation_gate_fails": "Reject generalization; report every station and do not tune on the confirmation cohort."
+  },
+  "boundary": {
+    "weather_forecasting_only": true,
+    "point_forecast_confirmation": true,
+    "polymarket_execution_ev_pnl_orders_excluded": true
+  }
+}

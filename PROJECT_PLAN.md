@@ -2380,7 +2380,10 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 - **Durum:** `IN_PROGRESS`
 - **Rationale:** Tek istasyon sonucu genelleme kanıtı değildir; beklemek yerine outcome'larına bakılmamış şehir/istasyonlar independent spatial holdout olarak kullanılabilir.
-- **Next:** İstasyonları ve tarih/split/gate'leri veri indirilmeden önce kilitle; her istasyonda aynı hourly schema, cutoff, eligibility ve daily expanding Ridge alpha100 uygula.
+- **Cohort lock:** KJFK/New York, KLAX/Los Angeles, KDFW/Dallas, KMIA/Miami, KSEA/Seattle; KORD development olduğu için hariç.
+- **Window:** Her istasyonda 2024-08-01–2025-07-31 initial history; 2025-08-01–2026-07-31 confirmation evaluation.
+- **Gates:** Pooled persistence MAE gain≥%5, pooled |bias|≤1°C, date-cluster bootstrap MAE-reduction 95% lower bound>0; ayrıca ≥4/5 station positive skill ve ≥3/5 station hem %5 skill hem |bias|≤1°C.
+- **Next:** Outcome değerlerini score etmeden immutable NOAA LCDv2 cohort'unu indir ve station-level data-quality gate'lerini çalıştır.
 - **Guardrail:** Şehirler sonuç görüldükten sonra seçilmeyecek; başarısız şehirler rapordan çıkarılmayacak; station-level ve pooled metrikler birlikte verilecek.
 - **Boundary:** Weather-only confirmation; Polymarket edge hâlâ test edilmez.
 
