@@ -1,0 +1,36 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-data-correction-v2",
+  "decision": "CORRECTED_DATASET_PASS",
+  "stations_passed": [
+    "KJFK",
+    "KLAX",
+    "KDFW",
+    "KMIA",
+    "KSEA"
+  ],
+  "corrected_rows": {
+    "KJFK": 0,
+    "KLAX": 0,
+    "KDFW": 0,
+    "KMIA": 0,
+    "KSEA": 1
+  },
+  "ksea_corrected_hourly_row_fraction": 0.00003100582909587002,
+  "label_coverage_range": [
+    0.9986301369863013,
+    1.0
+  ],
+  "cutoff_coverage_range": [
+    0.9808219178082191,
+    0.9876712328767123
+  ],
+  "remaining_out_of_range_temperature_count": 0,
+  "station_identity_error_count": 0,
+  "duplicate_sod_date_count": 0,
+  "provenance": {
+    "source_dataset_result_sha256": "ec78898cad40a5f026bbc658bfa4cf79fa6cb8a5bf688b900d4c62787d4e7324",
+    "corrected_dataset_result_sha256": "e91764d8dfa50e6c8e45e78d63d6bd2f1f2142dc50968046d3c683f13239b432"
+  },
+  "decision_effect": "The frozen five-station confirmation model may now be scored once.",
+  "boundary": "Data quality only; no model outcome was scored."
+}

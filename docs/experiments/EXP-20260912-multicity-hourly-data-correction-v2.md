@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — corrective transform has not run and no confirmation model has been scored.
+`PASSED` — all corrective data-quality gates passed; no confirmation model had been scored at this decision point.
 
 ## Hypothesis
 
@@ -16,3 +16,9 @@ The multi-city V1 failure is a sparse structured-field anomaly that can be handl
 - No METAR-derived replacement, interpolation, station removal, date removal, model fit, or outcome score is permitted in this step.
 
 Pass freezes corrected V2 artifacts and permits the original five-station confirmation to run once. Fail stops scoring.
+
+## Result
+
+Exactly one of 152,589 cohort hourly rows was corrected: KSEA 2024-12-26 02:53 LST. Its station-level correction fraction was 0.00310%, below the preregistered 0.01% maximum. No other station required correction.
+
+All five stations retained label coverage between 99.863% and 100%, cutoff-window coverage between 98.082% and 98.767%, and zero remaining invalid temperature, station identity error, or duplicate SOD date. Decision: `CORRECTED_DATASET_PASS`.

@@ -2390,11 +2390,12 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0184 — 2026-09-12 — Multi-city data corrective V2 ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Trigger:** Her station'da `dry_bulb_c` non-null ve inclusive [-60,60]°C dışında.
 - **Transform:** Original temperature/RH provenance olarak saklanır; model-input temperature ve dependent RH missing yapılır ve quality flags eklenir. METAR replacement/interpolation yasak.
 - **Gates:** Station başına corrected hourly row fraction≤%0.01; label≥%99; cutoff coverage≥%95; remaining invalid/station error/duplicate=0.
-- **Decision:** Tüm station gate'leri pass olmadan confirmation scoring yok.
+- **Result:** Yalnız KSEA'da 1/32,252=%0.00310 row corrected; diğer dört station=0. Cohort label coverage=%99.863–100, cutoff coverage=%98.082–98.767; remaining invalid/identity error/duplicate=0.
+- **Decision:** `CORRECTED_DATASET_PASS`; frozen beş-istasyon confirmation bir kez score edilebilir.
 - **Boundary:** Data-quality only; hiçbir outcome score edilmedi.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
@@ -2427,7 +2428,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Multi-city data-quality corrective V2'yi score öncesi ön-kayıt et: `dry_bulb_c` fiziksel aralık dışındaysa temperature ve dependent RH missing olur, manuel METAR replacement yapılmaz; ardından beş istasyonun tüm gate'lerini immutable yeni artifact üzerinde yeniden çalıştır.
+**Tek sonraki adım:** Corrected V2 checksum'larını doğrulayarak frozen station-specific daily expanding Ridge alpha100 confirmation runner'ını bir kez çalıştır; station/pooled metrics ve 5,000 target-date cluster bootstrap CI üret, tüm ön-kayıtlı gate'leri birlikte değerlendir.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
