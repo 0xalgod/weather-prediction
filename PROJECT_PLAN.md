@@ -2388,6 +2388,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Guardrail:** Şehirler sonuç görüldükten sonra seçilmeyecek; başarısız şehirler rapordan çıkarılmayacak; station-level ve pooled metrikler birlikte verilecek.
 - **Boundary:** Weather-only confirmation; Polymarket edge hâlâ test edilmez.
 
+### D-0184 — 2026-09-12 — Multi-city data corrective V2 ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Trigger:** Her station'da `dry_bulb_c` non-null ve inclusive [-60,60]°C dışında.
+- **Transform:** Original temperature/RH provenance olarak saklanır; model-input temperature ve dependent RH missing yapılır ve quality flags eklenir. METAR replacement/interpolation yasak.
+- **Gates:** Station başına corrected hourly row fraction≤%0.01; label≥%99; cutoff coverage≥%95; remaining invalid/station error/duplicate=0.
+- **Decision:** Tüm station gate'leri pass olmadan confirmation scoring yok.
+- **Boundary:** Data-quality only; hiçbir outcome score edilmedi.
+
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
 - **Durum:** `FAILED`

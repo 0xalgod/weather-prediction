@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-data-correction-v2",
+  "design_status": "CORRECTIVE_PREREGISTERED_AFTER_DATA_V1_FAILURE_BEFORE_ANY_MODEL_SCORING",
+  "parent_experiment": "EXP-20260912-multicity-hourly-confirmation-v1",
+  "source_dataset_result": "data/processed/multicity_hourly_confirmation/run=20260912T-v1/result.json",
+  "source_dataset_result_sha256": "ec78898cad40a5f026bbc658bfa4cf79fa6cb8a5bf688b900d4c62787d4e7324",
+  "correction_hypothesis": "The KSEA data-quality failure is a sparse structured-field anomaly that can be handled without value fabrication by deterministically converting every physically invalid dry-bulb temperature and its dependent relative humidity to missing across the entire frozen cohort.",
+  "transform": {
+    "trigger": "dry_bulb_c is non-null and outside inclusive [-60, 60] C",
+    "actions": [
+      "Copy the original dry_bulb_c and relative_humidity_pct into provenance fields.",
+      "Set dry_bulb_c to null.",
+      "Set relative_humidity_pct to null because it is derived from the anomalous temperature/dew-point combination.",
+      "Add deterministic OUT_OF_RANGE_DRY_BULB_NULLED and DEPENDENT_RH_NULLED quality flags."
+    ],
+    "forbidden": [
+      "Do not parse or substitute the METAR temperature.",
+      "Do not interpolate a replacement value.",
+      "Do not remove a station or date based on model outcome."
+    ]
+  },
+  "acceptance_gates": {
+    "maximum_corrected_hourly_row_fraction_per_station": 0.0001,
+    "minimum_label_coverage": 0.99,
+    "minimum_days_with_18_temperature_hours_through_cutoff_rate": 0.95,
+    "maximum_remaining_out_of_range_temperature_count": 0,
+    "maximum_station_identity_error_count": 0,
+    "maximum_duplicate_sod_date_count": 0
+  },
+  "decision_rule": {
+    "all_station_gates_pass": "Freeze V2 corrected station artifacts and permit the already-preregistered confirmation runner to score all five stations once.",
+    "any_station_gate_fails": "Do not score any station; report the confirmation experiment as blocked or failed."
+  },
+  "boundary": {
+    "data_quality_only": true,
+    "no_model_scoring": true,
+    "confirmation_outcomes_not_inspected": true,
+    "weather_only": true
+  }
+}
