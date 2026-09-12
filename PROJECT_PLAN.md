@@ -2378,7 +2378,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0183 — 2026-09-12 — Bağımsız mekânsal-zamansal confirmation tasarımı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Rationale:** Tek istasyon sonucu genelleme kanıtı değildir; beklemek yerine outcome'larına bakılmamış şehir/istasyonlar independent spatial holdout olarak kullanılabilir.
 - **Cohort lock:** KJFK/New York, KLAX/Los Angeles, KDFW/Dallas, KMIA/Miami, KSEA/Seattle; KORD development olduğu için hariç.
 - **Window:** Her istasyonda 2024-08-01–2025-07-31 initial history; 2025-08-01–2026-07-31 confirmation evaluation.
@@ -2386,6 +2386,9 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Data V1:** KJFK/KLAX/KDFW/KMIA pass; KSEA tek out-of-range structured sıcaklık nedeniyle fail. Satır 2024-12-26 02:53 LST: structured=80°C/RH=%2, aynı raw METAR=`09/05`. Hiçbir station score edilmedi.
 - **Next:** Ayrı corrective V2'de fiziksel aralık dışı temperature ve bağlı RH'yi missing yapan deterministic dönüşümü ön-kayıt et; METAR'dan elle değer doldurma; tüm kalite gate'lerini yeniden çalıştır.
 - **Guardrail:** Şehirler sonuç görüldükten sonra seçilmeyecek; başarısız şehirler rapordan çıkarılmayacak; station-level ve pooled metrikler birlikte verilecek.
+- **Confirmation:** 1,773 station-day; expanding/persistence pooled MAE=2.032/2.350°C, gain=%13.56, bias=-0.136°C. Beş station'ın beşi positive skill (%9.42–18.17) ve |bias|≤1°C.
+- **Inference:** Date-cluster paired MAE reduction=0.319°C; 95% CI=[0.236,0.401], 359 date cluster/5,000 resample. Tüm gate'ler pass.
+- **Decision:** `CONFIRMATION_PASS`; çok-şehirli point-forecast generalization kabul edildi.
 - **Boundary:** Weather-only confirmation; Polymarket edge hâlâ test edilmez.
 
 ### D-0184 — 2026-09-12 — Multi-city data corrective V2 ön kaydı
@@ -2400,11 +2403,20 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0185 — 2026-09-12 — Multi-city confirmation execution manifest
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Sources:** Original confirmation design SHA `c908…edf4`; corrected dataset result SHA `e917…b432`.
 - **Eligibility amendment:** Null SOD target deterministic `NO_SCORE`; impute edilmez ve training row olamaz. Diğer kurallar değişmedi.
 - **Lock:** Cohort/window/features/model/baselines/bootstrap/gates aynen inherited; single scoring run, no tuning, no station exclusion.
+- **Result:** Single scoring run `CONFIRMATION_PASS`; beş station ve pooled statistical gate'lerin tümü geçti.
 - **Boundary:** Weather point-forecast confirmation only.
+
+### D-0186 — 2026-09-12 — Point forecast sonrası probabilistic modeling geçişi
+
+- **Durum:** `IN_PROGRESS`
+- **Evidence:** Frozen expanding Ridge, KORD development ve beş unseen station confirmation'da persistence'ı yendi; fakat MAE skill bucket probability/calibration değildir.
+- **Next hypothesis:** Walk-forward residual dağılımı station/season/lead-context ile kalibre edilerek daily max için reliable CDF/bucket probabilities üretilebilir ve climatology/persistence-derived probability benchmark'larını log loss, Brier ve calibration'da yenebilir.
+- **Required design:** Model geliştirme ve calibration için yeni temporal split; confirmation sonuçlarında tuning yok. Gaussian homoskedastic, empirical rolling residual, quantile/GBT gibi adaylar yalnız development içinde karşılaştırılır; final probabilistic test yeniden korunur.
+- **Boundary:** Önce weather probability quality; Polymarket fiyat/EV entegrasyonu ancak calibration gate sonrası.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2436,7 +2448,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Corrected V2 checksum'larını doğrulayarak frozen station-specific daily expanding Ridge alpha100 confirmation runner'ını bir kez çalıştır; station/pooled metrics ve 5,000 target-date cluster bootstrap CI üret, tüm ön-kayıtlı gate'leri birlikte değerlendir.
+**Tek sonraki adım:** Multi-city point predictions üzerinden probabilistic experiment tasarımını ön-kayıt et: target bucket şeması, leakage-safe residual calibration, chronological development/calibration/protected-test split, Gaussian/rolling-empirical/quantile-GBT benchmark'ları ve log-loss/Brier/ECE gate'leri sonuç görülmeden kilitlensin.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

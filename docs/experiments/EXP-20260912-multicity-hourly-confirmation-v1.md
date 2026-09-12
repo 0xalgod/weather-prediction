@@ -2,7 +2,7 @@
 
 ## Status
 
-`IN_PROGRESS` — data-quality V1 failed before scoring; a corrective transform must be preregistered and pass before confirmation can run.
+`PASSED` — corrective data V2 passed and every preregistered confirmation gate passed in the single scoring run.
 
 ## Hypothesis
 
@@ -38,3 +38,11 @@ This confirms only next-day point-forecast generalization. It does not estimate 
 KJFK, KLAX, KDFW, and KMIA passed every gate. KSEA failed the zero-out-of-range-temperature gate on one 2024-12-26 02:53 LST row. NOAA's structured field says 80.0°C and associated relative humidity says 2%, while the same raw row's METAR says `09/05`. No model was scored and no confirmation outcome was inspected.
 
 The V1 failure remains recorded. A separate, preregistered V2 may treat physically invalid temperature and its dependent relative humidity as missing, without manually substituting the METAR temperature, and must rerun every station-level gate.
+
+## Confirmation result
+
+The frozen procedure scored 1,773 eligible station-days. Pooled expanding-Ridge MAE was 2.032°C versus persistence MAE 2.350°C, a 13.56% improvement; pooled bias was -0.136°C. Every station had positive MAE skill, ranging from 9.42% at KLAX to 18.17% at KMIA, and every station remained within 1°C absolute bias.
+
+The target-date-cluster bootstrap paired MAE reduction was 0.319°C with 95% interval [0.236, 0.401] across 359 date clusters. Every confirmation gate passed. Decision: `CONFIRMATION_PASS`.
+
+The confirmed claim is limited to next-day point forecasting from prior-day local observations. Probability calibration and market incremental value remain untested.

@@ -1,0 +1,64 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-confirmation-run-v2",
+  "decision": "CONFIRMATION_PASS",
+  "pooled": {
+    "events": 1773,
+    "expanding_ridge_mae_c": 2.031637535799612,
+    "expanding_ridge_rmse_c": 2.801668394483519,
+    "expanding_ridge_bias_c": -0.13567195041269856,
+    "persistence_mae_c": 2.350479413423576,
+    "harmonic_climatology_mae_c": 2.8701707804864283,
+    "mae_improvement_vs_persistence": 0.13564972141557988,
+    "paired_mae_reduction_c": 0.31884187762396365
+  },
+  "station_results": {
+    "KJFK": {
+      "events": 354,
+      "mae_c": 2.5498636097531353,
+      "bias_c": -0.15085984562039545,
+      "mae_improvement_vs_persistence": 0.1418028923249573
+    },
+    "KLAX": {
+      "events": 352,
+      "mae_c": 1.5432193264171035,
+      "bias_c": -0.05156775499409789,
+      "mae_improvement_vs_persistence": 0.09419175771415646
+    },
+    "KDFW": {
+      "events": 356,
+      "mae_c": 2.5937600370163083,
+      "bias_c": -0.3112049875276473,
+      "mae_improvement_vs_persistence": 0.12401235824133773
+    },
+    "KMIA": {
+      "events": 355,
+      "mae_c": 1.2825296543660412,
+      "bias_c": -0.06810850614564558,
+      "mae_improvement_vs_persistence": 0.18170735567946683
+    },
+    "KSEA": {
+      "events": 356,
+      "mae_c": 2.184134353212167,
+      "bias_c": -0.0955692071141164,
+      "mae_improvement_vs_persistence": 0.14120628479839686
+    }
+  },
+  "date_cluster_bootstrap": {
+    "cluster_count": 359,
+    "resamples": 5000,
+    "seed": 20260912,
+    "mean_paired_mae_reduction_c": 0.31884187762396365,
+    "lower_95pct_c": 0.2363009882295401,
+    "upper_95pct_c": 0.40148379434374687
+  },
+  "all_confirmation_gates_passed": true,
+  "provenance": {
+    "execution_config_sha256": "e78ef39f26ddfd90ad053445ee971dcf50c2b11f571f048b0bc34d2cb3fb1a82",
+    "confirmation_design_sha256": "c90894635d65230b67f31370ec71d0b6e6f194b9bd74077ab2d56b424ba0edf4",
+    "corrected_dataset_result_sha256": "e91764d8dfa50e6c8e45e78d63d6bd2f1f2142dc50968046d3c683f13239b432",
+    "result_sha256": "7778ac03d3601dde2b0cce7efe60d37231d217cc762431e331df135ff0bcf10d",
+    "predictions_sha256": "fb0d8858d5207e49b1d7d33198b97f1d55fb8b113d3257db9762c572a5a4cbf1"
+  },
+  "interpretation": "The frozen station-specific expanding Ridge procedure generalizes across all five prespecified unseen stations and materially beats persistence with a date-cluster confidence interval above zero.",
+  "boundary": "Confirmed next-day point-forecast skill only; no calibrated probabilities or Polymarket edge, execution, EV, P&L, or order claim."
+}
