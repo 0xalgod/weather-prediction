@@ -1,0 +1,87 @@
+{
+  "experiment_id": "EXP-20260912-kord-hourly-expanding-walkforward-v1",
+  "design_status": "EXPLORATORY_PREREGISTERED_BEFORE_EXPANDING_WALKFORWARD_RUN",
+  "parent_experiment": "EXP-20260909-kord-hourly-nextday-model-v2",
+  "motivation_experiment": "EXP-20260912-kord-hourly-drift-diagnostic-v1",
+  "hypothesis": "Daily expanding-window retraining of the locked Ridge alpha-100 model will keep absolute bias at or below 1C and improve MAE versus prior-day observed maximum by at least 5% over both the complete evaluation period and its formerly protected test half.",
+  "source_hourly": "data/processed/kord_hourly_two_year/run=20260909T-v1/hourly.jsonl",
+  "source_hourly_sha256": "649dae17faee433f352fc5ac4611445de208c951bf1163b79785d9c1fb835a74",
+  "source_labels": "data/processed/kord_hourly_two_year/run=20260909T-v1/labels.jsonl",
+  "source_labels_sha256": "a6b3f906582a1d81667666a951ccb0ec26bc55faf033729c627a8f82b9d266c9",
+  "source_static_result": "data/processed/kord_hourly_nextday_model/run=20260909T-v2/result.json",
+  "source_static_result_sha256": "ceb604a66888752c248271d54b233a984e7b6334f96a8a4b2f0327f77aec9b96",
+  "initial_training_period": [
+    "2024-08-01",
+    "2025-07-31"
+  ],
+  "evaluation_period": [
+    "2025-08-01",
+    "2026-07-31"
+  ],
+  "evaluation_segments": {
+    "former_validation": [
+      "2025-08-01",
+      "2026-01-31"
+    ],
+    "former_test": [
+      "2026-02-01",
+      "2026-07-31"
+    ]
+  },
+  "expected_counts": {
+    "initial_training": 365,
+    "evaluation": 354,
+    "former_validation": 176,
+    "former_test": 178
+  },
+  "eligibility": {
+    "minimum_distinct_temperature_hours_through_18_lst": 18,
+    "no_predict_when_ineligible": true
+  },
+  "features": {
+    "definition": "The same 48 features as the parent V2 experiment.",
+    "weather_cutoff": "Previous calendar day through 18:00 local standard time.",
+    "label_lags": "Only lags of two or more target days; target-day and target-minus-one SOD labels are forbidden."
+  },
+  "model": {
+    "family": "ridge",
+    "alpha": 100.0,
+    "retraining_frequency": "daily",
+    "training_window": "expanding",
+    "preprocessing": "Median imputation with missing indicators and standardization fitted anew on past training rows only.",
+    "selection_or_tuning": false
+  },
+  "baselines": [
+    "prior-day observed maximum through 18:00 LST",
+    "expanding harmonic day-of-year regression"
+  ],
+  "preregistered_metrics": [
+    "MAE",
+    "RMSE",
+    "bias",
+    "within-1C rate",
+    "within-2C rate",
+    "MAE improvement versus persistence",
+    "monthly MAE and bias"
+  ],
+  "exploratory_gates": {
+    "full_evaluation": {
+      "minimum_mae_improvement_vs_persistence": 0.05,
+      "maximum_absolute_bias_c": 1.0
+    },
+    "former_test": {
+      "minimum_mae_improvement_vs_persistence": 0.05,
+      "maximum_absolute_bias_c": 1.0
+    }
+  },
+  "decision_rule": {
+    "all_gates_pass": "Candidate is promising but requires a new disjoint confirmation period before any model acceptance.",
+    "any_gate_fails": "Reject daily expanding Ridge as the bias-drift remedy; do not tune on this consumed period."
+  },
+  "boundary": {
+    "post_test_exploratory": true,
+    "consumed_period_not_confirmation": true,
+    "weather_forecasting_only": true,
+    "polymarket_execution_ev_pnl_orders_excluded": true
+  }
+}
