@@ -1,0 +1,44 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-confirmation-v1",
+  "stage": "DATA_QUALITY_V1",
+  "decision": "MULTICITY_DATA_QUALITY_FAIL_NO_SCORING",
+  "stations_passed": [
+    "KJFK",
+    "KLAX",
+    "KDFW",
+    "KMIA"
+  ],
+  "stations_failed": [
+    "KSEA"
+  ],
+  "label_coverage": {
+    "KJFK": 1.0,
+    "KLAX": 1.0,
+    "KDFW": 1.0,
+    "KMIA": 0.9986301369863013,
+    "KSEA": 1.0
+  },
+  "cutoff_hour_coverage": {
+    "KJFK": 0.9835616438356164,
+    "KLAX": 0.9808219178082191,
+    "KDFW": 0.9863013698630136,
+    "KMIA": 0.9876712328767123,
+    "KSEA": 0.9876712328767123
+  },
+  "quality_failures": [
+    {
+      "station": "KSEA",
+      "timestamp_local_standard": "2024-12-26T02:53:00",
+      "field": "HourlyDryBulbTemperature",
+      "structured_value_c": 80.0,
+      "associated_relative_humidity_pct": 2.0,
+      "raw_metar_temperature_dewpoint": "09/05",
+      "interpretation": "NOAA structured-field anomaly; the same raw row's METAR conflicts with the structured value."
+    }
+  ],
+  "provenance": {
+    "dataset_result_sha256": "ec78898cad40a5f026bbc658bfa4cf79fa6cb8a5bf688b900d4c62787d4e7324"
+  },
+  "next_action": "Preregister a deterministic corrective data transform that nulls physically invalid dry-bulb temperature and dependent relative humidity without imputing the METAR value, then rerun all station quality gates before scoring.",
+  "boundary": "No station model was scored and no confirmation outcome was inspected."
+}

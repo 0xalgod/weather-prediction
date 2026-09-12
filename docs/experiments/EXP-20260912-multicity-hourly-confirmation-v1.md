@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — no hourly values or outcomes from the five confirmation stations have been retrieved or scored.
+`IN_PROGRESS` — data-quality V1 failed before scoring; a corrective transform must be preregistered and pass before confirmation can run.
 
 ## Hypothesis
 
@@ -32,3 +32,9 @@ Stations were selected for climate diversity and major-airport continuity, not o
 ## Boundary
 
 This confirms only next-day point-forecast generalization. It does not estimate bucket probabilities, market edge, execution, EV, P&L, or authorize orders.
+
+## Data-quality V1 result
+
+KJFK, KLAX, KDFW, and KMIA passed every gate. KSEA failed the zero-out-of-range-temperature gate on one 2024-12-26 02:53 LST row. NOAA's structured field says 80.0°C and associated relative humidity says 2%, while the same raw row's METAR says `09/05`. No model was scored and no confirmation outcome was inspected.
+
+The V1 failure remains recorded. A separate, preregistered V2 may treat physically invalid temperature and its dependent relative humidity as missing, without manually substituting the METAR temperature, and must rerun every station-level gate.

@@ -2383,7 +2383,8 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Cohort lock:** KJFK/New York, KLAX/Los Angeles, KDFW/Dallas, KMIA/Miami, KSEA/Seattle; KORD development olduğu için hariç.
 - **Window:** Her istasyonda 2024-08-01–2025-07-31 initial history; 2025-08-01–2026-07-31 confirmation evaluation.
 - **Gates:** Pooled persistence MAE gain≥%5, pooled |bias|≤1°C, date-cluster bootstrap MAE-reduction 95% lower bound>0; ayrıca ≥4/5 station positive skill ve ≥3/5 station hem %5 skill hem |bias|≤1°C.
-- **Next:** Outcome değerlerini score etmeden immutable NOAA LCDv2 cohort'unu indir ve station-level data-quality gate'lerini çalıştır.
+- **Data V1:** KJFK/KLAX/KDFW/KMIA pass; KSEA tek out-of-range structured sıcaklık nedeniyle fail. Satır 2024-12-26 02:53 LST: structured=80°C/RH=%2, aynı raw METAR=`09/05`. Hiçbir station score edilmedi.
+- **Next:** Ayrı corrective V2'de fiziksel aralık dışı temperature ve bağlı RH'yi missing yapan deterministic dönüşümü ön-kayıt et; METAR'dan elle değer doldurma; tüm kalite gate'lerini yeniden çalıştır.
 - **Guardrail:** Şehirler sonuç görüldükten sonra seçilmeyecek; başarısız şehirler rapordan çıkarılmayacak; station-level ve pooled metrikler birlikte verilecek.
 - **Boundary:** Weather-only confirmation; Polymarket edge hâlâ test edilmez.
 
@@ -2417,7 +2418,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Outcome'larına bakılmamış çok-şehirli confirmation cohort'un şehir/istasyon listesini, 2 yıllık tarih aralığını, chronological split'ini ve station-level/pooled gate'lerini veri indirilmeden önce kilitle; sonra immutable NOAA LCDv2 verisini çek.
+**Tek sonraki adım:** Multi-city data-quality corrective V2'yi score öncesi ön-kayıt et: `dry_bulb_c` fiziksel aralık dışındaysa temperature ve dependent RH missing olur, manuel METAR replacement yapılmaz; ardından beş istasyonun tüm gate'lerini immutable yeni artifact üzerinde yeniden çalıştır.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 
