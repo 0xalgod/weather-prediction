@@ -2,6 +2,8 @@
   "experiment_id": "EXP-20260912-multicity-hourly-data-correction-v2",
   "design_status": "CORRECTIVE_PREREGISTERED_AFTER_DATA_V1_FAILURE_BEFORE_ANY_MODEL_SCORING",
   "parent_experiment": "EXP-20260912-multicity-hourly-confirmation-v1",
+  "source_confirmation_config": "configs/EXP-20260912-multicity-hourly-confirmation-v1.json",
+  "source_confirmation_config_sha256": "c90894635d65230b67f31370ec71d0b6e6f194b9bd74077ab2d56b424ba0edf4",
   "source_dataset_result": "data/processed/multicity_hourly_confirmation/run=20260912T-v1/result.json",
   "source_dataset_result_sha256": "ec78898cad40a5f026bbc658bfa4cf79fa6cb8a5bf688b900d4c62787d4e7324",
   "correction_hypothesis": "The KSEA data-quality failure is a sparse structured-field anomaly that can be handled without value fabrication by deterministically converting every physically invalid dry-bulb temperature and its dependent relative humidity to missing across the entire frozen cohort.",
