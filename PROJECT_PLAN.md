@@ -2432,13 +2432,25 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0188 — 2026-09-12 — Development-only probability candidate selection manifest
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Input:** Yalnız consumed KORD/KJFK/KLAX/KDFW/KMIA/KSEA expanding predictions; residual=`actual_f-prediction_f`.
 - **LOSO:** Her fold bir development station holdout; Gaussian, Student-t df={3,5,8,15,30}, empirical jitter={0.25,0.5,1,1.5}°F ve iki locked quantile-GBT spec.
 - **Numerics:** 2,001 deterministic distribution sample; 2°F bins 20–120 + tails; probability floor=1e-6 ve renormalization.
 - **Selection:** Pooled LOSO CRPS, sonra log loss, 80% coverage error, fixed simplicity order. Winner tüm development data ile fit edilip checksum-frozen olur.
 - **Technical rerun:** İlk execution'da tüm input ve GBT sample değerleri finite/makul olmasına rağmen CRPS BLAS matmul reduction warning verdi. Aynı formül element-wise deterministic sum ile V2 çalıştırılacak; candidate/grid/metric değişmedi.
 - **Guardrail:** KBOS/KPHX/KDEN outcome veya point prediction candidate-selection input'u olamaz.
+- **V2 result:** 2,127 LOSO event; winner=Student-t df5, CRPS=2.982°F, 2°F-bin log loss=2.405, coverage80/90=%78.04/%88.43. V2 warning'siz ve V1 ranking/metrics'i exact reproduce etti.
+- **Comparison:** Gaussian CRPS=3.003; best empirical=2.994; best quantile GBT=2.995 fakat log loss=2.886 ile zayıf.
+- **Caveat:** Winner station coverage80=%61.86–92.68, coverage90=%76.27–97.46; spatial heterogeneity protected test gerektiriyor.
+- **Decision:** `DEVELOPMENT_CANDIDATE_FROZEN`; model artifact SHA `7dad…a6e8`, development tuning kapandı.
+
+### D-0189 — 2026-09-12 — Protected probability execution hazırlığı
+
+- **Durum:** `IN_PROGRESS`
+- **Frozen candidate:** Student-t residual df5 artifact SHA `7dad…a6e8`; protected outcome ile refit/recalibration yok.
+- **Required baselines:** Development-only persistence residual scale ve day-of-year empirical climatology aynı 2°F bin/CRPS/log-loss motoruyla kurulmalı.
+- **Point layer:** KBOS/KPHX/KDEN için frozen station-specific daily expanding Ridge alpha100 predictions üretilir; point score model selection girdisi değildir.
+- **Execution:** Tek protected probability run; station/pooled metrics, interval coverage ve 5,000 target-date cluster bootstrap; tüm D-0186 gates birlikte değerlendirilir.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2470,7 +2482,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Yalnız KORD/KJFK/KLAX/KDFW/KMIA/KSEA consumed predictions ile Gaussian, Student-t, empirical residual ve quantile-GBT candidate'larını leave-one-development-station-out CRPS üzerinde karşılaştır; tie-breaker'ları uygula ve tek probability candidate'ı protected score açılmadan freeze et.
+**Tek sonraki adım:** Frozen Student-t df5 artifact ve protected dataset checksum'larını bağlayan single-use execution manifestini oluştur; development-only persistence/climatology baseline formüllerini kilitle, ardından KBOS/KPHX/KDEN point predictions + probability score'u tek immutable run'da üret.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

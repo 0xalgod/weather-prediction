@@ -1,0 +1,70 @@
+{
+  "experiment_id": "EXP-20260912-probability-candidate-selection-v1",
+  "decision": "DEVELOPMENT_CANDIDATE_FROZEN",
+  "technical_execution": {
+    "v1": "Completed with BLAS reduction warnings despite finite inputs and samples; not used as the final evidence artifact.",
+    "v2": "Element-wise deterministic CRPS reduction completed without numerical warnings and reproduced the identical ranking and metrics."
+  },
+  "development": {
+    "stations": [
+      "KORD",
+      "KJFK",
+      "KLAX",
+      "KDFW",
+      "KMIA",
+      "KSEA"
+    ],
+    "events": 2127,
+    "validation": "leave-one-station-out"
+  },
+  "selected": {
+    "family": "student_t_residual",
+    "degrees_of_freedom": 5,
+    "mean_crps_f": 2.9823882847991667,
+    "categorical_log_loss": 2.405217214840262,
+    "mean_multiclass_brier": 0.8818302891263836,
+    "coverage80": 0.7804419370004702,
+    "coverage90": 0.8843441466854725,
+    "mean_width80_f": 12.520152352123949,
+    "mean_width90_f": 17.07042635430038
+  },
+  "nearest_competitors": [
+    {
+      "family": "student_t_residual",
+      "degrees_of_freedom": 8,
+      "mean_crps_f": 2.9882789781833408
+    },
+    {
+      "family": "empirical_residual",
+      "gaussian_jitter_bandwidth_f": 0.25,
+      "mean_crps_f": 2.9941035065298607
+    },
+    {
+      "family": "quantile_gbt_residual",
+      "n_estimators": 100,
+      "mean_crps_f": 2.9951091472075864,
+      "categorical_log_loss": 2.8864691693381053
+    },
+    {
+      "family": "gaussian_residual",
+      "mean_crps_f": 3.002822111723442
+    }
+  ],
+  "station_coverage_warning": {
+    "coverage80_range": [
+      0.6186440677966102,
+      0.9267605633802817
+    ],
+    "coverage90_range": [
+      0.7627118644067796,
+      0.9746478873239437
+    ],
+    "interpretation": "Pooled calibration passes the intended range, but station-level heterogeneity makes the protected spatial test essential."
+  },
+  "provenance": {
+    "config_sha256": "a3d1e734ccc2c04c0d33520435fc8f1dfba8a5cc284a509390d54e8a63957627",
+    "v2_result_sha256": "cf14d7ec9f0a08fc6a6fbcfb6772c1286f42c62a5949faed418e76ccd94af17a",
+    "frozen_probability_model_sha256": "7dad352bf20f1747d17fac4278f781e349a832ac77257e6c3310f4d94559a6e8"
+  },
+  "boundary": "Development-only selection; KBOS/KPHX/KDEN probability outcomes remain unscored."
+}

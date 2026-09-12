@@ -2,7 +2,7 @@
 
 ## Status
 
-`IN_PROGRESS` — protected station data quality passed; protected probability outcomes remain unscored while development-only candidate selection is pending.
+`IN_PROGRESS` — protected station data quality passed and the development-only Student-t candidate is frozen; protected probability outcomes remain unscored.
 
 ## Why this experiment exists
 
@@ -34,3 +34,9 @@ Passing means the weather probability model is eligible for a later market-incre
 KBOS, KPHX, and KDEN each supplied 730/730 non-null SOD labels. Prior-day cutoff-window coverage was 98.356%, 98.356%, and 98.493%, respectively. Station identity errors, duplicate SOD dates, and out-of-range temperatures were all zero, so the frozen corrective transform was not needed.
 
 No protected probability score was computed. The next permitted operation is development-only candidate selection using KORD, KJFK, KLAX, KDFW, KMIA, and KSEA.
+
+## Development-only candidate selection
+
+Across 2,127 leave-one-development-station-out predictions, Student-t residuals with five degrees of freedom ranked first: 2.982°F CRPS, 2.405 categorical log loss, 78.04% 80% interval coverage, and 88.43% 90% interval coverage. Gaussian CRPS was 3.003°F; the best empirical model was 2.994°F; the best quantile GBT was 2.995°F but had materially worse categorical log loss.
+
+The selected Student-t model artifact is frozen at SHA-256 `7dad352b…a6e8`. Candidate tuning is closed. Development station-level coverage was heterogeneous, so pooled development calibration is not accepted as spatial generalization evidence; the original protected gates remain unchanged.
