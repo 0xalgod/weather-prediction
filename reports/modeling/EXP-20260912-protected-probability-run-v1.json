@@ -1,0 +1,77 @@
+{
+  "experiment_id": "EXP-20260912-protected-probability-run-v1",
+  "decision": "PROTECTED_PROBABILITY_FAIL",
+  "events": 1060,
+  "pooled_candidate": {
+    "crps_f": 3.7725850801674783,
+    "categorical_log_loss": 2.670651791939444,
+    "mean_multiclass_brier": 0.9116865688411819,
+    "coverage80": 0.6962264150943396,
+    "coverage90": 0.8132075471698114,
+    "mean_width80_f": 12.53496582887483,
+    "mean_width90_f": 17.090623581683506
+  },
+  "best_baseline": {
+    "name": "persistence_gaussian",
+    "crps_f": 4.378311508101601,
+    "categorical_log_loss": 2.936730371871881,
+    "coverage80": 0.7773584905660378,
+    "coverage90": 0.8443396226415094
+  },
+  "improvements": {
+    "crps_vs_best_baseline": 0.13834703785084504,
+    "categorical_log_loss_vs_best_baseline": 0.09060368036539823,
+    "protected_stations_with_positive_crps_improvement": 3
+  },
+  "station_candidate": {
+    "KBOS": {
+      "events": 353,
+      "crps_f": 4.319176580323434,
+      "coverage80": 0.5920679886685553,
+      "coverage90": 0.7507082152974505
+    },
+    "KPHX": {
+      "events": 353,
+      "crps_f": 2.2278035050475404,
+      "coverage80": 0.9065155807365439,
+      "coverage90": 0.9688385269121813
+    },
+    "KDEN": {
+      "events": 354,
+      "crps_f": 4.7679554091569845,
+      "coverage80": 0.5903954802259888,
+      "coverage90": 0.7203389830508474
+    }
+  },
+  "date_cluster_bootstrap": {
+    "cluster_count": 358,
+    "mean_crps_reduction_f": 0.6057264279341232,
+    "lower_95pct_f": 0.4012051821837079,
+    "upper_95pct_f": 0.8147642483420947
+  },
+  "pit": {
+    "mean": 0.5134446927479657,
+    "ece_total_variation_from_uniform": 0.11415094339622643,
+    "shape": "Excess mass in both outer deciles, consistent with under-dispersion."
+  },
+  "failed_gates": [
+    "minimum_80pct_interval_coverage",
+    "minimum_90pct_interval_coverage"
+  ],
+  "passed_gates": [
+    "minimum_pooled_crps_improvement_vs_best_baseline",
+    "minimum_pooled_log_loss_improvement_vs_best_baseline",
+    "minimum_target_date_cluster_bootstrap_95pct_lower_bound_crps_reduction_f",
+    "maximum_80pct_interval_coverage",
+    "maximum_90pct_interval_coverage",
+    "minimum_protected_stations_with_positive_crps_improvement"
+  ],
+  "provenance": {
+    "config_sha256": "83b474b6853f13e9b5a8fa2cd4dd0eeafef6dd82077e8b33571f55fbfaa524b5",
+    "result_sha256": "0e34d060d974f0f915e6f9265e79e9290dcb1d15b66e6723345f9c7658814485",
+    "point_predictions_sha256": "e5efae590194fda74a0caaa5e8e8dbf421cc3a7a3abaf14c1ff8af9b1c789173",
+    "probability_scores_sha256": "78d25016f57c375871f3cc0450aec706c02029aeff2471f83299397f529d7041"
+  },
+  "interpretation": "The frozen distribution has real probabilistic skill but fails calibration: one global residual scale is too narrow for Boston and Denver and too wide for Phoenix. The protected cohort is consumed and cannot be used for confirmatory recalibration.",
+  "boundary": "Weather probability branch rejected at the protected calibration gate; no Polymarket edge, EV, execution, P&L, or order claim."
+}

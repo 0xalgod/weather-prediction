@@ -2412,13 +2412,16 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0186 — 2026-09-12 — Point forecast sonrası probabilistic modeling geçişi
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Evidence:** Frozen expanding Ridge, KORD development ve beş unseen station confirmation'da persistence'ı yendi; fakat MAE skill bucket probability/calibration değildir.
 - **Hypothesis:** Confirmed point prediction residual'larından reliable CDF/bucket probabilities üretilir ve protected cities'te best probabilistic baseline'a karşı CRPS≥%5, categorical log loss≥%2 iyileşir.
 - **Development:** Consumed KORD+KJFK/KLAX/KDFW/KMIA/KSEA; Gaussian, Student-t, empirical residual ve quantile GBT yalnız leave-one-development-station-out CRPS ile seçilir.
 - **Protected spatial test:** KBOS/Boston, KPHX/Phoenix, KDEN/Denver; outcome retrieval öncesi kilitli. 2024-08-01–2025-07-31 point history, 2025-08-01–2026-07-31 single-use probability test.
 - **Probability gates:** Best baseline'a karşı pooled CRPS gain≥%5, 2°F-bin log-loss gain≥%2, date-cluster bootstrap CRPS-reduction 95% lower>0, 80% coverage %75–85, 90% coverage %86–94, ≥2/3 station positive CRPS skill.
 - **Guardrail:** Protected data önce yalnız QC/point-prediction artifact; distribution candidate development şehirlerinde seçilip frozen olmadan protected probability score açılmaz.
+- **Protected result:** N=1,060; candidate/best-baseline CRPS=3.773/4.378°F, gain=%13.83; log-loss gain=%9.06; 3/3 station positive skill; bootstrap reduction=0.606°F, 95% CI=[0.401,0.815].
+- **Calibration fail:** Coverage80/90=%69.62/%81.32, required minimum=%75/%86. KBOS/KDEN under-dispersed, KPHX over-dispersed; PIT ECE=0.114.
+- **Decision:** `PROTECTED_PROBABILITY_FAIL`; weather probability branch current formuyla kabul edilmedi, protected cohort tuning için kullanılamaz.
 - **Boundary:** Önce weather probability quality; Polymarket fiyat/EV entegrasyonu ancak calibration gate sonrası.
 
 ### D-0187 — 2026-09-12 — Protected probability data ingestion manifest
@@ -2446,7 +2449,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0189 — 2026-09-12 — Protected probability execution hazırlığı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Frozen candidate:** Student-t residual df5 artifact SHA `7dad…a6e8`; protected outcome ile refit/recalibration yok.
 - **Required baselines:** Development-only persistence residual scale ve day-of-year empirical climatology aynı 2°F bin/CRPS/log-loss motoruyla kurulmalı.
 - **Point layer:** KBOS/KPHX/KDEN için frozen station-specific daily expanding Ridge alpha100 predictions üretilir; point score model selection girdisi değildir.
@@ -2454,6 +2457,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Baseline lock:** Persistence point + development error Gaussian; expanding harmonic point + development error empirical quantiles. CRPS/log-loss için ayrı ayrı daha iyi pooled baseline zorunlu comparator; bootstrap pooled-CRPS winner ile paired.
 - **PIT:** Candidate empirical rank, 10 equal bins; ECE=uniform'a total-variation distance. Protected outcome scale/distribution fit'inde yasak.
 - **Sources:** Candidate result SHA `cf14…f17a`, model SHA `7dad…a6e8`, protected dataset SHA `6d68…43a`.
+- **Result:** CRPS/log-loss/bootstrap/station-skill gate'leri pass; minimum 80% ve 90% coverage gate'leri fail. `PROTECTED_PROBABILITY_FAIL`.
+
+### D-0190 — 2026-09-12 — Adaptive uncertainty branch
+
+- **Durum:** `IN_PROGRESS`
+- **Evidence:** Point center ve probability ranking skill var; hata tek global scale'in station/regime heterogeneity'sini yakalayamaması. KBOS/KDEN daha geniş, KPHX daha dar dağılım gerektiriyor.
+- **Hypothesis direction:** Sadece karar anında bilinen online residual volatility, diurnal range, season ve point-prediction level ile heteroskedastic scale/quantile modeli global scale'den daha iyi kalibre olabilir.
+- **Data boundary:** Consumed dokuz şehir yalnız development olabilir. Yeni model bunlarda nested city-holdout ile seçilir; yeni spatial veya prospective cohort olmadan confirmation claim yok.
+- **No post-hoc fix:** Student-t scale protected coverage'a göre çarpılmayacak; coverage gate değişmeyecek; Boston/Phoenix/Denver yeni test sayılmayacak.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2485,7 +2497,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Frozen Student-t df5 artifact ve protected dataset checksum'larını bağlayan single-use execution manifestini oluştur; development-only persistence/climatology baseline formüllerini kilitle, ardından KBOS/KPHX/KDEN point predictions + probability score'u tek immutable run'da üret.
+**Tek sonraki adım:** Adaptive uncertainty diagnostic/design üret: dokuz consumed şehirde her tahmin günü için yalnız geçmiş residual'lardan 30/90-day volatility, geçmiş absolute-error quantile, diurnal temperature range ve seasonal covariates oluştur; nested leave-one-city-out ile global Student-t'ye karşı heteroskedastic scale/quantile challenger'ı preregister et, yeni confirmation cohort'u henüz açma.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

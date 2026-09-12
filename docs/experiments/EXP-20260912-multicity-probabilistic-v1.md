@@ -2,7 +2,7 @@
 
 ## Status
 
-`IN_PROGRESS` — protected station data quality passed and the development-only Student-t candidate is frozen; protected probability outcomes remain unscored.
+`FAILED` — the frozen Student-t candidate beat both baselines but failed protected interval-calibration gates.
 
 ## Why this experiment exists
 
@@ -40,3 +40,11 @@ No protected probability score was computed. The next permitted operation is dev
 Across 2,127 leave-one-development-station-out predictions, Student-t residuals with five degrees of freedom ranked first: 2.982°F CRPS, 2.405 categorical log loss, 78.04% 80% interval coverage, and 88.43% 90% interval coverage. Gaussian CRPS was 3.003°F; the best empirical model was 2.994°F; the best quantile GBT was 2.995°F but had materially worse categorical log loss.
 
 The selected Student-t model artifact is frozen at SHA-256 `7dad352b…a6e8`. Candidate tuning is closed. Development station-level coverage was heterogeneous, so pooled development calibration is not accepted as spatial generalization evidence; the original protected gates remain unchanged.
+
+## Protected probability result
+
+The single-use run scored 1,060 station-days. Student-t CRPS was 3.773°F versus the stronger baseline's 4.378°F, a 13.83% improvement. Categorical log loss improved 9.06%; all three stations had positive CRPS skill; and paired CRPS reduction was 0.606°F with date-cluster-bootstrap 95% interval [0.401, 0.815]. These discrimination/sharpness gates passed.
+
+Calibration failed. The nominal 80% and 90% intervals covered only 69.62% and 81.32%, below the preregistered 75% and 86% minimums. KBOS and KDEN were strongly under-dispersed, while KPHX was over-dispersed. The PIT histogram had excess outer-decile mass and ECE 0.114.
+
+Decision: `PROTECTED_PROBABILITY_FAIL`. KBOS, KPHX, and KDEN are now consumed and cannot be used to confirm a recalibrated model.
