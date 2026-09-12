@@ -2421,6 +2421,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Guardrail:** Protected data önce yalnız QC/point-prediction artifact; distribution candidate development şehirlerinde seçilip frozen olmadan protected probability score açılmaz.
 - **Boundary:** Önce weather probability quality; Polymarket fiyat/EV entegrasyonu ancak calibration gate sonrası.
 
+### D-0187 — 2026-09-12 — Protected probability data ingestion manifest
+
+- **Durum:** `IN_PROGRESS`
+- **Source/cohort:** NOAA LCDv2 2024–2026 annual objects; KBOS=`USW00014739`, KPHX=`USW00023183`, KDEN=`USW00003017`; exact 2024-08-01–2026-07-31.
+- **Hypothesis:** Üç station'da label≥%99, prior-day 00–18 LST ≥18-hour coverage≥%95; identity/duplicate/out-of-range=0.
+- **Correction boundary:** Raw invalid-temperature fail olursa scoring yok; yalnız önceden frozen null-temperature/dependent-RH V2 ve station başına≤%0.01 correction uygulanabilir.
+- **Decision:** QC pass yalnız immutable point-prediction girdisine izin verir; development-only probability candidate frozen olmadan protected probability score yasak.
+
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
 - **Durum:** `FAILED`

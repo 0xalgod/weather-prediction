@@ -1,0 +1,58 @@
+{
+  "experiment_id": "EXP-20260912-protected-probability-data-v1",
+  "design_status": "INGESTION_MANIFEST_LOCKED_BEFORE_PROTECTED_DATA_RETRIEVAL",
+  "parent_probability_design": "configs/EXP-20260912-multicity-probabilistic-v1.json",
+  "parent_probability_design_sha256": "4a2e571e41456523a296c8d400d66cb373250a8e1e12e5d679a13888d8d4ff74",
+  "hypothesis": "NOAA LCDv2 supplies complete, identity-stable two-year hourly predictors and SOD maximum-temperature labels for all three prespecified protected probability-test stations.",
+  "stations": [
+    {
+      "ghcn_id": "USW00014739",
+      "icao": "KBOS",
+      "city": "Boston"
+    },
+    {
+      "ghcn_id": "USW00023183",
+      "icao": "KPHX",
+      "city": "Phoenix"
+    },
+    {
+      "ghcn_id": "USW00003017",
+      "icao": "KDEN",
+      "city": "Denver"
+    }
+  ],
+  "window": {
+    "start_date": "2024-08-01",
+    "end_date": "2026-07-31",
+    "exact_days_per_station": 730,
+    "timestamp_semantics": "NOAA LCDv2 local standard time; no DST adjustment",
+    "decision_cutoff": "18:00 local standard time on target-minus-one day"
+  },
+  "source": {
+    "base_url": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access",
+    "years": [
+      2024,
+      2025,
+      2026
+    ],
+    "documentation": "https://www.ncei.noaa.gov/oa/local-climatological-data/v2/doc/lcdv2_DOCUMENTATION.pdf"
+  },
+  "data_quality_gates_per_station": {
+    "minimum_label_coverage": 0.99,
+    "minimum_days_with_18_temperature_hours_through_cutoff_rate": 0.95,
+    "maximum_station_identity_error_count": 0,
+    "maximum_duplicate_sod_date_count": 0,
+    "maximum_out_of_range_temperature_count": 0
+  },
+  "invalid_temperature_followup": "A raw V1 failure caused only by physically invalid temperature does not permit scoring. Apply the already-frozen deterministic null-temperature/dependent-RH correction in a separate immutable V2, requiring no more than 0.01% corrected rows per station, then rerun all gates.",
+  "decision_rule": {
+    "all_gates_pass": "Freeze protected data artifacts, but do not probability-score them before the development-only candidate is selected and frozen.",
+    "any_gate_fails": "Do not probability-score; diagnose and use only the preregistered invalid-temperature correction when applicable."
+  },
+  "boundary": {
+    "data_quality_only": true,
+    "protected_probability_outcomes_not_scored": true,
+    "no_model_selection_or_fit": true,
+    "polymarket_excluded": true
+  }
+}
