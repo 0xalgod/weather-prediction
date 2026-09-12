@@ -2423,11 +2423,12 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0187 — 2026-09-12 — Protected probability data ingestion manifest
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Source/cohort:** NOAA LCDv2 2024–2026 annual objects; KBOS=`USW00014739`, KPHX=`USW00023183`, KDEN=`USW00003017`; exact 2024-08-01–2026-07-31.
 - **Hypothesis:** Üç station'da label≥%99, prior-day 00–18 LST ≥18-hour coverage≥%95; identity/duplicate/out-of-range=0.
 - **Correction boundary:** Raw invalid-temperature fail olursa scoring yok; yalnız önceden frozen null-temperature/dependent-RH V2 ve station başına≤%0.01 correction uygulanabilir.
-- **Decision:** QC pass yalnız immutable point-prediction girdisine izin verir; development-only probability candidate frozen olmadan protected probability score yasak.
+- **Result:** Üç station da 730/730 label; cutoff coverage KBOS/KPHX/KDEN=%98.356/%98.356/%98.493; identity/duplicate/out-of-range=0, correction gerekmedi.
+- **Decision:** `MULTICITY_DATA_QUALITY_PASS`; QC pass yalnız immutable point-prediction girdisine izin verir, development-only probability candidate frozen olmadan protected probability score yasak.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2459,7 +2460,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** KBOS/KPHX/KDEN için immutable NOAA LCDv2 cohort'unu indir; frozen correction ve data-quality gate'lerini uygula, fakat development-only probability candidate seçilip freeze edilene kadar protected outcomes'u probability scoring'de açma.
+**Tek sonraki adım:** Yalnız KORD/KJFK/KLAX/KDFW/KMIA/KSEA consumed predictions ile Gaussian, Student-t, empirical residual ve quantile-GBT candidate'larını leave-one-development-station-out CRPS üzerinde karşılaştır; tie-breaker'ları uygula ve tek probability candidate'ı protected score açılmadan freeze et.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

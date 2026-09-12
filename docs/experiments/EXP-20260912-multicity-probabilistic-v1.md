@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — Boston, Phoenix, and Denver hourly values and outcomes have not been retrieved or scored.
+`IN_PROGRESS` — protected station data quality passed; protected probability outcomes remain unscored while development-only candidate selection is pending.
 
 ## Why this experiment exists
 
@@ -28,3 +28,9 @@ The selected candidate is compared with an honestly calibrated probabilistic per
 The single frozen candidate must beat the stronger baseline by at least 5% CRPS and 2% categorical log loss; paired CRPS reduction must have a positive date-cluster-bootstrap 95% lower bound; 80%/90% interval coverages must fall in [75%,85%] and [86%,94%]; and at least two of three protected stations must have positive CRPS improvement.
 
 Passing means the weather probability model is eligible for a later market-incremental test. It is not evidence of executable EV or profitability.
+
+## Protected data-quality result
+
+KBOS, KPHX, and KDEN each supplied 730/730 non-null SOD labels. Prior-day cutoff-window coverage was 98.356%, 98.356%, and 98.493%, respectively. Station identity errors, duplicate SOD dates, and out-of-range temperatures were all zero, so the frozen corrective transform was not needed.
+
+No protected probability score was computed. The next permitted operation is development-only candidate selection using KORD, KJFK, KLAX, KDFW, KMIA, and KSEA.

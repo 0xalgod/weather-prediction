@@ -1,0 +1,37 @@
+{
+  "experiment_id": "EXP-20260912-protected-probability-data-v1",
+  "decision": "MULTICITY_DATA_QUALITY_PASS",
+  "stations": {
+    "KBOS": {
+      "hourly_rows": 31230,
+      "label_coverage": 1.0,
+      "cutoff_coverage": 0.9835616438356164,
+      "identity_errors": 0,
+      "duplicate_sod_dates": 0,
+      "out_of_range_temperatures": 0
+    },
+    "KPHX": {
+      "hourly_rows": 28121,
+      "label_coverage": 1.0,
+      "cutoff_coverage": 0.9835616438356164,
+      "identity_errors": 0,
+      "duplicate_sod_dates": 0,
+      "out_of_range_temperatures": 0
+    },
+    "KDEN": {
+      "hourly_rows": 30440,
+      "label_coverage": 1.0,
+      "cutoff_coverage": 0.9849315068493151,
+      "identity_errors": 0,
+      "duplicate_sod_dates": 0,
+      "out_of_range_temperatures": 0
+    }
+  },
+  "correction_required": false,
+  "provenance": {
+    "config_sha256": "47a8b54f729350299a047f964eab987f977be416fdcb57f52c770b9920d86ac4",
+    "dataset_result_sha256": "6d68a1a3e51eada37be6877051280da0652fbb133b6f8d189b79da40d5e6743a"
+  },
+  "decision_effect": "Protected point-prediction inputs may be built, but protected probability scores remain sealed until a development-only probability candidate is selected and frozen.",
+  "boundary": "Data quality only; no probability model selection, fit, or protected scoring."
+}
