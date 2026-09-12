@@ -2398,6 +2398,14 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Decision:** `CORRECTED_DATASET_PASS`; frozen beş-istasyon confirmation bir kez score edilebilir.
 - **Boundary:** Data-quality only; hiçbir outcome score edilmedi.
 
+### D-0185 — 2026-09-12 — Multi-city confirmation execution manifest
+
+- **Durum:** `IN_PROGRESS`
+- **Sources:** Original confirmation design SHA `c908…edf4`; corrected dataset result SHA `e917…b432`.
+- **Eligibility amendment:** Null SOD target deterministic `NO_SCORE`; impute edilmez ve training row olamaz. Diğer kurallar değişmedi.
+- **Lock:** Cohort/window/features/model/baselines/bootstrap/gates aynen inherited; single scoring run, no tuning, no station exclusion.
+- **Boundary:** Weather point-forecast confirmation only.
+
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
 - **Durum:** `FAILED`

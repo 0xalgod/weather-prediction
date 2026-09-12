@@ -1,0 +1,31 @@
+{
+  "experiment_id": "EXP-20260912-multicity-hourly-confirmation-run-v2",
+  "design_status": "CORRECTIVE_EXECUTION_MANIFEST_LOCKED_AFTER_DATA_V2_PASS_BEFORE_ANY_MODEL_SCORING",
+  "confirmation_design": "configs/EXP-20260912-multicity-hourly-confirmation-v1.json",
+  "confirmation_design_sha256": "c90894635d65230b67f31370ec71d0b6e6f194b9bd74077ab2d56b424ba0edf4",
+  "corrected_dataset_result": "data/processed/multicity_hourly_confirmation/run=20260912T-v2-corrected/result.json",
+  "corrected_dataset_result_sha256": "e91764d8dfa50e6c8e45e78d63d6bd2f1f2142dc50968046d3c683f13239b432",
+  "eligibility_amendment": "Rows with a null target SOD label are deterministically NO_SCORE in addition to the already-locked prior-day cutoff coverage rule. They are not imputed and are never model training rows.",
+  "inherited_without_change": [
+    "five-station cohort",
+    "date windows",
+    "48 feature definitions",
+    "18:00 LST cutoff",
+    "minimum 18 distinct temperature hours",
+    "station-specific daily expanding Ridge alpha 100",
+    "baselines",
+    "metrics",
+    "5000-resample date-cluster bootstrap seed 20260912",
+    "all confirmation gates"
+  ],
+  "execution_policy": {
+    "single_scoring_run": true,
+    "no_tuning": true,
+    "no_station_exclusion": true,
+    "report_all_stations": true
+  },
+  "boundary": {
+    "weather_point_forecast_confirmation_only": true,
+    "polymarket_execution_ev_pnl_orders_excluded": true
+  }
+}
