@@ -1,0 +1,108 @@
+{
+  "experiment_id": "EXP-20260912-probability-candidate-selection-v1",
+  "design_status": "DEVELOPMENT_SELECTION_LOCKED_BEFORE_CANDIDATE_SCORING",
+  "parent_design": "configs/EXP-20260912-multicity-probabilistic-v1.json",
+  "parent_design_sha256": "4a2e571e41456523a296c8d400d66cb373250a8e1e12e5d679a13888d8d4ff74",
+  "development_predictions": [
+    {
+      "station_default": "KORD",
+      "path": "data/processed/kord_hourly_expanding_walkforward/run=20260912T-v1/predictions.jsonl",
+      "sha256": "0ea3b046b1f68ed426d503ce14e867bbc697cdd41d8bab06fd2a026d9d350421"
+    },
+    {
+      "path": "data/processed/multicity_hourly_confirmation_scores/run=20260912T-v2/predictions.jsonl",
+      "sha256": "fb0d8858d5207e49b1d7d33198b97f1d55fb8b113d3257db9762c572a5a4cbf1"
+    }
+  ],
+  "unit": "degrees Fahrenheit",
+  "residual_definition": "actual_f minus expanding_ridge_f",
+  "outer_validation": "Leave exactly one of KORD/KJFK/KLAX/KDFW/KMIA/KSEA out; fit distribution parameters on the other five and score the held-out station.",
+  "candidates": {
+    "gaussian_residual": {
+      "parameters": "development-fold residual mean and population standard deviation"
+    },
+    "student_t_residual": {
+      "degrees_of_freedom": [
+        3,
+        5,
+        8,
+        15,
+        30
+      ],
+      "parameters": "development-fold residual mean; scale chosen so theoretical standard deviation equals fold residual population standard deviation"
+    },
+    "empirical_residual": {
+      "gaussian_jitter_bandwidth_f": [
+        0.25,
+        0.5,
+        1.0,
+        1.5
+      ]
+    },
+    "quantile_gbt_residual": {
+      "quantiles": [
+        0.05,
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95
+      ],
+      "features": [
+        "expanding_ridge_f",
+        "sin_day_of_year",
+        "cos_day_of_year",
+        "development_station_one_hot"
+      ],
+      "parameter_grid": [
+        {
+          "n_estimators": 100,
+          "learning_rate": 0.05,
+          "max_depth": 2,
+          "min_samples_leaf": 30
+        },
+        {
+          "n_estimators": 200,
+          "learning_rate": 0.03,
+          "max_depth": 3,
+          "min_samples_leaf": 30
+        }
+      ],
+      "random_state": 20260912,
+      "crossing_policy": "Sort predicted quantiles row-wise before interpolation."
+    }
+  },
+  "distribution_numerics": {
+    "deterministic_sample_count": 2001,
+    "probability_grid": "i/(N+1) for i=1..N",
+    "empirical_jitter_seed": 20260912,
+    "quantile_tail_anchors": [
+      0.001,
+      0.999
+    ],
+    "quantile_tail_rule": "Linear extrapolation from the nearest two fitted quantiles, followed by monotonic rearrangement.",
+    "categorical_bin_edges_f": "20,22,...,120 with underflow and overflow",
+    "categorical_probability_floor": 0.000001,
+    "floor_policy": "Floor every bin then renormalize before log loss and Brier score."
+  },
+  "selection": {
+    "primary": "Pooled leave-one-station-out mean CRPS",
+    "tie_breakers_in_order": [
+      "Pooled categorical log loss",
+      "Absolute error of empirical 80% interval coverage from 0.80",
+      "Candidate order gaussian, student_t, empirical, quantile_gbt"
+    ],
+    "candidate_freeze": "Fit the selected family/specification once on all six development stations and write an immutable model artifact checksum before any protected probability scoring."
+  },
+  "forbidden_inputs": [
+    "KBOS outcomes or point predictions",
+    "KPHX outcomes or point predictions",
+    "KDEN outcomes or point predictions"
+  ],
+  "boundary": {
+    "development_only": true,
+    "protected_probability_test_untouched": true,
+    "no_polymarket_or_trading_claim": true
+  }
+}

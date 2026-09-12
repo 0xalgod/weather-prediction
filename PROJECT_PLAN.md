@@ -2430,6 +2430,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Result:** Üç station da 730/730 label; cutoff coverage KBOS/KPHX/KDEN=%98.356/%98.356/%98.493; identity/duplicate/out-of-range=0, correction gerekmedi.
 - **Decision:** `MULTICITY_DATA_QUALITY_PASS`; QC pass yalnız immutable point-prediction girdisine izin verir, development-only probability candidate frozen olmadan protected probability score yasak.
 
+### D-0188 — 2026-09-12 — Development-only probability candidate selection manifest
+
+- **Durum:** `IN_PROGRESS`
+- **Input:** Yalnız consumed KORD/KJFK/KLAX/KDFW/KMIA/KSEA expanding predictions; residual=`actual_f-prediction_f`.
+- **LOSO:** Her fold bir development station holdout; Gaussian, Student-t df={3,5,8,15,30}, empirical jitter={0.25,0.5,1,1.5}°F ve iki locked quantile-GBT spec.
+- **Numerics:** 2,001 deterministic distribution sample; 2°F bins 20–120 + tails; probability floor=1e-6 ve renormalization.
+- **Selection:** Pooled LOSO CRPS, sonra log loss, 80% coverage error, fixed simplicity order. Winner tüm development data ile fit edilip checksum-frozen olur.
+- **Guardrail:** KBOS/KPHX/KDEN outcome veya point prediction candidate-selection input'u olamaz.
+
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
 - **Durum:** `FAILED`
