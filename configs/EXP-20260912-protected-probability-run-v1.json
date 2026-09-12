@@ -1,0 +1,71 @@
+{
+  "experiment_id": "EXP-20260912-protected-probability-run-v1",
+  "design_status": "SINGLE_USE_EXECUTION_LOCKED_BEFORE_PROTECTED_PROBABILITY_SCORING",
+  "probability_design": "configs/EXP-20260912-multicity-probabilistic-v1.json",
+  "probability_design_sha256": "4a2e571e41456523a296c8d400d66cb373250a8e1e12e5d679a13888d8d4ff74",
+  "candidate_selection_result": "data/processed/probability_candidate_selection/run=20260912T-v2-numerical/result.json",
+  "candidate_selection_result_sha256": "cf14d7ec9f0a08fc6a6fbcfb6772c1286f42c62a5949faed418e76ccd94af17a",
+  "frozen_candidate_artifact": "data/processed/probability_candidate_selection/run=20260912T-v2-numerical/probability_model.json",
+  "frozen_candidate_artifact_sha256": "7dad352bf20f1747d17fac4278f781e349a832ac77257e6c3310f4d94559a6e8",
+  "protected_dataset_result": "data/processed/protected_probability_data/run=20260912T-v1/result.json",
+  "protected_dataset_result_sha256": "6d68a1a3e51eada37be6877051280da0652fbb133b6f8d189b79da40d5e6743a",
+  "candidate": {
+    "family": "student_t_residual",
+    "degrees_of_freedom": 5,
+    "application": "Add the frozen 2,001-sample Fahrenheit residual distribution to each protected expanding-Ridge point prediction; no protected refit or rescaling."
+  },
+  "protected_point_generation": {
+    "stations": [
+      "KBOS",
+      "KPHX",
+      "KDEN"
+    ],
+    "initial_history": [
+      "2024-08-01",
+      "2025-07-31"
+    ],
+    "single_use_evaluation": [
+      "2025-08-01",
+      "2026-07-31"
+    ],
+    "procedure": "Same station-specific daily expanding Ridge alpha 100, 48 features, target-minus-one 18:00 LST cutoff, minimum 18 distinct temperature hours, and null-target NO_SCORE contract.",
+    "online_update": "After a target date is predicted and observed, its eligible labeled row joins the station history for the next target date."
+  },
+  "development_only_baseline_calibration": {
+    "sources": "The same six development prediction files and checksums in EXP-20260912-probability-candidate-selection-v1.",
+    "persistence_gaussian": "For every protected persistence point, add Gaussian quantiles using the pooled development persistence error mean and population standard deviation.",
+    "harmonic_empirical": "For every protected expanding harmonic point, add the 2,001 deterministic quantiles of pooled development harmonic-climatology errors without jitter.",
+    "protected_outcomes_forbidden_for_scale_or_distribution_fit": true
+  },
+  "scoring": {
+    "candidate_and_baselines": "Identical 2,001-sample CRPS, 20F..120F two-degree bins with tails, 1e-6 bin floor and renormalization.",
+    "best_baseline_for_crps": "Whichever of persistence Gaussian and harmonic empirical has lower pooled protected CRPS; this single baseline supplies every row's paired bootstrap comparator.",
+    "best_baseline_for_log_loss": "Whichever baseline has lower pooled protected categorical log loss.",
+    "station_positive_skill": "Candidate station CRPS lower than the better station-level CRPS of the two baselines.",
+    "pit_ece": "Candidate randomized-free empirical PIT rank in ten equal-width bins; ECE is total variation distance from the uniform ten-bin distribution."
+  },
+  "gates_inherited_without_change": {
+    "minimum_pooled_crps_improvement_vs_best_baseline": 0.05,
+    "minimum_pooled_log_loss_improvement_vs_best_baseline": 0.02,
+    "minimum_target_date_cluster_bootstrap_95pct_lower_bound_crps_reduction_f": 0.0,
+    "minimum_80pct_interval_coverage": 0.75,
+    "maximum_80pct_interval_coverage": 0.85,
+    "minimum_90pct_interval_coverage": 0.86,
+    "maximum_90pct_interval_coverage": 0.94,
+    "minimum_protected_stations_with_positive_crps_improvement": 2
+  },
+  "bootstrap": {
+    "unit": "target_date across all protected stations available on that date",
+    "resamples": 5000,
+    "seed": 20260912
+  },
+  "decision_rule": {
+    "all_gates_pass": "PROTECTED_PROBABILITY_PASS; weather probability model may proceed to a separately preregistered market-incremental evaluation.",
+    "any_gate_fails": "PROTECTED_PROBABILITY_FAIL; do not tune or recalibrate on KBOS/KPHX/KDEN outcomes."
+  },
+  "boundary": {
+    "single_use_protected_probability_test": true,
+    "weather_only": true,
+    "no_polymarket_price_execution_ev_pnl_or_order_claim": true
+  }
+}

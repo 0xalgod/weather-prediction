@@ -2451,6 +2451,9 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **Required baselines:** Development-only persistence residual scale ve day-of-year empirical climatology aynı 2°F bin/CRPS/log-loss motoruyla kurulmalı.
 - **Point layer:** KBOS/KPHX/KDEN için frozen station-specific daily expanding Ridge alpha100 predictions üretilir; point score model selection girdisi değildir.
 - **Execution:** Tek protected probability run; station/pooled metrics, interval coverage ve 5,000 target-date cluster bootstrap; tüm D-0186 gates birlikte değerlendirilir.
+- **Baseline lock:** Persistence point + development error Gaussian; expanding harmonic point + development error empirical quantiles. CRPS/log-loss için ayrı ayrı daha iyi pooled baseline zorunlu comparator; bootstrap pooled-CRPS winner ile paired.
+- **PIT:** Candidate empirical rank, 10 equal bins; ECE=uniform'a total-variation distance. Protected outcome scale/distribution fit'inde yasak.
+- **Sources:** Candidate result SHA `cf14…f17a`, model SHA `7dad…a6e8`, protected dataset SHA `6d68…43a`.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
