@@ -2367,11 +2367,22 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0182 — 2026-09-12 — Persistent drift sonrası expanding retrain kararı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `PASSED`
 - **Evidence:** Static Ridge testte MAE skill korurken bias gate fail etti; aylık diagnostic hatanın kalıcı olduğunu doğruladı.
 - **Hypothesis:** Her tahmin gününde yalnız geçmiş eligible günlerle yeniden fit edilen locked Ridge alpha100, 2025-08-01–2026-07-31 döneminde |bias|≤1°C tutarken persistence MAE'yi≥%5 yener.
 - **Protocol:** İlk 365 günlük history sonrası daily expanding walk-forward; aynı 48 feature, aynı eligibility, target-date veya gelecek veri yok, tuning/model seçimi yok.
+- **Full evaluation:** N=354; expanding/static/persistence MAE=3.154/3.363/3.826°C; expanding bias=-0.147°C; persistence gain=%17.57.
+- **Former test:** N=178; expanding/static/persistence MAE=3.528/3.921/4.329°C; expanding bias=-0.627°C vs static=-2.169°C; persistence gain=%18.51.
+- **Decision:** `EXPLORATORY_PASS_REQUIRES_NEW_CONFIRMATION`; full ve former-test gate'lerinin tümü pass. Consumed dönemde yeni tuning yasak.
 - **Boundary:** Eski validation ve test outcome'ları artık bilindiği için tamamen exploratory/post-test; başarı yeni disjoint confirmation dönemi gerektirir.
+
+### D-0183 — 2026-09-12 — Bağımsız mekânsal-zamansal confirmation tasarımı
+
+- **Durum:** `IN_PROGRESS`
+- **Rationale:** Tek istasyon sonucu genelleme kanıtı değildir; beklemek yerine outcome'larına bakılmamış şehir/istasyonlar independent spatial holdout olarak kullanılabilir.
+- **Next:** İstasyonları ve tarih/split/gate'leri veri indirilmeden önce kilitle; her istasyonda aynı hourly schema, cutoff, eligibility ve daily expanding Ridge alpha100 uygula.
+- **Guardrail:** Şehirler sonuç görüldükten sonra seçilmeyecek; başarısız şehirler rapordan çıkarılmayacak; station-level ve pooled metrikler birlikte verilecek.
+- **Boundary:** Weather-only confirmation; Polymarket edge hâlâ test edilmez.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 
@@ -2403,7 +2414,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ## 14. Next Action
 
-**Tek sonraki adım:** Daily expanding-window Ridge alpha100 challenger'ını ön-kayıtlı exploratory walk-forward protokolüyle çalıştır; full evaluation ile eski validation/test yarılarında bias ve persistence'a karşı MAE gain'i ayrı raporla.
+**Tek sonraki adım:** Outcome'larına bakılmamış çok-şehirli confirmation cohort'un şehir/istasyon listesini, 2 yıllık tarih aralığını, chronological split'ini ve station-level/pooled gate'lerini veri indirilmeden önce kilitle; sonra immutable NOAA LCDv2 verisini çek.
 
 Paper Day 1 frozen settlement reconciliation ve yeni 14:00 order-book capture, forecast dataset çalışmasını engellemeyen paralel execution-evidence işi olarak korunur.
 

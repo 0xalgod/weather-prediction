@@ -1,0 +1,50 @@
+{
+  "experiment_id": "EXP-20260912-kord-hourly-expanding-walkforward-v1",
+  "decision": "EXPLORATORY_PASS_REQUIRES_NEW_CONFIRMATION",
+  "counts": {
+    "initial_training": 365,
+    "full_evaluation": 354,
+    "former_validation": 176,
+    "former_test": 178
+  },
+  "full_evaluation": {
+    "expanding_ridge_mae_c": 3.1536929773776667,
+    "expanding_ridge_bias_c": -0.1471667254961201,
+    "persistence_mae_c": 3.8259887005649715,
+    "static_ridge_mae_c": 3.362683453635959,
+    "mae_improvement_vs_persistence": 0.17571816746035582,
+    "mae_improvement_vs_static_ridge": 0.062149910670990405
+  },
+  "former_validation": {
+    "expanding_ridge_mae_c": 2.7752380992826278,
+    "expanding_ridge_bias_c": 0.3382367142685249,
+    "persistence_mae_c": 3.3170454545454544,
+    "mae_improvement_vs_persistence": 0.16334034691034172
+  },
+  "former_test": {
+    "expanding_ridge_mae_c": 3.5278955534716387,
+    "expanding_ridge_bias_c": -0.6271161940274546,
+    "persistence_mae_c": 4.3292134831460665,
+    "static_ridge_mae_c": 3.9208473656404594,
+    "static_ridge_bias_c": -2.169207861157436,
+    "mae_improvement_vs_persistence": 0.18509549893855198,
+    "mae_improvement_vs_static_ridge": 0.10022114495258683
+  },
+  "gate_checks": {
+    "full_evaluation": {
+      "minimum_mae_improvement_vs_persistence": true,
+      "maximum_absolute_bias_c": true
+    },
+    "former_test": {
+      "minimum_mae_improvement_vs_persistence": true,
+      "maximum_absolute_bias_c": true
+    }
+  },
+  "provenance": {
+    "config_sha256": "ab78bb82f523665ec75f38034d0ec0c2b8a9c4c32415e8768314b9fc3659dea2",
+    "result_sha256": "b5cb816b06324107791eaed8e7e0b00618425f448a60967161163b13d5da18ff",
+    "predictions_sha256": "0ea3b046b1f68ed426d503ce14e867bbc697cdd41d8bab06fd2a026d9d350421"
+  },
+  "interpretation": "Daily expanding retraining materially reduced the static model's persistent negative bias while improving MAE. Because all evaluation outcomes had been consumed previously, this is candidate-generation evidence only.",
+  "boundary": "Post-test exploratory weather forecast; requires disjoint confirmation and makes no Polymarket, execution, EV, P&L, or order claim."
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-`PREREGISTERED` — expanding walk-forward run has not started.
+`PASSED` — every preregistered exploratory gate passed; new disjoint confirmation is required.
 
 ## Hypothesis
 
@@ -21,3 +21,11 @@ A locked Ridge alpha-100 model, refitted daily on every eligible historical row 
 ## Interpretation boundary
 
 The evaluation outcomes were exposed by earlier work. This is therefore a post-test exploratory diagnostic even though the walk-forward calculation itself is leakage-safe. Passing the gates would justify freezing a candidate for a new disjoint confirmation cohort; it would not constitute confirmation or trading evidence.
+
+## Result
+
+The full 354-day evaluation produced 3.154°C MAE and -0.147°C bias. Persistence MAE was 3.826°C, so the expanding model improved MAE by 17.57%. Against the static Ridge model, MAE improved by 6.21%.
+
+In the 178-day former-test segment, expanding Ridge produced 3.528°C MAE and -0.627°C bias. This improved MAE by 18.51% versus persistence and by 10.02% versus static Ridge; static Ridge bias had been -2.169°C. Both the full-period and former-test bias and persistence-skill gates passed.
+
+Decision: `EXPLORATORY_PASS_REQUIRES_NEW_CONFIRMATION`. No further tuning is permitted on this consumed evaluation period.
