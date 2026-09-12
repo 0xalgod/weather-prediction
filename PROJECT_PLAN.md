@@ -2339,7 +2339,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 
 ### D-0178 — 2026-09-09 — KORD hourly next-day max model ön kaydı
 
-- **Durum:** `IN_PROGRESS`
+- **Durum:** `FAILED`
 - **Split:** Train 365 gün, validation 184 gün, protected test 181 gün; tamamen chronological.
 - **Cutoff:** Target-1 gün 18:00 LST; target-day ve target-1 SOD label yasak, label lag≥2.
 - **Models:** Persistence, harmonic climatology, Ridge ve HistGradientBoosting; seçim yalnız train içi 5-fold expanding CV MAE.
@@ -2354,6 +2354,15 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **V2 eligibility:** Prior-day 00–18 LST distinct temperature hour≥18; outcome-independent NO_PREDICT. Train/validation/test=365/176/178.
 - **Lock:** Aynı feature/model/train-CV/gates; validation outcome ile tuning yok.
 - **Boundary:** Weather-only; Polymarket/trading yok.
+
+### D-0181 — 2026-09-12 — KORD hourly test drift diagnostic ön kaydı
+
+- **Durum:** `IN_PROGRESS`
+- **Hypothesis:** Test aggregate negative bias birkaç outlier değil persistent regime drift; en az 3 test calendar month bias≤-1°C.
+- **Measures:** Monthly MAE/RMSE/bias, 30-day rolling bias, target/prediction mean ve train→test standardized feature mean shift.
+- **Lock:** Ridge alpha100 ve V2 features/splits aynen reproduce; hyperparameter/feature tuning yok.
+- **Decision:** Drift confirmed yalnız exploratory expanding-retrain tasarımına izin verir; consumed test yeni kanıt sayılmaz.
+- **Boundary:** Post-failure diagnostic, weather-only.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
 

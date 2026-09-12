@@ -1,0 +1,13 @@
+{
+  "experiment_id": "EXP-20260912-kord-hourly-drift-diagnostic-v1",
+  "design_status": "PREREGISTERED_BEFORE_RESIDUAL_DIAGNOSTIC",
+  "source_model_result": "data/processed/kord_hourly_nextday_model/run=20260909T-v2/result.json",
+  "source_model_result_sha256": "ceb604a66888752c248271d54b233a984e7b6334f96a8a4b2f0327f77aec9b96",
+  "source_config": "configs/EXP-20260909-kord-hourly-nextday-model-v2.json",
+  "locked_model": {"family": "ridge", "alpha": 100.0},
+  "hypothesis": "The failed aggregate test bias reflects persistent seasonal/regime drift rather than a small number of isolated extreme days: at least three test calendar months have model bias at or below -1C.",
+  "measurements": ["monthly MAE/RMSE/bias for validation and test", "30-day rolling test bias extrema", "train-to-test standardized feature mean shifts", "prediction and target means"],
+  "classification_thresholds": {"minimum_test_months_with_bias_at_or_below_minus_1c": 3, "material_feature_shift_absolute_standard_deviations": 0.5},
+  "decision_rule": {"drift_confirmed": "Permit preregistration of an expanding-retrain exploratory challenger; no tuning of the consumed test.", "drift_not_confirmed": "Investigate isolated errors/data quality before any new model."},
+  "boundary": {"diagnostic_only": true, "consumed_test_not_a_new_test": true, "no_hyperparameter_or_feature_tuning": true, "weather_only": true}
+}
