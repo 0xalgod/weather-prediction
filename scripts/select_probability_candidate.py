@@ -137,8 +137,8 @@ def score_samples(
     samples = np.sort(points[:, None] + residual_draws, axis=1)
     sample_count = samples.shape[1]
     coefficients = 2 * np.arange(1, sample_count + 1) - sample_count - 1
-    crps = np.mean(np.abs(samples - actual[:, None]), axis=1) - (
-        samples @ coefficients
+    crps = np.mean(np.abs(samples - actual[:, None]), axis=1) - np.sum(
+        samples * coefficients[None, :], axis=1
     ) / sample_count**2
     edges = np.arange(20.0, 122.0, 2.0)
     cdf = np.column_stack(

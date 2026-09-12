@@ -24,6 +24,18 @@ def test_empirical_crps_is_zero_for_perfect_degenerate_forecast():
     assert details[0]["crps_f"] == pytest.approx(0)
 
 
+def test_crps_reduction_is_finite_for_full_deterministic_sample_grid():
+    rows = [
+        {"station": "X", "target_date": "2026-01-01", "point_f": 100, "actual_f": 105}
+    ]
+    samples = np.linspace(-25, 25, 2001)[None, :]
+
+    with np.errstate(over="raise", invalid="raise", divide="raise"):
+        aggregate, _ = score_samples(rows, samples, 1e-6)
+
+    assert np.isfinite(aggregate["mean_crps_f"])
+
+
 def test_candidate_grid_is_fully_expanded():
     config = {
         "candidates": {

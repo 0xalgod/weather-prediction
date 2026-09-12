@@ -2437,6 +2437,7 @@ Sonuçlar planı desteklemiyorsa hipotez veya scope revize edilir. Başarısız 
 - **LOSO:** Her fold bir development station holdout; Gaussian, Student-t df={3,5,8,15,30}, empirical jitter={0.25,0.5,1,1.5}°F ve iki locked quantile-GBT spec.
 - **Numerics:** 2,001 deterministic distribution sample; 2°F bins 20–120 + tails; probability floor=1e-6 ve renormalization.
 - **Selection:** Pooled LOSO CRPS, sonra log loss, 80% coverage error, fixed simplicity order. Winner tüm development data ile fit edilip checksum-frozen olur.
+- **Technical rerun:** İlk execution'da tüm input ve GBT sample değerleri finite/makul olmasına rağmen CRPS BLAS matmul reduction warning verdi. Aynı formül element-wise deterministic sum ile V2 çalıştırılacak; candidate/grid/metric değişmedi.
 - **Guardrail:** KBOS/KPHX/KDEN outcome veya point prediction candidate-selection input'u olamaz.
 
 ### D-0180 — 2026-09-10 — Hourly Ridge validation geçti, protected test bias gate fail
