@@ -5,6 +5,8 @@
   "probability_design_sha256": "4a2e571e41456523a296c8d400d66cb373250a8e1e12e5d679a13888d8d4ff74",
   "candidate_selection_result": "data/processed/probability_candidate_selection/run=20260912T-v2-numerical/result.json",
   "candidate_selection_result_sha256": "cf14d7ec9f0a08fc6a6fbcfb6772c1286f42c62a5949faed418e76ccd94af17a",
+  "candidate_selection_config": "configs/EXP-20260912-probability-candidate-selection-v1.json",
+  "candidate_selection_config_sha256": "a3d1e734ccc2c04c0d33520435fc8f1dfba8a5cc284a509390d54e8a63957627",
   "frozen_candidate_artifact": "data/processed/probability_candidate_selection/run=20260912T-v2-numerical/probability_model.json",
   "frozen_candidate_artifact_sha256": "7dad352bf20f1747d17fac4278f781e349a832ac77257e6c3310f4d94559a6e8",
   "protected_dataset_result": "data/processed/protected_probability_data/run=20260912T-v1/result.json",
